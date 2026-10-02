@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>شروط الاستخدام · إشراقة يومية</title>
-<meta name="description" content="شروط الاستخدام لتطبيق إشراقة يومية.">
+<meta name="description" content="شروط الاستخدام · إشراقة يومية">
 <meta name="theme-color" content="#2A1B5E">
 <link rel="canonical" href="https://ishraqa.otwox.com/terms/">
 <link rel="alternate" hreflang="ar" href="https://ishraqa.otwox.com/terms/">
@@ -16,61 +16,116 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--cream:#FFFBF8;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6}
-@media (prefers-color-scheme:dark){:root{--cream:#14101F;--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645}}
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--bg:#FFFFFF;--soft:#F7F3FB;--ink:#1F1A2E;--muted:#5E5770;--line:#E9E3F1;--accent:#5B3A9E}
+@media (prefers-color-scheme:dark){:root{--bg:#121019;--soft:#1C1826;--ink:#F1ECF8;--muted:#B3AAC4;--line:#2C2640;--accent:#C7A8F0}}
 *{box-sizing:border-box}
-body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--cream);color:var(--ink);line-height:1.9}
-header{background:linear-gradient(140deg,var(--night),var(--plum) 60%,var(--sun));color:#fff}
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;max-width:860px;margin:0 auto;flex-wrap:wrap}
-header a{color:#fff;text-decoration:none}
-.brand{font-weight:800;display:flex;align-items:center;gap:10px}
-.brand img{width:36px;height:36px;border-radius:10px}
-nav{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center}
-nav a{font-weight:600;font-size:14px;opacity:.9}
-nav a[aria-current]{opacity:1;text-decoration:underline;text-underline-offset:6px}
-nav .lang{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:2px 12px}
-main{max-width:860px;margin:0 auto;padding:24px 20px 60px}
-article{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:8px 28px 24px}
-h1{font-size:30px;margin:20px 0 0}
-h1+p{color:var(--muted);margin-top:0}
-h2{font-size:20px;color:var(--plum);margin:28px 0 6px}
-a{color:var(--plum)}
-footer{text-align:center;color:var(--muted);font-size:14px;padding:0 20px 40px;line-height:2}
-footer a{color:var(--muted)}
-@media (max-width:600px){article{padding:4px 18px 18px}h1{font-size:24px}}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.95}
+a{color:var(--accent)}
+.bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .in{max-width:1240px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand img{width:34px;height:34px;border-radius:9px}
+.tabs{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{white-space:nowrap;color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px}
+.tabs a:hover{background:var(--soft)}
+.tabs a[aria-current]{color:var(--accent);background:var(--soft)}
+.lang{white-space:nowrap;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.hero{background:linear-gradient(140deg,var(--night),var(--plum) 62%,var(--sun));color:#fff}
+.hero .in{max-width:1240px;margin:0 auto;padding:56px 24px 48px}
+.hero small{opacity:.85;font-weight:600}
+.hero h1{font-size:44px;line-height:1.3;margin:6px 0 8px}
+.hero p{margin:0;opacity:.92;font-size:16px}
+.layout{max-width:1240px;margin:0 auto;padding:40px 24px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:56px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 120px);overflow:auto}
+.toc h4{margin:0 0 10px;font-size:13px;color:var(--muted);letter-spacing:.3px}
+.toc ol{list-style:none;margin:0;padding:0;border-inline-start:2px solid var(--line)}
+.toc a{display:block;padding:7px 16px;margin-inline-start:-2px;border-inline-start:2px solid transparent;color:var(--muted);text-decoration:none;font-size:15px;line-height:1.6}
+.toc a:hover{color:var(--ink)}
+.toc a.on{color:var(--accent);border-color:var(--accent);font-weight:700}
+.doc{max-width:780px}
+.doc h2{font-size:26px;margin:48px 0 10px;line-height:1.5}
+.doc h2:first-child{margin-top:0}
+.doc p,.doc li{color:var(--ink)}
+.doc ul,.doc ol{padding-inline-start:24px}
+.doc li{margin:6px 0}
+.doc .summary{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:6px 28px 14px;margin-bottom:8px}
+.doc .summary h2{margin-top:18px}
+.mtoc{display:none;margin:0 0 28px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:12px 18px}
+.mtoc summary{cursor:pointer;font-weight:700}
+.mtoc ol{margin:10px 0 4px;padding-inline-start:20px}
+.mtoc a{text-decoration:none;line-height:2.1}
+form{display:grid;gap:18px;max-width:640px}
+label{font-weight:700;font-size:15px;display:grid;gap:8px}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+textarea{min-height:180px;resize:vertical}
+button{font:inherit;font-weight:700;font-size:17px;color:#fff;background:var(--night);border:0;border-radius:999px;padding:13px 34px;cursor:pointer;justify-self:start}
+button:disabled{opacity:.6;cursor:wait}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.msg{border-radius:14px;padding:12px 16px;display:none}
+.msg.err{display:block;background:#FDECEC;color:#8A1C1C}
+.done{display:none;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:28px}
+.done h2{margin:0 0 6px}
+.note{color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .in{max-width:1240px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+@media (max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0;padding-top:28px}
+  .toc{display:none}
+  .mtoc{display:block}
+  .doc{max-width:none}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .bar .in{padding:8px 16px;gap:10px;flex-wrap:wrap}
+  .tabs{order:3;flex-basis:100%}
+  .lang{margin-inline-start:auto}
+  .hero .in{padding:36px 16px 30px}
+  .hero h1{font-size:32px}
+  .layout{padding:24px 16px 60px}
+  .doc h2{font-size:22px;margin-top:36px}
+  .doc .summary{padding:4px 18px 10px}
+}
 </style>
 </head>
 <body>
-<header><div class="wrap">
+<header class="bar"><div class="in">
 <a class="brand" href="../"><img src="../img/icon-192.png" alt=""> إشراقة يومية</a>
-<nav><a href="../privacy/">سياسة الخصوصية</a><a href="../terms/" aria-current="page">شروط الاستخدام</a><a href="../delete-account/">حذف الحساب</a><a class="lang" href="../en/terms/" hreflang="en" lang="en">English</a></nav>
+<nav class="tabs" aria-label="السياسات والمساعدة"><a href="../privacy/">سياسة الخصوصية</a><a href="../terms/" aria-current="page">شروط الاستخدام</a><a href="../delete-account/">حذف الحساب</a><a href="../contact/">تواصل معنا</a></nav>
+<a class="lang" href="../en/terms/" hreflang="en" lang="en">English</a>
 </div></header>
-<main><article>
-<h1>شروط الاستخدام</h1>
-<p>آخر تحديث: 2 أكتوبر 2026</p>
-<p>مرحبًا بك في <strong>إشراقة يومية</strong>. تنظّم هذه الشروط استخدامك للتطبيق وخدماته، وباستخدامك له فأنت توافق عليها، فاقرأها بهدوء.</p>
-<h2>1. الخدمة</h2>
+<section class="hero"><div class="in"><small>السياسات والمساعدة</small><h1>شروط الاستخدام</h1><p>آخر تحديث: 2 أكتوبر 2026</p></div></section>
+<div class="layout">
+<aside class="toc"><h4>في هذه الصفحة</h4><ol><li><a href="#s1">1. الخدمة</a></li><li><a href="#s2">2. الحساب</a></li><li><a href="#s3">3. ما تنشره</a></li><li><a href="#s4">4. إرشادات المجتمع</a></li><li><a href="#s5">5. محتوى إشراقة</a></li><li><a href="#s6">6. الدعم الاختياري</a></li><li><a href="#s7">7. إخلاء المسؤولية</a></li><li><a href="#s8">8. إنهاء الاستخدام</a></li><li><a href="#s9">9. الخصوصية</a></li><li><a href="#s10">10. التغييرات</a></li><li><a href="#s11">من نحن وكيف تتواصل معنا</a></li></ol></aside>
+<main class="doc">
+<details class="mtoc"><summary>في هذه الصفحة</summary><ol><li><a href="#s1">1. الخدمة</a></li><li><a href="#s2">2. الحساب</a></li><li><a href="#s3">3. ما تنشره</a></li><li><a href="#s4">4. إرشادات المجتمع</a></li><li><a href="#s5">5. محتوى إشراقة</a></li><li><a href="#s6">6. الدعم الاختياري</a></li><li><a href="#s7">7. إخلاء المسؤولية</a></li><li><a href="#s8">8. إنهاء الاستخدام</a></li><li><a href="#s9">9. الخصوصية</a></li><li><a href="#s10">10. التغييرات</a></li><li><a href="#s11">من نحن وكيف تتواصل معنا</a></li></ol></details><p>مرحبًا بك في <strong>إشراقة يومية</strong>. تنظّم هذه الشروط استخدامك للتطبيق وخدماته، وباستخدامك له فأنت توافق عليها، فاقرأها بهدوء.</p>
+<h2 id="s1">1. الخدمة</h2>
 <p>إشراقة تطبيق مجاني يقدّم حِكمًا يومية وشروحها، ومقالات، ومكتبة كتب، وفرصًا ومنحًا، ومساحة مجتمعية للكتابة والتسجيل الصوتي. قد نطوّر الميزات أو نغيّرها أو نوقف بعضها مع الوقت.</p>
-<h2>2. الحساب</h2>
+<h2 id="s2">2. الحساب</h2>
 <ul>
 <li>الحساب اختياري، ويلزم للكتابة والتعليق والمتابعة.</li>
 <li><strong>يجب ألا يقل عمرك عن 13 عامًا</strong> لإنشاء حساب.</li>
 <li>أنت مسؤول عن حسابك وعما يُنشر منه. لا تنتحل شخصية غيرك.</li>
 </ul>
-<h2>3. ما تنشره</h2>
+<h2 id="s3">3. ما تنشره</h2>
 <ul>
 <li>يبقى ما تكتبه أو تسجّله <strong>ملكًا لك</strong>. وبنشره تمنحنا إذنًا غير حصري ومجانيًا بعرضه ونشره داخل إشراقة وفي قنواتها، مع ذكر اسمك الظاهر، ما دام منشورًا.</li>
 <li>تتعهد بأن المحتوى من تأليفك أو لديك حق نشره، وأن صاحب الصوت في أي تسجيل وافق على نشره.</li>
 <li>يمكنك حذف منشوراتك وتعليقاتك في أي وقت.</li>
 </ul>
-<h2>4. إرشادات المجتمع</h2>
+<h2 id="s4">4. إرشادات المجتمع</h2>
 <p>لا يُسمح بـ:
 - الإساءة أو الكراهية أو التحريض ضد أي شخص أو قبيلة أو ثقافة أو دين.
 - التحرش أو التهديد أو نشر معلومات شخصية عن الآخرين أو صورهم دون إذنهم.
 - المعلومات المضللة عمدًا، والإعلانات والرسائل المزعجة.
 - المحتوى الجنسي أو العنيف، أو المخالف للقانون، أو المنتهك لحقوق غيرك.</p>
 <p>يراجع فريق إشراقة المحتوى، ويحق له رفض أي محتوى أو إخفاؤه أو حذفه، وإيقاف الحسابات المخالفة. ويمكنك الإبلاغ عن أي محتوى أو حظر أي مستخدم من داخل التطبيق، ونراجع البلاغات في أقرب وقت.</p>
-<h2>5. محتوى إشراقة</h2>
+<h2 id="s5">5. محتوى إشراقة</h2>
 <ul>
 <li>الحِكم والأمثال من التراث العربي، ونحرص على نسبتها لقائليها بدقة.</li>
 <li>المقالات للتثقيف العام، <strong>وليست نصيحة طبية أو مالية أو قانونية</strong>. استشر المختص في ما يخصك.</li>
@@ -78,19 +133,37 @@ footer a{color:var(--muted)}
 <li>المنح والفرص منقولة من مصادرها الرسمية؛ تحقق دائمًا من الشروط والمواعيد في الموقع الرسمي قبل التقديم.</li>
 <li>تصميم التطبيق وشعاره ونصوصه الأصلية ملك لنا، ولا يجوز استخدامها دون إذن.</li>
 </ul>
-<h2>6. الدعم الاختياري</h2>
+<h2 id="s6">6. الدعم الاختياري</h2>
 <p>الدعم المالي <strong>تطوّع اختياري</strong> يتم بالكامل عبر Google Play، ولا يمنح ميزات إضافية. تخضع المدفوعات واسترداد المبالغ لسياسات Google Play.</p>
-<h2>7. إخلاء المسؤولية</h2>
+<h2 id="s7">7. إخلاء المسؤولية</h2>
 <p>نقدّم التطبيق «كما هو»، ونبذل جهدنا ليكون دقيقًا ومتاحًا، لكننا لا نضمن خلوّه من الأخطاء أو انقطاع الخدمة. وإلى الحد الذي يسمح به القانون، لا نتحمل مسؤولية أي ضرر غير مباشر ينتج عن استخدام التطبيق أو الاعتماد على محتواه.</p>
-<h2>8. إنهاء الاستخدام</h2>
+<h2 id="s8">8. إنهاء الاستخدام</h2>
 <p>يمكنك التوقف عن استخدام التطبيق وحذف حسابك في أي وقت من <strong>حسابي ← حذف الحساب</strong>. ويحق لنا إيقاف أي حساب يخالف هذه الشروط.</p>
-<h2>9. الخصوصية</h2>
+<h2 id="s9">9. الخصوصية</h2>
 <p>تشرح <a href="../privacy/">سياسة الخصوصية</a> البيانات التي نجمعها وكيف نحميها.</p>
-<h2>10. التغييرات</h2>
+<h2 id="s10">10. التغييرات</h2>
 <p>قد نحدّث هذه الشروط، ونعلمك داخل التطبيق بأي تغيير جوهري. واستمرارك في الاستخدام بعد التحديث يعني موافقتك عليه.</p>
-<h2>من نحن وكيف تتواصل معنا</h2>
-<p>نحن في <strong>أوتواكس للحلول الرقمية</strong> نطوّر إشراقة يومية ونقدّم خدماتها. لأي سؤال عن هذه الشروط راسلنا على <strong>ishraqa@otwox.com</strong>.</p>
-</article></main>
-<footer>إشراقة يومية · <a href="mailto:ishraqa@otwox.com">ishraqa@otwox.com</a><br><a href="https://otwox.com">بواسطة أوتواكس للحلول الرقمية</a></footer>
+<h2 id="s11">من نحن وكيف تتواصل معنا</h2>
+<p>نحن في <strong>أوتواكس للحلول الرقمية</strong> نطوّر إشراقة يومية ونقدّم خدماتها. لأي سؤال عن هذه الشروط <a href="../contact/">تواصل معنا</a>.</p>
+</main>
+</div>
+<footer><div class="in">
+<nav><a href="../privacy/">سياسة الخصوصية</a><a href="../terms/">شروط الاستخدام</a><a href="../delete-account/">حذف الحساب</a><a href="../contact/">تواصل معنا</a></nav>
+<a href="https://otwox.com">بواسطة أوتواكس للحلول الرقمية</a>
+</div></footer>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  if(!('IntersectionObserver' in window)||!links.length)return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on')});
+      var a=map[e.target.id];if(a)a.classList.add('on');}
+  })},{rootMargin:'-90px 0px -70% 0px'});
+  document.querySelectorAll('.doc h2[id]').forEach(function(h){io.observe(h)});
+})();
+</script>
+
 </body>
 </html>

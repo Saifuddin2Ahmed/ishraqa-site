@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy · Ishraqa</title>
-<meta name="description" content="Privacy Policy for the Ishraqa app.">
+<meta name="description" content="Privacy Policy · Ishraqa">
 <meta name="theme-color" content="#2A1B5E">
 <link rel="canonical" href="https://ishraqa.otwox.com/en/privacy/">
 <link rel="alternate" hreflang="ar" href="https://ishraqa.otwox.com/privacy/">
@@ -16,49 +16,104 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--cream:#FFFBF8;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6}
-@media (prefers-color-scheme:dark){:root{--cream:#14101F;--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645}}
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--bg:#FFFFFF;--soft:#F7F3FB;--ink:#1F1A2E;--muted:#5E5770;--line:#E9E3F1;--accent:#5B3A9E}
+@media (prefers-color-scheme:dark){:root{--bg:#121019;--soft:#1C1826;--ink:#F1ECF8;--muted:#B3AAC4;--line:#2C2640;--accent:#C7A8F0}}
 *{box-sizing:border-box}
-body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--cream);color:var(--ink);line-height:1.9}
-header{background:linear-gradient(140deg,var(--night),var(--plum) 60%,var(--sun));color:#fff}
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;max-width:860px;margin:0 auto;flex-wrap:wrap}
-header a{color:#fff;text-decoration:none}
-.brand{font-weight:800;display:flex;align-items:center;gap:10px}
-.brand img{width:36px;height:36px;border-radius:10px}
-nav{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center}
-nav a{font-weight:600;font-size:14px;opacity:.9}
-nav a[aria-current]{opacity:1;text-decoration:underline;text-underline-offset:6px}
-nav .lang{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:2px 12px}
-main{max-width:860px;margin:0 auto;padding:24px 20px 60px}
-article{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:8px 28px 24px}
-h1{font-size:30px;margin:20px 0 0}
-h1+p{color:var(--muted);margin-top:0}
-h2{font-size:20px;color:var(--plum);margin:28px 0 6px}
-a{color:var(--plum)}
-footer{text-align:center;color:var(--muted);font-size:14px;padding:0 20px 40px;line-height:2}
-footer a{color:var(--muted)}
-@media (max-width:600px){article{padding:4px 18px 18px}h1{font-size:24px}}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.95}
+a{color:var(--accent)}
+.bar{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .in{max-width:1240px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand img{width:34px;height:34px;border-radius:9px}
+.tabs{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{white-space:nowrap;color:var(--muted);text-decoration:none;font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px}
+.tabs a:hover{background:var(--soft)}
+.tabs a[aria-current]{color:var(--accent);background:var(--soft)}
+.lang{white-space:nowrap;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.hero{background:linear-gradient(140deg,var(--night),var(--plum) 62%,var(--sun));color:#fff}
+.hero .in{max-width:1240px;margin:0 auto;padding:56px 24px 48px}
+.hero small{opacity:.85;font-weight:600}
+.hero h1{font-size:44px;line-height:1.3;margin:6px 0 8px}
+.hero p{margin:0;opacity:.92;font-size:16px}
+.layout{max-width:1240px;margin:0 auto;padding:40px 24px 80px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:56px}
+.toc{position:sticky;top:96px;align-self:start;max-height:calc(100vh - 120px);overflow:auto}
+.toc h4{margin:0 0 10px;font-size:13px;color:var(--muted);letter-spacing:.3px}
+.toc ol{list-style:none;margin:0;padding:0;border-inline-start:2px solid var(--line)}
+.toc a{display:block;padding:7px 16px;margin-inline-start:-2px;border-inline-start:2px solid transparent;color:var(--muted);text-decoration:none;font-size:15px;line-height:1.6}
+.toc a:hover{color:var(--ink)}
+.toc a.on{color:var(--accent);border-color:var(--accent);font-weight:700}
+.doc{max-width:780px}
+.doc h2{font-size:26px;margin:48px 0 10px;line-height:1.5}
+.doc h2:first-child{margin-top:0}
+.doc p,.doc li{color:var(--ink)}
+.doc ul,.doc ol{padding-inline-start:24px}
+.doc li{margin:6px 0}
+.doc .summary{background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:6px 28px 14px;margin-bottom:8px}
+.doc .summary h2{margin-top:18px}
+.mtoc{display:none;margin:0 0 28px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:12px 18px}
+.mtoc summary{cursor:pointer;font-weight:700}
+.mtoc ol{margin:10px 0 4px;padding-inline-start:20px}
+.mtoc a{text-decoration:none;line-height:2.1}
+form{display:grid;gap:18px;max-width:640px}
+label{font-weight:700;font-size:15px;display:grid;gap:8px}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+textarea{min-height:180px;resize:vertical}
+button{font:inherit;font-weight:700;font-size:17px;color:#fff;background:var(--night);border:0;border-radius:999px;padding:13px 34px;cursor:pointer;justify-self:start}
+button:disabled{opacity:.6;cursor:wait}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.msg{border-radius:14px;padding:12px 16px;display:none}
+.msg.err{display:block;background:#FDECEC;color:#8A1C1C}
+.done{display:none;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:28px}
+.done h2{margin:0 0 6px}
+.note{color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .in{max-width:1240px;margin:0 auto;padding:28px 24px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+@media (max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0;padding-top:28px}
+  .toc{display:none}
+  .mtoc{display:block}
+  .doc{max-width:none}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .bar .in{padding:8px 16px;gap:10px;flex-wrap:wrap}
+  .tabs{order:3;flex-basis:100%}
+  .lang{margin-inline-start:auto}
+  .hero .in{padding:36px 16px 30px}
+  .hero h1{font-size:32px}
+  .layout{padding:24px 16px 60px}
+  .doc h2{font-size:22px;margin-top:36px}
+  .doc .summary{padding:4px 18px 10px}
+}
 </style>
 </head>
 <body>
-<header><div class="wrap">
+<header class="bar"><div class="in">
 <a class="brand" href="../../"><img src="../../img/icon-192.png" alt=""> Ishraqa</a>
-<nav><a href="../../en/privacy/" aria-current="page">Privacy Policy</a><a href="../../en/terms/">Terms of Use</a><a href="../../en/delete-account/">Delete account</a><a class="lang" href="../../privacy/" hreflang="ar" lang="ar">العربية</a></nav>
+<nav class="tabs" aria-label="Policies & help"><a href="../../en/privacy/" aria-current="page">Privacy Policy</a><a href="../../en/terms/">Terms of Use</a><a href="../../en/delete-account/">Delete account</a><a href="../../en/contact/">Contact us</a></nav>
+<a class="lang" href="../../privacy/" hreflang="ar" lang="ar">العربية</a>
 </div></header>
-<main><article>
-<h1>Privacy Policy</h1>
-<p>Last updated: October 2, 2026</p>
-<p>This policy explains how we handle your data in <strong>Ishraqa</strong>. We collect as little data as possible, never sell it, and show no ads.</p>
-<h2>In short</h2>
+<section class="hero"><div class="in"><small>Policies & help</small><h1>Privacy Policy</h1><p>Last updated: October 2, 2026</p></div></section>
+<div class="layout">
+<aside class="toc"><h4>On this page</h4><ol><li><a href="#s1">In short</a></li><li><a href="#s2">1. Without an account</a></li><li><a href="#s3">2. When you create an account</a></li><li><a href="#s4">3. Notifications</a></li><li><a href="#s5">4. Analytics and crash reports</a></li><li><a href="#s6">5. How we use data</a></li><li><a href="#s7">6. Who processes data with us</a></li><li><a href="#s8">7. Retention and deletion</a></li><li><a href="#s9">8. Your rights</a></li><li><a href="#s10">9. Children</a></li><li><a href="#s11">10. Security</a></li><li><a href="#s12">11. Changes</a></li><li><a href="#s13">Who we are and how to reach us</a></li></ol></aside>
+<main class="doc">
+<details class="mtoc"><summary>On this page</summary><ol><li><a href="#s1">In short</a></li><li><a href="#s2">1. Without an account</a></li><li><a href="#s3">2. When you create an account</a></li><li><a href="#s4">3. Notifications</a></li><li><a href="#s5">4. Analytics and crash reports</a></li><li><a href="#s6">5. How we use data</a></li><li><a href="#s7">6. Who processes data with us</a></li><li><a href="#s8">7. Retention and deletion</a></li><li><a href="#s9">8. Your rights</a></li><li><a href="#s10">9. Children</a></li><li><a href="#s11">10. Security</a></li><li><a href="#s12">11. Changes</a></li><li><a href="#s13">Who we are and how to reach us</a></li></ol></details><p>This policy explains how we handle your data in <strong>Ishraqa</strong>. We collect as little data as possible, never sell it, and show no ads.</p>
+<div class="summary"><h2 id="s1">In short</h2>
 <ul>
 <li>You can use almost all of the app <strong>without an account</strong>; your preferences stay on your device.</li>
 <li>An account is optional and only needed to write, comment and follow.</li>
 <li><strong>No ads, no data selling, no advertising ID.</strong></li>
 <li>You can delete your account and all its data from inside the app at any time.</li>
 </ul>
-<h2>1. Without an account</h2>
+</div><h2 id="s2">1. Without an account</h2>
 <p>Stored <strong>on your device only</strong> and never sent to our servers: favorites, saved articles, streaks, points and badges, reading goal and book progress, greeting name, interests, theme and notification settings.</p>
-<h2>2. When you create an account</h2>
+<h2 id="s3">2. When you create an account</h2>
 <ul>
 <li><strong>Email address:</strong> to sign you in with a one-time code. Never used for marketing.</li>
 <li><strong>Your public profile:</strong> display name (a pseudonym is fine), photo, bio, region and country, and social links if you add them. These are <strong>publicly visible</strong>.</li>
@@ -67,40 +122,60 @@ footer a{color:var(--muted)}
 <li><strong>Notification preference</strong> and your in-app notification inbox.</li>
 </ul>
 <p><strong>Microphone</strong> permission is requested only when you tap record. Nothing is recorded in the background.</p>
-<h2>3. Notifications</h2>
+<h2 id="s4">3. Notifications</h2>
 <ul>
 <li>Morning, reading and deadline reminders are <strong>scheduled on your device</strong>.</li>
 <li>Daily-article, Ishraqa news and account-activity notifications are sent via Firebase using a <strong>device notification token</strong>, linked to your account only when signed in and removed when you sign out.</li>
 <li>Control each type in Settings, or turn them off in your phone settings.</li>
 </ul>
-<h2>4. Analytics and crash reports</h2>
+<h2 id="s5">4. Analytics and crash reports</h2>
 <p>We use Google Firebase for <strong>anonymous</strong> usage analytics (screens and events) and crash reports to improve the app. They are not linked to your name or email, and <strong>we removed the advertising ID from the app</strong>, so it is never collected. Article read counts are aggregate counters that do not record who read.</p>
-<h2>5. How we use data</h2>
+<h2 id="s6">5. How we use data</h2>
 <p>Only to run the app: sign-in, content and interactions, follows, notifications, content review and reports, and protecting the community from abuse. <strong>We do not sell your data or share it for advertising.</strong></p>
-<h2>6. Service providers</h2>
-<p>Trusted providers process data on our behalf and under our instructions:
-- <strong>Supabase:</strong> database, file storage and authentication (EU servers, Frankfurt).
-- <strong>Google Firebase:</strong> notifications, anonymous analytics, crash reports.
-- <strong>Resend:</strong> delivering your sign-in code by email.
-- <strong>Google Play:</strong> app distribution and optional support via Google Play Billing (we never see your card details).
-- <strong>Anthropic:</strong> helping our editors draft articles and explain quotes. Only the quote text or article topic is sent; <strong>no user data is sent</strong>.</p>
-<h2>7. Retention and deletion</h2>
+<h2 id="s7">6. Who processes data with us</h2>
+<p>We do not sell your data or share it for advertising. We rely on a small number of trusted service providers to run the app; they process data on our behalf, only under our instructions, and are bound to protect it:</p>
+<ul>
+<li><strong>Cloud hosting:</strong> database, file storage and sign-in, on secure servers in the European Union.</li>
+<li><strong>Notifications, analytics and crash reports:</strong> through Google Firebase, including Google Analytics for Firebase. Learn more about <a href="https://policies.google.com/technologies/partner-sites">how Google uses data</a>.</li>
+<li><strong>Email delivery:</strong> only to send your sign-in code.</li>
+<li><strong>Payments:</strong> optional support is processed by Google Play; we never see your card details.</li>
+</ul>
+<p>We may disclose data if required by law, or to protect the safety of our users.</p>
+<h2 id="s8">7. Retention and deletion</h2>
 <ul>
 <li>Account data is kept while your account exists.</li>
 <li><strong>Delete your account:</strong> <strong>Account → Delete account</strong>. Your account, public profile, posts, comments, likes, follows, recordings, images and notifications are deleted immediately. Encrypted backups may persist for up to 30 days, then are deleted automatically.</li>
-<li>You can also request deletion by email; we act within 30 days. See <a href="../../en/delete-account/">Delete account</a>.</li>
+<li>You can also request deletion through our <a href="../../en/contact/">contact page</a>; we act within 30 days. See <a href="../../en/delete-account/">Delete account</a>.</li>
 </ul>
-<h2>8. Your rights</h2>
-<p>You may access, correct (via "Edit profile") and delete your data, object to processing, or request a copy by emailing <strong>ishraqa@otwox.com</strong>.</p>
-<h2>9. Children</h2>
+<h2 id="s9">8. Your rights</h2>
+<p>You may access, correct (via "Edit profile") and delete your data, object to processing, or request a copy through our <a href="../../en/contact/">contact page</a>.</p>
+<h2 id="s10">9. Children</h2>
 <p>The app is for a general audience. <strong>Accounts are for users aged 13 and over.</strong> We do not knowingly collect data from younger children; tell us and we will delete such an account.</p>
-<h2>10. Security</h2>
+<h2 id="s11">10. Security</h2>
 <p>Data travels over encrypted connections (HTTPS), and database access rules prevent any user from viewing another user's private data or modifying it. We review and test these rules continuously.</p>
-<h2>11. Changes</h2>
+<h2 id="s12">11. Changes</h2>
 <p>If we make material changes we will notify you in the app; the last-updated date appears at the top.</p>
-<h2>Who we are and how to reach us</h2>
-<p>We are <strong>OtwoX Digital Solutions</strong>, the team that builds Ishraqa and looks after your data. For any question or request about your privacy or account, email <strong>ishraqa@otwox.com</strong>; we reply within 30 days at the latest.</p>
-</article></main>
-<footer>Ishraqa · <a href="mailto:ishraqa@otwox.com">ishraqa@otwox.com</a><br><a href="https://otwox.com">Powered by OtwoX Digital Solutions</a></footer>
+<h2 id="s13">Who we are and how to reach us</h2>
+<p>We are <strong>OtwoX Digital Solutions</strong>, the team that builds Ishraqa and looks after your data. For any question or request about your privacy or account, <a href="../../en/contact/">contact us</a> or use <strong>Account → Contact us</strong> in the app; we reply within 30 days at the latest.</p>
+</main>
+</div>
+<footer><div class="in">
+<nav><a href="../../en/privacy/">Privacy Policy</a><a href="../../en/terms/">Terms of Use</a><a href="../../en/delete-account/">Delete account</a><a href="../../en/contact/">Contact us</a></nav>
+<a href="https://otwox.com">Powered by OtwoX Digital Solutions</a>
+</div></footer>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  if(!('IntersectionObserver' in window)||!links.length)return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on')});
+      var a=map[e.target.id];if(a)a.classList.add('on');}
+  })},{rootMargin:'-90px 0px -70% 0px'});
+  document.querySelectorAll('.doc h2[id]').forEach(function(h){io.observe(h)});
+})();
+</script>
+
 </body>
 </html>
