@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>شروط الاستخدام · Terms of Use · إشراقة يومية</title>
-<meta name="description" content="شروط الاستخدام · Terms of Use لتطبيق إشراقة يومية من أوتواكس للحلول الرقمية.">
+<title>شروط الاستخدام · إشراقة يومية</title>
+<meta name="description" content="شروط الاستخدام لتطبيق إشراقة يومية.">
 <meta name="theme-color" content="#2A1B5E">
 <link rel="canonical" href="https://ishraqa.otwox.com/terms/">
+<link rel="alternate" hreflang="ar" href="https://ishraqa.otwox.com/terms/">
+<link rel="alternate" hreflang="en" href="https://ishraqa.otwox.com/en/terms/">
 <link rel="icon" type="image/png" href="../img/icon-192.png">
-<meta property="og:title" content="شروط الاستخدام · Terms of Use · إشراقة يومية">
+<meta property="og:title" content="شروط الاستخدام · إشراقة يومية">
 <meta property="og:image" content="https://ishraqa.otwox.com/img/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,22 +21,21 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--cream);color:var(--ink);line-height:1.9}
 header{background:linear-gradient(140deg,var(--night),var(--plum) 60%,var(--sun));color:#fff}
-header .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;max-width:860px;margin:0 auto}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;max-width:860px;margin:0 auto;flex-wrap:wrap}
 header a{color:#fff;text-decoration:none}
 .brand{font-weight:800;display:flex;align-items:center;gap:10px}
-nav{display:flex;flex-wrap:wrap;gap:4px 14px}
-header img{width:36px;height:36px;border-radius:10px}
+.brand img{width:36px;height:36px;border-radius:10px}
+nav{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center}
 nav a{font-weight:600;font-size:14px;opacity:.9}
+nav a[aria-current]{opacity:1;text-decoration:underline;text-underline-offset:6px}
+nav .lang{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:2px 12px}
 main{max-width:860px;margin:0 auto;padding:24px 20px 60px}
-article{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:8px 28px 24px;margin-bottom:24px}
-article[dir=ltr]{text-align:left}
-h1{font-size:30px;margin:20px 0 4px}
+article{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:8px 28px 24px}
+h1{font-size:30px;margin:20px 0 0}
+h1+p{color:var(--muted);margin-top:0}
 h2{font-size:20px;color:var(--plum);margin:28px 0 6px}
-p,li{color:var(--ink)}
 a{color:var(--plum)}
-code{font-size:.9em;background:var(--line);padding:1px 6px;border-radius:6px}
-hr{border:0;border-top:1px solid var(--line);margin:28px 0}
-footer{text-align:center;color:var(--muted);font-size:14px;padding:0 20px 40px}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:0 20px 40px;line-height:2}
 footer a{color:var(--muted)}
 @media (max-width:600px){article{padding:4px 18px 18px}h1{font-size:24px}}
 </style>
@@ -42,12 +43,12 @@ footer a{color:var(--muted)}
 <body>
 <header><div class="wrap">
 <a class="brand" href="../"><img src="../img/icon-192.png" alt=""> إشراقة يومية</a>
-<nav><a href="../privacy/">الخصوصية</a><a href="../terms/">الشروط</a><a href="../delete-account/">حذف الحساب</a></nav>
+<nav><a href="../privacy/">سياسة الخصوصية</a><a href="../terms/" aria-current="page">شروط الاستخدام</a><a href="../delete-account/">حذف الحساب</a><a class="lang" href="../en/terms/" hreflang="en" lang="en">English</a></nav>
 </div></header>
-<main>
-<article><h1>شروط الاستخدام</h1>
-<p><strong>تطبيق إشراقة يومية</strong> · آخر تحديث: 2 أكتوبر 2026</p>
-<p>مرحبًا بك في إشراقة يومية، من تطوير أوتواكس للحلول الرقمية. باستخدامك التطبيق فأنت توافق على هذه الشروط، فاقرأها بهدوء.</p>
+<main><article>
+<h1>شروط الاستخدام</h1>
+<p>آخر تحديث: 2 أكتوبر 2026</p>
+<p>مرحبًا بك في <strong>إشراقة يومية</strong>. تنظّم هذه الشروط استخدامك للتطبيق وخدماته، وباستخدامك له فأنت توافق عليها، فاقرأها بهدوء.</p>
 <h2>1. الخدمة</h2>
 <p>إشراقة تطبيق مجاني يقدّم حِكمًا يومية وشروحها، ومقالات، ومكتبة كتب، وفرصًا ومنحًا، ومساحة مجتمعية للكتابة والتسجيل الصوتي. قد نطوّر الميزات أو نغيّرها أو نوقف بعضها مع الوقت.</p>
 <h2>2. الحساب</h2>
@@ -75,7 +76,7 @@ footer a{color:var(--muted)}
 <li>المقالات للتثقيف العام، <strong>وليست نصيحة طبية أو مالية أو قانونية</strong>. استشر المختص في ما يخصك.</li>
 <li>كتب المكتبة في الملكية العامة أو منشورة بإذن، ويظهر مصدر كل كتاب وترخيصه في صفحته.</li>
 <li>المنح والفرص منقولة من مصادرها الرسمية؛ تحقق دائمًا من الشروط والمواعيد في الموقع الرسمي قبل التقديم.</li>
-<li>تصميم التطبيق وشعاره ونصوصه الأصلية ملك لأوتواكس للحلول الرقمية.</li>
+<li>تصميم التطبيق وشعاره ونصوصه الأصلية ملك لنا، ولا يجوز استخدامها دون إذن.</li>
 </ul>
 <h2>6. الدعم الاختياري</h2>
 <p>الدعم المالي <strong>تطوّع اختياري</strong> يتم بالكامل عبر Google Play، ولا يمنح ميزات إضافية. تخضع المدفوعات واسترداد المبالغ لسياسات Google Play.</p>
@@ -87,53 +88,9 @@ footer a{color:var(--muted)}
 <p>تشرح <a href="../privacy/">سياسة الخصوصية</a> البيانات التي نجمعها وكيف نحميها.</p>
 <h2>10. التغييرات</h2>
 <p>قد نحدّث هذه الشروط، ونعلمك داخل التطبيق بأي تغيير جوهري. واستمرارك في الاستخدام بعد التحديث يعني موافقتك عليه.</p>
-<h2>تواصل معنا</h2>
-<p>أوتواكس للحلول الرقمية · <strong>saifuddin.ai.dev@gmail.com</strong> · <a href="https://otwox.com">otwox.com</a></p></article>
-<article dir="ltr" lang="en"><h1>Terms of Use</h1>
-<p><strong>Ishraqa (Daily Wisdom)</strong> · Last updated: October 2, 2026</p>
-<p>Welcome to Ishraqa, developed by OtwoX Digital Solutions. By using the app you agree to these terms.</p>
-<h2>1. The service</h2>
-<p>Ishraqa is a free app offering daily quotes and their explanations, articles, a book library, opportunities and scholarships, and a community space for writing and voice recordings. We may develop, change or discontinue features over time.</p>
-<h2>2. Your account</h2>
-<ul>
-<li>An account is optional and needed to write, comment and follow.</li>
-<li><strong>You must be at least 13 years old</strong> to create an account.</li>
-<li>You are responsible for your account and what is posted from it. Do not impersonate others.</li>
-</ul>
-<h2>3. Your content</h2>
-<ul>
-<li>What you write or record <strong>remains yours</strong>. By posting it you grant us a free, non-exclusive permission to display and publish it within Ishraqa and its channels, credited to your display name, for as long as it is posted.</li>
-<li>You confirm the content is your own or that you have the right to publish it, and that anyone whose voice appears in a recording agreed to its publication.</li>
-<li>You can delete your posts and comments at any time.</li>
-</ul>
-<h2>4. Community guidelines</h2>
-<p>Not allowed:
-- Abuse, hate or incitement against any person, tribe, culture or religion.
-- Harassment, threats, or sharing others' personal information or photos without consent.
-- Deliberate misinformation, advertising or spam.
-- Sexual or violent content, illegal content, or content that infringes others' rights.</p>
-<p>The Ishraqa team reviews content and may reject, hide or remove it and suspend violating accounts. You can report any content or block any user from inside the app; we review reports promptly.</p>
-<h2>5. Ishraqa content</h2>
-<ul>
-<li>Quotes and proverbs come from Arabic heritage; we take care to attribute them accurately.</li>
-<li>Articles are for general education and are <strong>not medical, financial or legal advice</strong>.</li>
-<li>Library books are in the public domain or published with permission; each book's page shows its source and license.</li>
-<li>Opportunities and scholarships come from official sources; always verify terms and deadlines on the official website before applying.</li>
-<li>The app's design, logo and original texts belong to OtwoX Digital Solutions.</li>
-</ul>
-<h2>6. Optional support</h2>
-<p>Financial support is <strong>entirely voluntary</strong>, processed by Google Play, and unlocks no extra features. Payments and refunds follow Google Play's policies.</p>
-<h2>7. Disclaimer</h2>
-<p>The app is provided "as is". We work hard to keep it accurate and available but do not guarantee it is error-free or uninterrupted. To the extent permitted by law, we are not liable for indirect damages arising from using the app or relying on its content.</p>
-<h2>8. Ending use</h2>
-<p>You can stop using the app and delete your account at any time via <strong>Account → Delete account</strong>. We may suspend accounts that violate these terms.</p>
-<h2>9. Privacy</h2>
-<p>Our <a href="../privacy/">Privacy Policy</a> explains what we collect and how we protect it.</p>
-<h2>10. Changes</h2>
-<p>We may update these terms and will notify you in the app of material changes. Continuing to use the app after an update means you accept it.</p>
-<h2>Contact</h2>
-<p>OtwoX Digital Solutions · <strong>saifuddin.ai.dev@gmail.com</strong> · <a href="https://otwox.com">otwox.com</a></p></article>
-</main>
-<footer>© 2026 <a href="https://otwox.com">أوتواكس للحلول الرقمية</a> · <a href="mailto:saifuddin.ai.dev@gmail.com">saifuddin.ai.dev@gmail.com</a></footer>
+<h2>من نحن وكيف تتواصل معنا</h2>
+<p>نحن في <strong>أوتواكس للحلول الرقمية</strong> نطوّر إشراقة يومية ونقدّم خدماتها. لأي سؤال عن هذه الشروط راسلنا على <strong>ishraqa@otwox.com</strong>.</p>
+</article></main>
+<footer>إشراقة يومية · <a href="mailto:ishraqa@otwox.com">ishraqa@otwox.com</a><br><a href="https://otwox.com">بواسطة أوتواكس للحلول الرقمية</a></footer>
 </body>
 </html>
