@@ -83,14 +83,15 @@ article blockquote{{margin:18px 0;padding:14px 18px;border-radius:14px;backgroun
 .list img{{width:120px;height:78px;object-fit:cover;border-radius:12px;flex-shrink:0}}
 .list b{{display:block;line-height:1.5}}.list small{{color:var(--muted)}}
 .src{{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:26px;padding-top:12px;white-space:pre-line}}
-footer{{color:var(--muted);font-size:13px;text-align:center;padding:30px 0}}
+footer{{color:var(--muted);font-size:13px;text-align:center;padding:30px 0;line-height:2.2}}
+footer a{{color:var(--muted);text-decoration:none}} footer nav{{margin-bottom:4px}}
 </style></head><body>
 <div class="top"><div class="wrap"><a class="brand" href="/"><img src="/img/icon-192.png" alt=""> إشراقة يومية</a>
 <a class="btn light" href="{open_app}">افتح في التطبيق</a></div></div>
 """
 
-FOOT = """<footer>© {year} إشراقة يومية · من <a href="https://otwox.com">أوتواكس للحلول الرقمية</a> ·
-<a href="https://otwox.com/privacy">الخصوصية</a></footer></body></html>"""
+FOOT = """<footer><nav><a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
+<a href="/contact/">تواصل معنا</a></nav><a href="https://otwox.com">بواسطة أوتواكس للحلول الرقمية</a></footer></body></html>"""
 
 
 def article_page(a: dict) -> str:
