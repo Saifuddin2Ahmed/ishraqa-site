@@ -5,5 +5,5 @@
 صورة المعاينة img/og.png تُولَّد من og.html بمتصفح Chrome (1200x630).
 
 ## صورة معاينة الروابط
-`img/og.jpg`: صورة شروق فوق السحب، بلا كتابة (1200×630، أقل من 300KB ليعرضها واتساب كبيرة).
-المصدر: StockSnap «Golden Sunset» (CC0، لا يلزم ذكر المصدر): https://stocksnap.io/photo/golden-sunset-HRWS8SRVCO
+`img/og.jpg`: ظل شخص يقرأ كتابًا أمام شروق الشمس، بلا كتابة (1200×630، أقل من 300KB).
+المصدر: StockSnap (CC0، لا يلزم ذكر المصدر): https://stocksnap.io/photo/people-man-XVQYWY15O0

@@ -91,7 +91,7 @@ footer a{{color:var(--muted);text-decoration:none}} footer nav{{margin-bottom:4p
 """
 
 FOOT = """<footer><nav><a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
-<a href="/contact/">تواصل معنا</a></nav><a href="https://otwox.com">بواسطة أوتواكس للحلول الرقمية</a></footer></body></html>"""
+<a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer></body></html>"""
 
 
 def article_page(a: dict) -> str:
