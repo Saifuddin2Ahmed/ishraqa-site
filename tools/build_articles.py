@@ -98,7 +98,7 @@ def article_page(a: dict) -> str:
     slug = a['slug']
     url = f'{SITE}/a/{slug}/'
     author = (a.get('author') or {}).get('display_name') or a['author_name']
-    cover = a.get('cover_url') or f'{SITE}/img/og.png'
+    cover = a.get('cover_url') or f'{SITE}/img/og.jpg'
     body_html = markdown.markdown(a['body'], extensions=['extra', 'sane_lists'])
     cat = CATEGORIES.get(a['category'], '')
     date = a.get('publish_date') or ''
@@ -122,14 +122,14 @@ def article_page(a: dict) -> str:
 
 def index_page(items: list) -> str:
     rows = ''.join(
-        f'<a class="item" href="/a/{esc(a["slug"])}/"><img src="{esc(a.get("cover_url") or "/img/og.png")}" alt="" loading="lazy">'
+        f'<a class="item" href="/a/{esc(a["slug"])}/"><img src="{esc(a.get("cover_url") or "/img/og.jpg")}" alt="" loading="lazy">'
         f'<span><b>{esc(a["title"])}</b><small>{esc(CATEGORIES.get(a["category"], ""))} · {esc(a.get("publish_date"))}</small></span></a>'
         for a in items
     )
     return (
         HEAD.format(title='مقالات إشراقة يومية', desc='مقال يومي يستحق القراءة في الصحة والتقنية وتطوير الذات والثقافة.',
                     url=f'{SITE}/a/', og_type='website', og_title='مقالات إشراقة يومية',
-                    image=f'{SITE}/img/og.png', open_app=PLAY)
+                    image=f'{SITE}/img/og.jpg', open_app=PLAY)
         + '<div class="wrap"><main><h1>مقالات إشراقة</h1><div class="list">' + rows
         + '</div></main></div>' + FOOT.format(year=dt.date.today().year)
     )
