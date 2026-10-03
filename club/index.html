@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دعوة إلى نادي قرّاء · إشراقة يومية</title>
+<meta name="description" content="لديك دعوة لتقرأ مع أصدقائك في نادي قرّاء على إشراقة يومية: كتاب واحد، وهدف يومي، ونقاش لكل جزء.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1B5E">
+<link rel="icon" type="image/png" href="../img/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="إشراقة يومية">
+<meta property="og:title" content="لديك دعوة إلى نادي قرّاء 📚">
+<meta property="og:description" content="نقرأ كتابًا واحدًا معًا، كلٌّ في مكانه، ونناقشه جزءًا جزءًا. انضم إلينا على إشراقة يومية.">
+<meta property="og:image" content="https://ishraqa.otwox.com/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ishraqa.otwox.com/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6}
+@media (prefers-color-scheme:dark){:root{--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Cairo,Tahoma,sans-serif;background:linear-gradient(160deg,var(--night) 0%,var(--plum) 60%,var(--sun) 100%);color:var(--ink);line-height:1.8;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{width:100%;max-width:440px;background:var(--card);border-radius:28px;padding:32px 24px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.cover{width:96px;height:96px;border-radius:26px;margin:0 auto;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:800;color:#fff;background:linear-gradient(140deg,var(--night),var(--plum),var(--sun));box-shadow:0 10px 26px rgba(42,27,94,.25)}
+.small{margin:16px 0 0;font-size:14px;color:var(--muted)}
+h1{font-size:26px;line-height:1.5;margin:4px 0 6px;font-weight:800}
+.desc{color:var(--muted);margin:0 0 6px}
+.members{color:var(--muted);font-size:14px;margin:0 0 20px}
+ul{list-style:none;padding:0;margin:0 0 24px;text-align:right}
+li{padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
+li:last-child{border:0}
+.btn{display:block;text-decoration:none;font-weight:700;font-size:17px;border-radius:999px;padding:14px 20px;margin-top:10px}
+.primary{background:var(--night);color:#fff}
+.secondary{border:1.5px solid var(--line);color:var(--ink)}
+.code{margin-top:16px;font-size:13px;color:var(--muted)}
+.code b{direction:ltr;display:inline-block;letter-spacing:1px;color:var(--ink)}
+.missing{display:none}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="cover" id="cover">📚</div>
+  <p class="small">لديك دعوة إلى نادي قرّاء</p>
+  <h1 id="name">نادي قرّاء في إشراقة</h1>
+  <p class="desc" id="desc"></p>
+  <p class="members" id="members"></p>
+  <ul>
+    <li>📖 كتاب واحد نقرؤه معًا، كلٌّ في مكانه</li>
+    <li>🎯 هدف يومي صغير يناسب وقتك</li>
+    <li>💬 نقاش لكل جزء، دون حرق للأحداث</li>
+  </ul>
+  <a class="btn primary" id="open" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">انضم من التطبيق</a>
+  <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer=utm_source%3Dclub_invite">حمّل إشراقة يومية مجانًا</a>
+  <p class="code" id="codeLine">إن طُلب منك، رمز الدعوة: <b id="code"></b></p>
+</main>
+<script>
+(function(){
+  var p=new URLSearchParams(location.search), code=(p.get('c')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,16);
+  var play='https://play.google.com/store/apps/details?id=com.taeziz.ishraqa';
+  if(!code){document.getElementById('codeLine').style.display='none';return;}
+  document.getElementById('code').textContent=code;
+  // يفتح التطبيق مباشرة إن كان مثبتًا، وإلا ينتقل إلى Google Play
+  var target='ishraqa.otwox.com/club/?c='+code;
+  document.getElementById('open').href='intent://'+target+'#Intent;scheme=https;package=com.taeziz.ishraqa;S.browser_fallback_url='+encodeURIComponent(play)+';end';
+  fetch('https://jytbowsfvuzdnsmhmsly.supabase.co/rest/v1/rpc/club_by_code',{method:'POST',headers:{'apikey':'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD','Authorization':'Bearer sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD','Content-Type':'application/json'},body:JSON.stringify({p_code:code})})
+    .then(function(r){return r.json();}).then(function(rows){
+      var c=rows&&rows[0]; if(!c)return;
+      document.getElementById('name').textContent=c.name;
+      document.title='دعوة إلى '+c.name+' · إشراقة يومية';
+      if(c.description)document.getElementById('desc').textContent=c.description;
+      var n=c.member_count, m=n===1?'عضو واحد':n===2?'عضوان':(n%100>=3&&n%100<=10)?n+' أعضاء':n+' عضوًا';
+      document.getElementById('members').textContent=n>0?m:'';
+      var cv=document.getElementById('cover');
+      if(c.cover_url){var img=document.createElement('img');img.src=c.cover_url;img.alt='';img.className='cover';cv.replaceWith(img);}
+      else{cv.textContent=(c.name||'📚').trim().charAt(0);}
+    }).catch(function(){});
+})();
+</script>
+</body>
+</html>
