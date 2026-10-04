@@ -91,7 +91,8 @@ footer a{{color:var(--muted);text-decoration:none}} footer nav{{margin-bottom:4p
 <a class="btn light" href="{open_app}">افتح في التطبيق</a></div></div>
 """
 
-FOOT = """<footer><nav><a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
+FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
+<a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
 <a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer></body></html>"""
 
 
@@ -185,7 +186,8 @@ def main() -> None:
 
     urls = [f'{SITE}/', f'{SITE}/a/'] + [f'{SITE}/a/{a["slug"]}/' for a in items]
     # صفحات ثابتة أخرى: الحِكم (q) والكتب (k) والصفحات القانونية (بالعربية والإنجليزية)
-    for section in ('q', 'k', 'privacy', 'terms', 'contact', 'en/privacy', 'en/terms', 'en/contact'):
+    for section in ('about', 'developers', 'q', 'k', 'privacy', 'terms', 'contact',
+                    'en/privacy', 'en/terms', 'en/contact'):
         base = ROOT / section
         if base.exists():
             urls += sorted(
