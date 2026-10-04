@@ -154,6 +154,14 @@ def main() -> None:
     (OUT / 'index.html').write_text(index_page(items), encoding='utf-8')
 
     urls = [f'{SITE}/', f'{SITE}/a/'] + [f'{SITE}/a/{a["slug"]}/' for a in items]
+    # صفحات ثابتة أخرى: الحِكم (q) والكتب (k) والصفحات القانونية (بالعربية والإنجليزية)
+    for section in ('q', 'k', 'privacy', 'terms', 'contact', 'en/privacy', 'en/terms', 'en/contact'):
+        base = ROOT / section
+        if base.exists():
+            urls += sorted(
+                f'{SITE}/{p.parent.relative_to(ROOT).as_posix()}/'
+                for p in base.rglob('index.html')
+            )
     (ROOT / 'sitemap.xml').write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
         + ''.join(f'<url><loc>{u}</loc></url>' for u in urls) + '</urlset>\n', encoding='utf-8')
