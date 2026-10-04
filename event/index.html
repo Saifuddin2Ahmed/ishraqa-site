@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فعالية قرّاء · إشراقة يومية</title>
+<meta name="description" content="لقاء أو جلسة لنادي قرّاء على إشراقة يومية. سجّل حضورك من التطبيق ليصلك تذكير قبل الموعد.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1B5E">
+<link rel="icon" type="image/png" href="../img/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="إشراقة يومية">
+<meta property="og:title" content="فعالية لنادي قرّاء 📅">
+<meta property="og:description" content="لقاء أو جلسة لنادي قرّاء على إشراقة يومية. سجّل حضورك من التطبيق ليصلك تذكير قبل الموعد.">
+<meta property="og:image" content="https://ishraqa.otwox.com/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ishraqa.otwox.com/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6;--chip:#F3EEFB}
+@media (prefers-color-scheme:dark){:root{--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645;--chip:#2A2240}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Cairo,Tahoma,sans-serif;background:linear-gradient(160deg,var(--night) 0%,var(--plum) 60%,var(--sun) 100%);color:var(--ink);line-height:1.8;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{width:100%;max-width:440px;background:var(--card);border-radius:28px;padding:32px 24px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.kind{display:inline-block;background:var(--chip);border-radius:999px;padding:4px 14px;font-weight:700;font-size:14px}
+h1{font-size:24px;line-height:1.5;margin:14px 0 4px;font-weight:800}
+.club{color:var(--muted);margin:0 0 18px;font-size:15px}
+ul{list-style:none;padding:0;margin:0 0 20px;text-align:right}
+li{padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+li:last-child{border:0}
+.details{white-space:pre-line;text-align:right;color:var(--muted);margin:0 0 20px;font-size:15px}
+.btn{display:block;text-decoration:none;font-weight:700;font-size:17px;border-radius:999px;padding:14px 20px;margin-top:10px}
+.primary{background:var(--night);color:#fff}
+.secondary{border:1.5px solid var(--line);color:var(--ink)}
+.note{margin-top:16px;font-size:13px;color:var(--muted)}
+.hide{display:none}
+</style>
+</head>
+<body>
+<main class="card">
+  <span class="kind" id="kind">📅 فعالية</span>
+  <h1 id="title">فعالية لنادي قرّاء</h1>
+  <p class="club" id="club"></p>
+  <ul id="facts" class="hide">
+    <li id="when"></li>
+    <li id="where" class="hide"></li>
+  </ul>
+  <p class="details hide" id="details"></p>
+  <p class="note hide" id="private">هذه الفعالية في نادٍ خاص. اطلب رابط الدعوة من صاحب النادي، ثم سجّل حضورك من التطبيق.</p>
+  <a class="btn primary" id="open" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">سأحضر: افتح في التطبيق</a>
+  <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer=utm_source%3Devent_page">حمّل إشراقة يومية مجانًا</a>
+  <p class="note">يصلك تذكير قبل الموعد بساعة حين تسجّل «سأحضر» من التطبيق.</p>
+</main>
+<script>
+(function(){
+  var id=(new URLSearchParams(location.search).get('id')||'').toLowerCase();
+  if(!/^[0-9a-f-]{36}$/.test(id))return;
+  var play='https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer='+encodeURIComponent('utm_source=event_page');
+  var target='ishraqa.otwox.com/event/?id='+id;
+  document.getElementById('open').href='intent://'+target+'#Intent;scheme=https;package=com.taeziz.ishraqa;S.browser_fallback_url='+encodeURIComponent(play)+';end';
+  var kinds={meetup:'📍 لقاء حضوري',guest:'🎙️ ضيف النادي',live:'🔴 جلسة مباشرة'};
+  var platforms={meet:'Google Meet',zoom:'Zoom',youtube:'يوتيوب',facebook:'فيسبوك',tiktok:'تيك توك',x:'مساحات X',clubhouse:'كلوب هاوس',linkedin:'لينكدإن',whatsapp:'واتساب',viber:'فايبر',other:'منصة على الإنترنت'};
+  var days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  var months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  function when(iso){var d=new Date(iso),h=d.getHours()%12||12,m=('0'+d.getMinutes()).slice(-2);return days[d.getDay()]+' '+d.getDate()+' '+months[d.getMonth()]+' · '+h+':'+m+' '+(d.getHours()<12?'ص':'م');}
+  var key='sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD';
+  fetch('https://jytbowsfvuzdnsmhmsly.supabase.co/rest/v1/club_events?id=eq.'+id+'&select=kind,title,details,starts_at,place,platform,clubs(name)',{headers:{apikey:key,Authorization:'Bearer '+key}})
+    .then(function(r){return r.json();}).then(function(rows){
+      var e=rows&&rows[0];
+      if(!e){document.getElementById('private').classList.remove('hide');return;}
+      document.getElementById('kind').textContent=kinds[e.kind]||'📅 فعالية';
+      document.getElementById('title').textContent=e.title;
+      document.title=e.title+' · إشراقة يومية';
+      if(e.clubs&&e.clubs.name)document.getElementById('club').textContent='نادي '+e.clubs.name;
+      document.getElementById('facts').classList.remove('hide');
+      document.getElementById('when').textContent='🕗 '+when(e.starts_at);
+      var w=document.getElementById('where');
+      if(e.place){w.textContent='📍 '+e.place;w.classList.remove('hide');}
+      else if(e.platform){w.textContent='💻 عبر '+(platforms[e.platform]||'الإنترنت');w.classList.remove('hide');}
+      if(e.details){var d=document.getElementById('details');d.textContent=e.details;d.classList.remove('hide');}
+    }).catch(function(){});
+})();
+</script>
+</body>
+</html>
