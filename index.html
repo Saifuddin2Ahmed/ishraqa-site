@@ -74,6 +74,8 @@ h2{font-size:32px;margin:0 0 8px;text-align:center}
 .quote{max-width:760px;margin:0 auto;text-align:center;background:linear-gradient(140deg,var(--night),var(--plum));color:#fff;border-radius:28px;padding:40px 28px}
 .quote p{font-size:26px;font-weight:700;margin:0 0 8px;line-height:1.7}
 .quote span{color:var(--gold);font-weight:600}
+.quote{display:grid}.quote .q{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .9s,visibility .9s}.quote .q.on{opacity:1;visibility:visible}
+.dots{grid-area:2/1;display:flex;gap:8px;justify-content:center;margin-top:18px}.dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:width .3s}.dots button.on{width:22px;border-radius:4px;background:var(--gold)}
 .cta{text-align:center}
 footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0;color:var(--muted);font-size:14px}
 footer .row{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;align-items:center}
@@ -143,10 +145,20 @@ footer .credit{line-height:1.9}
 
   <section>
     <div class="wrap">
-      <div class="quote">
-        <p>«كل شروق يمنحك فرصة جديدة لتبدأ من جديد.»</p>
-        <span>— من إشراقات التطبيق</span>
+      <div class="quote" id="quotes">
+        <figure class="q on"><p>«أعزُّ مكانٍ في الدُّنى سرجُ سابحٍ، وخيرُ جليسٍ في الزمان كتابُ.»</p><span>— المتنبي</span></figure>
+        <figure class="q"><p>«أفضل طريقة للتنبؤ بالمستقبل هي أن تخترعه.»</p><span>— آلان كاي</span></figure>
+        <figure class="q"><p>«إذا كنتُ قد رأيت أبعد، فذلك لأنني وقفت على أكتاف العمالقة.»</p><span>— إسحاق نيوتن</span></figure>
+        <figure class="q"><p>«الكلام رخيص، أرني الكود.»</p><span>— لينوس تورفالدس</span></figure>
+        <figure class="q"><p>«بالأمس كنت ذكيًا فأردت أن أغيّر العالم، واليوم أنا حكيم لذلك أغيّر نفسي.»</p><span>— يُنسب إلى جلال الدين الرومي</span></figure>
+        <figure class="q"><p>«هذا للجميع.»</p><span>— تيم بيرنرز-لي، مخترع الويب</span></figure>
+        <figure class="q"><p>«من يعرف الآخرين ذكي، ومن يعرف نفسه حكيم.»</p><span>— لاو تزو</span></figure>
+        <figure class="q"><p>«الخبر الكاذب يطير، والحقيقة تمشي على قدمين.»</p><span>— حكمة</span></figure>
+        <figure class="q"><p>«الفي البرّ عوّام.»</p><span>— مثل سوداني</span></figure>
+        <figure class="q"><p>«كل صباح هو صفحة بيضاء، فاكتب فيها ما يستحق أن يُقرأ.»</p><span>— حكمة</span></figure>
+        <div class="dots"><button aria-label="الحكمة 1" class=on></button><button aria-label="الحكمة 2"></button><button aria-label="الحكمة 3"></button><button aria-label="الحكمة 4"></button><button aria-label="الحكمة 5"></button><button aria-label="الحكمة 6"></button><button aria-label="الحكمة 7"></button><button aria-label="الحكمة 8"></button><button aria-label="الحكمة 9"></button><button aria-label="الحكمة 10"></button></div>
       </div>
+      <script>(function(){var b=document.getElementById("quotes"),q=b.querySelectorAll(".q"),d=b.querySelectorAll(".dots button"),i=0,t;function go(n){q[i].classList.remove("on");d[i].classList.remove("on");i=(n+q.length)%q.length;q[i].classList.add("on");d[i].classList.add("on")}function run(){clearInterval(t);if(!matchMedia("(prefers-reduced-motion: reduce)").matches)t=setInterval(function(){go(i+1)},7000)}d.forEach(function(x,k){x.onclick=function(){go(k);run()}});run()})();</script>
     </div>
   </section>
 
