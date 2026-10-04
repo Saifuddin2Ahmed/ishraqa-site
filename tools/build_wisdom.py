@@ -14,7 +14,8 @@ import sys
 import urllib.request
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from build_articles import FOOT, HEAD, PLAY, SITE, esc  # noqa: E402
+from build_articles import FOOT, HEAD, PLAY, SITE, esc, open_app  # noqa: E402
+from urllib.parse import quote as urlquote  # noqa: E402
 
 APP = pathlib.Path(__file__).resolve().parents[2]
 SLUGS = {
@@ -49,8 +50,9 @@ def head(title, desc, url, image=f'{SITE}/img/og.jpg', og_type='article'):
                        og_title=esc(title), image=esc(image), open_app=PLAY).replace('</head>', EXTRA_CSS + '</head>')
 
 
-def cta(text):
-    return f'<div class="cta"><p>{text}</p><a class="btn main" href="{PLAY}">حمّل إشراقة يومية مجانًا</a></div>'
+def cta(text, label='حمّل إشراقة يومية مجانًا', href=None):
+    href = href or f'{PLAY}&referrer=' + urlquote('utm_source=web&utm_medium=wisdom')
+    return f'<div class="cta"><p>{text}</p><a class="btn main" href="{href}">{label}</a></div>'
 
 
 def short(s, n=150):
@@ -63,17 +65,19 @@ def quote_page(q, ex, related):
     who = q['author'] or 'حكمة'
     title = f'«{short(q["quote"], 70)}» معناها وشرحها'
     secs = f'<div class="sec"><h2>المعنى</h2><p>{esc(ex["meaning"])}</p></div>'
-    if ex.get('story'):
-        secs += f'<div class="sec"><h2>القصة والسياق</h2><p>{esc(ex["story"])}</p></div>'
-    secs += f'<div class="sec apply"><h2>كيف أطبّقها اليوم؟</h2><p>{esc(ex["reflection"])}</p></div>'
+    ld = json.dumps({'@context': 'https://schema.org', '@type': 'Quotation', 'text': q['quote'],
+                     'creator': {'@type': 'Person', 'name': who}, 'inLanguage': 'ar', 'url': url},
+                    ensure_ascii=False)
     more = ''.join(f'<a href="/q/{r["id"]}/">{esc(short(r["quote"], 60))}<small>{esc(r["author"] or "")}</small></a>'
                    for r in related)
     return (head(title + ' · إشراقة يومية', short(ex['meaning'], 155), url)
+            .replace('</head>', f'<script type="application/ld+json">{ld}</script></head>')
             + '<div class="wrap"><main>'
             + f'<span class="cat"><a href="/q/#{esc(q["category"])}" style="text-decoration:none">{esc(q["category"])}</a></span>'
             + f'<div class="quote"><p>«{esc(q["quote"])}»</p><span>— {esc(who)}</span></div>'
             + secs
-            + cta('حكمة جديدة كل صباح، مع معناها وكيف تطبّقها، في تطبيق إشراقة يومية')
+            + cta('قصة هذه الحكمة، وكيف تطبّقها في يومك، وحكمة جديدة كل صباح: في تطبيق إشراقة يومية',
+                  'اكتشفها في إشراقة')
             + (f'<h2>من {esc(q["category"])} أيضًا</h2><div class="qlist">{more}</div>' if more else '')
             + '</main></div>' + FOOT.format(year=dt.date.today().year))
 
@@ -97,16 +101,14 @@ def quotes_index(by_cat):
 def book_page(b, recaps):
     slug = SLUGS[b['title']]
     url = f'{SITE}/k/{slug}/'
-    rec = ''.join(f'<div class="recap"><b>الصفحات {r["from_page"]}–{r["to_page"]}</b><p>{esc(r["recap"])}</p></div>'
-                  for r in recaps)
     return (head(f'كتاب {b["title"]} لـ{b["author"]}: اقرأه مجانًا · إشراقة يومية', short(b['description'], 155),
                  url, image=b.get('cover_url') or f'{SITE}/img/og.jpg')
             + '<div class="wrap"><main>'
             + f'<div class="book"><img src="{esc(b["cover_url"])}" alt="غلاف {esc(b["title"])}">'
             + f'<div><h1>{esc(b["title"])}</h1><div class="meta">{esc(b["author"])} · {b["pages"]} صفحة</div>'
             + f'<p style="font-size:18px">{esc(b["description"])}</p></div></div>'
-            + (f'<h2>من بداية الكتاب</h2>{rec}' if rec else '')
-            + cta(f'اقرأ «{esc(b["title"])}» كاملًا مجانًا في إشراقة، وناقشه مع ناديك جزءًا جزءًا')
+            + cta(f'اقرأ «{esc(b["title"])}» كاملًا مجانًا في إشراقة، وناقشه مع ناديك جزءًا جزءًا',
+                  'اقرأه مجانًا في إشراقة')
             + '</main></div>' + FOOT.format(year=dt.date.today().year))
 
 

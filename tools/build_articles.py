@@ -82,6 +82,7 @@ article blockquote{{margin:18px 0;padding:14px 18px;border-radius:14px;backgroun
 .list a.item{{display:flex;gap:14px;align-items:center;text-decoration:none;padding:12px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-bottom:12px}}
 .list img{{width:120px;height:78px;object-fit:cover;border-radius:12px;flex-shrink:0}}
 .list b{{display:block;line-height:1.5}}.list small{{color:var(--muted)}}
+.fade{{position:relative}}.fade:after{{content:'';position:absolute;left:0;right:0;bottom:0;height:110px;background:linear-gradient(transparent,var(--cream))}}
 .src{{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:26px;padding-top:12px;white-space:pre-line}}
 footer{{color:var(--muted);font-size:13px;text-align:center;padding:30px 0;line-height:2.2}}
 footer a{{color:var(--muted);text-decoration:none}} footer nav{{margin-bottom:4px}}
@@ -94,28 +95,57 @@ FOOT = """<footer><nav><a href="/privacy/">سياسة الخصوصية</a> · <a
 <a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer></body></html>"""
 
 
+def open_app(path: str, ref: str) -> str:
+    """يفتح التطبيق على الصفحة نفسها إن كان مثبتًا، وإلا يذهب إلى Google Play"""
+    from urllib.parse import quote
+    play = f'{PLAY}&referrer=' + quote(f'utm_source=web&utm_medium={ref}')
+    return (f'intent://ishraqa.otwox.com{path}#Intent;scheme=https;package=com.taeziz.ishraqa;'
+            f'S.browser_fallback_url={quote(play, safe="")};end')
+
+
+def teaser(body: str, words: int = 120) -> str:
+    """أول فقرات المقال حتى نحو 120 كلمة: لمحة تشجّع على إكماله في التطبيق"""
+    out, n = [], 0
+    for block in body.split(chr(10) * 2):
+        if not block.strip():
+            continue
+        out.append(block)
+        n += len(block.split())
+        if n >= words:
+            break
+    return (chr(10) * 2).join(out)
+
+
 def article_page(a: dict) -> str:
     slug = a['slug']
     url = f'{SITE}/a/{slug}/'
     author = (a.get('author') or {}).get('display_name') or a['author_name']
     cover = a.get('cover_url') or f'{SITE}/img/og.jpg'
-    body_html = markdown.markdown(a['body'], extensions=['extra', 'sane_lists'])
+    body_html = markdown.markdown(teaser(a['body']), extensions=['extra', 'sane_lists'])
+    app = open_app(f'/a/{slug}/', 'article')
+    ld = json.dumps({
+        '@context': 'https://schema.org', '@type': 'Article', 'headline': a['title'],
+        'description': a.get('excerpt') or '', 'image': [cover], 'datePublished': a.get('publish_date'),
+        'author': {'@type': 'Person', 'name': author}, 'inLanguage': 'ar',
+        'publisher': {'@type': 'Organization', 'name': 'إشراقة يومية',
+                      'logo': {'@type': 'ImageObject', 'url': f'{SITE}/img/icon-192.png'}},
+        'mainEntityOfPage': url,
+    }, ensure_ascii=False)
     cat = CATEGORIES.get(a['category'], '')
     date = a.get('publish_date') or ''
     return (
         HEAD.format(title=esc(a['title']) + ' · إشراقة يومية', desc=esc(a.get('excerpt')), url=url,
                     og_type='article', og_title=esc(a['title']), image=esc(cover),
-                    open_app=PLAY)
+                    open_app=app).replace('</head>', f'<script type="application/ld+json">{ld}</script></head>')
         + '<div class="wrap" style="padding:0">'
         + f'<img class="cover" src="{esc(cover)}" alt="">'
         + '</div><div class="wrap"><main>'
         + (f'<span class="cat">{esc(cat)}</span>' if cat else '')
         + f'<h1>{esc(a["title"])}</h1>'
         + f'<div class="meta">بقلم {esc(author)} · {a["reading_minutes"]} دقائق قراءة · {esc(date)}</div>'
-        + f'<article>{body_html}</article>'
-        + '<div class="cta"><p>اقرأ مقالًا جديدًا كل يوم، وحكمة كل صباح، في تطبيق إشراقة يومية</p>'
-        + f'<a class="btn main" href="{PLAY}">حمّل التطبيق مجانًا</a></div>'
-        + (f'<div class="src">المراجع:\n{esc(a.get("sources"))}</div>' if a.get('sources') else '')
+        + f'<article class="fade">{body_html}</article>'
+        + '<div class="cta"><p>أكمل قراءة المقال، مع خلاصته العملية، في تطبيق إشراقة يومية</p>'
+        + f'<a class="btn main" href="{app}">اقرأه كاملًا في إشراقة</a></div>'
         + '</main></div>' + FOOT.format(year=dt.date.today().year)
     )
 
