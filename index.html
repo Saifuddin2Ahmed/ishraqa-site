@@ -59,6 +59,9 @@ h1{font-size:46px;line-height:1.35;margin:0 0 14px;font-weight:800;text-wrap:bal
 .free{margin-top:14px;font-size:14px;opacity:.9}
 .phone{justify-self:center;width:280px;border-radius:38px;border:9px solid rgba(255,255,255,.22);box-shadow:0 30px 70px rgba(0,0,0,.4);overflow:hidden;margin-bottom:-60px;background:#000}
 .phone img{display:block;width:100%}
+.phone{display:grid}.phone img{grid-area:1/1;opacity:0;transition:opacity .9s ease}.phone img.on,.phone img:only-child{opacity:1}
+.brand,.nav-link,.nav-cta{white-space:nowrap}
+@media (max-width:520px){.nav-link.dev,.nav-cta{display:none}.brand{font-size:18px}.brand img{width:34px;height:34px}}
 section{padding:90px 0 40px}
 h2{font-size:32px;margin:0 0 8px;text-align:center}
 .sub{text-align:center;color:var(--muted);margin:0 auto 40px;max-width:640px}
@@ -140,7 +143,7 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
   <div class="wrap">
     <nav>
       <a class="brand" href="#"><img src="img/icon-192.png" alt=""> إشراقة يومية</a>
-      <div class="nav-r"><a class="nav-link" href="about/">عن إشراقة</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
+      <div class="nav-r"><a class="nav-link" href="/about/">عن إشراقة</a><a class="nav-link dev" href="/developers/">للمطوّرين</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
     </nav>
     <div class="hero-grid">
       <div>
@@ -153,7 +156,7 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
         </a>
         <div class="free">مجاني · بلا إعلانات · يعمل دون إنترنت</div>
       </div>
-      <div class="phone"><img src="img/club.webp" alt="نادي القرّاء في تطبيق إشراقة"></div>
+      <div class="phone"><img class="on" src="/img/club.webp" alt="نادي القرّاء في تطبيق إشراقة"><img src="/img/home.webp" alt="إشراقة الصباح"><img src="/img/club4.webp" alt="لقاءات النادي"><img src="/img/community.webp" alt="تحدي المجتمعات"><img src="/img/explain.webp" alt="اشرح لي"><img src="/img/recap.webp" alt="ذكّرني أين وصلت"></div>
     </div>
   </div>
 </header>
@@ -187,7 +190,7 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
             <li>مشروع حقيقي في مستودع عام برخصة مفتوحة</li>
             <li>معرض المشاريع: سيرة تُرى</li>
           </ul>
-          <a class="dev-btn" href="developers/">اعرف أكثر عن نوادي البناء</a>
+          <a class="dev-btn" href="/developers/">اعرف أكثر عن نوادي البناء</a>
         </div>
         <pre class="term" aria-hidden="true"><span class="c"># نادي بناء في إشراقة</span>
 <span class="k">team</span>     = <span class="s">"حتى 7 أعضاء"</span>
@@ -242,12 +245,12 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
 <footer>
   <div class="wrap row">
     <nav class="links">
-      <a href="about/">عن إشراقة</a>
-      <a href="developers/">للمطوّرين</a>
-      <a href="privacy/">سياسة الخصوصية</a>
-      <a href="terms/">شروط الاستخدام</a>
-      <a href="delete-account/">حذف الحساب</a>
-      <a href="contact/">تواصل معنا</a>
+      <a href="/about/">عن إشراقة</a>
+      <a href="/developers/">للمطوّرين</a>
+      <a href="/privacy/">سياسة الخصوصية</a>
+      <a href="/terms/">شروط الاستخدام</a>
+      <a href="/delete-account/">حذف الحساب</a>
+      <a href="/contact/">تواصل معنا</a>
     </nav>
     <div class="credit">© 2026 إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div>
   </div>
@@ -296,5 +299,6 @@ document.addEventListener('visibilitychange',function(){run=!document.hidden;kic
 if(rm)frame(0);else kick();
 })();
 </script>
+<script src="/live.js" defer></script>
 </body>
 </html>
