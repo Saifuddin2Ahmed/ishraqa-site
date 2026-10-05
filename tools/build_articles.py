@@ -186,7 +186,7 @@ def main() -> None:
 
     urls = [f'{SITE}/', f'{SITE}/a/'] + [f'{SITE}/a/{a["slug"]}/' for a in items]
     # صفحات ثابتة أخرى: الحِكم (q) والكتب (k) والصفحات القانونية (بالعربية والإنجليزية)
-    for section in ('about', 'developers', 'q', 'k', 'privacy', 'terms', 'contact',
+    for section in ('about', 'developers', 'wallpapers', 'q', 'k', 'privacy', 'terms', 'contact',
                     'en/privacy', 'en/terms', 'en/contact'):
         base = ROOT / section
         if base.exists():
