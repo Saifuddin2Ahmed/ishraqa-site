@@ -1,0 +1,11 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.taeziz.ishraqa",
+    "sha256_cert_fingerprints": [
+      "8E:F1:74:18:D1:22:F9:93:95:9F:93:73:6E:12:AA:99:6F:CA:67:AA:AB:2B:83:EE:32:0B:45:AC:B7:CF:B3:2B",
+      "4F:4E:08:3D:11:94:37:AC:04:B6:EE:12:CA:4E:E7:21:46:F6:E5:B9:A2:51:2C:0B:8E:B9:E2:AC:82:F0:6F:BF"
+    ]
+  }
+}]
