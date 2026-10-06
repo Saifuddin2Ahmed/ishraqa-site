@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>صدى · إشراقة يومية</title>
+<meta name="description" content="«صدى»: مساحة الصوت في إشراقة يومية. مثل أو حكاية أو خاطرة بصوت صاحبها. استمع الآن، وردّ بصوتك من التطبيق.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1B5E">
+<link rel="icon" type="image/png" href="../img/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="إشراقة يومية">
+<meta property="og:title" content="استمع على «صدى» في إشراقة 🎙️">
+<meta property="og:description" content="مثل أو حكاية أو خاطرة بصوت صاحبها. استمع الآن، وردّ بصوتك من التطبيق.">
+<meta property="og:image" content="https://ishraqa.otwox.com/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ishraqa.otwox.com/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6;--chip:#F3EEFB;--bar:#D9CFEA}
+@media (prefers-color-scheme:dark){:root{--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645;--chip:#2A2240;--bar:#3A3157}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Cairo,Tahoma,sans-serif;background:linear-gradient(160deg,var(--night) 0%,var(--plum) 60%,var(--sun) 100%);color:var(--ink);line-height:1.8;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{width:100%;max-width:440px;background:var(--card);border-radius:28px;padding:32px 24px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.kind{display:inline-block;background:var(--chip);border-radius:999px;padding:4px 14px;font-weight:700;font-size:14px}
+h1{font-size:23px;line-height:1.5;margin:14px 0 4px;font-weight:800}
+.who{color:var(--muted);margin:0 0 14px;font-size:15px}
+.caption{white-space:pre-line;text-align:right;color:var(--muted);margin:0 0 16px;font-size:15px}
+.player{display:flex;align-items:center;gap:12px;margin:8px 0 18px}
+.play{flex:none;width:56px;height:56px;border-radius:50%;border:0;background:var(--night);color:#fff;font-size:22px;cursor:pointer}
+.play:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.wave{flex:1;display:flex;align-items:center;gap:2px;height:44px;cursor:pointer}
+.wave i{flex:1;border-radius:3px;background:var(--bar);min-height:3px}
+.wave i.on{background:var(--plum)}
+.time{font-size:13px;color:var(--muted);direction:ltr}
+.btn{display:block;text-decoration:none;font-weight:700;font-size:17px;border-radius:999px;padding:14px 20px;margin-top:10px}
+.primary{background:var(--night);color:#fff}
+.secondary{border:1.5px solid var(--line);color:var(--ink)}
+.note{margin-top:16px;font-size:13px;color:var(--muted)}
+.hide{display:none}
+@media (prefers-reduced-motion:no-preference){.wave i{transition:background .2s}}
+</style>
+</head>
+<body>
+<main class="card">
+  <span class="kind" id="kind">🎙️ تسجيل صوتي</span>
+  <h1 id="title">صدى: مساحة الصوت في إشراقة</h1>
+  <p class="who" id="who"></p>
+  <div class="player hide" id="player">
+    <button class="play" id="play" aria-label="استمع">▶</button>
+    <div class="wave" id="wave" role="slider" aria-label="موضع الاستماع" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"></div>
+    <span class="time" id="time"></span>
+  </div>
+  <p class="caption hide" id="caption"></p>
+  <p class="note hide" id="missing">هذا التسجيل غير متاح الآن: ربما حذفه صاحبه أو ما زال قيد المراجعة.</p>
+  <a class="btn primary" id="open" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">ردّ بصوتك: افتح في التطبيق</a>
+  <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer=utm_source%3Dvoice_page">حمّل إشراقة يومية مجانًا</a>
+  <p class="note">ننشر ما يجمع ولا يفرّق: لا سخرية من قبيلة أو منطقة أو فئة.</p>
+</main>
+<audio id="audio" preload="none"></audio>
+<script>
+(function(){
+  var id=(new URLSearchParams(location.search).get('id')||'').toLowerCase();
+  if(!/^[0-9a-f-]{36}$/.test(id))return;
+  var play='https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer='+encodeURIComponent('utm_source=voice_page');
+  document.getElementById('open').href='intent://ishraqa.otwox.com/v/?id='+id+'#Intent;scheme=https;package=com.taeziz.ishraqa;S.browser_fallback_url='+encodeURIComponent(play)+';end';
+  var cats={proverbs:'أمثال',stories:'حكايات',poetry:'شعر',reading:'قراءة من كتاب',thoughts:'خواطر',chat:'ونسة/دردشة',other:'تسجيل صوتي'};
+  var base='https://jytbowsfvuzdnsmhmsly.supabase.co';
+  var key='sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD';
+  function fmt(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+':'+('0'+s%60).slice(-2);}
+  function fallback(seed){var h=0,out=[];for(var i=0;i<seed.length;i++)h=(h*31+seed.charCodeAt(i))&0x7fffffff;for(var j=0;j<60;j++){h=(h*1103515245+12345)&0x7fffffff;out.push(15+(h%85));}return out;}
+  fetch(base+'/rest/v1/voice_posts?id=eq.'+id+'&select=title,caption,category,duration_seconds,audio_path,waveform,author:profiles!voice_posts_author_id_fkey(display_name)',{headers:{apikey:key,Authorization:'Bearer '+key}})
+    .then(function(r){return r.json();}).then(function(rows){
+      var v=rows&&rows[0];
+      if(!v){document.getElementById('missing').classList.remove('hide');return;}
+      document.getElementById('kind').textContent='🎙️ '+(cats[v.category]||'تسجيل صوتي');
+      document.getElementById('title').textContent=v.title;
+      document.title=v.title+' · إشراقة يومية';
+      if(v.author&&v.author.display_name)document.getElementById('who').textContent='بصوت '+v.author.display_name;
+      if(v.caption){var c=document.getElementById('caption');c.textContent=v.caption;c.classList.remove('hide');}
+      var audio=document.getElementById('audio');
+      audio.src=base+'/storage/v1/object/public/voices/'+v.audio_path;
+      var wave=document.getElementById('wave'),bars=(v.waveform&&v.waveform.length?v.waveform:fallback(id)),peak=Math.max.apply(null,bars)||1;
+      bars.forEach(function(b){var i=document.createElement('i');i.style.height=Math.max(8,b/peak*100)+'%';wave.appendChild(i);});
+      var total=v.duration_seconds||0,time=document.getElementById('time'),btn=document.getElementById('play');
+      time.textContent=fmt(total);
+      document.getElementById('player').classList.remove('hide');
+      function paint(){var d=audio.duration||total,f=d?audio.currentTime/d:0,n=wave.children.length;for(var k=0;k<n;k++)wave.children[k].className=(k+.5)/n<=f?'on':'';wave.setAttribute('aria-valuenow',Math.round(f*100));time.textContent=audio.paused&&!audio.currentTime?fmt(total):fmt(audio.currentTime);}
+      btn.onclick=function(){if(audio.paused){audio.play();}else{audio.pause();}};
+      audio.onplay=function(){btn.textContent='❚❚';btn.setAttribute('aria-label','إيقاف مؤقت');};
+      audio.onpause=audio.onended=function(){btn.textContent='▶';btn.setAttribute('aria-label','استمع');};
+      audio.ontimeupdate=paint;
+      function seek(f){var d=audio.duration||total;if(!d)return;audio.currentTime=Math.min(d,Math.max(0,f*d));paint();}
+      wave.onclick=function(e){var r=wave.getBoundingClientRect();seek((r.right-e.clientX)/r.width);};
+      wave.onkeydown=function(e){var d=audio.duration||total||1;if(e.key==='ArrowLeft')seek((audio.currentTime+5)/d);if(e.key==='ArrowRight')seek((audio.currentTime-5)/d);};
+    }).catch(function(){});
+})();
+</script>
+</body>
+</html>
