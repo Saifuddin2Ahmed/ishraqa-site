@@ -10,10 +10,14 @@ import datetime as dt
 import html
 import json
 import shutil
+import sys
 import urllib.request
 from pathlib import Path
 
 import markdown
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import seo  # noqa: E402
 
 SUPABASE_URL = 'https://jytbowsfvuzdnsmhmsly.supabase.co'
 PUBLISHABLE_KEY = 'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD'
@@ -87,11 +91,12 @@ article blockquote{{margin:18px 0;padding:14px 18px;border-radius:14px;backgroun
 footer{{color:var(--muted);font-size:13px;text-align:center;padding:30px 0;line-height:2.2}}
 footer a{{color:var(--muted);text-decoration:none}} footer nav{{margin-bottom:4px}}
 </style></head><body>
-<div class="top"><div class="wrap"><a class="brand" href="/"><img src="/img/icon-192.png" alt=""> إشراقة يومية</a>
+<div class="top"><div class="wrap"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
 <a class="btn light" href="{open_app}">افتح في التطبيق</a></div></div>
 """
 
-FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
+FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/a/">المقالات</a> · <a href="/q/">الحِكم والأمثال</a> ·
+<a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
 <a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
 <a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer></body></html>"""
 
@@ -117,53 +122,89 @@ def teaser(body: str, words: int = 120) -> str:
     return (chr(10) * 2).join(out)
 
 
-def article_page(a: dict) -> str:
+def is_team(name: str) -> bool:
+    return 'فريق' in (name or '') or 'إشراقة' in (name or '')
+
+
+def article_page(a: dict, related: list) -> str:
     slug = a['slug']
     url = f'{SITE}/a/{slug}/'
     author = (a.get('author') or {}).get('display_name') or a['author_name']
     cover = a.get('cover_url') or f'{SITE}/img/og.jpg'
     body_html = markdown.markdown(teaser(a['body']), extensions=['extra', 'sane_lists'])
     app = open_app(f'/a/{slug}/', 'article')
-    ld = json.dumps({
-        '@context': 'https://schema.org', '@type': 'Article', 'headline': a['title'],
-        'description': a.get('excerpt') or '', 'image': [cover], 'datePublished': a.get('publish_date'),
-        'author': {'@type': 'Person', 'name': author}, 'inLanguage': 'ar',
-        'publisher': {'@type': 'Organization', 'name': 'إشراقة يومية',
-                      'logo': {'@type': 'ImageObject', 'url': f'{SITE}/img/icon-192.png'}},
-        'mainEntityOfPage': url,
-    }, ensure_ascii=False)
     cat = CATEGORIES.get(a['category'], '')
     date = a.get('publish_date') or ''
-    return (
-        HEAD.format(title=esc(a['title']) + ' · إشراقة يومية', desc=esc(a.get('excerpt')), url=url,
-                    og_type='article', og_title=esc(a['title']), image=esc(cover),
-                    open_app=app).replace('</head>', f'<script type="application/ld+json">{ld}</script></head>')
+    modified = (a.get('updated_at') or '')[:10] or date
+    if modified < date:
+        modified = date
+    title = seo.fit_title(a['title'])
+    desc = seo.clip(a.get('excerpt') or a['title'], 155)
+    who = ({'@type': 'Organization', 'name': author, 'url': f'{SITE}/about/'} if is_team(author)
+           else {'@type': 'Person', 'name': author})
+    nodes = [
+        {'@type': 'Article', '@id': url + '#article', 'headline': seo.clip(a['title'], 110), 'description': desc,
+         'image': [cover], 'datePublished': date, 'dateModified': modified, 'author': who,
+         'publisher': {'@id': seo.ORG_ID}, 'mainEntityOfPage': {'@id': url + '#webpage'},
+         'isPartOf': {'@id': seo.WEBSITE_ID}, 'articleSection': cat or None, 'inLanguage': 'ar',
+         'timeRequired': f'PT{a["reading_minutes"]}M' if a.get('reading_minutes') else None,
+         'isAccessibleForFree': True},
+        seo.webpage(url, a['title'], desc),
+        seo.breadcrumb(url, [('إشراقة يومية', f'{SITE}/'), ('المقالات', f'{SITE}/a/'), (a['title'], url)]),
+        seo.org(), seo.website(),
+    ]
+    nodes[0] = {k: v for k, v in nodes[0].items() if v is not None}
+    more = ''.join(
+        f'<a class="item" href="/a/{esc(r["slug"])}/"><img src="{esc(r.get("cover_url") or "/img/og.jpg")}" alt="{esc(r["title"])}" '
+        f'width="120" height="78" loading="lazy">'
+        f'<span><b>{esc(r["title"])}</b><small>{esc(CATEGORIES.get(r["category"], ""))} · {esc(r.get("publish_date"))}</small></span></a>'
+        for r in related)
+    page = (
+        HEAD.format(title=esc(title), desc=esc(desc), url=url,
+                    og_type='article', og_title=esc(a['title']), image=esc(cover), open_app=app)
         + '<div class="wrap" style="padding:0">'
-        + f'<img class="cover" src="{esc(cover)}" alt="">'
+        + f'<img class="cover" src="{esc(cover)}" alt="{esc(a["title"])}" width="1600" height="900" fetchpriority="high">'
         + '</div><div class="wrap"><main>'
         + (f'<span class="cat">{esc(cat)}</span>' if cat else '')
         + f'<h1>{esc(a["title"])}</h1>'
-        + f'<div class="meta">بقلم {esc(author)} · {a["reading_minutes"]} دقائق قراءة · {esc(date)}</div>'
+        + f'<div class="meta">بقلم {esc(author)} · {a["reading_minutes"]} دقائق قراءة · <time datetime="{esc(date)}">{esc(date)}</time></div>'
         + f'<article class="fade">{body_html}</article>'
         + '<div class="cta"><p>أكمل قراءة المقال، مع خلاصته العملية، في تطبيق إشراقة يومية</p>'
         + f'<a class="btn main" href="{app}">اقرأه كاملًا في إشراقة</a></div>'
+        + (f'<h2>مقالات أخرى من إشراقة</h2><div class="list">{more}</div>' if more else '')
         + '</main></div>' + FOOT.format(year=dt.date.today().year)
     )
+    return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes, image=cover, image_alt=a['title'],
+                        og_type='article', article={'published': date, 'modified': modified, 'section': cat})
+
+
+def related_to(a: dict, items: list, n: int = 3) -> list:
+    """مقالات من التصنيف نفسه أولًا، ثم الأحدث"""
+    others = [r for r in items if r['slug'] != a['slug']]
+    same = [r for r in others if r['category'] == a['category']]
+    return (same + [r for r in others if r not in same])[:n]
 
 
 def index_page(items: list) -> str:
     rows = ''.join(
-        f'<a class="item" href="/a/{esc(a["slug"])}/"><img src="{esc(a.get("cover_url") or "/img/og.jpg")}" alt="" loading="lazy">'
+        f'<a class="item" href="/a/{esc(a["slug"])}/"><img src="{esc(a.get("cover_url") or "/img/og.jpg")}" alt="{esc(a["title"])}" '
+        f'width="120" height="78" loading="lazy">'
         f'<span><b>{esc(a["title"])}</b><small>{esc(CATEGORIES.get(a["category"], ""))} · {esc(a.get("publish_date"))}</small></span></a>'
         for a in items
     )
-    return (
-        HEAD.format(title='مقالات إشراقة يومية', desc='مقال يومي يستحق القراءة في الصحة والتقنية وتطوير الذات والثقافة.',
-                    url=f'{SITE}/a/', og_type='website', og_title='مقالات إشراقة يومية',
+    url = f'{SITE}/a/'
+    title = 'مقالات إشراقة يومية: صحة وتقنية وتطوير ذات وثقافة'
+    desc = 'مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.'
+    nodes = [seo.webpage(url, title, desc, 'CollectionPage',
+                         mainEntity=seo.item_list([f'{SITE}/a/{a["slug"]}/' for a in items])),
+             seo.breadcrumb(url, [('إشراقة يومية', f'{SITE}/'), ('المقالات', url)]), seo.org(), seo.website()]
+    page = (
+        HEAD.format(title=title, desc=desc, url=url, og_type='website', og_title=title,
                     image=f'{SITE}/img/og.jpg', open_app=PLAY)
         + '<div class="wrap"><main><h1>مقالات إشراقة</h1><div class="list">' + rows
         + '</div></main></div>' + FOOT.format(year=dt.date.today().year)
     )
+    return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes)
 
 
 def main() -> None:
@@ -171,7 +212,7 @@ def main() -> None:
         CATEGORIES[c['slug']] = c['name_ar']
     today = dt.date.today().isoformat()
     items = fetch(
-        'articles?select=slug,title,excerpt,body,cover_url,category,author_name,reading_minutes,sources,publish_date,'
+        'articles?select=slug,title,excerpt,body,cover_url,category,author_name,reading_minutes,sources,publish_date,updated_at,'
         'author:profiles!articles_author_id_fkey(display_name)'
         f'&status=eq.published&publish_date=lte.{today}&order=publish_date.desc&limit=500'
     )
@@ -181,23 +222,13 @@ def main() -> None:
     for a in items:
         d = OUT / a['slug']
         d.mkdir()
-        (d / 'index.html').write_text(article_page(a), encoding='utf-8')
+        (d / 'index.html').write_text(article_page(a, related_to(a, items)), encoding='utf-8')
     (OUT / 'index.html').write_text(index_page(items), encoding='utf-8')
 
-    urls = [f'{SITE}/', f'{SITE}/a/'] + [f'{SITE}/a/{a["slug"]}/' for a in items]
-    # صفحات ثابتة أخرى: الحِكم (q) والكتب (k) والصفحات القانونية (بالعربية والإنجليزية)
-    for section in ('about', 'developers', 'wallpapers', 'testers', 'q', 'k', 'privacy', 'terms', 'contact',
-                    'en/privacy', 'en/terms', 'en/contact'):
-        base = ROOT / section
-        if base.exists():
-            urls += sorted(
-                f'{SITE}/{p.parent.relative_to(ROOT).as_posix()}/'
-                for p in base.rglob('index.html')
-            )
-    (ROOT / 'sitemap.xml').write_text(
-        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-        + ''.join(f'<url><loc>{u}</loc></url>' for u in urls) + '</urlset>\n', encoding='utf-8')
-    print(f'{len(items)} articles')
+    # خريطة الموقع كاملة (كل صفحة قابلة للفهرسة، مع تاريخ آخر تغيير) وملف llms.txt
+    n = len(seo.write_sitemap(ROOT))
+    seo.write_llms(ROOT)
+    print(f'{len(items)} articles, {n} urls in sitemap')
 
 
 if __name__ == '__main__':
