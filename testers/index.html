@@ -234,6 +234,7 @@ border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px rgba(240,122,74,.18
 <div id="channel" style="display:none">
   <div class="form" style="margin-bottom:22px"><form id="post">
     <label for="pn">اسمك</label><input id="pn" name="pname" required minlength="2" maxlength="60" autocomplete="name">
+    <label for="pe">بريدك الذي سجّلت به (لتُحسب ملاحظتك لشارة «رائد»)</label><input id="pe" name="pemail" type="email" maxlength="120" autocomplete="email" dir="ltr">
     <label>نوع الملاحظة</label>
     <div class="seg">
       <label><input type="radio" name="kind" value="bug"><span>🐞 مشكلة</span></label>
@@ -334,9 +335,10 @@ var f=$('join');f.onsubmit=function(e){e.preventDefault();$('jerr').textContent=
  if(!ph){$('jerr').textContent='اختر نوع هاتفك';return}
  f.querySelector('button').disabled=true;
  rpc('join_testers',{p_name:name,p_email:mail,p_phone:ph,p_city:f.city.value,p_public:f.pub.checked}).then(function(r){
+  if(r==='declined'){f.querySelector('button').disabled=false;$('jerr').textContent='لم يُقبل طلبك السابق. راسلنا على ishraqa@otwox.com';return}
   f.style.display='none';$(r==='waitlist'?'okIphone':'okAndroid').classList.add('on');
  }).catch(function(x){f.querySelector('button').disabled=false;
-  $('jerr').textContent=/busy/.test(x.message)?'الضغط كبير الآن، حاول بعد قليل':'تعذّر التسجيل، تأكد من البريد وحاول مرة أخرى'})};
+  $('jerr').textContent=/disposable/.test(x.message)?'هذا بريد مؤقت. سجّل ببريدك الدائم (مثل Gmail)':/busy/.test(x.message)?'الضغط كبير الآن، حاول بعد قليل':'تعذّر التسجيل، تأكد من البريد وحاول مرة أخرى'})};
 // قناة الملاحظات
 var code='';try{code=localStorage.getItem('ishraqa_testers_code')||''}catch(_){}
 var kinds={bug:'🐞 مشكلة',idea:'💡 فكرة',praise:'💛 إعجاب'};
@@ -350,12 +352,13 @@ if(code)load().catch(function(){code=''});
 $('post').onsubmit=function(e){e.preventDefault();var t=this;$('perr').textContent='';
  var k=(t.querySelector('input[name=kind]:checked')||{}).value||'idea';
  t.querySelector('button').disabled=true;
- rpc('tester_feedback_post',{p_code:code,p_name:t.pname.value.trim(),p_kind:k,p_body:t.body.value.trim(),p_device:t.device.value.trim()})
+ (function(){try{localStorage.setItem('ishraqa_tester_email',t.pemail.value.trim())}catch(_){}})(),rpc('tester_feedback_post',{p_code:code,p_name:t.pname.value.trim(),p_kind:k,p_body:t.body.value.trim(),p_device:t.device.value.trim(),p_email:(t.pemail.value.trim()||null)})
  .then(function(){t.body.value='';t.querySelector('button').disabled=false;return load()})
  .catch(function(){t.querySelector('button').disabled=false;$('perr').textContent='تعذّر الإرسال: الاسم حرفان على الأقل والملاحظة خمسة أحرف على الأقل'})};
 // جدار الروّاد
 rpc('founding_testers').then(function(rows){$('wall').innerHTML=rows.length?rows.map(function(r){return '<span>'+esc(r.name)+'</span>'}).join(''):
  '<p class="prose">لم يكتمل أحد بعد. كن أول اسم هنا 🌅</p>'}).catch(function(){});
 })();
-</script></body>
+</script><script>try{var e=localStorage.getItem('ishraqa_tester_email');if(e&&document.getElementById('pe'))document.getElementById('pe').value=e}catch(_){}</script>
+</body>
 </html>
