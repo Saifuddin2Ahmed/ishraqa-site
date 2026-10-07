@@ -155,7 +155,6 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
           <span><small>احصل عليه من</small><b>Google Play</b></span>
         </a>
-        <div><a class="webapp" href="/app/">أو جرّبه الآن في المتصفح ←</a></div>
         <div class="free">مجاني · بلا إعلانات · يعمل دون إنترنت</div>
       </div>
       <div class="phone"><img class="on" src="/img/club.webp" alt="نادي القرّاء في تطبيق إشراقة"><img src="/img/home.webp" alt="إشراقة الصباح"><img src="/img/club4.webp" alt="لقاءات النادي"><img src="/img/community.webp" alt="تحدي المجتمعات"><img src="/img/explain.webp" alt="اشرح لي"><img src="/img/recap.webp" alt="ذكّرني أين وصلت"></div>
@@ -240,7 +239,6 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
         <span><small>احصل عليه من</small><b>Google Play</b></span>
       </a>
-      <div><a class="webapp" href="/app/">على آيفون أو حاسوب؟ افتح إشراقة في المتصفح ←</a></div>
     </div>
   </section>
 </main>
@@ -305,5 +303,12 @@ if(rm)frame(0);else kick();
 })();
 </script>
 <script src="/live.js" defer></script>
+<script>
+/* آيفون: لا متجر Play، فزر التحميل يفتح إشراقة مباشرة وتظهر هناك ورقة التثبيت */
+(function(){var ua=navigator.userAgent;if(!(/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)))return;
+document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a){a.href='/app/';a.removeAttribute('target');
+var b=a.querySelector('b'),sm=a.querySelector('small');if(b&&sm){sm.textContent='احصل عليه';b.textContent='على آيفون';var sv=a.querySelector('svg');if(sv)sv.style.display='none'}
+else if(a.classList.contains('nav-cta')){a.textContent='افتح إشراقة'}});})();
+</script>
 </body>
 </html>

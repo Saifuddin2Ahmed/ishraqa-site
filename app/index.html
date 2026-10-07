@@ -77,6 +77,29 @@
     @media (prefers-reduced-motion: reduce) {
       #splash .sun, #splash .dots i { animation: none; }
     }
+    /* آيفون (Safari خارج وضع التطبيق): ورقة «ثبّت إشراقة» تظهر بعد التحميل */
+    #ios-install {
+      position: fixed; z-index: 20; inset: auto 12px calc(12px + env(safe-area-inset-bottom)) 12px;
+      padding: 16px 18px 14px; border-radius: 22px;
+      background: rgba(30, 20, 66, .96); color: #FFF6E5;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.12);
+      font-family: "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", system-ui, sans-serif;
+      transform: translateY(140%); transition: transform .45s cubic-bezier(.2,.8,.2,1);
+    }
+    #ios-install.on { transform: none; }
+    #ios-install .row { display: flex; align-items: center; gap: 12px; }
+    #ios-install img { width: 46px; height: 46px; border-radius: 12px; }
+    #ios-install b { display: block; font-size: 16px; }
+    #ios-install p { margin: 8px 0 0; font-size: 14px; line-height: 1.8; color: #E9DFF7; }
+    #ios-install .share { display: inline-block; width: 16px; height: 16px; vertical-align: -2px; }
+    #ios-install button {
+      position: absolute; top: 8px; left: 10px; border: 0; background: transparent;
+      color: #E9DFF7; font-size: 22px; line-height: 1; padding: 6px; cursor: pointer;
+    }
+    #ios-install::after {
+      content: ""; position: absolute; bottom: -9px; left: 50%; margin-left: -9px;
+      border: 9px solid transparent; border-bottom: 0; border-top-color: rgba(30, 20, 66, .96);
+    }
   </style>
 </head>
 <body>
@@ -99,6 +122,36 @@
       s.classList.add('hide');
       setTimeout(function () { s.remove(); }, 500);
     });
+  </script>
+  <div id="ios-install" role="dialog" aria-label="ثبّت إشراقة على شاشتك">
+    <button type="button" aria-label="إغلاق">×</button>
+    <div class="row">
+      <img src="icons/apple-touch-icon.png" alt="">
+      <div><b>ثبّت إشراقة على شاشتك</b><span style="font-size:13px;color:#E9DFF7">تفتحها بلمسة مثل أي تطبيق</span></div>
+    </div>
+    <p>اضغط زر المشاركة
+      <svg class="share" viewBox="0 0 24 24" fill="none" stroke="#FFD27A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+      في الأسفل، ثم اختر «إضافة إلى الشاشة الرئيسية».</p>
+  </div>
+  <script>
+    // آيفون/آيباد في Safari فقط، وليس بعد التثبيت (navigator.standalone)، ومرة حتى يُغلق
+    (function () {
+      var ua = navigator.userAgent;
+      var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var standalone = navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+      var key = 'ishraqa_ios_install_closed';
+      var closed = false;
+      try { closed = localStorage.getItem(key) === '1'; } catch (_) {}
+      if (!ios || standalone || closed) return;
+      var el = document.getElementById('ios-install');
+      el.querySelector('button').onclick = function () {
+        el.classList.remove('on');
+        try { localStorage.setItem(key, '1'); } catch (_) {}
+      };
+      window.addEventListener('flutter-first-frame', function () {
+        setTimeout(function () { el.classList.add('on'); }, 2500);
+      });
+    })();
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

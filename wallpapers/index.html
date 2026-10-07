@@ -297,7 +297,7 @@ border-radius:50%;background:var(--cream);border:3px solid var(--sun);box-shadow
 <body>
 <div class="bar" aria-hidden="true"><div class="wrap">
   <a class="brand" href="/" tabindex="-1"><img src="/img/icon-192.png" alt=""> إشراقة يومية</a>
-  <div class="nav-r"><a class="nav-link" href="/about/" tabindex="-1">عن إشراقة</a><a class="nav-link" href="/developers/" tabindex="-1">للمطوّرين</a><a class="nav-link" href="/app/" tabindex="-1">افتحه في المتصفح</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" tabindex="-1">حمّل إشراقة</a></div>
+  <div class="nav-r"><a class="nav-link" href="/about/" tabindex="-1">عن إشراقة</a><a class="nav-link" href="/developers/" tabindex="-1">للمطوّرين</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" tabindex="-1">حمّل إشراقة</a></div>
 </div></div>
 <header class="hero page-hero">
   <canvas id="sky" aria-hidden="true"></canvas>
@@ -332,7 +332,7 @@ border-radius:50%;background:var(--cream);border:3px solid var(--sun);box-shadow
         <div class="ctas"><a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
             <span><small>احصل عليه من</small><b>Google Play</b></span>
-          </a><a class="ghost" href="/app/"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>على آيفون أو حاسوب؟ افتحه في المتصفح</a></div>
+          </a></div>
       </div>
     </div>
   </section>
@@ -352,7 +352,7 @@ border-radius:50%;background:var(--cream);border:3px solid var(--sun);box-shadow
     <div class="credit">© 2026 إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div>
   </div>
 </footer>
-<div class="dock" id="dock"><a class="p1" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>حمّل إشراقة</a><a class="p2" href="/app/"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>افتحه في المتصفح</a></div>
+<div class="dock" id="dock"><a class="p1" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>حمّل إشراقة</a></div>
 <script>
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -407,5 +407,11 @@ if(rm)frame(0);else kick();
 })();
 </script>
 <script src="/live.js" defer></script>
+<script>
+(function(){var ua=navigator.userAgent;if(!(/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)))return;
+document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a){a.href='/app/';a.removeAttribute('target');
+var b=a.querySelector('b'),sm=a.querySelector('small');if(b&&sm){sm.textContent='احصل عليه';b.textContent='على آيفون';var sv=a.querySelector('svg');if(sv)sv.style.display='none'}
+else if(a.classList.contains('nav-cta')||a.classList.contains('p1')){a.lastChild.textContent='افتح إشراقة'}});})();
+</script>
 </body>
 </html>
