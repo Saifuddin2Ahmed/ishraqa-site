@@ -50,6 +50,7 @@ h1{font-size:46px;line-height:1.35;margin:0 0 14px;font-weight:800;text-wrap:bal
 .tag{display:inline-block;color:var(--gold);font-weight:700;margin-bottom:10px;letter-spacing:.3px}
 .play{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;text-decoration:none;padding:12px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 .play svg{width:28px;height:28px}
+.stores{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.stores .play.plat{background:#111;}.stores .play.plat svg{width:24px;height:24px}@media (max-width:520px){.stores{justify-content:center}.stores .play{padding:10px 16px}}
 .webapp{display:inline-block;margin-top:12px;color:inherit;opacity:.9;font-weight:700;text-decoration:none;border-bottom:1px dashed currentColor;padding-bottom:2px}.webapp:hover{opacity:1}
 .play small{display:block;font-size:11px;opacity:.8;line-height:1.2}
 .play b{display:block;font-size:19px;line-height:1.3}
@@ -147,10 +148,10 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
         <div class="tag">بوتقةٌ للمعرفة، وفضاءٌ للقراءة</div>
         <h1>أفقٌ يمتد من ذاكرة الماضي<br>إلى احتمالات المستقبل</h1>
         <p class="lead">حكمةٌ تفتح صباحك، وكتبٌ تقرؤها مع ناديك، ومجتمعٌ يشبهك من مدينتك وجامعتك.</p>
-        <a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
+        <div class="stores"><a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
           <span><small>احصل عليه من</small><b>Google Play</b></span>
-        </a>
+        </a><a class="play plat" href="/app/" aria-label="إشراقة على آيفون"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><span><small>متوفر على</small><b>آيفون</b></span></a><a class="play plat" href="/app/" aria-label="إشراقة على الحاسوب"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20"/></svg><span><small>متوفر على</small><b>الحاسوب</b></span></a></div>
         <div class="free">مجاني · بلا إعلانات · يعمل دون إنترنت</div>
       </div>
       <div class="phone"><img width="540" height="1134" class="on" src="/img/club.webp" alt="نادي القرّاء في تطبيق إشراقة"><img width="540" height="1134" src="/img/home.webp" alt="إشراقة الصباح"><img width="540" height="1134" src="/img/club4.webp" alt="لقاءات النادي"><img width="540" height="1134" src="/img/community.webp" alt="تحدي المجتمعات"><img width="540" height="1134" src="/img/explain.webp" alt="اشرح لي"><img width="540" height="1134" src="/img/recap.webp" alt="ذكّرني أين وصلت"></div>
@@ -231,10 +232,10 @@ background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);color:#E9E3F7;
     <div class="wrap">
       <h2>من ذاكرة الماضي إلى احتمالات المستقبل، اقرأ معنا</h2>
       <p class="sub">حمّل إشراقة يومية وابدأ مع ناديك اليوم.</p>
-      <a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">
+      <div class="stores"><a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
         <span><small>احصل عليه من</small><b>Google Play</b></span>
-      </a>
+      </a><a class="play plat" href="/app/" aria-label="إشراقة على آيفون"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><span><small>متوفر على</small><b>آيفون</b></span></a><a class="play plat" href="/app/" aria-label="إشراقة على الحاسوب"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20"/></svg><span><small>متوفر على</small><b>الحاسوب</b></span></a></div>
     </div>
   </section>
 </main>
@@ -300,11 +301,11 @@ if(rm)frame(0);else kick();
 </script>
 <script src="/live.js" defer></script>
 <script>
-/* آيفون: لا متجر Play، فزر التحميل يفتح إشراقة مباشرة وتظهر هناك ورقة التثبيت */
+/* آيفون وآيباد: لا متجر Play هنا، فنُبقي زر «آيفون» وحده */
 (function(){var ua=navigator.userAgent;if(!(/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)))return;
-document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a){a.href='/app/';a.removeAttribute('target');
-var b=a.querySelector('b'),sm=a.querySelector('small');if(b&&sm){sm.textContent='احصل عليه';b.textContent='على آيفون';var sv=a.querySelector('svg');if(sv)sv.style.display='none'}
-else if(a.classList.contains('nav-cta')){a.textContent='افتح إشراقة'}});})();
+document.querySelectorAll('.stores a[href*="play.google.com"]').forEach(function(a){a.style.display='none'});
+document.querySelectorAll('.stores a[aria-label="إشراقة على الحاسوب"]').forEach(function(a){a.style.display='none'});
+document.querySelectorAll('a.nav-cta[href*="play.google.com"]').forEach(function(a){a.href='/app/';a.textContent='افتح إشراقة'});})();
 </script>
 </body>
 </html>

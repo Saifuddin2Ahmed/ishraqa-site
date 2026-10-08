@@ -100,6 +100,30 @@
       content: ""; position: absolute; bottom: -9px; left: 50%; margin-left: -9px;
       border: 9px solid transparent; border-bottom: 0; border-top-color: rgba(30, 20, 66, .96);
     }
+    /* الحاسوب: ورقة «ثبّت إشراقة على حاسوبك» (Chrome/Edge بزر تثبيت، وSafari على ماك بتعليمات) */
+    #pc-install {
+      position: fixed; z-index: 20; bottom: 20px; left: 20px; width: 360px; max-width: calc(100vw - 40px);
+      padding: 18px 18px 16px; border-radius: 20px; box-sizing: border-box;
+      background: rgba(30, 20, 66, .97); color: #FFF6E5;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.12);
+      font-family: "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", system-ui, sans-serif;
+      transform: translateY(160%); transition: transform .45s cubic-bezier(.2,.8,.2,1);
+    }
+    #pc-install.on { transform: none; }
+    #pc-install .row { display: flex; align-items: center; gap: 12px; }
+    #pc-install img { width: 48px; height: 48px; border-radius: 12px; }
+    #pc-install b { display: block; font-size: 16px; }
+    #pc-install small { font-size: 13px; color: #E9DFF7; }
+    #pc-install p { margin: 10px 0 0; font-size: 14px; line-height: 1.8; color: #E9DFF7; }
+    #pc-install .go {
+      margin-top: 12px; width: 100%; border: 0; border-radius: 12px; padding: 11px; cursor: pointer;
+      font: inherit; font-weight: 700; font-size: 15px; color: #fff;
+      background: linear-gradient(135deg, #4B2E83, #8E3A8C 55%, #F07A4A);
+    }
+    #pc-install .x {
+      position: absolute; top: 8px; left: 10px; border: 0; background: transparent;
+      color: #E9DFF7; font-size: 22px; line-height: 1; padding: 6px; cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -151,6 +175,44 @@
       window.addEventListener('flutter-first-frame', function () {
         setTimeout(function () { el.classList.add('on'); }, 2500);
       });
+    })();
+  </script>
+  <div id="pc-install" role="dialog" aria-label="ثبّت إشراقة على حاسوبك">
+    <button type="button" class="x" aria-label="إغلاق">×</button>
+    <div class="row">
+      <img src="icons/Icon-192.png" alt="">
+      <div><b>ثبّت إشراقة على حاسوبك</b><small>تفتحها من سطح المكتب مثل أي برنامج</small></div>
+    </div>
+    <p class="mac" hidden>من شريط القوائم في Safari: «ملف» ← «إضافة إلى Dock».</p>
+    <button type="button" class="go" hidden>ثبّت الآن</button>
+  </div>
+  <script>
+    // الحاسوب فقط (لا الهاتف ولا التابلت)، وليس بعد التثبيت، ومرة حتى يُغلق
+    (function () {
+      var ua = navigator.userAgent;
+      var mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var standalone = window.matchMedia && matchMedia('(display-mode: standalone)').matches;
+      var key = 'ishraqa_pc_install_closed', closed = false;
+      try { closed = localStorage.getItem(key) === '1'; } catch (_) {}
+      if (mobile || standalone || closed) return;
+      var el = document.getElementById('pc-install'), go = el.querySelector('.go'), ready = false, deferred = null;
+      function hide() { el.classList.remove('on'); }
+      el.querySelector('.x').onclick = function () { hide(); try { localStorage.setItem(key, '1'); } catch (_) {} };
+      function show() { if (ready) setTimeout(function () { el.classList.add('on'); }, 3000); }
+      window.addEventListener('flutter-first-frame', function () { ready = true; if (deferred || macSafari) show(); });
+      // Chrome وEdge: زر تثبيت حقيقي
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault(); deferred = e; go.hidden = false; show();
+      });
+      go.onclick = function () {
+        if (!deferred) return;
+        deferred.prompt();
+        deferred.userChoice.finally(function () { deferred = null; hide(); });
+      };
+      window.addEventListener('appinstalled', hide);
+      // Safari على ماك: لا حدث تثبيت، فتعليمات «إضافة إلى Dock»
+      var macSafari = /Macintosh/.test(ua) && /Safari/.test(ua) && !/Chrome|Chromium|Edg|Firefox/.test(ua);
+      if (macSafari) el.querySelector('.mac').hidden = false;
     })();
   </script>
   <script src="flutter_bootstrap.js" async></script>

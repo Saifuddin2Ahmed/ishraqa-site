@@ -16,7 +16,7 @@ Send a request through our [contact page](https://ishraqa.otwox.com/en/contact/?
 - Your account and email address
 - Your public profile: name, photo, bio and links
 - "Your Culture" posts and images, comments and likes
-- Voice recordings in "Grandma's Wisdom"
+- Your voice recordings in "Sada" and voice notes in clubs
 - Follows, reports and block lists
 - Notification tokens and your notification inbox
 
