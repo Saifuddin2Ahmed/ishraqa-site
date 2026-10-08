@@ -63,7 +63,7 @@ def app():
             'url': SITE + '/', 'installUrl': PLAY, 'downloadUrl': PLAY, 'image': SITE + '/img/icon-512.png',
             'screenshot': [f'{SITE}/img/{n}.webp' for n in ('home', 'club', 'club4', 'community', 'library')],
             'featureList': ['حكمة أو مثل مع معناه وقصته', 'مقال قصير موثّق بخلاصة عملية', 'نادي القرّاء',
-                            'لقاءات وفعاليات', 'تحدي المدن والجامعات والمدارس', 'نوادي البناء للمطوّرين',
+                            'لقاءات وفعاليات', 'تحدي المدن والجامعات والمدارس', 'نوادي المطوّرين للمطوّرين',
                             'مكتبة كتب مجانية', 'يعمل دون إنترنت', 'بلا إعلانات'],
             'author': {'@type': 'Person', '@id': FOUNDER_ID, 'name': 'م. سيف الدين أحمد'}, 'publisher': {'@id': ORG_ID}}
 
@@ -185,6 +185,9 @@ def finalize(doc, *, url, title, desc, nodes=(), lang='ar', image=OG_IMAGE, imag
     doc, sized = size_images(doc, url, root)
     if sized:
         doc = doc.replace('</head>', '<style>:where(img[width][height]){height:auto}</style></head>', 1)
+    # أيقونتا آيفون والحاسوب بجانب زر Google Play (ما عدا المختبرين والكِت؛ platforms.js يتجاهل الرئيسية أيضًا)
+    if 'platforms.js' not in doc and '/testers/' not in url and '/kit/' not in url and '</body>' in doc:
+        doc = doc.replace('</body>', '<script src="/platforms.js" defer></script>\n</body>', 1)
     return re.sub(r'\n{3,}', '\n\n', doc)
 
 
@@ -246,8 +249,8 @@ def static_page(path):
         return t, d, [webpage(url, t, d, 'AboutPage', about={'@id': APP_ID}, mainEntity={'@id': FOUNDER_ID}),
                       _crumbs(url, 'عن إشراقة'), founder(full=True), app(), org(), website()]
     if path == 'developers':
-        t = 'نوادي البناء للمطوّرين' + SUFFIX
-        d = 'فريق صغير، ومرشد خبير، ومشروع مفتوح المصدر يراه العالم. نوادي البناء في إشراقة يومية للمطوّرين والمطوّرات مجانًا.'
+        t = 'نوادي المطوّرين للمطوّرين' + SUFFIX
+        d = 'فريق صغير، ومرشد خبير، ومشروع مفتوح المصدر يراه العالم. نوادي المطوّرين في إشراقة يومية للمطوّرين والمطوّرات مجانًا.'
         return t, d, [webpage(url, t, d, about={'@id': APP_ID}), _crumbs(url, 'للمطوّرين'), app(), org(), website()]
     if path == 'wallpapers':
         t = 'خلفيات إشراقة: سمات ويندوز ولوحات للهاتف'
