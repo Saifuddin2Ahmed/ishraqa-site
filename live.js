@@ -17,14 +17,31 @@
     var i = 0, vis = true, cap = ph.parentElement.querySelector('.phone-cap');
     imgs.forEach(function (im, k) { if (k) im.loading = 'lazy'; });
     whenVisible(ph, function (v) { vis = v; });
-    if (rm) return;
-    setInterval(function () {
-      if (!vis || document.hidden) return;
+    function go() {
       imgs[i].classList.remove('on');
       i = (i + 1) % imgs.length;
       imgs[i].classList.add('on');
-      if (cap) cap.textContent = imgs[i].dataset.cap || '';
-    }, 3600);
+      if (cap && imgs[i].dataset.cap) cap.textContent = imgs[i].dataset.cap;
+    }
+    // لمسة على الهاتف (أو على «المس الشاشة») تُظهر الشاشة التالية فورًا، مع اهتزازة خفيفة
+    var timer = null, hint = ph.parentElement.querySelector('.phone-hint');
+    function tap() {
+      go();
+      ph.classList.add('tap');
+      setTimeout(function () { ph.classList.remove('tap'); }, 160);
+      if (navigator.vibrate) navigator.vibrate(8);
+      if (timer) { clearInterval(timer); start(); }
+    }
+    ph.addEventListener('click', tap);
+    if (hint) {
+      hint.addEventListener('click', tap);
+      hint.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(); } });
+    }
+    function start() {
+      timer = setInterval(function () { if (vis && !document.hidden) go(); }, 3600);
+    }
+    if (rm) return;
+    start();
   });
 
   // الطرفية: كود يُكتب
