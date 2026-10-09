@@ -71,7 +71,7 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>
-<div class="top"><div class="wrap wide"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
+<div class="top"><div class="wrap wide"><a class="brand" href="/a/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
 <nav class="tnav"><a href="/a/">المقالات</a>
 <a class="btn light" data-open href="{open_app}">افتح في التطبيق</a></nav></div></div>
 """
@@ -160,6 +160,11 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 .feat b{font-size:clamp(24px,2.8vw,32px);line-height:1.45}.feat p{margin:0;color:var(--muted);font-size:16.5px;line-height:1.85}
 .feat small{color:var(--muted)}
 @media (max-width:820px){.feat{grid-template-columns:1fr}.feat .ph{min-height:0;aspect-ratio:16/9}.feat .in{padding:22px}}
+.get{margin:44px 0 10px;padding:38px 24px;border-radius:28px;text-align:center;background:linear-gradient(135deg,var(--night),var(--plum) 60%,var(--sun));color:#fff}
+.get h2{margin:0 0 6px;font-size:26px}.get p{margin:0 auto 22px;max-width:560px;opacity:.92}
+.stores{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.store{display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;text-decoration:none;padding:11px 18px;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.25);transition:transform .2s}
+.store:hover{transform:translateY(-2px)}.store svg{width:26px;height:26px}.store small{display:block;font-size:11px;opacity:.8;line-height:1.2}.store b{display:block;font-size:17px;line-height:1.3}
 .empty{display:none;text-align:center;color:var(--muted);padding:40px 0}
 main{padding-bottom:20px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.rv.on{opacity:1;transform:none}
@@ -195,10 +200,8 @@ chips.forEach(function(ch){ch.addEventListener('click',function(){cat=ch.dataset
 })();
 </script>"""
 
-FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/a/">المقالات</a> · <a href="/q/">الحِكم والأمثال</a> ·
-<a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
-<a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
-<a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer>
+FOOT = """<footer><nav><a href="/a/">المقالات</a> · <a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
+<a href="/delete-account/">حذف الحساب</a> · <a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer>
 {js}</body></html>"""
 
 ICONS = {
@@ -208,6 +211,13 @@ ICONS = {
     'tg': '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.2l-4.8-1.5c-1-.3-1-1 .2-1.5L20.5 3c.9-.3 1.6.2 1.4 1.3z"/></svg>',
     'link': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
 }
+STORES = (
+    '<section class="get rv"><h2>حمّل إشراقة يومية</h2><p>مقال جديد كل يوم، وحكمة مع شرحها، ومكتبة ونوادٍ للقراءة. مجاني وبلا إعلانات.</p><div class="stores">'
+    '<a class="store" href="__PLAY__" aria-label="احصل عليه من Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg><span><small>احصل عليه من</small><b>Google Play</b></span></a>'
+    '<a class="store" href="/app/" aria-label="إشراقة على آيفون وماك"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span><small>متوفر على</small><b>آيفون وماك</b></span></a>'
+    '<a class="store" href="__MS__" target="_blank" rel="noopener" aria-label="إشراقة على ويندوز"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A84FF" d="M2 2h9.6v9.6H2zM12.4 2H22v9.6h-9.6zM2 12.4h9.6V22H2zM12.4 12.4H22V22h-9.6z"/></svg><span><small>احصل عليه من</small><b>Microsoft Store</b></span></a>'
+    '</div></section><script src="/apple-only.js" defer></script>'
+)
 SEARCH_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'
 
 
@@ -383,6 +393,7 @@ def index_page(items: list) -> str:
         + feat_html
         + f'<div class="grid">{"".join(card(a) for a in rest)}</div>'
         + '<p class="empty">لا توجد مقالات مطابقة. جرّب كلمة أخرى.</p>'
+        + STORES.replace('__PLAY__', PLAY).replace('__MS__', MS_STORE)
         + '</main></div>' + FOOT.format(year=dt.date.today().year, js=js())
     )
     return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes)
