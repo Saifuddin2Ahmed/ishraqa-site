@@ -28,10 +28,11 @@ dialog.fx-get[open]{animation:fxgin .4s cubic-bezier(.2,.8,.2,1)}
 @keyframes fxgin{from{opacity:0;transform:translateY(20px) scale(.96)}}
 .fx-get img{width:64px;height:64px;border-radius:18px;box-shadow:0 12px 30px rgba(240,122,74,.35)}
 .fx-get h3{margin:14px 0 18px;font-size:22px}
-.fx-get .gs{display:grid;gap:10px}
-.fx-get .gs a{display:flex;align-items:center;gap:14px;padding:13px 18px;border-radius:16px;background:#000;color:#fff;text-decoration:none;transition:transform .2s}
-.fx-get .gs a:hover{transform:translateY(-2px)}
-.fx-get .gs svg{width:28px;height:28px;flex-shrink:0}.fx-get .gs small{display:block;font-size:11.5px;opacity:.75;text-align:start}.fx-get .gs b{display:block;font-size:18px;text-align:start}
-.fx-get .gs .hint{display:block;font-size:12.5px;color:#FFB547;margin-top:2px;text-align:start}
+.fx-get .gs{display:flex;justify-content:center;gap:14px}
+.fx-get .gs a{width:78px;height:78px;border-radius:22px;display:grid;place-items:center;background:#000;transition:transform .2s,box-shadow .2s}
+.fx-get .gs a:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.3)}
+.fx-get .gs svg{width:36px;height:36px}
+.fx-get .msg{min-height:1.6em;margin:16px 0 0;font-size:14.5px;font-weight:700;color:#F07A4A;opacity:0;transition:opacity .25s}
+.fx-get .msg.on{opacity:1}
 .fx-get .x{position:absolute;top:14px;inset-inline-end:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(127,127,127,.15);color:inherit;font-size:20px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){dialog.fx-get[open]{animation:none}}
