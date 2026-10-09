@@ -72,7 +72,7 @@ HEAD = """<!doctype html>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>
 <div class="top"><div class="wrap wide"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
-<nav class="tnav"><a href="/a/">المقالات</a><a href="/q/">الحِكم</a><a href="/k/">المكتبة</a>
+<nav class="tnav"><a href="/a/">المقالات</a><a href="/k/">المكتبة</a>
 <a class="btn light" data-open href="{open_app}">افتح في التطبيق</a></nav></div></div>
 """
 
@@ -195,7 +195,7 @@ chips.forEach(function(ch){ch.addEventListener('click',function(){cat=ch.dataset
 })();
 </script>"""
 
-FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/a/">المقالات</a> · <a href="/q/">الحِكم والأمثال</a> ·
+FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/a/">المقالات</a> ·
 <a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
 <a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
 <a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer>
