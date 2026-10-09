@@ -186,7 +186,7 @@ def finalize(doc, *, url, title, desc, nodes=(), lang='ar', image=OG_IMAGE, imag
     if sized:
         doc = doc.replace('</head>', '<style>:where(img[width][height]){height:auto}</style></head>', 1)
     # أيقونتا آيفون والحاسوب بجانب زر Google Play (ما عدا المختبرين والكِت؛ platforms.js يتجاهل الرئيسية أيضًا)
-    if 'platforms.js' not in doc and '/testers/' not in url and '/kit/' not in url and '</body>' in doc:
+    if 'platforms.js' not in doc and '/testers/' not in url and '/kit/' not in url and '/a/' not in url and '</body>' in doc:
         doc = doc.replace('</body>', '<script src="/platforms.js" defer></script>\n</body>', 1)
     return re.sub(r'\n{3,}', '\n\n', doc)
 
