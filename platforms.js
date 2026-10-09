@@ -26,7 +26,8 @@
     var box = document.createElement('span');
     box.className = 'plat-ic';
     box.appendChild(icon('/app/', 'آيفون', PHONE));
-    if (!ios) box.appendChild(icon('/app/', 'الحاسوب', LAPTOP));
+    // ويندوز: من Microsoft Store؛ وغيره (ماك ولينكس): نسخة الحاسوب
+    if (!ios) box.appendChild(icon(/Windows NT/.test(ua) ? 'https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct' : '/app/', 'الحاسوب', LAPTOP));
     a.insertAdjacentElement('afterend', box);
     if (ios) a.style.display = 'none';  // لا متجر Play على آيفون
   });
