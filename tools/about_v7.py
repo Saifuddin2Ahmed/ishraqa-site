@@ -56,15 +56,14 @@ def main():
     sk = ''.join(f'<li>{k}</li>' for k in SKILLS)
     dev = (f'<section class="{MARK}"><div class="wrap"><div class="dv rv"><div class="dv-bn"><i></i></div><div class="dv-in">'
            '<div class="dv-ph"><img src="/img/dev-portrait.webp" alt="م. سيف الدين أحمد" width="512" height="512" loading="lazy"></div>'
-           '<div><h3>م. سيف الدين أحمد</h3><div class="t">مطوّر إشراقة يومية · مؤسس أوتواكس للحلول الرقمية</div>'
-           '<p>أبني التطبيقات بـ Flutter وأندرويد والذكاء الاصطناعي، وأؤمن أن شباب أفريقيا قادرون على صناعة أدوات العالم لا استخدامها فقط. '
-           'وإشراقة هي المكان الذي التقى فيه حبي للكتب بحبي للبرمجة.</p>'
-           f'<ul class="dv-sk">{sk}</ul>{icons}</div></div></div></div></section>')
+           '<div><h3>م. سيف الدين أحمد</h3><div class="t">مطوّر منتجات تقنية · مؤسس أوتواكس للحلول الرقمية</div>'
+           '<p>أطوّر منتجات تقنية تصنع فرقًا في حياة الناس. وإشراقة هي المكان الذي التقى فيه حبي للكتب بحبي للبناء.</p>'
+           f'{icons}</div></div></div></div></section>')
     a = s.index('<section><div class="wrap ab-dev')
     b = s.index('</section>', a) + len('</section>')
     s = s[:a] + dev + s[b:]
     # المسيرة بصيغة المتكلم
-    for old, new in [('تطبيق لقراءة الكتب صمّمه سيف الدين بـ Flutter.', 'تطبيق لقراءة الكتب صمّمتُه بـ Flutter.'),
+    for old, new in [('تطبيق لقراءة الكتب صمّمه سيف الدين بـ Flutter.', 'كانت البداية تطبيقًا لقراءة الكتب صمّمتُه مع نادي مطوري Google بجامعة الخرطوم، بإرشاد المهندس إسلام مدحت.'),
                      ('وفي سبتمبر جمعه نادي Candle للقراءة', 'وفي سبتمبر جمعني نادي Candle للقراءة'),
                      ('ووقف إلى جانبه أخوه وزميله سعيد حسن', 'ووقف إلى جانبي أخي وزميلي سعيد حسن')]:
         assert old in s, old
