@@ -215,6 +215,10 @@
       if (macSafari) el.querySelector('.mac').hidden = false;
     })();
   </script>
+  <script>
+    // يبقى تسجيل الدخول وبيانات الجهاز محفوظة: نطلب من المتصفح تخزينًا دائمًا لا يُمسح تلقائيًا
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (_) {}
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
