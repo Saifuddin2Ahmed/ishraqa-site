@@ -64,7 +64,7 @@
   if (!fine) return;
 
   /* ٦) البطاقات تميل مع المؤشر، وضوء يتبعه */
-  $('.f, .card, .feat, .k-col, .kh-card, .devcard, .kd-card, .k-path, .tl > div, .steps > div').forEach(function (c) {
+  $('.f, .card, .feat, .k-col, .kh-card, .devcard, .k-path, .tl > div, .steps > div').forEach(function (c) {
     if (c.closest('.kc')) return;
     c.classList.add('fx-tilt'); if (getComputedStyle(c).position === 'static') c.style.position = 'relative';
     c.addEventListener('pointermove', function (e) {
