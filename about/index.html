@@ -279,9 +279,25 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
 .kh-line i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--sun),var(--plum));transform-origin:right;transform:scaleX(var(--p,0))}
 @media (prefers-reduced-motion:reduce){.kc-bg.on{animation:none}.kc-scene,.kc-bg{transition:none}.kg-core i{animation:none}
 .kh{height:auto}.kh-stick{position:static;height:auto;padding:80px 0}.kh-track{transform:none!important;flex-wrap:wrap;justify-content:center}}
+
+/* ── v3: رزمة الصفحات ── */
+.kd{position:relative;height:230vh;margin-top:10px}
+.kd-stick{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center}
+.kd-stage{position:relative;width:min(1000px,94vw);height:min(560px,78vh)}
+.kd-card{position:absolute;left:50%;top:50%;width:min(300px,30%);min-height:190px;padding:24px 22px;border-radius:24px;background:var(--card);border:1px solid var(--line);
+box-shadow:0 18px 44px rgba(42,27,94,.12);transform-origin:50% 100%;will-change:transform;backface-visibility:hidden}
+.kd-card .k-ic{width:34px;height:34px;color:var(--plum)}
+.kd-n{position:absolute;top:16px;inset-inline-end:20px;font-weight:900;font-size:34px;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--sun);opacity:.7}
+.kd-card b{display:block;font-size:22px;margin:12px 0 4px}.kd-card p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.8}
+.kd-card:nth-child(odd){background:linear-gradient(160deg,var(--card),var(--soft,var(--card)))}
+@media (max-width:760px),(prefers-reduced-motion:reduce){.kd{height:auto}.kd-stick{position:static;height:auto}
+.kd-stage{height:auto;width:auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kd-card{position:relative;left:auto;top:auto;width:auto;transform:none!important}}
+@media (max-width:480px){.kd-stage{grid-template-columns:1fr}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
-<style>:where(img[width][height]){height:auto}</style></head>
+<style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/fx.css">
+</head>
 <body>
 <header class="hero page-hero">
   <canvas id="sky" aria-hidden="true"></canvas>
@@ -308,7 +324,7 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
 <main>
   <section><div class="wrap"><h2 class="rv">كلمة: إشراقة</h2><div class="word rv"><p>إشراقة هي لحظةٌ تتّسع فيها الرؤية؛ حين تقودنا فكرةٌ إلى فهمٍ جديد، أو تفتح لنا المعرفة أفقًا لم نكن نراه.</p><p>فما نعرفه يؤثر فيما نختار، وما نختاره يرسم ما نصير إليه. لذلك، ليست القراءة مجرد جمعٍ للمعلومات، بل رحلةٌ نرى من خلالها ما كان، ونفهم ما هو كائن، ونستشرف ما يمكن أن يكون.</p><b>إشراقة: أن نرى أبعد، كلما عرفنا أكثر.</b></div></div></section>
   <section><div class="wrap"><h2 class="rv">ما إشراقة؟</h2><p class="prose rv">إشراقة يومية مساحة هادئة للقراءة والمعرفة. تبدأ يومك بحكمة أو مثل مع معناه وقصته، ومقال قصير موثّق في آخره خلاصة عملية، ثم تقرأ كتابًا مع ناديك بهدف يومي يناسب وقتك، ونقاش لكل جزء لا يُفتح إلا حين تصل إليه. وتجمع إشراقة القرّاء في تحديات بين المدن والولايات والجامعات والمدارس، وتفتح للمطوّرين نوادي بناء صغيرة يقودها مرشد وتنتج مشاريع مفتوحة المصدر. وتحفظ ذاكرة أهلنا: أمثالًا بأصوات أهلها، وثقافة كل منطقة بأقلام أبنائها. التطبيق مجاني بالكامل وبلا إعلانات.</p></div></section>
-  <section class="k2i-v1"><div class="wrap"><div class="k-text rv"><p>نؤمن في إشراقة أن المعرفة لا ينبغي أن تنتهي عند الصفحة الأخيرة من الكتاب، ولا أن تبقى الأفكار حبيسة الشاشات. يمكن لفكرة أن تجمع أشخاصًا لم يلتقوا من قبل، وأن يتحول النقاش إلى تعلّم مشترك، وأن يصبح التعلّم بداية لمبادرة أو مشروع أو عمل يحفظ ذاكرة مجتمع.</p><p>لهذا نبني إشراقة لتكون أكثر من مساحة للقراءة؛ نريدها بيئة يلتقي فيها الإنسان بالمعرفة، ويلتقي فيها أصحاب الاهتمامات المشتركة، وتجد فيها الأفكار فرصة للنمو والتطبيق والمشاركة.</p></div><div class="kg" aria-label="أبعاد إشراقة"><canvas class="kg-cv" aria-hidden="true"></canvas><div class="kg-core"><i></i><i></i><img src="/img/icon-192.png" alt="إشراقة" width="96" height="96"></div><div class="kg-node" data-k="0"><b>الإنسان</b><span>المعرفة وسيلة لتوسيع الفهم والإمكانات</span></div><div class="kg-node" data-k="1"><b>المعرفة</b><span>قراءة وفهم وتأمل وتعلّم مستمر</span></div><div class="kg-node" data-k="2"><b>المجتمع</b><span>لقاء من تجمعهم اهتمامات مشتركة</span></div><div class="kg-node" data-k="3"><b>الإنتاج</b><span>تحويل التعلّم إلى مشاريع ومبادرات</span></div><div class="kg-node" data-k="4"><b>الذاكرة</b><span>حفظ الحكايات والأمثال والمعارف المحلية</span></div><div class="kg-node" data-k="5"><b>التقنية</b><span>أدوات تسهّل الوصول والمشاركة والتعاون</span></div></div><p class="k-motto rv">نقرأ لنتعلّم، ونتعلّم لنتشارك، ونتشارك لنصنع أثرًا.</p></div></section>
+  <section class="k2i-v1"><div class="wrap"><div class="k-text rv"><p>نؤمن في إشراقة أن المعرفة لا ينبغي أن تنتهي عند الصفحة الأخيرة من الكتاب، ولا أن تبقى الأفكار حبيسة الشاشات. يمكن لفكرة أن تجمع أشخاصًا لم يلتقوا من قبل، وأن يتحول النقاش إلى تعلّم مشترك، وأن يصبح التعلّم بداية لمبادرة أو مشروع أو عمل يحفظ ذاكرة مجتمع.</p><p>لهذا نبني إشراقة لتكون أكثر من مساحة للقراءة؛ نريدها بيئة يلتقي فيها الإنسان بالمعرفة، ويلتقي فيها أصحاب الاهتمامات المشتركة، وتجد فيها الأفكار فرصة للنمو والتطبيق والمشاركة.</p></div><div class="kd k2i-v3" aria-label="أبعاد إشراقة"><div class="kd-stick"><div class="kd-stage"><article class="kd-card" style="--k:0"><span class="kd-n">01</span><svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="6" r="3"/><path d="M5 21a7 7 0 0 1 14 0"/></svg><b>الإنسان</b><p>المعرفة وسيلة لتوسيع الفهم والإمكانات.</p></article><article class="kd-card" style="--k:1"><span class="kd-n">02</span><svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></svg><b>المعرفة</b><p>قراءة وفهم وتأمل، وتعلّم لا يتوقف.</p></article><article class="kd-card" style="--k:2"><span class="kd-n">03</span><svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg><b>المجتمع</b><p>لقاء من تجمعهم اهتمامات وأحلام مشتركة.</p></article><article class="kd-card" style="--k:3"><span class="kd-n">04</span><svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0 5 5l-8.4 8.4a2.1 2.1 0 0 1-3-3z"/><path d="M14.7 6.3 17 4l3 3-2.3 2.3"/></svg><b>الإنتاج</b><p>ما نتعلّمه يصير مشروعًا ومبادرة.</p></article><article class="kd-card" style="--k:4"><span class="kd-n">05</span><svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/><path d="M21 3v6h-6"/></svg><b>الذاكرة</b><p>حكايات وأمثال ومعارف محلية لا تضيع.</p></article><article class="kd-card" style="--k:5"><span class="kd-n">06</span><svg class="k-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><b>التقنية</b><p>أدوات تجعل الوصول والمشاركة أسهل.</p></article></div></div></div><p class="k-motto rv">نقرأ لنتعلّم، ونتعلّم لنتشارك، ونتشارك لنصنع أثرًا.</p></div></section>
   <section><div class="wrap"><h2 class="rv">لماذا بدأت إشراقة؟</h2><div class="k-text rv"><p>بدأت إشراقة من سؤال بسيط: لماذا نحمل في هواتفنا كل هذه المعرفة، ونجد صعوبة في أن نقرأ معًا، أو نتحاور، أو نبني شيئًا مما نتعلّمه؟</p><p>الكاتب في بلد، والقارئ في بلد آخر، والمبرمج المبتدئ يتعلّم وحده، وكثير من مدارسنا وأحيائنا فقدت مكتباتها ونوادي القراءة والبرمجة فيها. وفي زمن تقودنا فيه الخوارزميات إلى ما نشاهد ونقرأ، أردنا مساحة تعيد للإنسان دوره كاملًا: <strong>أن يقرأ، ويفهم، ويشارك، ويبني.</strong></p></div></div></section>
   <section class="kh k2i-v2" aria-label="المسيرة"><div class="kh-stick"><div class="wrap kh-head"><h2>من قارئ على جهاز واحد، إلى مساحة للجميع</h2></div><div class="kh-track"><article class="kh-card"><span class="kh-year">2022</span><b>البذرة</b><p>في دورة Flutter مع نادي مطوري Google بجامعة الخرطوم، صمّم سيف الدين تطبيقًا لقراءة الكتب. لم يُنشر يومها، لكن الفكرة بقيت تنتظر وقتها.</p></article><article class="kh-card"><span class="kh-year">2023</span><b>قارئٌ على جهاز واحد</b><p>صارت إشراقة قارئ كتب على جهاز مؤسسها وحده. وفي سبتمبر جمعه نادي Candle للقراءة، الذي أسسته لينة بشير موسى، بقرّاء من أماكن شتى.</p></article><article class="kh-card"><span class="kh-year">2024</span><b>بوتقة صغيرة</b><p>اتسعت لتضم الحِكم والمعلومات والكتب المختارة. ووقف إلى جانبه أخوه وزميله سعيد حسن، الداعم الأول في هذه المسيرة، فجعل ما بدا مستحيلًا ممكنًا.</p></article><article class="kh-card"><span class="kh-year">2025</span><b>أول نسخة</b><p>وصلت النسخة الأولى إلى Google Play في مرحلة الاختبار، ثم توقف العمل فترة.</p></article><article class="kh-card"><span class="kh-year">2026</span><b>العودة</b><p>في أبريل عاد العمل برؤية أوسع: مساحة تربط القراءة بالحوار والمجتمع والتعاون.</p></article><article class="kh-card"><span class="kh-year">اليوم</span><b>للجميع</b><p>في أكتوبر 2026 صارت إشراقة يومية متاحة للجميع على Google Play ومتجر Microsoft.</p></article></div><div class="kh-line"><i></i></div></div></section>
 
@@ -445,5 +461,30 @@ if(kg){var cv=kg.querySelector('.kg-cv'),cx=cv.getContext('2d'),nodes=[].slice.c
   requestAnimationFrame(draw)}
 })();
 </script>
+<script>
+/* k2i-v3: رزمة الصفحات — مكدّسة كأوراق كتاب، تنفرد مع التمرير حتى تستقر شبكة */
+(function(){
+var kd=document.querySelector('.kd');if(!kd)return;
+var wide=matchMedia('(min-width:761px)'),rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var cards=[].slice.call(kd.querySelectorAll('.kd-card')),stage=kd.querySelector('.kd-stage');
+function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+function f(){
+  if(!wide.matches||rm){cards.forEach(function(c){c.style.transform=''});return}
+  var r=kd.getBoundingClientRect(),h=r.height-innerHeight,p=Math.min(1,Math.max(0,-r.top/(h>0?h:1)));
+  var W=stage.clientWidth,H=stage.clientHeight,cw=cards[0].offsetWidth,ch=cards[0].offsetHeight,gx=(W-cw*3)/4,gy=(H-ch*2)/3;
+  cards.forEach(function(c,i){
+    var t=ease(Math.min(1,Math.max(0,p*1.35-i*0.06)));
+    var col=i%3,row=(i/3)|0,tx=W/2-(gx+col*(cw+gx)+cw/2),ty=(gy+row*(ch+gy)+ch/2)-H/2;
+    /* الرزمة: كل ورقة مائلة قليلًا ومزاحة كأنها صفحات كتاب */
+    var sr=(i-2.5)*5,sx=(i-2.5)*6,sy=-(i)*3;
+    var x=sx+(tx-sx)*t,y=sy+(ty-sy)*t,rot=sr*(1-t),ry=(1-t)*(i%2?-18:18);
+    c.style.transform='translate(-50%,-50%) translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+rot.toFixed(2)+'deg) perspective(900px) rotateY('+ry.toFixed(1)+'deg)';
+    c.style.zIndex=t>0.5?10+i:10-i;
+  });
+}
+addEventListener('scroll',f,{passive:true});addEventListener('resize',f);wide.addEventListener('change',f);f();
+})();
+</script>
+<script src="/fx.js" defer></script>
 </body>
 </html>

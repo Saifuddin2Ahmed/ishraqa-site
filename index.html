@@ -278,7 +278,8 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
 .kh{height:auto}.kh-stick{position:static;height:auto;padding:80px 0}.kh-track{transform:none!important;flex-wrap:wrap;justify-content:center}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
-<style>:where(img[width][height]){height:auto}</style></head>
+<style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/fx.css">
+</head>
 <body>
 <header class="hero">
   <canvas id="sky" aria-hidden="true"></canvas>
@@ -572,5 +573,6 @@ if(kg){var cv=kg.querySelector('.kg-cv'),cx=cv.getContext('2d'),nodes=[].slice.c
   requestAnimationFrame(draw)}
 })();
 </script>
+<script src="/fx.js" defer></script>
 </body>
 </html>
