@@ -14,7 +14,8 @@
     '.plat-ic a:hover{transform:translateY(-2px)}.plat-ic svg{width:20px;height:20px}' +
     '.nav-r .plat-ic a,.bar .plat-ic a{width:34px;height:34px;border-radius:10px}.nav-r .plat-ic svg{width:17px;height:17px}' +
     '.plat-ic.big{gap:12px;margin-inline-start:12px}.plat-ic.big a,a.play.ic-only{width:64px;height:64px;border-radius:18px;padding:0;justify-content:center;vertical-align:middle;background:#000;border:0;box-shadow:0 10px 30px rgba(0,0,0,.25)}' +
-    '.plat-ic.big svg,a.play.ic-only svg{width:30px;height:30px}a.play.ic-only span{display:none}';
+    '.plat-ic.big svg,a.play.ic-only svg{width:30px;height:30px}a.play.ic-only span{display:none}' +
+    'a.play.plat-full,a.play.plat-host{margin:5px;vertical-align:middle}';
   document.head.appendChild(css);
   // زرّا آيفون وماك لأجهزة Apple فقط (apple-only.js)
   var ao = document.createElement('script'); ao.src = '/apple-only.js'; ao.defer = true; document.head.appendChild(ao);
@@ -32,6 +33,22 @@
     // زر الواجهة (داخل header): أيقونات فقط بحجم واحد
     var big = a.classList.contains('play') && !!a.closest('header');
     a.dataset.platDone = '1';
+    // زر Play كامل خارج الواجهة (قسم الدعوة أسفل الصفحة): أزرار كاملة بأسمائها كما في الرئيسية
+    if (a.classList.contains('play') && !big) {
+      var full = function (href, small, name, svg, label, blank) {
+        var b = icon(href, label, svg, blank);
+        b.className = 'play plat-full';
+        b.innerHTML = svg + '<span><small>' + small + '</small><b>' + name + '</b></span>';
+        return b;
+      };
+      a.classList.add('plat-host');
+      var after = a;
+      [full('/app/', 'متوفر على', 'آيفون وماك', APPLE, 'آيفون وماك'),
+       ios ? null : full('https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct', 'احصل عليه من', 'Microsoft Store', WIN, 'ويندوز', true)]
+        .forEach(function (b) { if (!b) return; after.insertAdjacentElement('afterend', b); after = b; });
+      if (ios) a.style.display = 'none';
+      return;
+    }
     var box = document.createElement('span');
     box.className = 'plat-ic' + (big ? ' big' : '');
     if (big) a.classList.add('ic-only');
