@@ -12,7 +12,9 @@
     '.plat-ic a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#111;color:#fff;' +
     'border:1px solid rgba(255,255,255,.22);box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .2s}' +
     '.plat-ic a:hover{transform:translateY(-2px)}.plat-ic svg{width:20px;height:20px}' +
-    '.nav-r .plat-ic a,.bar .plat-ic a{width:34px;height:34px;border-radius:10px}.nav-r .plat-ic svg{width:17px;height:17px}';
+    '.nav-r .plat-ic a,.bar .plat-ic a{width:34px;height:34px;border-radius:10px}.nav-r .plat-ic svg{width:17px;height:17px}' +
+    '.plat-ic.big{gap:12px;margin-inline-start:12px}.plat-ic.big a,a.play.ic-only{width:64px;height:64px;border-radius:18px;padding:0;justify-content:center;vertical-align:middle;background:#000;border:0;box-shadow:0 10px 30px rgba(0,0,0,.25)}' +
+    '.plat-ic.big svg,a.play.ic-only svg{width:30px;height:30px}a.play.ic-only span{display:none}';
   document.head.appendChild(css);
   // زرّا آيفون وماك لأجهزة Apple فقط (apple-only.js)
   var ao = document.createElement('script'); ao.src = '/apple-only.js'; ao.defer = true; document.head.appendChild(ao);
@@ -25,9 +27,14 @@
   }
   document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function (a) {
     if (a.closest('.stores') || a.dataset.platDone) return;
+    // لا أيقونات في الشريط العلوي
+    if (a.classList.contains('nav-cta') || a.closest('.nav-r, nav')) return;
+    // زر الواجهة (داخل header): أيقونات فقط بحجم واحد
+    var big = a.classList.contains('play') && !!a.closest('header');
     a.dataset.platDone = '1';
     var box = document.createElement('span');
-    box.className = 'plat-ic';
+    box.className = 'plat-ic' + (big ? ' big' : '');
+    if (big) a.classList.add('ic-only');
     box.appendChild(icon('/app/', 'آيفون وماك', APPLE));
     if (!ios) box.appendChild(icon('https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct', 'ويندوز', WIN, true));
     a.insertAdjacentElement('afterend', box);
