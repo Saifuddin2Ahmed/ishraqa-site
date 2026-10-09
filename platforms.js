@@ -14,6 +14,8 @@
     '.plat-ic a:hover{transform:translateY(-2px)}.plat-ic svg{width:20px;height:20px}' +
     '.nav-r .plat-ic a,.bar .plat-ic a{width:34px;height:34px;border-radius:10px}.nav-r .plat-ic svg{width:17px;height:17px}';
   document.head.appendChild(css);
+  // زرّا آيفون وماك لأجهزة Apple فقط (apple-only.js)
+  var ao = document.createElement('script'); ao.src = '/apple-only.js'; ao.defer = true; document.head.appendChild(ao);
   function icon(href, label, svg, blank) {
     var a = document.createElement('a');
     a.href = href; a.title = label; a.setAttribute('aria-label', 'إشراقة على ' + label);
