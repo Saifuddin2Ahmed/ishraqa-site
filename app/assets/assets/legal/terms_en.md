@@ -43,10 +43,10 @@ The app is provided "as is". We work hard to keep it accurate and available but 
 You can stop using the app and delete your account at any time via **Account → Delete account**. We may suspend accounts that violate these terms.
 
 ## 9. Privacy
-Our [Privacy Policy](https://ishraqa.otwox.com/en/privacy/) explains what we collect and how we protect it.
+Our [Privacy Policy](https://ishraqa.app/en/privacy/) explains what we collect and how we protect it.
 
 ## 10. Changes
 We may update these terms and will notify you in the app of material changes. Continuing to use the app after an update means you accept it.
 
 ## Who we are and how to reach us
-We are **OtwoX Digital Solutions**, the team that builds and runs Ishraqa. For any question about these terms, [contact us](https://ishraqa.otwox.com/en/contact/).
+We are **OtwoX Digital Solutions**, the team that builds and runs Ishraqa. For any question about these terms, [contact us](https://ishraqa.app/en/contact/).
