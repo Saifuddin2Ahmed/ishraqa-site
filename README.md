@@ -1,4 +1,4 @@
-# موقع إشراقة (ishraqa.otwox.com)
+# موقع إشراقة (ishraqa.app)
 
 يُنشر على GitHub Pages من المستودع العام Saifuddin2Ahmed/ishraqa-site.
 للتحديث: انسخ index.html و img و CNAME و robots.txt و sitemap.xml إلى ذلك المستودع وادفعها.

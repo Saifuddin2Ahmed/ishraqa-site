@@ -18,7 +18,7 @@ import subprocess
 import sys
 from urllib.parse import urljoin
 
-SITE = 'https://ishraqa.otwox.com'
+SITE = 'https://ishraqa.app'
 PLAY = 'https://play.google.com/store/apps/details?id=com.taeziz.ishraqa'
 DEV_PLAY = 'https://play.google.com/store/apps/dev?id=6759566582761793518'
 APP_NAME = 'إشراقة يومية'

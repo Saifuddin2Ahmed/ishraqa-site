@@ -1,4 +1,4 @@
-"""يولّد صفحة ويب لكل مقال منشور في إشراقة (ishraqa.otwox.com/a/<slug>/)
+"""يولّد صفحة ويب لكل مقال منشور في إشراقة (ishraqa.app/a/<slug>/)
 مع معاينة المشاركة (صورة الغلاف) وزر فتح التطبيق، وصفحة فهرس /a/.
 
 يقرأ المقالات المنشورة فقط عبر المفتاح العام (القابل للنشر)؛ الحماية في سياسات RLS.
@@ -21,7 +21,10 @@ import seo  # noqa: E402
 
 SUPABASE_URL = 'https://jytbowsfvuzdnsmhmsly.supabase.co'
 PUBLISHABLE_KEY = 'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD'
-SITE = 'https://ishraqa.otwox.com'
+SITE = 'https://ishraqa.app'
+
+# المؤسس: كل صيغ اسمه وحساباته لمحركات البحث (بيانات منظّمة فقط، لا نص ظاهر)
+FOUNDER = {"@type": "Person", "@id": "https://ishraqa.app/#founder", "name": "سيف الدين أحمد عبدالقادر حامد", "alternateName": ["م. سيف الدين أحمد", "سيف الدين أحمد", "سيف الدين أحمد عبدالقادر", "Saifuddin Ahmed Abdelgadir Hamed", "Saifuddin Ahmed Abdelgadir", "Saifuddin Ahmed"], "jobTitle": "مطوّر منتجات تقنية · مؤسس أوتواكس للحلول الرقمية", "worksFor": {"@id": "https://otwox.com/#organization"}, "sameAs": ["https://www.linkedin.com/in/saifuddin2ahmed", "https://github.com/Saifuddin2Ahmed", "https://www.facebook.com/Saifuddin2Ahmed", "https://kwegatta.ai.studio/#/u/6X3HptD8tna8ehAkmIiEzB9QWuT2"]}
 PLAY = 'https://play.google.com/store/apps/details?id=com.taeziz.ishraqa'
 MS_STORE = 'https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct'
 ROOT = Path(__file__).resolve().parents[1]
@@ -219,7 +222,7 @@ def open_app(path: str, ref: str) -> str:
     """على أندرويد يفتح التطبيق على الصفحة نفسها إن كان مثبتًا، وإلا Google Play (والأجهزة الأخرى يضبطها JS)"""
     from urllib.parse import quote
     play = f'{PLAY}&referrer=' + quote(f'utm_source=web&utm_medium={ref}')
-    return (f'intent://ishraqa.otwox.com{path}#Intent;scheme=https;package=com.taeziz.ishraqa;'
+    return (f'intent://ishraqa.app{path}#Intent;scheme=https;package=com.taeziz.ishraqa;'
             f'S.browser_fallback_url={quote(play, safe="")};end')
 
 
@@ -297,6 +300,7 @@ def article_page(a: dict, related: list) -> str:
     title = seo.fit_title(a['title'])
     desc = seo.clip(a.get('excerpt') or a['title'], 155)
     who = ({'@type': 'Organization', 'name': author, 'url': f'{SITE}/about/'} if is_team(author)
+           else FOUNDER if 'سيف الدين' in author
            else {'@type': 'Person', 'name': author})
     nodes = [
         {'@type': 'Article', '@id': url + '#article', 'headline': seo.clip(a['title'], 110), 'description': desc,

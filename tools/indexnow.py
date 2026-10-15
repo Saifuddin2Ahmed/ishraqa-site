@@ -10,7 +10,7 @@ import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-HOST = 'ishraqa.otwox.com'
+HOST = 'ishraqa.app'
 SENT = ROOT / 'tools' / '.indexnow_sent.json'
 
 
