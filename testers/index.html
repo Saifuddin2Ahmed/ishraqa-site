@@ -346,7 +346,7 @@ var f=$('join');f.onsubmit=function(e){e.preventDefault();$('jerr').textContent=
  if(!ph){$('jerr').textContent='اختر نوع هاتفك';return}
  f.querySelector('button').disabled=true;
  rpc('join_testers',{p_name:name,p_email:mail,p_phone:ph,p_city:f.city.value,p_public:f.pub.checked}).then(function(r){
-  if(r==='declined'){f.querySelector('button').disabled=false;$('jerr').textContent='لم يُقبل طلبك السابق. راسلنا على ishraqa@otwox.com';return}
+  if(r==='declined'){f.querySelector('button').disabled=false;$('jerr').textContent='لم يُقبل طلبك السابق. راسلنا على hello@ishraqa.app';return}
   f.style.display='none';$(r==='waitlist'?'okIphone':'okAndroid').classList.add('on');
  }).catch(function(x){f.querySelector('button').disabled=false;
   $('jerr').textContent=/disposable/.test(x.message)?'هذا بريد مؤقت. سجّل ببريدك الدائم (مثل Gmail)':/busy/.test(x.message)?'الضغط كبير الآن، حاول بعد قليل':'تعذّر التسجيل، تأكد من البريد وحاول مرة أخرى'})};
