@@ -121,7 +121,6 @@ export const T = {
     open: 'افتح في التطبيق',
     join: 'انضم من التطبيق',
     get: 'حمّل إشراقة',
-    web: 'أو استخدمها من المتصفح',
     followers: 'متابِعون',
     following: 'يتابِع',
     level: 'المستوى',
@@ -143,7 +142,6 @@ export const T = {
     open: 'Open in the app',
     join: 'Join in the app',
     get: 'Get Ishraqa',
-    web: 'or use it in your browser',
     followers: 'Followers',
     following: 'Following',
     level: 'Level',
@@ -271,9 +269,9 @@ function actions(t, { android, appPath, playRef, join }) {
   const primary = android
     ? `<a class="btn primary" href="${esc(intentLink(appPath, playRef))}">${esc(join ? t.join : t.open)}</a>
 <a class="btn secondary" href="${esc(playUrl)}">${esc(t.get)}</a>`
-    : `<a class="btn primary" href="${esc(playUrl)}">${esc(t.get)}</a>`;
-  return `${primary}
-<a class="web" href="${esc(WEB_APP)}">${esc(t.web)}</a>`;
+    // آيفون والحاسوب: الزر نفسه يقود بهدوء إلى النسخة المناسبة (بلا ذكر «المتصفح»)
+    : `<a class="btn primary" href="${esc(WEB_APP)}">${esc(t.get)}</a>`;
+  return primary;
 }
 
 function initial(name) {
