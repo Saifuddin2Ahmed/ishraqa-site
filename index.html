@@ -7,9 +7,13 @@
 <meta name="description" content="إشراقة — بوتقةٌ للمعرفة، وفضاءٌ للقراءة. تطبيق مجاني بلا إعلانات: حكمة مع معناها، ومقال يومي، وكتب تقرؤها مع نادي القرّاء.">
 <meta name="robots" content="max-image-preview:large">
 <link rel="canonical" href="https://ishraqa.app/">
+<link rel="alternate" hreflang="ar" href="https://ishraqa.app/">
+<link rel="alternate" hreflang="en" href="https://ishraqa.app/en/">
+<link rel="alternate" hreflang="x-default" href="https://ishraqa.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="إشراقة يومية">
 <meta property="og:locale" content="ar_AR">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://ishraqa.app/">
 <meta property="og:title" content="إشراقة يومية · بوتقةٌ للمعرفة وفضاءٌ للقراءة">
 <meta property="og:description" content="إشراقة — بوتقةٌ للمعرفة، وفضاءٌ للقراءة. تطبيق مجاني بلا إعلانات: حكمة مع معناها، ومقال يومي، وكتب تقرؤها مع نادي القرّاء.">
@@ -276,6 +280,8 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
 .kh-line i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--sun),var(--plum));transform-origin:right;transform:scaleX(var(--p,0))}
 @media (prefers-reduced-motion:reduce){.kc-bg.on{animation:none}.kc-scene,.kc-bg{transition:none}.kg-core i{animation:none}
 .kh{height:auto}.kh-stick{position:static;height:auto;padding:80px 0}.kh-track{transform:none!important;flex-wrap:wrap;justify-content:center}}
+.kc-scene.on li:nth-child(4){animation-delay:.24s}
+.nav-link.lang{padding:5px 12px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-size:13.5px}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/fx.css">
@@ -286,7 +292,7 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
   <div class="wrap">
     <nav>
       <a class="brand" href="#"><img width="192" height="192" src="img/icon-192.png" alt=""> إشراقة يومية</a>
-      <div class="nav-r"><a class="nav-link" href="/about/">عن إشراقة</a><a class="nav-link dev" href="/developers/">للمطوّرين</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
+      <div class="nav-r"><a class="nav-link" href="/about/">عن إشراقة</a><a class="nav-link dev" href="/developers/">للمطوّرين</a><a class="nav-link lang" href="/en/" hreflang="en" lang="en">English</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
     </nav>
     <div class="hero-grid">
       <div>
@@ -317,8 +323,7 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
         <figure class="q"><p>«من يعرف الآخرين ذكي، ومن يعرف نفسه حكيم.»</p><span>— لاو تزو</span></figure>
         <figure class="q"><p>«الخبر الكاذب يطير، والحقيقة تمشي على قدمين.»</p><span>— حكمة</span></figure>
         <figure class="q"><p>«الفي البرّ عوّام.»</p><span>— مثل سوداني</span></figure>
-        <figure class="q"><p>«كل صباح هو صفحة بيضاء، فاكتب فيها ما يستحق أن يُقرأ.»</p><span>— حكمة</span></figure>
-        <div class="dots"><button aria-label="الحكمة 1" class=on></button><button aria-label="الحكمة 2"></button><button aria-label="الحكمة 3"></button><button aria-label="الحكمة 4"></button><button aria-label="الحكمة 5"></button><button aria-label="الحكمة 6"></button><button aria-label="الحكمة 7"></button><button aria-label="الحكمة 8"></button><button aria-label="الحكمة 9"></button><button aria-label="الحكمة 10"></button></div>
+        <div class="dots"><button aria-label="الحكمة 1" class=on></button><button aria-label="الحكمة 2"></button><button aria-label="الحكمة 3"></button><button aria-label="الحكمة 4"></button><button aria-label="الحكمة 5"></button><button aria-label="الحكمة 6"></button><button aria-label="الحكمة 7"></button><button aria-label="الحكمة 8"></button><button aria-label="الحكمة 9"></button></div>
       </div>
       <script>(function(){var b=document.getElementById("quotes"),q=b.querySelectorAll(".q"),d=b.querySelectorAll(".dots button"),i=0,t;function go(n){q[i].classList.remove("on");d[i].classList.remove("on");i=(n+q.length)%q.length;q[i].classList.add("on");d[i].classList.add("on")}function run(){clearInterval(t);if(!matchMedia("(prefers-reduced-motion: reduce)").matches)t=setInterval(function(){go(i+1)},7000)}d.forEach(function(x,k){x.onclick=function(){go(k);run()}});run()})();</script>
     </div>
@@ -327,7 +332,7 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
   
 
   
-  <section class="kc k2i-v2" aria-label="ما في إشراقة"><div class="kc-stick"><div class="kc-bg on" style="background-image:url(/img/scene-read.webp)"></div><div class="kc-bg" style="background-image:url(/img/scene-share.webp)"></div><div class="kc-bg" style="background-image:url(/img/scene-build.webp)"></div><div class="kc-bg" style="background-image:url(/img/scene-memory.webp)"></div><div class="kc-shade"></div><div class="kc-grain"></div><div class="wrap kc-in"><div class="kc-scenes"><div class="kc-scene on" data-i="0"><span class="kc-num">01</span><h3>اقرأ</h3><p>مكتبة من روائع الكتب، ومقال قصير كل يوم، وحكمة تعرف معناها وقصتها.</p><ul><li>المكتبة</li><li>مقال اليوم</li><li>ذكّرني أين وصلت</li></ul></div><div class="kc-scene" data-i="1"><span class="kc-num">02</span><h3>تحاور</h3><p>نوادٍ تقرأ الكتاب نفسه، وتتحاور فيه دون أن تحرق متعته، وتختار معًا ما تقرؤه بعده.</p><ul><li>نوادي القراءة</li><li>اللقاءات</li><li>تحدي المجتمعات</li></ul></div><div class="kc-scene" data-i="2"><span class="kc-num">03</span><h3>اصنع</h3><p>فرق صغيرة من المطوّرين، وموجّه خبير، ومشروع مفتوح المصدر يراه العالم.</p><ul><li>نوادي المطوّرين</li><li>معرض المشاريع</li><li>المنح والفرص</li></ul></div><div class="kc-scene" data-i="3"><span class="kc-num">04</span><h3>احفظ</h3><p>أمثال بأصوات أهلها، وحكايات المدن وعاداتها تُكتب بأسماء أصحابها.</p><ul><li>صدى</li><li>ثقافتك</li></ul></div></div><nav class="kc-rail"><button type="button" data-i="0" class=on aria-label="اقرأ"><i></i><span>اقرأ</span></button><button type="button" data-i="1" aria-label="تحاور"><i></i><span>تحاور</span></button><button type="button" data-i="2" aria-label="اصنع"><i></i><span>اصنع</span></button><button type="button" data-i="3" aria-label="احفظ"><i></i><span>احفظ</span></button></nav></div><div class="kc-bar"><i></i></div></div></section>
+  <section class="kc k2i-v2" aria-label="ما في إشراقة"><div class="kc-stick"><div class="kc-bg on" style="background-image:url(/img/scene-read.webp)"></div><div class="kc-bg" style="background-image:url(/img/scene-share.webp)"></div><div class="kc-bg" style="background-image:url(/img/scene-build.webp)"></div><div class="kc-bg" style="background-image:url(/img/scene-memory.webp)"></div><div class="kc-shade"></div><div class="kc-grain"></div><div class="wrap kc-in"><div class="kc-scenes"><div class="kc-scene on" data-i="0"><span class="kc-num">01</span><h3>اقرأ</h3><p>مكتبة من روائع الكتب، ومقال قصير كل يوم، وحكمة تعرف معناها وقصتها.</p><ul><li>المكتبة</li><li>مقال اليوم</li><li>ذكّرني أين وصلت</li></ul></div><div class="kc-scene" data-i="1"><span class="kc-num">02</span><h3>تحاور</h3><p>نوادٍ تقرأ الكتاب نفسه، وتتحاور فيه دون أن تحرق متعته، وتختار معًا ما تقرؤه بعده.</p><ul><li>نوادي القراءة</li><li>نوادي الإنجليزية</li><li>اللقاءات</li><li>تحدي المجتمعات</li></ul></div><div class="kc-scene" data-i="2"><span class="kc-num">03</span><h3>اصنع</h3><p>فرق صغيرة من المطوّرين، وموجّه خبير، ومشروع مفتوح المصدر يراه العالم.</p><ul><li>نوادي المطوّرين</li><li>معرض المشاريع</li><li>المنح والفرص</li></ul></div><div class="kc-scene" data-i="3"><span class="kc-num">04</span><h3>احفظ</h3><p>أمثال بأصوات أهلها، وحكايات المدن وعاداتها تُكتب بأسماء أصحابها.</p><ul><li>صدى</li><li>ثقافتك</li></ul></div></div><nav class="kc-rail"><button type="button" data-i="0" class=on aria-label="اقرأ"><i></i><span>اقرأ</span></button><button type="button" data-i="1" aria-label="تحاور"><i></i><span>تحاور</span></button><button type="button" data-i="2" aria-label="اصنع"><i></i><span>اصنع</span></button><button type="button" data-i="3" aria-label="احفظ"><i></i><span>احفظ</span></button></nav></div><div class="kc-bar"><i></i></div></div></section>
 
 
   <section><div class="wrap">
@@ -376,6 +381,7 @@ background:radial-gradient(circle at 35% 30%,var(--gold),var(--sun) 35%,var(--pl
       <a href="/terms/">شروط الاستخدام</a>
       <a href="/delete-account/">حذف الحساب</a>
       <a href="/contact/">تواصل معنا</a>
+      <a href="/en/" hreflang="en" lang="en">English</a>
     </nav>
     <div class="credit">© 2026 إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div>
   </div>
