@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2A1B5E"/>
+    <stop offset="0.55" stop-color="#8E3A8C"/>
+    <stop offset="1" stop-color="#F07A4A"/>
+  </linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FFF6D5"/>
+    <stop offset="1" stop-color="#FFB547"/>
+  </linearGradient>
+  <clipPath id="horizon"><rect x="0" y="0" width="1024" height="598"/></clipPath>
+</defs>
+<g transform="translate(512 488) scale(0.9) translate(-512 -512)">
+  <g stroke="#FFD27A" stroke-width="34" stroke-linecap="round"><line x1="291.8" y1="501.0" x2="229.9" y2="484.4"/><line x1="342.6" y1="407.4" x2="295.0" y2="364.6"/><line x1="430.3" y1="347.1" x2="407.4" y2="287.4"/><line x1="512.0" y1="332.0" x2="512.0" y2="268.0"/><line x1="593.7" y1="347.1" x2="616.6" y2="287.4"/><line x1="681.4" y1="407.4" x2="729.0" y2="364.6"/><line x1="732.2" y1="501.0" x2="794.1" y2="484.4"/></g>
+  <circle cx="512" cy="560" r="185" fill="url(#sun)" clip-path="url(#horizon)"/>
+  <g stroke-width="44" stroke-linecap="round"><line x1="224" y1="650" x2="800" y2="650" stroke="#FFFFFF" stroke-opacity="1.0"/><line x1="370" y1="730" x2="800" y2="730" stroke="#FFFFFF" stroke-opacity="0.8"/><line x1="530" y1="810" x2="800" y2="810" stroke="#FFFFFF" stroke-opacity="0.6"/></g>
+</g></svg>

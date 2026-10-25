@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ملف على إشراقة يومية</title>
+<meta name="description" content="تابِع القرّاء والكتّاب على إشراقة يومية.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1B5E">
+<link rel="icon" type="image/png" href="/img/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="إشراقة يومية">
+<meta property="og:title" content="ملف على إشراقة يومية">
+<meta property="og:description" content="تابِع القرّاء والكتّاب على إشراقة يومية.">
+<meta property="og:image" content="https://ishraqa.app/img/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ishraqa.app/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6}
+@media (prefers-color-scheme:dark){:root{--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645}}
+*{box-sizing:border-box}
+html{background:var(--night)}
+body{margin:0;min-height:100vh;font-family:Cairo,Tahoma,sans-serif;background:linear-gradient(160deg,var(--night) 0%,var(--plum) 60%,var(--sun) 100%);color:var(--ink);line-height:1.8;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;gap:18px}
+.card{width:100%;max-width:460px;background:var(--card);border-radius:28px;padding:34px 24px 26px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.sun{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff;background:linear-gradient(140deg,var(--night),var(--plum),var(--sun));animation:pulse 1.6s ease-in-out infinite alternate}
+h1{font-size:24px;line-height:1.5;margin:0 0 6px;font-weight:800}
+p{color:var(--muted);margin:0 0 18px}
+.btn{display:block;text-decoration:none;font-weight:700;font-size:17px;border-radius:999px;padding:14px 20px;margin-top:10px}
+.primary{background:var(--night);color:#fff}
+.secondary{border:1.5px solid var(--line);color:var(--ink)}
+.foot{color:#fff;opacity:.85;font-size:14px;text-decoration:none;font-weight:700}
+@keyframes pulse{to{transform:scale(1.06);opacity:.85}}
+@media (prefers-reduced-motion:reduce){.sun{animation:none}}
+</style>
+<script>if(/^\/(en\/)?(u|c)(\/|$)/.test(location.pathname)&&(location.pathname.split('/').filter(Boolean).length>(location.pathname.indexOf('/en/')===0?2:1)||/[?&](u|c)=/.test(location.search)))document.documentElement.className='share-wait';</script>
+</head>
+<body>
+<main class="card" id="wait">
+  <div class="sun" aria-hidden="true">☀</div>
+  <h1>ملف على إشراقة يومية</h1>
+  <p>نجهّز الملف… وإن كان التطبيق مثبّتًا يُفتح فيه مباشرة.</p>
+  <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&amp;referrer=utm_source%3Dshare_link">حمّل إشراقة</a>
+  <a class="btn secondary" href="/app/">أو استخدمها من المتصفح</a>
+</main>
+<a class="foot" href="/">☀ إشراقة يومية</a>
+<script type="module" src="/share/card.js"></script>
+</body>
+</html>

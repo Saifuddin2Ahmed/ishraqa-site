@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" translate="no" class="notranslate">
+<head>
+  <!-- يُستبدل بقيمة --base-href عند البناء (للنشر: /app/) -->
+  <base href="/app/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <title>إشراقة يومية</title>
+  <meta name="description" content="إشراقة يومية: حكمة تُشرق يومك، ومقال يفتح ذهنك، وكتب مجانية، ومجتمع قرّاء يتبادلون الأثر. مجاني وبلا إعلانات.">
+  <meta name="google" content="notranslate">
+  <meta name="theme-color" content="#4B2E83">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="إشراقة يومية">
+  <meta property="og:description" content="حكمة تُشرق يومك، ومقال يفتح ذهنك، وكتب مجانية، ومجتمع قرّاء.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:locale" content="ar_AR">
+
+  <!-- «أضف إلى الشاشة الرئيسية» على آيفون وأندرويد -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="إشراقة">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: #2A1B5E;
+    }
+    /* شاشة البداية حتى يرسم التطبيق أول إطار: فجر متدرج والشمس تشرق */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      background: linear-gradient(180deg, #2A1B5E 0%, #4B2E83 38%, #8E3B8A 66%, #D7656A 86%, #EE7B4A 100%);
+      font-family: "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", system-ui, sans-serif;
+      color: #FFF6E5;
+      transition: opacity .45s ease;
+    }
+    #splash.hide { opacity: 0; pointer-events: none; }
+    #splash .sun {
+      width: 156px;
+      height: 106px;
+      animation: rise 1.6s cubic-bezier(.2, .7, .2, 1) both, glow 2.8s ease-in-out 1.6s infinite;
+    }
+    #splash .horizon {
+      width: 190px;
+      height: 3px;
+      margin-top: -22px;
+      border-radius: 3px;
+      background: rgba(255, 246, 229, .85);
+    }
+    #splash .name { font-size: 26px; font-weight: 700; letter-spacing: .5px; }
+    #splash .dots { display: flex; gap: 7px; }
+    #splash .dots i {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255, 246, 229, .75);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    #splash .dots i:nth-child(2) { animation-delay: .2s; }
+    #splash .dots i:nth-child(3) { animation-delay: .4s; }
+    @keyframes rise { from { transform: translateY(26px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes glow { 50% { filter: drop-shadow(0 0 18px rgba(255, 209, 120, .55)); } }
+    @keyframes pulse { 50% { opacity: .25; transform: scale(.7); } }
+    @media (prefers-reduced-motion: reduce) {
+      #splash .sun, #splash .dots i { animation: none; }
+    }
+    /* آيفون (Safari خارج وضع التطبيق): ورقة «ثبّت إشراقة» تظهر بعد التحميل */
+    #ios-install {
+      position: fixed; z-index: 20; inset: auto 12px calc(12px + env(safe-area-inset-bottom)) 12px;
+      padding: 16px 18px 14px; border-radius: 22px;
+      background: rgba(30, 20, 66, .96); color: #FFF6E5;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.12);
+      font-family: "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", system-ui, sans-serif;
+      transform: translateY(140%); transition: transform .45s cubic-bezier(.2,.8,.2,1);
+    }
+    #ios-install.on { transform: none; }
+    #ios-install .row { display: flex; align-items: center; gap: 12px; }
+    #ios-install img { width: 46px; height: 46px; border-radius: 12px; }
+    #ios-install b { display: block; font-size: 16px; }
+    #ios-install p { margin: 8px 0 0; font-size: 14px; line-height: 1.8; color: #E9DFF7; }
+    #ios-install .share { display: inline-block; width: 16px; height: 16px; vertical-align: -2px; }
+    #ios-install button {
+      position: absolute; top: 8px; left: 10px; border: 0; background: transparent;
+      color: #E9DFF7; font-size: 22px; line-height: 1; padding: 6px; cursor: pointer;
+    }
+    #ios-install::after {
+      content: ""; position: absolute; bottom: -9px; left: 50%; margin-left: -9px;
+      border: 9px solid transparent; border-bottom: 0; border-top-color: rgba(30, 20, 66, .96);
+    }
+    /* الحاسوب: ورقة «ثبّت إشراقة على حاسوبك» (Chrome/Edge بزر تثبيت، وSafari على ماك بتعليمات) */
+    #pc-install {
+      position: fixed; z-index: 20; bottom: 20px; left: 20px; width: 360px; max-width: calc(100vw - 40px);
+      padding: 18px 18px 16px; border-radius: 20px; box-sizing: border-box;
+      background: rgba(30, 20, 66, .97); color: #FFF6E5;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.12);
+      font-family: "Segoe UI", Tahoma, "Geeza Pro", "Noto Naskh Arabic", system-ui, sans-serif;
+      transform: translateY(160%); transition: transform .45s cubic-bezier(.2,.8,.2,1);
+    }
+    #pc-install.on { transform: none; }
+    #pc-install .row { display: flex; align-items: center; gap: 12px; }
+    #pc-install img { width: 48px; height: 48px; border-radius: 12px; }
+    #pc-install b { display: block; font-size: 16px; }
+    #pc-install small { font-size: 13px; color: #E9DFF7; }
+    #pc-install p { margin: 10px 0 0; font-size: 14px; line-height: 1.8; color: #E9DFF7; }
+    #pc-install .go {
+      margin-top: 12px; width: 100%; border: 0; border-radius: 12px; padding: 11px; cursor: pointer;
+      font: inherit; font-weight: 700; font-size: 15px; color: #fff;
+      background: linear-gradient(135deg, #4B2E83, #8E3A8C 55%, #F07A4A);
+    }
+    #pc-install .x {
+      position: absolute; top: 8px; left: 10px; border: 0; background: transparent;
+      color: #E9DFF7; font-size: 22px; line-height: 1; padding: 6px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash" role="status" aria-label="إشراقة يومية، جارٍ التحميل">
+    <img class="sun" src="icons/splash-sun.png" alt="">
+    <div class="horizon"></div>
+    <div class="name">إشراقة يومية</div>
+    <div class="dots"><i></i><i></i><i></i></div>
+  </div>
+  <noscript>
+    <p style="color:#fff;text-align:center;font-family:sans-serif;padding:24px">
+      إشراقة يومية تحتاج تفعيل JavaScript.
+    </p>
+  </noscript>
+  <script>
+    // نخفي شاشة البداية بعد أول إطار يرسمه التطبيق
+    window.addEventListener('flutter-first-frame', function () {
+      var s = document.getElementById('splash');
+      if (!s) return;
+      s.classList.add('hide');
+      setTimeout(function () { s.remove(); }, 500);
+    });
+  </script>
+  <div id="ios-install" role="dialog" aria-label="ثبّت إشراقة على شاشتك">
+    <button type="button" aria-label="إغلاق">×</button>
+    <div class="row">
+      <img src="icons/apple-touch-icon.png" alt="">
+      <div><b>ثبّت إشراقة على شاشتك</b><span style="font-size:13px;color:#E9DFF7">تفتحها بلمسة مثل أي تطبيق</span></div>
+    </div>
+    <p>اضغط زر المشاركة
+      <svg class="share" viewBox="0 0 24 24" fill="none" stroke="#FFD27A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+      في الأسفل، ثم اختر «إضافة إلى الشاشة الرئيسية».</p>
+  </div>
+  <script>
+    // آيفون/آيباد في Safari فقط، وليس بعد التثبيت (navigator.standalone)، ومرة حتى يُغلق
+    (function () {
+      var ua = navigator.userAgent;
+      var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var standalone = navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+      var key = 'ishraqa_ios_install_closed';
+      var closed = false;
+      try { closed = localStorage.getItem(key) === '1'; } catch (_) {}
+      if (!ios || standalone || closed) return;
+      var el = document.getElementById('ios-install');
+      el.querySelector('button').onclick = function () {
+        el.classList.remove('on');
+        try { localStorage.setItem(key, '1'); } catch (_) {}
+      };
+      window.addEventListener('flutter-first-frame', function () {
+        setTimeout(function () { el.classList.add('on'); }, 2500);
+      });
+    })();
+  </script>
+  <div id="pc-install" role="dialog" aria-label="ثبّت إشراقة على حاسوبك">
+    <button type="button" class="x" aria-label="إغلاق">×</button>
+    <div class="row">
+      <img src="icons/Icon-192.png" alt="">
+      <div><b>ثبّت إشراقة على حاسوبك</b><small>تفتحها من سطح المكتب مثل أي برنامج</small></div>
+    </div>
+    <p class="mac" hidden>من شريط القوائم في Safari: «ملف» ← «إضافة إلى Dock».</p>
+    <button type="button" class="go" hidden>ثبّت الآن</button>
+  </div>
+  <script>
+    // الحاسوب فقط (لا الهاتف ولا التابلت)، وليس بعد التثبيت، ومرة حتى يُغلق
+    (function () {
+      var ua = navigator.userAgent;
+      var mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var standalone = window.matchMedia && matchMedia('(display-mode: standalone)').matches;
+      var key = 'ishraqa_pc_install_closed', closed = false;
+      try { closed = localStorage.getItem(key) === '1'; } catch (_) {}
+      if (mobile || standalone || closed) return;
+      var el = document.getElementById('pc-install'), go = el.querySelector('.go'), ready = false, deferred = null;
+      function hide() { el.classList.remove('on'); }
+      el.querySelector('.x').onclick = function () { hide(); try { localStorage.setItem(key, '1'); } catch (_) {} };
+      function show() { if (ready) setTimeout(function () { el.classList.add('on'); }, 3000); }
+      window.addEventListener('flutter-first-frame', function () { ready = true; if (deferred || macSafari) show(); });
+      // Chrome وEdge: زر تثبيت حقيقي
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault(); deferred = e; go.hidden = false; show();
+      });
+      go.onclick = function () {
+        if (!deferred) return;
+        deferred.prompt();
+        deferred.userChoice.finally(function () { deferred = null; hide(); });
+      };
+      window.addEventListener('appinstalled', hide);
+      // Safari على ماك: لا حدث تثبيت، فتعليمات «إضافة إلى Dock»
+      var macSafari = /Macintosh/.test(ua) && /Safari/.test(ua) && !/Chrome|Chromium|Edg|Firefox/.test(ua);
+      if (macSafari) el.querySelector('.mac').hidden = false;
+    })();
+  </script>
+  <script>
+    // يبقى تسجيل الدخول وبيانات الجهاز محفوظة: نطلب من المتصفح تخزينًا دائمًا لا يُمسح تلقائيًا
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (_) {}
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
