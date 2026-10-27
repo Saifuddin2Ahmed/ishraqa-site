@@ -22,10 +22,15 @@ jobs:
           python-version: '3.12'
       - run: pip install markdown
       - run: python tools/build_articles.py
-      - run: python tools/indexnow.py
       - name: Commit changes
         run: |
           git config user.name "ishraqa-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -A a sitemap.xml llms.txt tools/.lastmod.json tools/.indexnow_sent.json
+          git add -A a sitemap.xml llms.txt tools/.lastmod.json
           git diff --cached --quiet || (git commit -m "Daily articles: $(date +%F)" && git push)
+      # IndexNow بعد النشر لا قبله: ينتظر حتى تُنشر خريطة الموقع الجديدة على ishraqa.app
+      - run: python tools/indexnow.py --wait
+      - name: Save IndexNow state
+        run: |
+          git add tools/.indexnow_sent.json
+          git diff --cached --quiet || (git commit -m "IndexNow state: $(date +%F)" && git push)

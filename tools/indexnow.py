@@ -1,17 +1,35 @@
 """يبلّغ محركات البحث (Bing وYandex وNaver وSeznam…) بالصفحات الجديدة والمتغيّرة فورًا عبر IndexNow.
 
 يقرأ الروابط وتواريخ lastmod من خريطة الموقع، ويرسل كل رابط جديد أو تغيّر تاريخه منذ آخر إرسال
-(أو الكل بخيار --all). المفتاح علني بطبيعته (ملف <key>.txt في جذر الموقع)."""
+(أو الكل بخيار --all). المفتاح علني بطبيعته (ملف <key>.txt في جذر الموقع).
+بخيار --wait ينتظر حتى تُنشر الصفحات فعلًا (تطابق خريطة الموقع المنشورة المحلية) قبل التبليغ، فلا يزورها Bing قبل النشر."""
 import json
 import pathlib
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 HOST = 'ishraqa.app'
 SENT = ROOT / 'tools' / '.indexnow_sent.json'
+
+
+def deployed(xml, timeout=1200, step=30):   # ذاكرة GitHub Pages المؤقتة حتى 10 دقائق
+    """ينتظر نشر GitHub Pages: حين تطابق خريطة الموقع المنشورة الخريطةَ المحلية تكون الصفحات الجديدة قد نُشرت"""
+    end = time.time() + timeout
+    while time.time() < end:
+        try:
+            req = urllib.request.Request(f'https://{HOST}/sitemap.xml?nocache={int(time.time())}',
+                                         headers={'User-Agent': 'ishraqa-indexnow', 'Cache-Control': 'no-cache'})
+            if urllib.request.urlopen(req, timeout=30).read().decode('utf-8').strip() == xml.strip():
+                return True
+        except Exception:
+            pass
+        time.sleep(step)
+    print('site not deployed yet; will retry next run')
+    return False
 
 
 def main():
@@ -24,6 +42,8 @@ def main():
     new = list(urls) if '--all' in sys.argv else [u for u, d in urls.items() if sent.get(u) != d]
     if not new:
         print('nothing new')
+        return
+    if '--wait' in sys.argv and not deployed(xml):
         return
     status = None
     for i in range(0, len(new), 10000):

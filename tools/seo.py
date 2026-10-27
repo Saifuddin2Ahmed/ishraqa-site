@@ -21,6 +21,8 @@ from urllib.parse import urljoin
 SITE = 'https://ishraqa.app'
 PLAY = 'https://play.google.com/store/apps/details?id=com.taeziz.ishraqa'
 DEV_PLAY = 'https://play.google.com/store/apps/dev?id=6759566582761793518'
+MS_STORE = 'https://apps.microsoft.com/detail/9nr3bxwzrdxs'
+APP_STORE = None  # رابط App Store بعد اعتماد المراجعة، مثل 'https://apps.apple.com/app/id0000000000'
 APP_NAME = 'إشراقة يومية'
 SUFFIX = ' · إشراقة يومية'
 OG_IMAGE = SITE + '/img/og.jpg'
@@ -29,7 +31,16 @@ OG_ALT = 'شخص يقرأ كتابًا أمام شروق الشمس'
 ORG_ID = 'https://otwox.com/#organization'
 WEBSITE_ID = SITE + '/#website'
 APP_ID = SITE + '/#app'
-FOUNDER_ID = SITE + '/about/#founder'
+# كيان المؤسس واحد في كل المواقع: صفحته الشخصية هي المرجع (saifuddin.dev يعرّفه بالمعرّف نفسه)
+FOUNDER_ID = 'https://saifuddin.dev/#person'
+FOUNDER_NAME = 'سيف الدين أحمد عبدالقادر حامد'
+FOUNDER_ALT = ['م. سيف الدين أحمد', 'سيف الدين أحمد', 'سيف الدين أحمد عبدالقادر',
+               'Saifuddin Ahmed Abdelgadir Hamed', 'Saifuddin Ahmed Abdelgadir', 'Saifuddin Ahmed', 'Eng. Saifuddin Ahmed']
+FOUNDER_SAME_AS = ['https://saifuddin.dev/', 'https://orcid.org/0009-0007-9719-7258',
+                   'https://www.linkedin.com/in/saifuddin2ahmed', 'https://github.com/Saifuddin2Ahmed',
+                   'https://www.facebook.com/Saifuddin2Ahmed', 'https://huggingface.co/saifuddin2ahmed',
+                   'https://otwox.com/about-us/founder', DEV_PLAY,
+                   'https://kwegatta.ai.studio/#/u/6X3HptD8tna8ehAkmIiEzB9QWuT2']
 
 APP_DESC = ('تطبيق مجاني بلا إعلانات للقراءة والمعرفة: حكمة أو مثل مع معناه وقصته، ومقال قصير موثّق، '
             'وكتب تقرؤها مع نادي القرّاء جزءًا جزءًا، وتحديات قراءة بين المدن والجامعات والمدارس، ونوادي بناء للمطوّرين.')
@@ -47,36 +58,45 @@ PHONE_SHOT = (540, 1134)
 def org():
     return {'@type': 'Organization', '@id': ORG_ID, 'name': 'أوتواكس للحلول الرقمية',
             'alternateName': 'OtwoX Digital Solutions', 'url': 'https://otwox.com',
-            'founder': {'@type': 'Person', '@id': FOUNDER_ID, 'name': 'م. سيف الدين أحمد'}}
+            'founder': founder_ref()}
+
+
+def founder_ref():
+    return {'@type': 'Person', '@id': FOUNDER_ID, 'name': FOUNDER_NAME, 'url': 'https://saifuddin.dev/'}
+
+
+def stores():
+    return [u for u in (PLAY, MS_STORE, APP_STORE) if u]
 
 
 def website():
     return {'@type': 'WebSite', '@id': WEBSITE_ID, 'url': SITE + '/', 'name': APP_NAME,
-            'alternateName': ['إشراقة', 'Ishraqa Daily'], 'inLanguage': 'ar', 'publisher': {'@id': ORG_ID}}
+            'alternateName': ['إشراقة', 'تطبيق إشراقة', 'Ishraqa', 'Ishraqa Daily', 'Ishraqa app'],
+            'inLanguage': ['ar', 'en'], 'publisher': {'@id': ORG_ID}}
 
 
 def app():
-    return {'@type': 'MobileApplication', '@id': APP_ID, 'name': APP_NAME, 'alternateName': 'Ishraqa Daily',
-            'description': APP_DESC, 'operatingSystem': 'Android', 'applicationCategory': 'EducationalApplication',
+    return {'@type': 'MobileApplication', '@id': APP_ID, 'name': APP_NAME, 'alternateName': ['Ishraqa Daily', 'إشراقة', 'Ishraqa'],
+            'description': APP_DESC,
+            'operatingSystem': ', '.join(['Android', 'Windows'] + (['iOS'] if APP_STORE else [])),
+            'applicationCategory': 'EducationalApplication',
             'applicationSubCategory': 'القراءة والمعرفة', 'inLanguage': 'ar', 'isAccessibleForFree': True,
             'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'USD'},
-            'url': SITE + '/', 'installUrl': PLAY, 'downloadUrl': PLAY, 'image': SITE + '/img/icon-512.png',
+            'url': SITE + '/', 'installUrl': PLAY, 'downloadUrl': stores(), 'image': SITE + '/img/icon-512.png',
+            'sameAs': stores() + ['https://github.com/ishraqa-app', 'https://www.npmjs.com/package/ishraqa'],
             'screenshot': [f'{SITE}/img/{n}.webp' for n in ('home', 'club', 'club4', 'community', 'library')],
             'featureList': ['حكمة أو مثل مع معناه وقصته', 'مقال قصير موثّق بخلاصة عملية', 'نادي القرّاء',
                             'لقاءات وفعاليات', 'تحدي المدن والجامعات والمدارس', 'نوادي المطوّرين للمطوّرين',
                             'مكتبة كتب مجانية', 'يعمل دون إنترنت', 'بلا إعلانات'],
-            'author': {'@type': 'Person', '@id': FOUNDER_ID, 'name': 'م. سيف الدين أحمد'}, 'publisher': {'@id': ORG_ID}}
+            'author': founder_ref(), 'publisher': {'@id': ORG_ID}}
 
 
 def founder(full=False):
-    p = {'@type': 'Person', '@id': FOUNDER_ID, 'name': 'م. سيف الدين أحمد', 'url': SITE + '/about/',
-         'jobTitle': 'مؤسس أوتواكس للحلول الرقمية', 'worksFor': {'@id': ORG_ID}}
+    p = dict(founder_ref(), jobTitle='مهندس ومطوّر منتجات رقمية · مؤسس أوتواكس للحلول الرقمية',
+             worksFor={'@id': ORG_ID})
     if full:
-        p.update({'alternateName': ['سيف الدين أحمد', 'Saifuddin Ahmed', 'Eng. Saifuddin Ahmed'],
-                  'image': SITE + '/img/developer.jpg',
-                  'sameAs': [DEV_PLAY, 'https://www.linkedin.com/in/saifuddin2ahmed', 'https://github.com/Saifuddin2Ahmed',
-                             'https://www.facebook.com/Saifuddin2Ahmed', 'https://huggingface.co/saifuddin2ahmed',
-                             'https://otwox.com/about-us/founder']})
+        p.update({'alternateName': FOUNDER_ALT, 'image': SITE + '/img/developer.jpg', 'sameAs': FOUNDER_SAME_AS,
+                  'subjectOf': {'@id': SITE + '/about/#webpage'}})
     return p
 
 
@@ -271,7 +291,9 @@ def static_page(path):
 def finalize_static(doc, path, root=None):
     t, d, nodes = static_page(path)
     url = f'{SITE}/{path}/' if path else SITE + '/'
-    return finalize(doc, url=url, title=t, desc=d, nodes=nodes, root=root)
+    # للرئيسية نسخة إنجليزية: بدون هذا تُحذف وسوم hreflang عند تحديث الرأس (--static)
+    alts = {'ar': SITE + '/', 'en': SITE + '/en/'} if path == '' else None
+    return finalize(doc, url=url, title=t, desc=d, nodes=nodes, root=root, alternates=alts)
 
 
 # ───────────── خريطة الموقع وllms.txt ─────────────
@@ -319,6 +341,26 @@ def _order(url):
     return (sect, 0, key)
 
 
+# ما لا يغيّر محتوى الصفحة نفسها: بطاقات «اقرأ أيضًا» والتذييل وسنة الحقوق
+_VOLATILE = [r'<h2 class="sec">اقرأ أيضًا</h2>.*?(?=<footer)', r'<footer>.*?</footer>', r'© ?\d{4}']
+
+
+def _content_hash(s):
+    for pat in _VOLATILE:
+        s = re.sub(pat, '', s, flags=re.S)
+    return hashlib.sha1(s.encode()).hexdigest()[:16]
+
+
+def _legacy_hash(s):
+    return hashlib.sha1(re.sub(r'© ?\d{4}', '©', s).encode()).hexdigest()[:16]
+
+
+def _declared_modified(s, today):
+    """تاريخ التعديل المعلن في بيانات المقال (Article.dateModified) إن وُجد، ولا يتجاوز اليوم"""
+    m = re.search(r'"@type":"Article".*?"dateModified":"(\d{4}-\d{2}-\d{2})', s)
+    return min(m.group(1), today) if m else None
+
+
 def write_sitemap(root, today=None):
     root = pathlib.Path(root)
     today = today or dt.date.today().isoformat()
@@ -326,9 +368,12 @@ def write_sitemap(root, today=None):
     seen = json.loads(store.read_text(encoding='utf-8')) if store.exists() else {}
     rows, fresh = [], {}
     for url, f, s in sorted(pages(root), key=lambda r: _order(r[0])):
-        h = hashlib.sha1(re.sub(r'© ?\d{4}', '©', s).encode()).hexdigest()[:16]
+        h = _content_hash(s)
         old = seen.get(url)
-        if old and old[0] == h:
+        declared = _declared_modified(s, today)
+        if declared:
+            date = declared
+        elif old and old[0] in (h, _legacy_hash(s)):   # الصيغة القديمة للبصمة: لا نغيّر التاريخ لمجرد تغيّرها
             date = old[1]
         elif old:
             date = today

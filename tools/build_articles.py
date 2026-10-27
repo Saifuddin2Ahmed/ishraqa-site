@@ -23,8 +23,8 @@ SUPABASE_URL = 'https://jytbowsfvuzdnsmhmsly.supabase.co'
 PUBLISHABLE_KEY = 'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD'
 SITE = 'https://ishraqa.app'
 
-# المؤسس: كل صيغ اسمه وحساباته لمحركات البحث (بيانات منظّمة فقط، لا نص ظاهر)
-FOUNDER = {"@type": "Person", "@id": "https://ishraqa.app/#founder", "name": "سيف الدين أحمد عبدالقادر حامد", "alternateName": ["م. سيف الدين أحمد", "سيف الدين أحمد", "سيف الدين أحمد عبدالقادر", "Saifuddin Ahmed Abdelgadir Hamed", "Saifuddin Ahmed Abdelgadir", "Saifuddin Ahmed"], "jobTitle": "مطوّر منتجات تقنية · مؤسس أوتواكس للحلول الرقمية", "worksFor": {"@id": "https://otwox.com/#organization"}, "sameAs": ["https://www.linkedin.com/in/saifuddin2ahmed", "https://github.com/Saifuddin2Ahmed", "https://www.facebook.com/Saifuddin2Ahmed", "https://kwegatta.ai.studio/#/u/6X3HptD8tna8ehAkmIiEzB9QWuT2"]}
+# المؤسس: كيان واحد (https://saifuddin.dev/#person) بكل صيغ اسمه وحساباته، من seo.py (بيانات منظّمة فقط، لا نص ظاهر)
+FOUNDER = seo.founder(full=True)
 PLAY = 'https://play.google.com/store/apps/details?id=com.taeziz.ishraqa'
 MS_STORE = 'https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct'
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +46,23 @@ def fetch(path: str) -> list:
     )
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)
+
+
+RESIZE = True   # أوقفه إن تجاوز تحويل الصور حصة الخطة في Supabase
+_OBJ = f'{SUPABASE_URL}/storage/v1/object/public/'
+
+
+def sized(url: str, width: int) -> str:
+    """نسخة أخف من غلاف المقال بعرض محدد (يرسلها Supabase بصيغة WebP للمتصفحات التي تدعمها)"""
+    if not RESIZE or not (url or '').startswith(_OBJ):
+        return url
+    return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/', 1) + f'?width={width}&quality=72'
+
+
+def srcset(url: str, widths=(640, 1024, 1600)) -> str:
+    if not RESIZE or not (url or '').startswith(_OBJ):
+        return ''
+    return ', '.join(f'{esc(sized(url, w))} {w}w' for w in widths)
 
 
 def esc(s) -> str:
@@ -72,6 +89,7 @@ HEAD = """<!doctype html>
 <meta name="twitter:description" content="{desc}">
 <meta name="twitter:image" content="{image}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://jytbowsfvuzdnsmhmsly.supabase.co">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
 <style>{css}</style></head><body>
 <div class="top"><div class="wrap wide"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
@@ -264,7 +282,7 @@ def card(a: dict) -> str:
     q = ' '.join([a['title'], a.get('excerpt') or '', CATEGORIES.get(a['category'], '')])
     meta = ' · '.join(x for x in [author_of(a), minutes(a), a.get('publish_date') or ''] if x)
     return (f'<a class="card rv" href="/a/{esc(a["slug"])}/" data-cat="{esc(a["category"])}" data-q="{esc(q)}">'
-            f'<div class="ph"><img src="{esc(a.get("cover_url") or "/img/og.jpg")}" alt="{esc(a["title"])}" width="640" height="400" loading="lazy"></div>'
+            f'<div class="ph"><img src="{esc(sized(a.get("cover_url") or "/img/og.jpg", 640))}" alt="{esc(a["title"])}" width="640" height="400" loading="lazy" decoding="async"></div>'
             f'<div class="in">{pill(a["category"])}<b>{esc(a["title"])}</b>'
             f'<p>{esc(a.get("excerpt") or "")}</p><small>{esc(meta)}</small></div></a>')
 
@@ -323,7 +341,9 @@ def article_page(a: dict, related: list) -> str:
         HEAD.format(title=esc(title), desc=esc(desc), url=url, og_type='article', og_title=esc(a['title']),
                     image=esc(cover), open_app=app, css=CSS)
         + '<div class="progress" aria-hidden="true"></div>'
-        + f'<div class="hero-a"><figure><img src="{esc(cover)}" alt="{esc(a["title"])}" width="1600" height="800" fetchpriority="high"></figure></div>'
+        + (f'<div class="hero-a"><figure><img src="{esc(sized(cover, 1024))}"'
+           + (f' srcset="{srcset(cover)}" sizes="(max-width: 1180px) 100vw, 1140px"' if srcset(cover) else '')
+           + f' alt="{esc(a["title"])}" width="1600" height="800" fetchpriority="high"></figure></div>')
         + '<div class="wrap"><main><div class="head-a">'
         + pill(a['category'])
         + f'<h1>{esc(a["title"])}</h1>'
@@ -372,7 +392,7 @@ def index_page(items: list) -> str:
         meta = ' · '.join(x for x in [author_of(feat), minutes(feat), feat.get('publish_date') or ''] if x)
         feat_html = (
             f'<a class="feat rv" href="/a/{esc(feat["slug"])}/" data-cat="{esc(feat["category"])}" data-q="{esc(q)}">'
-            f'<div class="ph"><img src="{esc(feat.get("cover_url") or "/img/og.jpg")}" alt="{esc(feat["title"])}" width="900" height="560" fetchpriority="high"></div>'
+            f'<div class="ph"><img src="{esc(sized(feat.get("cover_url") or "/img/og.jpg", 1024))}" alt="{esc(feat["title"])}" width="900" height="560" fetchpriority="high"></div>'
             f'<div class="in"><span class="tag">☀ مقال اليوم</span>{pill(feat["category"])}<b>{esc(feat["title"])}</b>'
             f'<p>{esc(feat.get("excerpt") or "")}</p><small>{esc(meta)}</small></div></a>')
     page = (
