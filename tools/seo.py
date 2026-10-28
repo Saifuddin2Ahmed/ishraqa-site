@@ -26,7 +26,9 @@ APP_STORE = None  # رابط App Store بعد اعتماد المراجعة، م
 APP_NAME = 'إشراقة يومية'
 SUFFIX = ' · إشراقة يومية'
 OG_IMAGE = SITE + '/img/og.jpg'
-OG_ALT = 'شخص يقرأ كتابًا أمام شروق الشمس'
+OG_IMAGE_EN = SITE + '/img/og-en.jpg'  # نسخة إنجليزية من صورة المعاينة
+OG_ALT = 'شعار إشراقة يومية في توهّج الفجر: مكانك الذي كنت تبحث عنه'
+OG_ALT_EN = 'The Ishraqa Daily logo in a dawn glow: The place you were looking for'
 
 ORG_ID = 'https://otwox.com/#organization'
 WEBSITE_ID = SITE + '/#website'
@@ -48,7 +50,7 @@ APP_DESC = ('تطبيق مجاني بلا إعلانات للقراءة والم
 # أبعاد صور /img/ (احتياطًا حين لا تتوفر Pillow، كما في GitHub Actions)
 IMG_DIMS = {
     'icon-192.png': (192, 192), 'icon-512.png': (512, 512), 'developer.jpg': (240, 240),
-    'og.jpg': (1200, 630), 'og.png': (1200, 630),
+    'og.jpg': (1200, 630), 'og-en.jpg': (1200, 630), 'og.png': (1200, 630),
 }
 PHONE_SHOT = (540, 1134)
 
@@ -165,7 +167,9 @@ def finalize(doc, *, url, title, desc, nodes=(), lang='ar', image=OG_IMAGE, imag
     doc = re.sub(r'<title>.*?</title>', lambda _: f'<title>{esc(title)}</title>', doc, count=1, flags=re.S)
     locale = 'ar_AR' if lang == 'ar' else 'en_US'
     if image == OG_IMAGE:
-        image_alt = image_alt or (OG_ALT if lang == 'ar' else 'A person reading a book at sunrise')
+        image_alt = image_alt or (OG_ALT if lang == 'ar' else OG_ALT_EN)
+        if lang == 'en':
+            image = OG_IMAGE_EN
     m = [f'<meta name="description" content="{esc(desc)}">',
          '<meta name="robots" content="max-image-preview:large">',
          f'<link rel="canonical" href="{url}">']
@@ -182,7 +186,7 @@ def finalize(doc, *, url, title, desc, nodes=(), lang='ar', image=OG_IMAGE, imag
           f'<meta property="og:title" content="{esc(title)}">',
           f'<meta property="og:description" content="{esc(desc)}">',
           f'<meta property="og:image" content="{esc(image)}">']
-    if image == OG_IMAGE:
+    if image in (OG_IMAGE, OG_IMAGE_EN):
         m += ['<meta property="og:image:type" content="image/jpeg">',
               '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">']
     if image_alt:
@@ -263,8 +267,8 @@ def static_page(path):
     """إعدادات رأس الصفحات الثابتة: (العنوان، الوصف، العُقد)؛ path مثل '' أو 'about'"""
     url = f'{SITE}/{path}/' if path else SITE + '/'
     if path == '':
-        t = 'إشراقة يومية · بوتقةٌ للمعرفة وفضاءٌ للقراءة'
-        d = 'إشراقة — بوتقةٌ للمعرفة، وفضاءٌ للقراءة. تطبيق مجاني بلا إعلانات: حكمة مع معناها، ومقال يومي، وكتب تقرؤها مع نادي القرّاء.'
+        t = 'إشراقة يومية · مكانك الذي كنت تبحث عنه'
+        d = 'منحٌ وفرص تُنشر أولًا بأول، نوادٍ للمطوّرين والمبدعين، مقالات تفتح الذهن، وصوتك في «صدى». ابدأ من هنا.'
         return t, d, [webpage(url, t, d, crumbs=False, about={'@id': APP_ID}, mainEntity={'@id': APP_ID}),
                       website(), org(), app(), founder()]
     if path == 'about':
@@ -382,7 +386,7 @@ def write_sitemap(root, today=None):
         fresh[url] = [h, date]
         alts = re.findall(r'<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">', s)
         img = re.search(r'<meta property="og:image" content="([^"]+)"', s)
-        rows.append((url, date, alts, img.group(1) if img and img.group(1) != OG_IMAGE else None))
+        rows.append((url, date, alts, img.group(1) if img and img.group(1) not in (OG_IMAGE, OG_IMAGE_EN) else None))
     store.write_text(json.dumps(fresh, ensure_ascii=False, indent=0, sort_keys=True), encoding='utf-8')
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" '
