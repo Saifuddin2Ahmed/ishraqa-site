@@ -42,7 +42,7 @@ FOUNDER_SAME_AS = ['https://saifuddin.dev/', 'https://orcid.org/0009-0007-9719-7
                    'https://www.linkedin.com/in/saifuddin2ahmed', 'https://github.com/Saifuddin2Ahmed',
                    'https://www.facebook.com/Saifuddin2Ahmed', 'https://huggingface.co/saifuddin2ahmed',
                    'https://otwox.com/about-us/founder', DEV_PLAY,
-                   'https://kwegatta.ai.studio/#/u/6X3HptD8tna8ehAkmIiEzB9QWuT2']
+                   'https://matchpiece.ai.studio/u/6X3HptD8tna8ehAkmIiEzB9QWuT2']
 
 APP_DESC = ('تطبيق مجاني بلا إعلانات للقراءة والمعرفة: حكمة أو مثل مع معناه وقصته، ومقال قصير موثّق، '
             'وكتب تقرؤها مع نادي القرّاء جزءًا جزءًا، وتحديات قراءة بين المدن والجامعات والمدارس، ونوادي بناء للمطوّرين.')
