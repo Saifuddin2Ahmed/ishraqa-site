@@ -27,8 +27,8 @@ APP_NAME = 'إشراقة يومية'
 SUFFIX = ' · إشراقة يومية'
 OG_IMAGE = SITE + '/img/og.jpg'
 OG_IMAGE_EN = SITE + '/img/og-en.jpg'  # نسخة إنجليزية من صورة المعاينة
-OG_ALT = 'شعار إشراقة يومية في توهّج الفجر: مكانك الذي كنت تبحث عنه'
-OG_ALT_EN = 'The Ishraqa Daily logo in a dawn glow: The place you were looking for'
+OG_ALT = 'شروق الشمس على الأرض من الفضاء'
+OG_ALT_EN = 'Sunrise over Earth, seen from space'
 
 ORG_ID = 'https://otwox.com/#organization'
 WEBSITE_ID = SITE + '/#website'

@@ -2,15 +2,25 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+  try {
+    var q = new URLSearchParams(location.search);
+    var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).join(',');
+    if (q.get('lang') !== 'ar' && !/(^|,)ar\b/i.test(langs)) location.replace('/en/i/' + location.search + location.hash);
+  } catch (e) {}
+</script>
 <title>دعوة إلى إشراقة يومية</title>
 <meta name="description" content="منحٌ وفرص تُنشر أولًا بأول، نوادٍ للمطوّرين والمبدعين، مقالات تفتح الذهن، وصوتك في «صدى». ابدأ من هنا.">
 <meta name="theme-color" content="#2A1B5E">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="../img/icon-192.png">
+<link rel="alternate" hreflang="ar" href="https://ishraqa.app/i/">
+<link rel="alternate" hreflang="en" href="https://ishraqa.app/en/i/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="إشراقة يومية">
 <meta property="og:locale" content="ar_AR">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://ishraqa.app/i/">
 <meta property="og:title" content="لديك دعوة إلى مجتمع إشراقة 🌅">
 <meta property="og:description" content="منحٌ وفرص تُنشر أولًا بأول، نوادٍ للمطوّرين والمبدعين، مقالات تفتح الذهن، وصوتك في «صدى». ابدأ من هنا.">
@@ -19,52 +29,65 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="شعار إشراقة يومية في توهّج الفجر: مكانك الذي كنت تبحث عنه">
+<meta property="og:image:alt" content="شروق الشمس على الأرض من الفضاء">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ishraqa.app/img/og.jpg">
+<meta name="twitter:image:alt" content="شروق الشمس على الأرض من الفضاء">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--gold:#FFB547;--cream:#FFFBF8;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6}
-@media (prefers-color-scheme:dark){:root{--cream:#14101F;--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645}}
+:root{--night:#2A1B5E;--plum:#8E3A8C;--sun:#F07A4A;--gold:#FFB547;--cream:#FFFBF8;--ink:#2A1B5E;--muted:#5E5770;--card:#FFFFFF;--line:#EEE7F6;--chip:#F6EEF8;--ic:#8E3A8C}
+@media (prefers-color-scheme:dark){:root{--cream:#14101F;--ink:#F3EEFB;--muted:#B8B0C9;--card:#1E1830;--line:#2E2645;--chip:#2B2140;--ic:#FFB547}}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:Cairo,Tahoma,sans-serif;background:linear-gradient(160deg,var(--night) 0%,var(--plum) 60%,var(--sun) 100%);color:#fff;line-height:1.8;display:flex;align-items:center;justify-content:center;padding:24px 16px}
-.card{width:100%;max-width:440px;background:var(--card);color:var(--ink);border-radius:28px;padding:32px 24px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:Cairo,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:linear-gradient(160deg,var(--night) 0%,var(--plum) 60%,var(--sun) 100%);color:#fff;line-height:1.8;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{width:100%;max-width:440px;background:var(--card);color:var(--ink);border-radius:28px;padding:32px 24px 26px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.35);animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
 .logo{width:84px;height:84px;border-radius:22px;box-shadow:0 10px 26px rgba(42,27,94,.25)}
 .from{margin:18px 0 0;font-size:15px;color:var(--muted)}
 .from b{color:var(--ink)}
-h1{font-size:26px;line-height:1.5;margin:6px 0 10px;font-weight:800}
-.lead{color:var(--muted);margin:0 0 20px}
-ul{list-style:none;padding:0;margin:0 0 24px;text-align:right}
-li{padding:8px 0;border-bottom:1px solid var(--line);font-size:15px}
+h1{font-size:26px;line-height:1.5;margin:6px 0 8px;font-weight:800;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 20px;text-wrap:balance}
+ul{list-style:none;padding:0;margin:0 0 26px;text-align:start}
+li{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;font-weight:600;text-wrap:pretty;animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(180ms + var(--i)*80ms)}
 li:last-child{border:0}
-.play{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;text-decoration:none;padding:12px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-.play svg{width:28px;height:28px}
-.play small{display:block;font-size:11px;opacity:.8;line-height:1.2}
-.play b{display:block;font-size:19px;line-height:1.3}
-.free{margin-top:12px;font-size:13px;color:var(--muted)}
-.more{display:block;margin-top:18px;font-size:14px;color:var(--plum);font-weight:700;text-decoration:none}
+.ic{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--chip)}
+.ic svg{width:20px;height:20px;fill:none;stroke:var(--ic);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.stores{display:flex;justify-content:center;gap:16px;margin:0 0 4px}
+.stores a{display:grid;place-items:center;width:60px;height:60px;border-radius:18px;background:#000;box-shadow:0 10px 26px rgba(0,0,0,.22);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(560ms + var(--i)*70ms);-webkit-tap-highlight-color:transparent}
+@media (prefers-color-scheme:dark){.stores a{box-shadow:0 0 0 1px rgba(255,255,255,.14),0 10px 26px rgba(0,0,0,.35)}}
+.stores a[hidden]{display:none}
+.stores a:hover{transform:translateY(-3px)}
+.stores a:active{transform:scale(.94)}
+.stores a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.stores a.mine{box-shadow:0 0 0 3px var(--card),0 0 0 5px var(--sun),0 12px 28px rgba(240,122,74,.35)}
+.stores svg{width:28px;height:28px}
+.more{display:inline-block;margin-top:20px;font-size:14px;color:var(--plum);font-weight:700;text-decoration:none}
+@media (prefers-color-scheme:dark){.more{color:var(--gold)}}
+.toast{position:fixed;inset-inline:16px;bottom:24px;margin:auto;max-width:260px;background:#1b1530;color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,.35);opacity:0;transform:translateY(12px);transition:opacity .25s,transform .25s;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes pop{from{opacity:0;transform:scale(.7)}}
+@media (prefers-reduced-motion:reduce){.card,li,.stores a{animation:none}.stores a,.toast{transition:none}}
 </style>
 <link rel="stylesheet" href="/fx.css">
 </head>
 <body>
 <main class="card">
-  <img class="logo" src="../img/icon-192.png" alt="إشراقة يومية">
+  <img class="logo" src="../img/icon-192.png" alt="إشراقة يومية" width="84" height="84">
   <p class="from" id="from" hidden><b id="name"></b> يدعوك</p>
-  <h1>ابدأ يومك بإشراقة 🌅</h1>
-  <p class="lead">تطبيق هادئ للقراءة والمعرفة يرافقك كل صباح.</p>
+  <h1>مكانك الذي كنت تبحث عنه</h1>
+  <p class="lead">فرص ومعرفة ومجتمع يشبهك، أينما كنت.</p>
   <ul>
-    <li>🌅 حكمة تُلهمك كل صباح مع شرحها</li>
-    <li>📰 مقال يومي قصير يستحق القراءة</li>
-    <li>📚 مكتبة وهدف قراءة لطيف</li>
-    <li>🎓 منح دراسية حقيقية من مصادرها</li>
+    <li style="--i:0"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>منح وفرص تُنشر أولًا بأول</li>
+    <li style="--i:1"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>نوادٍ للمطوّرين والمبدعين</li>
+    <li style="--i:2"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>مقالات تفتح الذهن، بلغتين</li>
+    <li style="--i:3"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg></span>صوتك يُسمع في «صدى»</li>
   </ul>
-  <a class="play" id="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer=utm_source%3Dinvite%26utm_medium%3Dapp" aria-label="احصل عليه من Google Play">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
-    <span><small>احصل عليه من</small><b>Google Play</b></span>
-  </a>
-  <div class="free">مجاني بالكامل · بلا إعلانات</div>
+  <nav class="stores" aria-label="حمّل إشراقة">
+    <a id="play" style="--i:0" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&amp;referrer=utm_source%3Dinvite%26utm_medium%3Dapp" title="Google Play" aria-label="Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg></a>
+    <a id="apple" style="--i:1" href="/app/" title="App Store" aria-label="App Store"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></a>
+    <a id="ms" style="--i:2" href="https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct" target="_blank" rel="noopener" title="Microsoft Store" aria-label="Microsoft Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A84FF" d="M2 2h9.6v9.6H2zM12.4 2H22v9.6h-9.6zM2 12.4h9.6V22H2zM12.4 12.4H22V22h-9.6z"/></svg></a>
+  </nav>
   <a class="more" href="../">تعرّف على إشراقة ←</a>
 </main>
 <script>
@@ -76,12 +99,30 @@ li:last-child{border:0}
       if (n) {
         document.getElementById('name').textContent = n;
         document.getElementById('from').hidden = false;
-        document.title = n + ' يدعوك إلى إشراقة يومية';
+        document.title = '' + n + ' يدعوك إلى إشراقة يومية';
       }
     }
   } catch (e) {}
+  // المتجر المناسب لجهاز الزائر: إبرازه، ولا Google Play ولا Microsoft Store على آيفون/آيباد
+  (function () {
+    var ua = navigator.userAgent;
+    var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var apple = ios || /Macintosh/.test(ua);
+    var $ = function (id) { return document.getElementById(id); };
+    if (ios) { $('play').hidden = true; $('ms').hidden = true; }
+    var mine = apple ? 'apple' : /Android/.test(ua) ? 'play' : /Windows/.test(ua) ? 'ms' : '';
+    if (mine) $(mine).classList.add('mine');
+    // زر Apple يفتح على أجهزة Apple فقط؛ وعلى غيرها رسالة قصيرة
+    if (!apple) $('apple').addEventListener('click', function (e) {
+      e.preventDefault();
+      var t = document.querySelector('.toast');
+      if (!t) { t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
+      t.textContent = 'متاح لأجهزة Apple فقط';
+      requestAnimationFrame(function () { t.classList.add('on'); });
+      clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('on'); }, 2500);
+    });
+  })();
 </script>
-<script src="/platforms.js" defer></script>
 <script src="/fx.js" defer></script>
 </body>
 </html>
