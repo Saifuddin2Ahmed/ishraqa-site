@@ -1,4 +1,4 @@
-// إشراقة · بطاقات المشاركة العامة: ishraqa.app/u/<اسم المستخدم> و ishraqa.app/c/<رمز النادي>
+// إشراقة · بطاقات المشاركة العامة: ishraqa.app/u/<اسم المستخدم> و ishraqa.app/c/<رمز النادي> و ishraqa.app/o/<معرّف الفرصة>
 // وحدة صافية (بلا واجهات Worker أو Node) يستعملها العامل لبناء الصفحة على الخادم،
 // وتُنسخ كما هي إلى الموقع (share/render.js) لتبني الصفحة الاحتياطية نفسها في المتصفح.
 // كل نص من المستخدم يمر عبر esc() قبل دخوله HTML.
@@ -11,10 +11,13 @@ export const PACKAGE = 'com.taeziz.ishraqa';
 export const PLAY = `https://play.google.com/store/apps/details?id=${PACKAGE}`;
 export const WEB_APP = `${ORIGIN}/app/`;
 export const OG_DEFAULT = `${ORIGIN}/img/og.jpg`;
+export const OG_DEFAULT_EN = `${ORIGIN}/img/og-en.jpg`;
+export const ogDefault = (lang) => (lang === 'en' ? OG_DEFAULT_EN : OG_DEFAULT);
 const STORAGE_PREFIX = `${SB_URL}/storage/v1/object/public/`;
 
 const USER_RE = /^[a-z0-9_][a-z0-9_.]{1,18}[a-z0-9_]$/;
 const CODE_RE = /^[a-z0-9]{4,16}$/;
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 
 /** يهرّب النص لـ HTML (محتوى وسمات معًا) */
 export function esc(v) {
@@ -37,8 +40,16 @@ export function normCode(raw) {
   return CODE_RE.test(s) ? s : null;
 }
 
+/** معرّف فرصة (uuid) صالح بعد التطبيع، أو null */
+export function normId(raw) {
+  const s = String(raw ?? '').trim().toLowerCase();
+  return UUID_RE.test(s) ? s : null;
+}
+
+const NORM = { u: normUser, c: normCode, o: normId };
+
 /**
- * يقرأ المسار: /u/<اسم>، /c/<رمز>، و/en/… للإنجليزية، أو /u/?u=<اسم> و/c/?c=<رمز>.
+ * يقرأ المسار: /u/<اسم>، /c/<رمز>، /o/<معرّف>، و/en/… أو ?lang=en للإنجليزية، أو /u/?u=<اسم> و/c/?c=<رمز>.
  * يعيد {type, raw, key, lang} — key = null إن كان الشكل غير صالح (صفحة 404)،
  * أو null إن لم يكن المسار لنا (يمرّ إلى الموقع كما هو).
  */
@@ -47,12 +58,13 @@ export function parsePath(pathname, search = '') {
   let lang = null;
   if (seg[0] === 'en') { lang = 'en'; seg.shift(); }
   const type = seg[0];
-  if (type !== 'u' && type !== 'c') return null;
+  if (!Object.hasOwn(NORM, type)) return null;
   if (seg.length > 2) return null;
   const q = new URLSearchParams(search || '');
+  if (!lang && q.get('lang') === 'en') lang = 'en';
   const raw = seg[1] ?? q.get(type) ?? '';
   if (!raw) return null;
-  const key = type === 'u' ? normUser(raw) : normCode(raw);
+  const key = NORM[type](raw);
   return { type, raw, key, lang };
 }
 
@@ -76,8 +88,14 @@ export function pickLang(explicit, acceptLanguage, userAgent) {
 
 export const isAndroid = (ua) => /android/i.test(ua || '');
 
+/** روبوتات معاينة الروابط ومحركات البحث: تأخذ صفحة OG الكاملة */
+export const isPreviewBot = (ua) => BOT_RE.test(ua || '');
+
+const OPP_FIELDS = 'id,title,title_en,organization,type,deadline,deadline_expected,cover_url,fully_funded';
+
 /** يجلب البطاقة من Supabase: {status:'ok', card} | {status:'missing'} | {status:'error'} */
 export async function fetchCard(type, key, fetchImpl = fetch) {
+  if (type === 'o') return fetchOpportunity(key, fetchImpl);
   const fn = type === 'u' ? 'public_profile_card' : 'public_club_card';
   const body = type === 'u' ? { p_username: key } : { p_key: key };
   try {
@@ -100,7 +118,48 @@ export async function fetchCard(type, key, fetchImpl = fetch) {
   }
 }
 
+/**
+ * فرصة منشورة عبر REST بالمفتاح العام: سياسة RLS «read published opportunities» تسمح لـ anon
+ * بقراءة الصفوف المنشورة وحدها (الترحيل 004)، فلا حاجة إلى دالة جديدة.
+ */
+export async function fetchOpportunity(id, fetchImpl = fetch) {
+  const url = `${SB_URL}/rest/v1/opportunities?select=${OPP_FIELDS}&id=eq.${encodeURIComponent(id)}&status=eq.published&limit=1`;
+  try {
+    const r = await fetchImpl(url, {
+      method: 'GET',
+      headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Accept: 'application/json' },
+    });
+    if (!r.ok) return { status: 'error', code: r.status };
+    const rows = await r.json();
+    if (Array.isArray(rows) && rows[0] && typeof rows[0] === 'object') return { status: 'ok', card: rows[0] };
+    return { status: 'missing' };
+  } catch (_) {
+    return { status: 'error' };
+  }
+}
+
 // ───────────────────────── النصوص ─────────────────────────
+
+const MONTHS = {
+  ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+};
+
+/** تاريخ yyyy-mm-dd مقروء (بلا Intl، فالنتيجة واحدة في العامل وفي المتصفح) */
+export function fmtDate(iso, lang) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ''));
+  if (!m) return '';
+  const mo = MONTHS[lang][+m[2] - 1];
+  if (!mo) return '';
+  return lang === 'ar' ? `${+m[3]} ${mo} ${m[1]}` : `${mo} ${+m[3]}, ${m[1]}`;
+}
+
+const OPP_TYPES = {
+  ar: { scholarship: 'منحة دراسية', grant: 'تمويل ودعم', fellowship: 'زمالة', training: 'تدريب', job: 'وظيفة',
+    competition: 'مسابقة', internship: 'تدريب عملي', conference: 'مؤتمر' },
+  en: { scholarship: 'Scholarship', grant: 'Grant', fellowship: 'Fellowship', training: 'Training', job: 'Job',
+    competition: 'Competition', internship: 'Internship', conference: 'Conference' },
+};
 
 const LEVELS = {
   ar: { fajr: 'فجر', shuruq: 'شروق', duha: 'ضحى', zuhr: 'ظهيرة', nur: 'نور' },
@@ -127,14 +186,22 @@ export const T = {
     verified: 'حساب موثّق',
     other: 'English',
     members: membersAr,
+    // أسماء الأنواع كما في التطبيق (ckKind* في lib/l10n)، و«نادٍ» لأي نوع غير معروف
     kind: (k, lvl) =>
-      k === 'build' ? 'نادي مطوّرين' : k === 'language' ? `نادي لغة${lvl ? ` · ${lvl}` : ''}` : 'نادي قرّاء',
+      k === 'build' ? 'نادي مطوّرين' : k === 'language' ? `نادي لغة${lvl ? ` · ${lvl}` : ''}` : k === 'reading' ? 'نادي قراءة' : 'نادٍ',
     official: 'نادٍ رسمي',
     profileDesc: (name) => `تابِع ${name} على إشراقة يومية.`,
     clubDesc: (kind, name) => `${kind} على إشراقة يومية: «${name}». انضم إلينا.`,
     nfTitle: 'لم نجد هذه الصفحة',
     nfUser: 'ربما تغيّر اسم المستخدم، أو لم يعد الحساب متاحًا.',
     nfClub: 'ربما صار النادي خاصًا، أو تغيّر رابطه.',
+    nfOpp: 'ربما أُزيلت هذه الفرصة، أو تغيّر رابطها.',
+    oppType: (k) => OPP_TYPES.ar[k] || 'فرصة',
+    deadline: (d) => `آخر موعد: ${d}`,
+    deadlineExpected: (d) => `الموعد المتوقَّع: ${d}`,
+    closed: 'انتهى موعد التقديم',
+    fullyFunded: 'ممولة بالكامل',
+    oppDesc: 'فرصة على إشراقة يومية',
     home: 'إلى الصفحة الرئيسية',
   },
   en: {
@@ -149,13 +216,20 @@ export const T = {
     other: 'العربية',
     members: (n) => (!n || n < 1 ? '' : n === 1 ? '1 member' : `${n} members`),
     kind: (k, lvl) =>
-      k === 'build' ? 'Developers club' : k === 'language' ? `Language club${lvl ? ` · ${lvl}` : ''}` : 'Reading club',
+      k === 'build' ? 'Developer club' : k === 'language' ? `Language club${lvl ? ` · ${lvl}` : ''}` : k === 'reading' ? 'Reading club' : 'Club',
     official: 'Official club',
     profileDesc: (name) => `Follow ${name} on Ishraqa Daily.`,
     clubDesc: (kind, name) => `${kind} on Ishraqa Daily: “${name}”. Come join us.`,
     nfTitle: "We couldn't find this page",
     nfUser: 'The username may have changed, or the account is no longer available.',
     nfClub: 'The club may have become private, or its link changed.',
+    nfOpp: 'This opportunity may have been removed, or its link changed.',
+    oppType: (k) => OPP_TYPES.en[k] || 'Opportunity',
+    deadline: (d) => `Deadline: ${d}`,
+    deadlineExpected: (d) => `Expected deadline: ${d}`,
+    closed: 'Applications closed',
+    fullyFunded: 'Fully funded',
+    oppDesc: 'An opportunity on Ishraqa Daily',
     home: 'Back to the home page',
   },
 };
@@ -217,11 +291,11 @@ function playWithRef(ref) {
 }
 
 /** هيكل الصفحة الكامل (الرأس بمعاينات OG/Twitter، والجسم) */
-export function page({ lang, title, desc, image, imageIsDefault, canonical, alternates, robots, body }) {
+export function page({ lang, title, desc, image, imageIsDefault, large = false, canonical, alternates, robots, body }) {
   const t = T[lang];
   const dir = lang === 'ar' ? 'rtl' : 'ltr';
-  const img = image || OG_DEFAULT;
-  const card = imageIsDefault || !image ? 'summary_large_image' : 'summary';
+  const img = image || ogDefault(lang);
+  const card = large || imageIsDefault || !image ? 'summary_large_image' : 'summary';
   const alt = alternates
     ? `<link rel="alternate" hreflang="ar" href="${esc(alternates.ar)}">
 <link rel="alternate" hreflang="en" href="${esc(alternates.en)}">
@@ -247,7 +321,7 @@ ${alt}
 ${canonical ? `<meta property="og:url" content="${esc(canonical)}">` : ''}
 <meta property="og:image" content="${esc(img)}">
 <meta property="og:image:alt" content="${esc(title)}">
-${img === OG_DEFAULT ? '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">' : ''}
+${img === OG_DEFAULT || img === OG_DEFAULT_EN ? '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">' : ''}
 <meta name="twitter:card" content="${card}">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
@@ -352,13 +426,56 @@ ${actions(t, { android, appPath, playRef: `utm_source=club_share&utm_medium=web&
   });
 }
 
-/** صفحة «لم نجد» للملف أو النادي */
+/** نص الموعد: آخر موعد، أو المتوقَّع، أو «انتهى» إن مضى (today بصيغة yyyy-mm-dd للاختبار) */
+export function deadlineText(card, lang, today = new Date().toISOString().slice(0, 10)) {
+  const t = T[lang];
+  const d = fmtDate(card.deadline, lang);
+  if (!d) return '';
+  if (String(card.deadline).slice(0, 10) < today) return t.closed;
+  return card.deadline_expected ? t.deadlineExpected(d) : t.deadline(d);
+}
+
+/** صفحة الفرصة: العنوان بلغة الزائر (title_en للإنجليزية إن وُجد)، والجهة، والموعد، والغلاف */
+export function renderOpportunity(card, { lang = 'ar', android = false, today } = {}) {
+  const t = T[lang];
+  const id = normId(card.id) || '';
+  const name = clip((lang === 'en' && card.title_en) || card.title, 120) || t.oppType(card.type);
+  const org = clip(card.organization, 100);
+  const when = deadlineText(card, lang, today);
+  const img = safeImage(card.cover_url);
+  const title = `${name} · ${t.app}`;
+  const desc = clip([org, when, card.fully_funded ? t.fullyFunded : ''].filter(Boolean).join(' · '), 200) || t.oppDesc;
+  const otherLang = lang === 'ar' ? 'en' : 'ar';
+  const chips = [t.oppType(card.type), card.fully_funded ? t.fullyFunded : '', when].filter(Boolean);
+  const body = `<main class="card">
+<a class="lang" href="${esc(canonicalPath('o', id, otherLang))}" hreflang="${otherLang}">${esc(t.other)}</a>
+${img ? `<img class="cover" src="${esc(img)}" alt="" width="104" height="104">` : '<div class="cover" aria-hidden="true">☀</div>'}
+<h1><span>${esc(name)}</span></h1>
+${org ? `<p class="handle" dir="auto">${esc(org)}</p>` : ''}
+<ul class="chips">${chips.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+${actions(t, { android, appPath: `/o/${id}`, playRef: 'utm_source=opportunity_share&utm_medium=web' })}
+</main>`;
+  return page({
+    lang,
+    title,
+    desc,
+    image: img,
+    imageIsDefault: !img,
+    large: true,
+    canonical: ORIGIN + canonicalPath('o', id, lang),
+    alternates: { ar: ORIGIN + canonicalPath('o', id, 'ar'), en: ORIGIN + canonicalPath('o', id, 'en') },
+    robots: 'noindex, follow',
+    body,
+  });
+}
+
+/** صفحة «لم نجد» للملف أو النادي أو الفرصة */
 export function renderNotFound({ lang = 'ar', type = 'u' } = {}) {
   const t = T[lang];
   const body = `<main class="card">
 <div class="cover" aria-hidden="true">☀</div>
 <h1>${esc(t.nfTitle)}</h1>
-<p class="bio">${esc(type === 'c' ? t.nfClub : t.nfUser)}</p>
+<p class="bio">${esc(type === 'c' ? t.nfClub : type === 'o' ? t.nfOpp : t.nfUser)}</p>
 <a class="btn secondary" href="${ORIGIN}/">${esc(t.home)}</a>
 ${actions(t, { android: false, appPath: '/', playRef: 'utm_source=share_404&utm_medium=web' })}
 </main>`;
