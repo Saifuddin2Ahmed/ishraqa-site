@@ -18,9 +18,6 @@ Disallow: /
 User-agent: anthropic-ai
 Disallow: /
 
-User-agent: PerplexityBot
-Disallow: /
-
 User-agent: Bytespider
 Disallow: /
 
