@@ -41,7 +41,7 @@ FOUNDER_ALT = ['م. سيف الدين أحمد', 'سيف الدين أحمد', '
 FOUNDER_SAME_AS = ['https://saifuddin.dev/', 'https://orcid.org/0009-0007-9719-7258',
                    'https://www.linkedin.com/in/saifuddin2ahmed', 'https://github.com/Saifuddin2Ahmed',
                    'https://www.facebook.com/Saifuddin2Ahmed', 'https://huggingface.co/saifuddin2ahmed',
-                   'https://otwox.com/about-us/founder', DEV_PLAY,
+                   'https://otwox.com/about-us/founder', 'https://birtallab.org/about', DEV_PLAY,
                    'https://matchpiece.ai.studio/u/6X3HptD8tna8ehAkmIiEzB9QWuT2']
 
 APP_DESC = ('تطبيق مجاني بلا إعلانات للقراءة والمعرفة: حكمة أو مثل مع معناه وقصته، ومقال قصير موثّق، '
