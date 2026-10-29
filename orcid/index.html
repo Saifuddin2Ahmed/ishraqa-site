@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ORCID · إشراقة</title>
+<style>
+  :root { color-scheme: light dark; --bg: #fffaf3; --fg: #2b2118; --muted: #6b5d50; --accent: #c8702a; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17120e; --fg: #f5ede4; --muted: #b9a998; --accent: #f0a35e; } }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+    font: 17px/1.7 system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; }
+  main { min-height: 100%; display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box; text-align: center; }
+  svg { width: 56px; height: 56px; }
+  h1 { font-size: 20px; margin: 16px 0 20px; font-weight: 700; }
+  a.btn { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--accent); color: #fff;
+    text-decoration: none; font-weight: 600; }
+  a.alt { display: block; margin-top: 14px; color: var(--muted); font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <!-- أيقونة ORCID iD الرسمية كما هي: https://orcid.org/assets/vectors/orcid.logo.icon.svg -->
+    <svg viewBox="0 0 72 72" role="img" aria-label="ORCID iD">
+      <path d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"/>
+      <g transform="translate(18.868966, 12.910345)" fill="#FFFFFF">
+        <polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"/>
+        <path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"/>
+        <path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"/>
+      </g>
+    </svg>
+    <h1 id="msg"></h1>
+    <a class="btn" id="open" href="ishraqa://orcid"></a>
+    <a class="alt" id="web" href="/app/"></a>
+  </div>
+</main>
+<script>
+(function () {
+  var en = !/^ar\b/i.test(navigator.language || '');
+  var q = new URLSearchParams(location.search);
+  var st = q.get('status') || 'error';
+  if (!/^(ok|denied|expired|taken|exchange|config|error)$/.test(st)) st = 'error';
+  var T = {
+    ar: { ok: 'رُبط ORCID بملفك', denied: 'لم يُمنح الإذن في ORCID', expired: 'انتهت مهلة الربط، حاول مجددًا',
+          taken: 'هذا المعرّف مربوط بحساب آخر', error: 'تعذّر ربط ORCID، حاول لاحقًا',
+          open: 'العودة إلى إشراقة', web: 'فتح إشراقة على الويب' },
+    en: { ok: 'ORCID iD connected', denied: 'Permission was not granted on ORCID', expired: 'The link expired. Please try again',
+          taken: 'This ORCID iD is linked to another account', error: "Couldn't connect ORCID. Please try later",
+          open: 'Back to Ishraqa', web: 'Open Ishraqa on the web' }
+  };
+  var t = en ? T.en : T.ar;
+  if (en) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
+  document.getElementById('msg').textContent = t[st] || t.error;
+  var deep = 'ishraqa://orcid?status=' + encodeURIComponent(st);
+  var open = document.getElementById('open');
+  open.href = deep; open.textContent = t.open;
+  var web = document.getElementById('web');
+  web.textContent = t.web;
+  // على الجوال: نحاول فتح التطبيق مباشرة، والزر يبقى إن لم يُفتح
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    setTimeout(function () { location.href = deep; }, 300);
+  }
+})();
+</script>
+</body>
+</html>
