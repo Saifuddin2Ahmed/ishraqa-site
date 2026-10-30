@@ -55,6 +55,8 @@ li:last-child{border:0}
 .stores .gp img{width:162px}
 /* App Store badge: 42px tall, clear space = 1/4 of its height */
 .stores .as{margin:10px}.stores .as img{width:126px}
+/* Microsoft Store badge (official SVG, 161x44): 42px tall like App Store */
+.stores .ms{margin:10px}.stores .ms img{width:154px}
 .more{display:inline-block;margin-top:20px;font-size:14px;color:var(--plum);font-weight:700;text-decoration:none}
 @media (prefers-color-scheme:dark){.more{color:var(--gold)}}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}}
@@ -78,6 +80,7 @@ li:last-child{border:0}
   <nav class="stores" aria-label="Get Ishraqa">
     <a id="play" class="gp" style="--i:0" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&amp;referrer=utm_source%3Dinvite%26utm_medium%3Dapp" title="Google Play" aria-label="Google Play"><img src="/img/badges/google-play-en.png" alt="Get it on Google Play" width="162" height="63"></a>
     <a id="apple" class="as" style="--i:1" href="https://apps.apple.com/app/id6826877682" title="App Store" aria-label="App Store"><picture><source media="(prefers-color-scheme: dark)" srcset="/img/badges/app-store-en-white.svg"><img src="/img/badges/app-store-en-black.svg" alt="Download on the App Store" width="126" height="42"></picture></a>
+    <a id="ms" class="ms" style="--i:2" href="https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct" target="_blank" rel="noopener" title="Microsoft Store" aria-label="Microsoft Store"><img src="/img/badges/microsoft-store-en.svg" alt="Get it from Microsoft" width="154" height="42"></a>
   </nav>
   <a class="more" href="../">Discover Ishraqa →</a>
 </main>
