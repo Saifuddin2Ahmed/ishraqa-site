@@ -1,6 +1,6 @@
 # Terms of Use
 
-Last updated: October 2, 2026
+Last updated: October 29, 2026
 
 Welcome to **Ishraqa**. These terms govern your use of the app and its services; by using it, you agree to them.
 
@@ -32,6 +32,9 @@ The Ishraqa team reviews content and may reject, hide or remove it and suspend v
 - Library books are in the public domain or published with permission; each book's page shows its source and license.
 - Opportunities and scholarships come from official sources; always verify terms and deadlines on the official website before applying.
 - The app's design, logo and original texts belong to us and may not be used without permission.
+- You may not copy the app or any part of it, or reverse engineer, decompile, disassemble or attempt to extract its source code, by any means including AI tools, except to the extent the law expressly allows.
+- You may not collect Ishraqa's content or user data by automated means (scraping, crawling or bulk downloading), use the app, its content or its design to train or improve AI models, or republish it or build a competing service with it, without our written permission.
+- These limits do not affect your own content or books offered under open licenses, which follow their own license terms.
 
 ## 6. Optional support
 Financial support is **entirely voluntary**, processed by Google Play, and unlocks no extra features. Payments and refunds follow Google Play's policies.
@@ -50,3 +53,5 @@ We may update these terms and will notify you in the app of material changes. Co
 
 ## Who we are and how to reach us
 We are **OtwoX Digital Solutions**, the team that builds and runs Ishraqa. For any question about these terms, [contact us](https://ishraqa.app/en/contact/).
+
+© 2026 Saifuddin Ahmed. All rights reserved.

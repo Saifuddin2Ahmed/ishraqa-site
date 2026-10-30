@@ -22968,6 +22968,20 @@ Copyright 2021, the Dart project authors.  Please see the AUTHORS file
 for details. All rights reserved. Use of this source code is governed by a
 BSD-style license that can be found in the LICENSE file.
 --------------------------------------------------------------------------------
+ishraqa_app
+
+Copyright (c) 2026 Saifuddin Ahmed. All rights reserved.
+
+This repository and everything in it (source code, design, graphics, sounds,
+texts and data) is proprietary and confidential. No license is granted to use,
+copy, modify, distribute, reverse engineer, decompile, or use any part of it to
+train or improve AI models, without prior written permission from
+Saifuddin Ahmed (hello@ishraqa.app).
+
+Third-party packages, fonts and openly licensed content (for example public-domain
+or Creative Commons library books) remain under their own licenses.
+
+--------------------------------------------------------------------------------
 jni
 leak_tracker
 leak_tracker_flutter_testing
