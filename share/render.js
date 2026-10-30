@@ -9,7 +9,9 @@ export const SB_URL = 'https://jytbowsfvuzdnsmhmsly.supabase.co';
 export const SB_KEY = 'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD';
 export const PACKAGE = 'com.taeziz.ishraqa';
 export const PLAY = `https://play.google.com/store/apps/details?id=${PACKAGE}`;
-export const WEB_APP = `${ORIGIN}/app/`;
+// المتاجر الثلاثة: الطريق الوحيد إلى التطبيق (لا نسخة ويب للمستخدمين)
+export const APP_STORE = 'https://apps.apple.com/app/id6826877682';
+export const MICROSOFT_STORE = 'https://apps.microsoft.com/detail/9nr3bxwzrdxs';
 export const OG_DEFAULT = `${ORIGIN}/img/og.jpg`;
 export const OG_DEFAULT_EN = `${ORIGIN}/img/og-en.jpg`;
 export const ogDefault = (lang) => (lang === 'en' ? OG_DEFAULT_EN : OG_DEFAULT);
@@ -87,6 +89,15 @@ export function pickLang(explicit, acceptLanguage, userAgent) {
 }
 
 export const isAndroid = (ua) => /android/i.test(ua || '');
+
+/** نوع الجهاز من User-Agent: android | apple (آيفون وآيباد وماك) | windows | other */
+export function platformOf(ua) {
+  const s = ua || '';
+  if (/android/i.test(s)) return 'android';
+  if (/iPhone|iPad|iPod|Macintosh|Mac OS X/.test(s)) return 'apple';
+  if (/Windows NT/.test(s)) return 'windows';
+  return 'other';
+}
 
 /** روبوتات معاينة الروابط ومحركات البحث: تأخذ صفحة OG الكاملة */
 export const isPreviewBot = (ua) => BOT_RE.test(ua || '');
@@ -267,6 +278,7 @@ h1{font-size:26px;line-height:1.45;margin:0 0 2px;font-weight:800;display:flex;a
 .stats b{display:block;font-size:22px;font-weight:800;line-height:1.3}
 .stats span{font-size:13px;color:var(--muted)}
 .btn{display:block;text-decoration:none;font-weight:700;font-size:17px;border-radius:999px;padding:14px 20px;margin-top:10px;transition:transform .2s,box-shadow .2s}
+.get{margin:18px 0 0;font-weight:700}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(42,27,94,.25)}
 .primary{background:var(--night);color:#fff}
 @media (prefers-color-scheme:dark){.primary{background:linear-gradient(120deg,var(--plum),var(--sun))}}
@@ -338,14 +350,20 @@ ${body}
 </html>`;
 }
 
-function actions(t, { android, appPath, playRef, join }) {
+/** أزرار التطبيق: كل جهاز إلى صفحة متجره الرسمية مباشرة؛ وغير المعروف يرى المتاجر الثلاثة */
+function actions(t, { android, platform, appPath, playRef, join }) {
+  const p = platform || (android ? 'android' : 'other');
   const playUrl = playWithRef(playRef);
-  const primary = android
-    ? `<a class="btn primary" href="${esc(intentLink(appPath, playRef))}">${esc(join ? t.join : t.open)}</a>
-<a class="btn secondary" href="${esc(playUrl)}">${esc(t.get)}</a>`
-    // آيفون والحاسوب: الزر نفسه يقود بهدوء إلى النسخة المناسبة (بلا ذكر «المتصفح»)
-    : `<a class="btn primary" href="${esc(WEB_APP)}">${esc(t.get)}</a>`;
-  return primary;
+  if (p === 'android') {
+    return `<a class="btn primary" href="${esc(intentLink(appPath, playRef))}">${esc(join ? t.join : t.open)}</a>
+<a class="btn secondary" href="${esc(playUrl)}">${esc(t.get)}</a>`;
+  }
+  if (p === 'apple') return `<a class="btn primary" href="${esc(APP_STORE)}">${esc(t.get)}</a>`;
+  if (p === 'windows') return `<a class="btn primary" href="${esc(MICROSOFT_STORE)}">${esc(t.get)}</a>`;
+  return `<p class="get">${esc(t.get)}</p>
+<a class="btn secondary" href="${esc(playUrl)}">Google Play</a>
+<a class="btn secondary" href="${esc(APP_STORE)}">App Store</a>
+<a class="btn secondary" href="${esc(MICROSOFT_STORE)}">Microsoft Store</a>`;
 }
 
 function initial(name) {
@@ -354,7 +372,7 @@ function initial(name) {
 }
 
 /** صفحة الملف الشخصي */
-export function renderProfile(card, { lang = 'ar', android = false } = {}) {
+export function renderProfile(card, { lang = 'ar', android = false, platform } = {}) {
   const t = T[lang];
   const user = normUser(card.username) || '';
   const name = clip(card.display_name, 80) || `@${user}`;
@@ -376,7 +394,7 @@ ${img ? `<img class="avatar" src="${esc(img)}" alt="" width="112" height="112">`
 ${bio ? `<p class="bio">${esc(bio)}</p>` : ''}
 ${level || placeTxt ? `<ul class="chips">${level ? `<li>☀ ${esc(t.level)}: ${esc(level)}</li>` : ''}${placeTxt ? `<li>📍 ${esc(placeTxt)}</li>` : ''}</ul>` : ''}
 <div class="stats"><div><b>${num(card.followers)}</b><span>${esc(t.followers)}</span></div><div><b>${num(card.following)}</b><span>${esc(t.following)}</span></div></div>
-${actions(t, { android, appPath, playRef: 'utm_source=profile_share&utm_medium=web' })}
+${actions(t, { android, platform, appPath, playRef: 'utm_source=profile_share&utm_medium=web' })}
 </main>`;
   return page({
     lang,
@@ -392,7 +410,7 @@ ${actions(t, { android, appPath, playRef: 'utm_source=profile_share&utm_medium=w
 }
 
 /** صفحة النادي */
-export function renderClub(card, { lang = 'ar', android = false } = {}) {
+export function renderClub(card, { lang = 'ar', android = false, platform } = {}) {
   const t = T[lang];
   const code = normCode(card.code) || '';
   const name = clip(card.name, 80) || t.kind(card.kind);
@@ -411,7 +429,7 @@ ${img ? `<img class="cover" src="${esc(img)}" alt="" width="104" height="104">` 
 <h1><span>${esc(name)}</span></h1>
 <ul class="chips">${chips.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
 ${about ? `<p class="bio">${esc(about)}</p>` : ''}
-${actions(t, { android, appPath, playRef: `utm_source=club_share&utm_medium=web&club=${code}`, join: true })}
+${actions(t, { android, platform, appPath, playRef: `utm_source=club_share&utm_medium=web&club=${code}`, join: true })}
 </main>`;
   return page({
     lang,
@@ -436,7 +454,7 @@ export function deadlineText(card, lang, today = new Date().toISOString().slice(
 }
 
 /** صفحة الفرصة: العنوان بلغة الزائر (title_en للإنجليزية إن وُجد)، والجهة، والموعد، والغلاف */
-export function renderOpportunity(card, { lang = 'ar', android = false, today } = {}) {
+export function renderOpportunity(card, { lang = 'ar', android = false, platform, today } = {}) {
   const t = T[lang];
   const id = normId(card.id) || '';
   const name = clip((lang === 'en' && card.title_en) || card.title, 120) || t.oppType(card.type);
@@ -453,7 +471,7 @@ ${img ? `<img class="cover" src="${esc(img)}" alt="" width="104" height="104">` 
 <h1><span>${esc(name)}</span></h1>
 ${org ? `<p class="handle" dir="auto">${esc(org)}</p>` : ''}
 <ul class="chips">${chips.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
-${actions(t, { android, appPath: `/o/${id}`, playRef: 'utm_source=opportunity_share&utm_medium=web' })}
+${actions(t, { android, platform, appPath: `/o/${id}`, playRef: 'utm_source=opportunity_share&utm_medium=web' })}
 </main>`;
   return page({
     lang,
@@ -470,14 +488,14 @@ ${actions(t, { android, appPath: `/o/${id}`, playRef: 'utm_source=opportunity_sh
 }
 
 /** صفحة «لم نجد» للملف أو النادي أو الفرصة */
-export function renderNotFound({ lang = 'ar', type = 'u' } = {}) {
+export function renderNotFound({ lang = 'ar', type = 'u', platform = 'other' } = {}) {
   const t = T[lang];
   const body = `<main class="card">
 <div class="cover" aria-hidden="true">☀</div>
 <h1>${esc(t.nfTitle)}</h1>
 <p class="bio">${esc(type === 'c' ? t.nfClub : type === 'o' ? t.nfOpp : t.nfUser)}</p>
 <a class="btn secondary" href="${ORIGIN}/">${esc(t.home)}</a>
-${actions(t, { android: false, appPath: '/', playRef: 'utm_source=share_404&utm_medium=web' })}
+${actions(t, { platform, appPath: '/', playRef: 'utm_source=share_404&utm_medium=web' })}
 </main>`;
   return page({
     lang,

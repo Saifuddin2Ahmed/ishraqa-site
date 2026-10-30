@@ -133,7 +133,7 @@ var apple=/iPhone|iPad|iPod|Macintosh/.test(ua),android=/Android/.test(ua),win=/
 document.querySelectorAll('a[data-open]').forEach(function(a){
   if(android)return;
   if(win){a.href='https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct';a.target='_blank';a.rel='noopener';}
-  else if(apple){a.href='/app/';}
+  else if(apple){a.href='https://apps.apple.com/app/id6826877682';}
   else{a.href='https://play.google.com/store/apps/details?id=com.taeziz.ishraqa';}
 });
 var els=document.querySelectorAll('.rv');

@@ -186,7 +186,7 @@ background:color-mix(in srgb,var(--cream) 78%,transparent);backdrop-filter:satur
 .bar .nav-link{color:var(--ink)}.bar .nav-link:hover{background:var(--soft)}
 .bar .nav-cta{background:var(--grad);color:#fff}
 .bar.show{transform:none}
-/* شريط سفلي للهاتف: حمّل أو افتح في المتصفح */
+/* شريط سفلي للهاتف: حمّل إشراقة */
 .dock{position:fixed;z-index:60;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:none;gap:8px;padding:8px;border-radius:20px;
 background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);
 border:1px solid var(--line);box-shadow:0 18px 44px rgba(20,10,50,.25);transform:translateY(140%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
@@ -419,9 +419,9 @@ if(rm)frame(0);else kick();
 <script src="/live.js" defer></script>
 <script>
 (function(){var ua=navigator.userAgent;if(!(/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)))return;
-document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a){a.href='/app/';a.removeAttribute('target');
+document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a){a.href='https://apps.apple.com/app/id6826877682';a.removeAttribute('target');
 var b=a.querySelector('b'),sm=a.querySelector('small');if(b&&sm){sm.textContent='احصل عليه';b.textContent='على آيفون';var sv=a.querySelector('svg');if(sv)sv.style.display='none'}
-else if(a.classList.contains('nav-cta')||a.classList.contains('p1')){a.lastChild.textContent='افتح إشراقة'}});})();
+else if(a.classList.contains('nav-cta')||a.classList.contains('p1')){a.lastChild.textContent='حمّل إشراقة'}});})();
 </script>
 <script src="/platforms.js" defer></script>
 <script src="/fx.js" defer></script>

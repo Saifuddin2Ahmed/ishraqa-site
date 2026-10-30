@@ -32,7 +32,6 @@
     </svg>
     <h1 id="msg"></h1>
     <a class="btn" id="open" href="ishraqa://orcid"></a>
-    <a class="alt" id="web" href="/app/"></a>
   </div>
 </main>
 <script>
@@ -44,10 +43,10 @@
   var T = {
     ar: { ok: 'رُبط ORCID بملفك', denied: 'لم يُمنح الإذن في ORCID', expired: 'انتهت مهلة الربط، حاول مجددًا',
           taken: 'هذا المعرّف مربوط بحساب آخر', error: 'تعذّر ربط ORCID، حاول لاحقًا',
-          open: 'العودة إلى إشراقة', web: 'فتح إشراقة على الويب' },
+          open: 'العودة إلى إشراقة' },
     en: { ok: 'ORCID iD connected', denied: 'Permission was not granted on ORCID', expired: 'The link expired. Please try again',
           taken: 'This ORCID iD is linked to another account', error: "Couldn't connect ORCID. Please try later",
-          open: 'Back to Ishraqa', web: 'Open Ishraqa on the web' }
+          open: 'Back to Ishraqa' }
   };
   var t = en ? T.en : T.ar;
   if (en) { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; }
@@ -55,8 +54,6 @@
   var deep = 'ishraqa://orcid?status=' + encodeURIComponent(st);
   var open = document.getElementById('open');
   open.href = deep; open.textContent = t.open;
-  var web = document.getElementById('web');
-  web.textContent = t.web;
   // على الجوال: نحاول فتح التطبيق مباشرة، والزر يبقى إن لم يُفتح
   if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
     setTimeout(function () { location.href = deep; }, 300);

@@ -22,7 +22,8 @@ SITE = 'https://ishraqa.app'
 PLAY = 'https://play.google.com/store/apps/details?id=com.taeziz.ishraqa'
 DEV_PLAY = 'https://play.google.com/store/apps/dev?id=6759566582761793518'
 MS_STORE = 'https://apps.microsoft.com/detail/9nr3bxwzrdxs'
-APP_STORE = None  # رابط App Store بعد اعتماد المراجعة، مثل 'https://apps.apple.com/app/id0000000000'
+MS_STORE_DIRECT = 'https://apps.microsoft.com/detail/9NR3BXWZRDXS?mode=direct'  # روابط التحميل الظاهرة
+APP_STORE = 'https://apps.apple.com/app/id6826877682'
 APP_NAME = 'إشراقة يومية'
 SUFFIX = ' · إشراقة يومية'
 OG_IMAGE = SITE + '/img/og.jpg'
@@ -431,8 +432,10 @@ def write_llms(root):
     topics = sorted(p for p in found if p.startswith('/q/t/'))
     books = sorted(p for p in found if re.fullmatch(r'/k/[^/]+/', p))
     out = (f'# {APP_NAME}\n\n'
-           f'> {APP_NAME}: {APP_DESC} يعمل على أندرويد، ومتاح على Google Play.\n\n'
+           f'> {APP_NAME}: {APP_DESC} يعمل على أندرويد وآيفون وماك وويندوز، ومتاح على Google Play وApp Store وMicrosoft Store.\n\n'
            f'- التحميل: [{APP_NAME} على Google Play]({PLAY})\n'
+           f'- التحميل: [{APP_NAME} على App Store]({APP_STORE})\n'
+           f'- التحميل: [{APP_NAME} على Microsoft Store]({MS_STORE_DIRECT})\n'
            '- السعر: مجاني بالكامل، بلا إعلانات ولا بيع للبيانات\n'
            f'- المطوّر: [م. سيف الدين أحمد]({SITE}/about/)، مؤسس أوتواكس للحلول الرقمية\n'
            '- الناشر: [أوتواكس للحلول الرقمية](https://otwox.com)\n'

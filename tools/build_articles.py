@@ -197,7 +197,7 @@ var apple=/iPhone|iPad|iPod|Macintosh/.test(ua),android=/Android/.test(ua),win=/
 document.querySelectorAll('a[data-open]').forEach(function(a){
   if(android)return;
   if(win){a.href='__MS__';a.target='_blank';a.rel='noopener';}
-  else if(apple){a.href='/app/';}
+  else if(apple){a.href='https://apps.apple.com/app/id6826877682';}
   else{a.href='__PLAY__';}
 });
 var els=document.querySelectorAll('.rv');
@@ -354,7 +354,7 @@ def article_page(a: dict, related: list) -> str:
         + '<div class="cta rv"><h3>أكمل القراءة في إشراقة يومية</h3>'
         + '<p>المقال كاملًا مع خلاصته العملية، ومقال جديد كل يوم، ومكتبة ونوادٍ للقراءة.</p>'
         + f'<a class="btn main" data-open href="{app}">اقرأه كاملًا في التطبيق</a>'
-        + '<small>مجاني وبلا إعلانات · أندرويد وويندوز وآيفون وماك</small></div>'
+        + '<small>بلا إعلانات · أندرويد وويندوز وآيفون وماك</small></div>'
         + share_row(url, a['title'])
         + '</main></div>'
         + (f'<div class="wrap wide"><h2 class="sec">اقرأ أيضًا</h2><div class="grid">{more}</div></div>' if more else '')
