@@ -1,0 +1,5 @@
+[{
+  "packageFamilyName": "SaifuddinAhmedAbdelgadir.57557656C0688_gpb1zvydp52br",
+  "paths": ["/a/*", "/club*", "/event*", "/q/*", "/k/*", "/v/*", "/s/*", "/community*", "/u/*", "/c/*", "/o/*"],
+  "excludePaths": ["/app/*", "/.well-known/*"]
+}]
