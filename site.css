@@ -1,0 +1,41 @@
+/* إشراقة · طبقة موحّدة للصفحات الداخلية (عن إشراقة، النوادي، المطوّرين، التواصل، السياسات…).
+   تُحمَّل بعد أنماط الصفحة: توحّد الخط والإيقاع والتركيز والوضع الداكن مع الرئيسية، دون تغيير المحتوى. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+img,video,svg{max-width:100%}
+h1,h2,h3{text-wrap:balance;letter-spacing:-.2px}
+html[lang=en] h1,html[lang=en] h2{letter-spacing:-.6px}
+p,li{text-wrap:pretty}
+:focus-visible{outline:2px solid #F8D299;outline-offset:3px;border-radius:10px}
+::selection{background:rgba(245,158,81,.32)}
+a{text-underline-offset:.22em;text-decoration-thickness:1px}
+
+/* أزرار وروابط أهدأ في حركتها */
+.nav-link,.nav-cta,.tabs a,.lang,.play,button,.f,.card{transition:background-color .25s,color .25s,border-color .25s,box-shadow .3s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.play:hover{transform:translateY(-2px)}
+.nav-cta:hover,.lang:hover{background:rgba(255,255,255,.22)}
+
+/* الوضع الداكن بألوان الرئيسية نفسها (ليل بنفسجي عميق بدل الرمادي) */
+@media (prefers-color-scheme:dark){
+  :root{--cream:#100818;--bg:#100818;--soft:#1C1129;--card:#1C1129;--line:#30223F;--ink:#F7EFE6;--muted:#BCAFCB;color-scheme:dark}
+  body{background:#100818}
+  .bar{background:rgba(16,8,24,.86)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  input,select,textarea{background:rgba(255,255,255,.04)}
+  .msg.err{background:rgba(255,120,100,.12)!important;color:#FFB4A6!important}
+}
+
+/* شريط علوي زجاجي في صفحات السياسات */
+.bar{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+@supports (backdrop-filter:blur(1px)){.bar{background:color-mix(in srgb,var(--bg,#fff) 86%,transparent)}}
+
+/* إيقاع موحّد للعناوين الكبيرة في رأس الصفحات */
+header.hero h1,section.hero h1,.hero h1{font-weight:800;line-height:1.3}
+footer{font-size:14px}
+
+/* عرض الهاتف: هوامش 16px ولا تمرير أفقي */
+@media (max-width:520px){.wrap,.in,.layout{padding-inline:16px!important}}
+
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* زر الإرسال في الوضع الداكن بلون الشروق كما في صفحة الدعم */
+@media (prefers-color-scheme:dark){form button[type=submit]{background:linear-gradient(140deg,#F8D299,#F59E51);color:#1a0d24;box-shadow:0 14px 34px rgba(245,158,81,.22)}}
