@@ -219,7 +219,7 @@ chips.forEach(function(ch){ch.addEventListener('click',function(){cat=ch.dataset
 FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/a/">المقالات</a> ·
 <a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
 <a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
-<a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية<br><a href="https://otwox.com">تطوير أوتواكس للحلول الرقمية</a></div></footer>
+<a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية</div></footer>
 {js}</body></html>"""
 
 ICONS = {
