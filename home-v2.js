@@ -6,30 +6,27 @@
   var $ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
 
-  /* ١) فيديو الواجهة: الصورة الثابتة أولًا، ثم يتسلّل الفيديو حين يبدأ */
-  var hero = document.querySelector('.hero'), v = document.getElementById('hv'), tg = document.getElementById('hv-t');
+  /* ١) فيديو الواجهة: صامت، يعمل وحده، بلا أي أزرار تحكّم.
+     الصورة الثابتة تبقى ظاهرة، ولا يظهر الفيديو إلا حين يبدأ فعلًا؛ فإن منعه المتصفح
+     (وضع توفير الطاقة في iOS مثلًا) بقيت الصورة بهدوء دون أي علامة تشغيل. */
+  var hero = document.querySelector('.hero'), v = document.getElementById('hv');
   var sd = navigator.connection && navigator.connection.saveData;
+  if (v) { v.controls = false; v.removeAttribute('controls'); }
   if (hero && v && !rm && !sd) {
-    var want = true, vis = true, base = v.getAttribute('data-base');
+    var vis = true, base = v.getAttribute('data-base'), loaded = false;
     var sync = function () {
-      if (!v.src) return;
-      if (want && vis && !document.hidden) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      if (!loaded) return;
+      if (vis && !document.hidden) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
       else v.pause();
     };
     var start = function () {
-      var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches;
-      v.muted = true; v.defaultMuted = true; v.playsInline = true;
-      v.src = base + (portrait ? 'hero-m.mp4' : 'hero-1280.mp4');
+      var portrait = matchMedia('(max-aspect-ratio: 4/5)').matches, name = portrait ? 'hero-m' : 'hero-1280';
+      v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true;
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+      [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(function (t) {
+        var s = document.createElement('source'); s.src = base + name + '.' + t[0]; s.type = t[1]; v.appendChild(s); });
       v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
-      sync();
-      if (tg) {
-        tg.hidden = false;
-        tg.addEventListener('click', function () {
-          want = !want; tg.setAttribute('aria-pressed', String(!want));
-          tg.setAttribute('aria-label', want ? (en ? 'Pause background video' : 'إيقاف الفيديو') : (en ? 'Play background video' : 'تشغيل الفيديو'));
-          sync();
-        });
-      }
+      loaded = true; v.load(); sync();
     };
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; sync(); }).observe(hero);
     document.addEventListener('visibilitychange', sync);
