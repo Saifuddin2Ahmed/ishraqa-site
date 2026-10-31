@@ -2,22 +2,74 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["ZZ3FR8MAK8.com.taeziz.ishraqa"],
+        "appIDs": [
+          "ZZ3FR8MAK8.com.taeziz.ishraqa"
+        ],
         "components": [
-          { "/": "/a/*", "comment": "articles" },
-          { "/": "/club*", "comment": "club invites (/club/<code> and /club?c=)" },
-          { "/": "/event*", "comment": "events" },
-          { "/": "/q/*", "comment": "single quote share links" },
-          { "/": "/k/*", "comment": "library books" },
-          { "/": "/v/*", "comment": "voice posts (Echo)" },
-          { "/": "/s/*", "comment": "space invites" },
-          { "/": "/community*", "comment": "communities" },
-          { "/": "/u/*", "comment": "public profiles (@username)" },
-          { "/": "/c/*", "comment": "community share pages" },
-          { "/": "/en/u/*", "comment": "public profiles, English" },
-          { "/": "/en/c/*", "comment": "community share pages, English" },
-          { "/": "/o/*", "comment": "opportunities" },
-          { "/": "/en/o/*", "comment": "opportunities, English" }
+          {
+            "/": "/support*",
+            "comment": "support page"
+          },
+          {
+            "/": "/en/support*",
+            "comment": "support page (en)"
+          },
+          {
+            "/": "/a/*",
+            "comment": "articles"
+          },
+          {
+            "/": "/club*",
+            "comment": "club invites (/club/<code> and /club?c=)"
+          },
+          {
+            "/": "/event*",
+            "comment": "events"
+          },
+          {
+            "/": "/q/*",
+            "comment": "single quote share links"
+          },
+          {
+            "/": "/k/*",
+            "comment": "library books"
+          },
+          {
+            "/": "/v/*",
+            "comment": "voice posts (Echo)"
+          },
+          {
+            "/": "/s/*",
+            "comment": "space invites"
+          },
+          {
+            "/": "/community*",
+            "comment": "communities"
+          },
+          {
+            "/": "/u/*",
+            "comment": "public profiles (@username)"
+          },
+          {
+            "/": "/c/*",
+            "comment": "community share pages"
+          },
+          {
+            "/": "/en/u/*",
+            "comment": "public profiles, English"
+          },
+          {
+            "/": "/en/c/*",
+            "comment": "community share pages, English"
+          },
+          {
+            "/": "/o/*",
+            "comment": "opportunities"
+          },
+          {
+            "/": "/en/o/*",
+            "comment": "opportunities, English"
+          }
         ]
       }
     ]
