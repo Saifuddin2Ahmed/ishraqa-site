@@ -6,7 +6,7 @@
   var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   var $ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
-  var skip = '.kc, .kh, .kd, header, nav, footer, .top, .bar, .hero, .hero-a, .hero-i';
+  var skip = '.kc, .kh, .kd, .sv, header, nav, footer, .top, .bar, .hero, .hero-a, .hero-i';
   var io = ('IntersectionObserver' in window) && !rm ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('fx-in'); io.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -10% 0px' }) : null;
