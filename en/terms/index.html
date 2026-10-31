@@ -81,7 +81,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 textarea{min-height:180px;resize:vertical}
 button{font:inherit;font-weight:700;font-size:17px;color:#fff;background:var(--night);border:0;border-radius:999px;padding:13px 34px;cursor:pointer;justify-self:start}
 button:disabled{opacity:.6;cursor:wait}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.hp{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .msg{border-radius:14px;padding:12px 16px;display:none}
 .msg.err{display:block;background:#FDECEC;color:#8A1C1C}
 .done{display:none;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:28px}
@@ -114,6 +114,7 @@ footer .credit{line-height:1.9}
 }
 </style>
 <style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/fx.css">
+<link rel="stylesheet" href="/site.css">
 </head>
 <body>
 <header class="bar"><div class="in">
@@ -121,7 +122,7 @@ footer .credit{line-height:1.9}
 <nav class="tabs" aria-label="Policies & help"><a href="../../en/privacy/">Privacy Policy</a><a href="../../en/terms/" aria-current="page">Terms of Use</a><a href="../../en/delete-account/">Delete account</a><a href="../../en/contact/">Contact us</a></nav>
 <a class="lang" href="../../terms/" hreflang="ar" lang="ar">العربية</a>
 </div></header>
-<section class="hero"><div class="in"><small>Policies & help</small><h1>Terms of Use</h1><p>Last updated: October 29, 2026</p></div></section>
+<section class="hero"><div class="in"><h1>Terms of Use</h1><p>Last updated: October 29, 2026</p></div></section>
 <div class="layout">
 <aside class="toc"><h4>On this page</h4><ol><li><a href="#s1">1. The service</a></li><li><a href="#s2">2. Your account</a></li><li><a href="#s3">3. Your content</a></li><li><a href="#s4">4. Community guidelines</a></li><li><a href="#s5">5. Ishraqa content</a></li><li><a href="#s6">6. Optional support</a></li><li><a href="#s7">7. Disclaimer</a></li><li><a href="#s8">8. Ending use</a></li><li><a href="#s9">9. Privacy</a></li><li><a href="#s10">10. Changes</a></li><li><a href="#s11">Who we are and how to reach us</a></li></ol></aside>
 <main class="doc">

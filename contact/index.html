@@ -81,7 +81,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 textarea{min-height:180px;resize:vertical}
 button{font:inherit;font-weight:700;font-size:17px;color:#fff;background:var(--night);border:0;border-radius:999px;padding:13px 34px;cursor:pointer;justify-self:start}
 button:disabled{opacity:.6;cursor:wait}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.hp{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .msg{border-radius:14px;padding:12px 16px;display:none}
 .msg.err{display:block;background:#FDECEC;color:#8A1C1C}
 .done{display:none;background:var(--soft);border:1px solid var(--line);border-radius:20px;padding:28px}
@@ -114,6 +114,7 @@ footer .credit{line-height:1.9}
 }
 </style>
 <style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/fx.css">
+<link rel="stylesheet" href="/site.css">
 </head>
 <body>
 <header class="bar"><div class="in">
@@ -121,7 +122,7 @@ footer .credit{line-height:1.9}
 <nav class="tabs" aria-label="السياسات والمساعدة"><a href="../privacy/">سياسة الخصوصية</a><a href="../terms/">شروط الاستخدام</a><a href="../delete-account/">حذف الحساب</a><a href="../contact/" aria-current="page">تواصل معنا</a></nav>
 <a class="lang" href="../en/contact/" hreflang="en" lang="en">English</a>
 </div></header>
-<section class="hero"><div class="in"><small>السياسات والمساعدة</small><h1>تواصل معنا</h1></div></section>
+<section class="hero"><div class="in"><h1>تواصل معنا</h1></div></section>
 <div class="layout">
 <aside></aside>
 <main class="doc">
@@ -136,7 +137,7 @@ footer .credit{line-height:1.9}
 <button type="submit" id="cb">إرسال</button>
 <p class="note">نستخدم بياناتك للرد على رسالتك فقط. اقرأ <a href="../privacy/">سياسة الخصوصية</a>.</p>
 </form>
-<div class="done" id="cd" role="status"><h2>وصلتنا رسالتك ✓</h2><p>شكرًا لتواصلك. سنرد على بريدك قريبًا.</p></div>
+<div class="done" id="cd" role="status"><h2>وصلتنا رسالتك ✓</h2><p>شكرًا لتواصلك. سنرد على بريدك في أقرب وقت.</p></div>
 <script>
 (function(){
   var f=document.getElementById('cf'),b=document.getElementById('cb'),m=document.getElementById('cm');

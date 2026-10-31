@@ -36,6 +36,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="../media/hero/hero-1280.webp" type="image/webp" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" as="image" href="../media/hero/mac-en-560.webp" type="image/webp" imagesrcset="../media/hero/mac-en-560.webp 560w, ../media/hero/mac-en-895.webp 891w" imagesizes="(max-width:820px) 92vw, 50vw">
 <link rel="preload" as="image" href="../media/hero/hero-m.webp" type="image/webp" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="../fx.css">
@@ -50,17 +51,19 @@
     <source srcset="../media/hero/hero-1280.webp" type="image/webp">
     <img src="../media/hero/hero-1280.jpg" width="1280" height="720" alt="" fetchpriority="high">
   </picture>
-  <video id="hv" data-base="../media/hero/" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
+  <video id="hv" class="hero-video" data-base="../media/hero/" muted autoplay loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="top"><div class="wrap"><nav aria-label="Main">
     <a class="brand" href="./"><img width="192" height="192" src="../img/icon-192.png" alt=""><span class="vh">Ishraqa Daily</span></a>
     <div class="nav-r"><a class="nav-link" href="/about/" hreflang="ar">About</a><a class="nav-link dev" href="/developers/" hreflang="ar">Developers</a><a class="nav-link lang" href="/" hreflang="ar" lang="ar">العربية</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">Get the app</a></div>
   </nav></div></div>
-  <div class="hero-in"><div class="wrap">
+  <div class="hero-in"><div class="wrap hero-grid">
+    <div class="hero-copy">
     <h1>Ishraqa Daily</h1>
     <div class="stores"><a class="st" data-st="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="Ishraqa Daily on Google Play" title="Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg></a><a class="st" data-st="as" href="https://apps.apple.com/app/id6826877682" aria-label="Ishraqa Daily on the App Store" title="App Store"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></a><a class="st" data-st="ms" href="https://apps.microsoft.com/detail/9nr3bxwzrdxs" target="_blank" rel="noopener" aria-label="Ishraqa Daily on Microsoft Store" title="Microsoft Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.6v9.6H2z"/><path fill="#7FBA00" d="M12.4 2H22v9.6h-9.6z"/><path fill="#00A4EF" d="M2 12.4h9.6V22H2z"/><path fill="#FFB900" d="M12.4 12.4H22V22h-9.6z"/></svg></a></div>
+    </div>
+    <figure class="hero-mac"><img src="../media/hero/mac-en-560.webp" srcset="../media/hero/mac-en-560.webp 560w, ../media/hero/mac-en-895.webp 891w" sizes="(max-width:820px) 92vw, 50vw" width="891" height="532" alt="A laptop showing the Ishraqa Daily library" decoding="async" fetchpriority="high"></figure>
   </div></div>
-  <button class="hv-t" id="hv-t" type="button" aria-pressed="false" aria-label="Pause background video" hidden><svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M3 1.5v11l9.5-5.5z"/></svg></button>
   <span class="cue" aria-hidden="true"></span>
 </header>
 
