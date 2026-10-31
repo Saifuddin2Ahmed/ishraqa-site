@@ -1,7 +1,7 @@
 {
 "https://ishraqa.app/": [
-"8e875f9659a855b6",
-"2026-10-30"
+"c6d31f604869d23d",
+"2026-10-31"
 ],
 "https://ishraqa.app/a/": [
 "55b0ef44fcfba46c",
@@ -152,48 +152,52 @@
 "2026-10-30"
 ],
 "https://ishraqa.app/about/": [
-"0f4c4976bb5ce3a0",
-"2026-10-29"
+"fd1f08e1200c6d0d",
+"2026-10-31"
 ],
 "https://ishraqa.app/child-safety/": [
-"9946064c7281786b",
-"2026-10-28"
+"51f938c982fedcd9",
+"2026-10-31"
 ],
 "https://ishraqa.app/contact/": [
-"26bc77d4a629fc0c",
-"2026-10-28"
+"9ffd4167d25e647c",
+"2026-10-31"
 ],
 "https://ishraqa.app/delete-account/": [
-"0c2c9cf7e7ff6fae",
-"2026-10-28"
+"21af864b3574a82c",
+"2026-10-31"
 ],
 "https://ishraqa.app/developers/": [
-"11b5114d779035d9",
-"2026-10-28"
+"9f2e810e930a660c",
+"2026-10-31"
 ],
 "https://ishraqa.app/en/": [
-"d9b34c91ba9964fd",
-"2026-10-30"
+"2fda1be4a7c7291f",
+"2026-10-31"
 ],
 "https://ishraqa.app/en/child-safety/": [
-"9b705b011ec98ead",
-"2026-10-28"
+"13713c3724639535",
+"2026-10-31"
 ],
 "https://ishraqa.app/en/contact/": [
-"f076c88a7ac91cd7",
-"2026-10-28"
+"683dfadb6e90679d",
+"2026-10-31"
 ],
 "https://ishraqa.app/en/delete-account/": [
-"13488008f3f2a20c",
-"2026-10-28"
+"e6a7ba439d355292",
+"2026-10-31"
 ],
 "https://ishraqa.app/en/privacy/": [
-"7b2f848fc312ba75",
-"2026-10-28"
+"4aa1396e34ee8555",
+"2026-10-31"
+],
+"https://ishraqa.app/en/support/": [
+"232ca782e119cae8",
+"2026-10-31"
 ],
 "https://ishraqa.app/en/terms/": [
-"10f358fa0dc192f1",
-"2026-10-29"
+"154af7d9921c0138",
+"2026-10-31"
 ],
 "https://ishraqa.app/k/": [
 "484472986e70c6f4",
@@ -220,15 +224,19 @@
 "2026-10-27"
 ],
 "https://ishraqa.app/privacy/": [
-"78fa7000d3f0d890",
-"2026-10-28"
+"bd6d37bca6e43edb",
+"2026-10-31"
+],
+"https://ishraqa.app/support/": [
+"8c6798e1d4f5ccd1",
+"2026-10-31"
 ],
 "https://ishraqa.app/terms/": [
-"78e1805fc7779555",
-"2026-10-29"
+"de7f17184cf44768",
+"2026-10-31"
 ],
 "https://ishraqa.app/wallpapers/": [
-"0bf9f950ffb92b84",
-"2026-10-30"
+"a09ac5f13d817fa7",
+"2026-10-31"
 ]
 }
