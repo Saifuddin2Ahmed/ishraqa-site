@@ -216,7 +216,7 @@ chips.forEach(function(ch){ch.addEventListener('click',function(){cat=ch.dataset
 })();
 </script>"""
 
-FOOT = """<footer><nav><a href="/about/">عن إشراقة</a> · <a href="/a/">المقالات</a> ·
+FOOT = """<footer><nav><a href="/about/">عن التطبيق</a> · <a href="/a/">المقالات</a> ·
 <a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
 <a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
 <a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية</div></footer>

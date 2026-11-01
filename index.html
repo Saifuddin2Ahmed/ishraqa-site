@@ -10,6 +10,7 @@
 <link rel="alternate" hreflang="ar" href="https://ishraqa.app/">
 <link rel="alternate" hreflang="en" href="https://ishraqa.app/en/">
 <link rel="alternate" hreflang="x-default" href="https://ishraqa.app/">
+<script src="/lang.js?v=2"></script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="إشراقة يومية">
 <meta property="og:locale" content="ar_AR">
@@ -40,7 +41,7 @@
 <link rel="preload" as="image" href="media/hero/hero-m.webp" type="image/webp" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="fx.css?v=20261101">
-<link rel="stylesheet" href="home-v2.css?v=20261101f">
+<link rel="stylesheet" href="home-v2.css?v=20261101g">
 </head>
 <body>
 <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
@@ -54,8 +55,8 @@
   <video id="hv" class="hero-video" data-base="media/hero/" muted autoplay loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="top"><div class="wrap"><nav aria-label="الرئيسية">
-    <a class="brand" href="./"><img width="192" height="192" src="img/icon-192.png" alt=""><span class="vh">إشراقة يومية</span></a>
-    <div class="nav-r"><a class="nav-link" href="/about/">عن إشراقة</a><a class="nav-link dev" href="/developers/">للمطوّرين</a><a class="nav-link lang" href="/en/" hreflang="en" lang="en">English</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
+    <a class="brand" href="./"><img width="192" height="192" src="img/icon-192.png" alt=""><span class="brand-n">إشراقة يومية</span></a>
+    <div class="nav-r"><a class="nav-link" href="/about/">عن التطبيق</a><a class="nav-link dev" href="/developers/">للمطوّرين</a><a class="nav-link lang" href="/en/" hreflang="en" lang="en">English</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
   </nav></div></div>
   <div class="hero-in"><div class="wrap hero-grid">
     <div class="hero-copy">
@@ -117,7 +118,7 @@
 
 <footer>
   <div class="wrap row">
-    <nav class="links"><a href="/about/">عن إشراقة</a>
+    <nav class="links"><a href="/about/">عن التطبيق</a>
       <a href="/developers/">للمطوّرين</a>
       <a href="/wallpapers/">خلفيات إشراقة</a>
       <a href="/privacy/">سياسة الخصوصية</a>
@@ -131,6 +132,11 @@
 </footer>
 <script src="home-v2.js" defer></script>
 <script src="fx.js" defer></script>
+<<<<<<< HEAD
 <script id="hero-ph-rot">(function(){var p=document.querySelector(".hero-ph");if(!p||matchMedia("(prefers-reduced-motion: reduce)").matches)return;var a=p.querySelectorAll("img"),i=0;if(a.length<2)return;setInterval(function(){if(document.hidden)return;var n=(i+1)%a.length;if(!a[n].complete||!a[n].naturalWidth)return;for(var k=0;k<a.length;k++)a[k].classList.remove("was");a[i].classList.remove("on");a[i].classList.add("was");i=n;a[i].classList.add("on")},3800)})();</script>
+=======
+<script id="hero-ph-rot">(function(){var p=document.querySelector(".hero-ph");if(!p||matchMedia("(prefers-reduced-motion: reduce)").matches)return;var a=p.querySelectorAll("img"),i=0;if(a.length<2)return;setInterval(function(){if(document.hidden)return;a[i].classList.remove("on");i=(i+1)%a.length;a[i].classList.add("on")},3800)})();</script>
+<script src="/promo.js?v=2" defer></script>
+>>>>>>> site-cachebust
 </body>
 </html>
