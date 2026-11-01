@@ -94,7 +94,7 @@ HEAD = """<!doctype html>
 <style>{css}</style></head><body>
 <div class="top"><div class="wrap wide"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
 <nav class="tnav"><a href="/a/">المقالات</a><a href="/k/">المكتبة</a>
-<a class="btn light" data-open href="{open_app}">افتح في التطبيق</a></nav></div></div>
+<a class="btn light" data-open href="{open_app}">حمّل التطبيق</a></nav></div></div>
 """
 
 CSS = """
@@ -401,7 +401,6 @@ def index_page(items: list) -> str:
                     image=f'{SITE}/img/og.jpg', open_app=PLAY, css=CSS)
         + '<header class="hero-i"><video class="hero-v" autoplay muted loop playsinline preload="metadata" poster="/media/articles/hero.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback><source src="/media/articles/hero.mp4" type="video/mp4"><source src="/media/articles/hero.webm" type="video/webm"></video><div class="wrap wide"><h1>مقالات إشراقة</h1>'
         + '<p>مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.</p>'
-        + f'<div class="stats"><div><b>{len(items)}</b>مقالًا</div><div><b>{len(used)}</b>تصنيفات</div><div><b>مجانًا</b>بلا إعلانات</div></div>'
         + f'<label class="search">{SEARCH_ICON}<input type="search" placeholder="ابحث في المقالات…" aria-label="ابحث في المقالات"></label>'
         + '</div></header>'
         + f'<div class="wrap wide"><main><div class="chips" role="group" aria-label="التصنيفات">{chips}</div>'
