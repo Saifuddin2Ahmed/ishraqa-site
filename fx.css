@@ -36,3 +36,8 @@ dialog.fx-get[open]{animation:fxgin .4s cubic-bezier(.2,.8,.2,1)}
 .fx-get .msg.on{opacity:1}
 .fx-get .x{position:absolute;top:14px;inset-inline-end:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(127,127,127,.15);color:inherit;font-size:20px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){dialog.fx-get[open]{animation:none}}
+/* سطر المطوّر فوق سطر الحقوق في تذييل كل الصفحات */
+footer .credit{line-height:1.75}footer .credit .by{display:inline-block}footer .credit span{display:block}
+footer .credit .by{color:inherit;text-decoration:none;font-weight:500;letter-spacing:.01em}
+footer .credit .by:hover{color:var(--ink,inherit);text-decoration:underline;text-underline-offset:3px}
+footer .credit span{opacity:.85}
