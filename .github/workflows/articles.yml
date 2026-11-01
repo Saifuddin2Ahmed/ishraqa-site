@@ -27,7 +27,11 @@ jobs:
           git config user.name "ishraqa-bot"
           git config user.email "actions@users.noreply.github.com"
           git add -A a sitemap.xml llms.txt tools/.lastmod.json
-          git diff --cached --quiet || (git commit -m "Daily articles: $(date +%F)" && git push)
+          # بعد دفعة يدوية: ننتظر حتى ينتهي نشر GitHub Pages الجاري، وإلا تتصادم عمليتا النشر وتفشلان معًا
+          if ! git diff --cached --quiet; then
+            [ "${{ github.event_name }}" = "push" ] && sleep 90
+            git commit -m "Daily articles: $(date +%F)" && git push
+          fi
       # IndexNow بعد النشر لا قبله: ينتظر حتى تُنشر خريطة الموقع الجديدة على ishraqa.app
       - run: python tools/indexnow.py --wait
       - name: Save IndexNow state
