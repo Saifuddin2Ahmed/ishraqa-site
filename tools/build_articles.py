@@ -414,6 +414,37 @@ def index_page(items: list) -> str:
     return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes)
 
 
+def home_latest(items: list, n: int = 6) -> None:
+    """الرئيسية: أحدث المقالات (روابط يقرؤها محرك البحث ويصل منها إلى كل مقال جديد)، تُحدَّث مع كل بناء"""
+    home = ROOT / 'index.html'
+    if not home.exists():
+        return
+    cards = ''.join(
+        f'<a class="hl-c" href="/a/{esc(a["slug"])}/"><img src="{esc(sized(a.get("cover_url") or "/img/og.jpg", 640))}" alt="" loading="lazy" decoding="async" width="640" height="360">'
+        f'<span class="hl-k">{esc(CATEGORIES.get(a["category"], ""))}</span><b>{esc(a["title"])}</b></a>'
+        for a in items[:n])
+    block = ('<!--LATEST--><section class="hl" aria-label="أحدث المقالات"><div class="wrap">'
+             '<div class="hl-h"><h2>من مقالات إشراقة</h2><a href="/a/">كل المقالات ←</a></div>'
+             f'<div class="hl-g">{cards}</div></div>'
+             '<style>.hl{padding:clamp(70px,9vw,120px) 0 0}.hl-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}'
+             '.hl-h h2{margin:0}.hl-h a{color:#f6c48a;font-weight:700;text-decoration:none;white-space:nowrap}'
+             '.hl-g{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}'
+             '.hl-c{display:block;text-decoration:none;color:inherit;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:transform .3s,border-color .3s}'
+             '.hl-c:hover{transform:translateY(-4px);border-color:rgba(248,210,153,.4)}'
+             '.hl-c img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}'
+             '.hl-k{display:block;margin:14px 18px 4px;font-size:13px;color:#f6c48a;font-weight:700}'
+             '.hl-c b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0 18px 18px;font-size:18px;line-height:1.6}'
+             '@media (max-width:900px){.hl-g{grid-template-columns:1fr 1fr}}@media (max-width:560px){.hl-g{grid-template-columns:1fr}.hl-c:nth-child(n+4){display:none}}</style>'
+             '</section><!--/LATEST-->')
+    html = home.read_text(encoding='utf-8')
+    import re as _re
+    if '<!--LATEST-->' in html:
+        html = _re.sub(r'<!--LATEST-->.*?<!--/LATEST-->', lambda _m: block, html, count=1, flags=_re.S)
+    else:
+        html = html.replace('  <section class="cta">', block + chr(10) + '  <section class="cta">', 1)
+    home.write_text(html, encoding='utf-8')
+
+
 def main() -> None:
     for c in fetch('article_categories?select=slug,name_ar'):
         CATEGORIES[c['slug']] = c['name_ar']
@@ -431,6 +462,7 @@ def main() -> None:
         d.mkdir()
         (d / 'index.html').write_text(article_page(a, related_to(a, items)), encoding='utf-8')
     (OUT / 'index.html').write_text(index_page(items), encoding='utf-8')
+    home_latest(items)
 
     # خريطة الموقع كاملة (كل صفحة قابلة للفهرسة، مع تاريخ آخر تغيير) وملف llms.txt
     n = len(seo.write_sitemap(ROOT))
