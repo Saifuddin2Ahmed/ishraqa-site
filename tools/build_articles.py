@@ -94,7 +94,7 @@ HEAD = """<!doctype html>
 <style>{css}</style></head><body>
 <div class="top"><div class="wrap wide"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
 <nav class="tnav"><a href="/a/">المقالات</a><a href="/k/">المكتبة</a>
-<a class="btn light" data-open href="{open_app}">افتح في التطبيق</a></nav></div></div>
+<a class="btn light" data-open href="{open_app}">افتح في التطبيق</a><a class="lang" href="/en/" hreflang="en" lang="en">English</a></nav></div></div>
 """
 
 CSS = """
@@ -108,7 +108,7 @@ a{color:inherit}img{max-width:100%}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;white-space:nowrap}.brand img{width:34px;height:34px;border-radius:9px}
 .tnav{display:flex;align-items:center;gap:18px}.tnav a{text-decoration:none;font-weight:700;font-size:15px;opacity:.9}.tnav a:hover{opacity:1}
-@media (max-width:640px){.tnav a:not(.btn){display:none}}
+@media (max-width:640px){.tnav a:not(.btn):not(.lang){display:none}}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;border-radius:999px;padding:9px 18px;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.light{background:rgba(255,255,255,.18);color:#fff;font-size:14px;opacity:1!important;border:1px solid rgba(255,255,255,.25)}
