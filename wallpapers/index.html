@@ -309,14 +309,14 @@ border-radius:50%;background:var(--cream);border:3px solid var(--sun);box-shadow
 <body>
 <div class="bar" aria-hidden="true"><div class="wrap">
   <a class="brand" href="/" tabindex="-1"><img width="192" height="192" src="/img/icon-192.png" alt=""> إشراقة يومية</a>
-  <div class="nav-r"><a class="nav-link" href="/about/" tabindex="-1">عن إشراقة</a><a class="nav-link" href="/developers/" tabindex="-1">للمطوّرين</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" tabindex="-1">حمّل إشراقة</a></div>
+  <div class="nav-r"><a class="nav-link" href="/about/" tabindex="-1">عن إشراقة</a><a class="nav-link" href="/developers/" tabindex="-1">للمطوّرين</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" tabindex="-1">حمّل التطبيق</a></div>
 </div></div>
 <header class="hero page-hero">
   <canvas id="sky" aria-hidden="true"></canvas>
   <div class="wrap">
     <nav class="top">
       <a class="brand" href="/"><img width="192" height="192" src="/img/icon-192.png" alt=""> إشراقة يومية</a>
-      <div class="nav-r"><a class="nav-link" href="/about/">عن إشراقة</a><a class="nav-link" href="/developers/">للمطوّرين</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
+      <div class="nav-r"><a class="nav-link" href="/about/">عن إشراقة</a><a class="nav-link dev" href="/developers/">للمطوّرين</a><a class="nav-link lang" href="/en/" hreflang="en" lang="en">English</a><a class="nav-cta" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل التطبيق</a></div>
     </nav>
     <div class="hero-grid">
       <div class="hero-copy">
@@ -351,15 +351,15 @@ border-radius:50%;background:var(--cream);border:3px solid var(--sun);box-shadow
 </main>
 <footer>
   <div class="wrap row">
-    <nav class="links">
-      <a href="/about/">عن إشراقة</a>
+    <nav class="links"><a href="/about/">عن إشراقة</a>
       <a href="/developers/">للمطوّرين</a>
-      <a href="/wallpapers/">خلفيات إشراقة</a>
+      <a href="/wallpapers/" aria-current="page">خلفيات إشراقة</a>
       <a href="/privacy/">سياسة الخصوصية</a>
       <a href="/terms/">شروط الاستخدام</a>
       <a href="/delete-account/">حذف الحساب</a>
+      <a href="/child-safety/">سلامة الأطفال</a>
       <a href="/contact/">تواصل معنا</a>
-    </nav>
+      <a href="/en/" hreflang="en" lang="en">English</a></nav>
     <div class="credit">© 2026 إشراقة يومية</div>
   </div>
 </footer>
@@ -418,12 +418,6 @@ if(rm)frame(0);else kick();
 })();
 </script>
 <script src="/live.js" defer></script>
-<script>
-(function(){var ua=navigator.userAgent;if(!(/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)))return;
-document.querySelectorAll('a[href*="play.google.com/store/apps/details"]').forEach(function(a){a.href='https://apps.apple.com/app/id6826877682';a.removeAttribute('target');
-var b=a.querySelector('b'),sm=a.querySelector('small');if(b&&sm){sm.textContent='احصل عليه';b.textContent='على آيفون';var sv=a.querySelector('svg');if(sv)sv.style.display='none'}
-else if(a.classList.contains('nav-cta')||a.classList.contains('p1')){a.lastChild.textContent='حمّل إشراقة'}});})();
-</script>
 <script src="/platforms.js" defer></script>
 <script src="/fx.js" defer></script>
 </body>
