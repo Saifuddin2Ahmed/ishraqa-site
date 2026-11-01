@@ -161,8 +161,9 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 .card b{font-size:18px;line-height:1.55}.card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card small{color:var(--muted);font-size:13px;margin-top:auto}
 .hero-i{position:relative;overflow:hidden;background:linear-gradient(130deg,var(--night),var(--plum) 58%,var(--sun));color:#fff;padding:54px 0 64px}
-.hero-i:after{content:'';position:absolute;inset:auto -10% -55% auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,181,71,.45),transparent 65%)}
-.hero-i .wrap{position:relative;z-index:1}
+.hero-i:after{z-index:1;content:'';position:absolute;inset:auto -10% -55% auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,181,71,.45),transparent 65%)}
+.hero-i .wrap{position:relative;z-index:2}
+.hero-i{padding:96px 0 104px}.hero-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}.hero-i:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(22,9,40,.45),rgba(22,9,40,.78) 55%,rgba(22,9,40,.9)),linear-gradient(0deg,rgba(22,9,40,.75),transparent 60%)}@media (max-width:760px){.hero-i{padding:64px 0 72px}.hero-i:before{background:linear-gradient(0deg,rgba(22,9,40,.9),rgba(22,9,40,.68))}}@media (prefers-reduced-motion:reduce){.hero-v{display:none}.hero-i{background:url(/media/articles/hero.jpg) center/cover}}
 .hero-i h1{margin:0 0 8px}.hero-i p{margin:0;font-size:19px;opacity:.92;max-width:640px}
 .stats{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}.stats div{font-size:14px;opacity:.85}.stats b{display:block;font-size:28px;line-height:1.2;opacity:1}
 .search{margin-top:26px;max-width:560px;position:relative}
@@ -398,7 +399,7 @@ def index_page(items: list) -> str:
     page = (
         HEAD.format(title=title, desc=desc, url=url, og_type='website', og_title=title,
                     image=f'{SITE}/img/og.jpg', open_app=PLAY, css=CSS)
-        + '<header class="hero-i"><div class="wrap wide"><h1>مقالات إشراقة</h1>'
+        + '<header class="hero-i"><video class="hero-v" autoplay muted loop playsinline preload="metadata" poster="/media/articles/hero.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback><source src="/media/articles/hero.mp4" type="video/mp4"><source src="/media/articles/hero.webm" type="video/webm"></video><div class="wrap wide"><h1>مقالات إشراقة</h1>'
         + '<p>مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.</p>'
         + f'<div class="stats"><div><b>{len(items)}</b>مقالًا</div><div><b>{len(used)}</b>تصنيفات</div><div><b>مجانًا</b>بلا إعلانات</div></div>'
         + f'<label class="search">{SEARCH_ICON}<input type="search" placeholder="ابحث في المقالات…" aria-label="ابحث في المقالات"></label>'
