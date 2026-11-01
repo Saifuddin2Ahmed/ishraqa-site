@@ -50,7 +50,11 @@
   el.addEventListener('click', done);
   var shown = false;
   var show = function () {
-    if (shown) return; shown = true;
+    if (shown) return;
+    // الشاشات الضيقة: لا تزاحم فقاعة «حمّل التطبيق»
+    var ga = document.querySelector('.ga.in');
+    if (ga && innerWidth <= 820) { setTimeout(show, 2500); return; }
+    shown = true;
     document.body.appendChild(el);
     requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('in'); }); });
     removeEventListener('scroll', onScroll);
