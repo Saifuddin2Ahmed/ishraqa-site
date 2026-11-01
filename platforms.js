@@ -7,6 +7,13 @@
   if (/^\/(testers|app|kit|iphone)(\/|$)/.test(path)) return;
   var ua = navigator.userAgent;
   var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var mac = /Macintosh/.test(ua) && !ios;
+  var win = /Windows NT/.test(ua);
+  // زر واحد: كل جهاز إلى متجره (لا نسخة ويب): آيفون/ماك ← App Store، ويندوز ← Microsoft Store، غيرها ← Google Play
+  function route(a) {
+    if (ios || mac) { a.href = AS; a.removeAttribute('target'); }
+    else if (win) { a.href = MS; a.target = '_blank'; a.rel = 'noopener'; }
+  }
   var en = /^en/i.test(document.documentElement.lang);
   var PLAY = 'https://play.google.com/store/apps/details?id=com.taeziz.ishraqa';
   var AS = 'https://apps.apple.com/app/id6826877682';
@@ -48,15 +55,9 @@
     if (a.closest('.stores') || a.dataset.platDone) return;
     a.dataset.platDone = '1';
     // الشريط العلوي: زر واحد يبقى كما هو (آيفون ← App Store)
-    if (a.classList.contains('nav-cta') || a.closest('.nav-r, nav')) {
-      if (ios) { a.href = AS; a.removeAttribute('target'); }
-      return;
-    }
+    if (a.classList.contains('nav-cta') || a.closest('.nav-r, nav')) { route(a); return; }
     // رابط نصي داخل فقرة: يبقى رابطًا (آيفون ← App Store)
-    if (!a.classList.contains('play') && !a.querySelector('svg')) {
-      if (ios) { a.href = AS; a.removeAttribute('target'); }
-      return;
-    }
+    if (!a.classList.contains('play') && !a.querySelector('svg')) { route(a); return; }
     // زر متجر في المحتوى: يُستبدل بالمجموعة الموحّدة، ومجموعة واحدة فقط لكل حاوية
     var host = a.parentElement;
     if (host && host.querySelector(':scope > .stores.plat')) { a.remove(); return; }
