@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>إشراقة يومية</title>
+<link rel="canonical" href="https://ishraqa.app/">
+<meta http-equiv="refresh" content="0; url=/">
+<script>
+// نسخة الويب أُوقفت: التطبيق في المتاجر. نزيل عامل الخدمة القديم وذاكرته ثم نذهب للرئيسية
+(function(){
+  function go(){ location.replace('/' + (location.search || '')); }
+  try {
+    var jobs = [];
+    if ('serviceWorker' in navigator) jobs.push(navigator.serviceWorker.getRegistrations().then(function(rs){ return Promise.all(rs.map(function(r){ return r.unregister(); })); }));
+    if (window.caches) jobs.push(caches.keys().then(function(ks){ return Promise.all(ks.map(function(k){ return caches.delete(k); })); }));
+    Promise.all(jobs).then(go, go);
+    setTimeout(go, 1500);
+  } catch (e) { go(); }
+})();
+</script>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#120a1c;color:#fff;font-family:system-ui,sans-serif}a{color:#f6c48a}</style>
+</head>
+<body><a href="/">إشراقة يومية</a></body>
+</html>
