@@ -144,6 +144,7 @@ article ul li::marker,article ol li::marker{color:var(--sun);font-weight:800}
 .cta:before{content:'';position:absolute;inset:auto -60px -120px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,181,71,.55),transparent 70%)}
 .cta h3{margin:0 0 6px;font-size:23px;position:relative}.cta p{margin:0 0 20px;opacity:.92;position:relative}
 .cta .btn{position:relative}.cta small{display:block;margin-top:14px;opacity:.8;font-size:13px;position:relative}
+.rights{font-size:13px;line-height:1.8;opacity:.62;margin:-22px 0 32px}
 .share{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0 34px}
 .share span{font-weight:700;color:var(--muted);margin-inline-end:4px}
 .share a,.share button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:transform .2s,background .2s;font:inherit}
@@ -220,7 +221,7 @@ chips.forEach(function(ch){ch.addEventListener('click',function(){cat=ch.dataset
 FOOT = """<footer><nav><a href="/about/">عن التطبيق</a> · <a href="/a/">المقالات</a> ·
 <a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
 <a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
-<a href="/contact/">تواصل معنا</a></nav><div>© {year} إشراقة يومية</div></footer>
+<a href="/contact/">تواصل معنا</a></nav><div>جميع الحقوق محفوظة © {year} إشراقة يومية</div></footer>
 {js}</body></html>"""
 
 ICONS = {
@@ -301,7 +302,8 @@ def share_row(url: str, title: str) -> str:
                   for k, n, h in links)
     return (f'<div class="share"><span>شارك المقال</span>{out}'
             f'<button type="button" data-copy aria-label="نسخ الرابط" title="نسخ الرابط">{ICONS["link"]}</button>'
-            '<span class="ok">نُسخ الرابط ✓</span></div>')
+            '<span class="ok">نُسخ الرابط ✓</span></div>'
+            '<p class="rights">جميع الحقوق محفوظة لإشراقة يومية وكاتب المقال. يسرّنا الاقتباس مع ذكر المصدر ورابطه.</p>')
 
 
 def article_page(a: dict, related: list) -> str:

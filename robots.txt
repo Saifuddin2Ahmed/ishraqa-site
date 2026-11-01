@@ -1,3 +1,12 @@
+# Ishraqa Daily content is made available for your personal, non-commercial use,
+# subject to our Terms of Use: https://ishraqa.app/terms/
+# Any other use is not permitted without prior written permission, including:
+# (1) training or developing machine learning, artificial intelligence (AI) or large language models (LLMs);
+# (2) text and data mining;
+# (3) creating or providing archived or cached datasets containing our content; and
+# (4) any commercial purpose.
+# Scraping our content by automated means is prohibited. Contact: hello@ishraqa.app
+
 # Search engines: welcome everywhere.
 User-agent: *
 Allow: /
@@ -37,6 +46,51 @@ User-agent: Diffbot
 Disallow: /
 
 User-agent: omgilibot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Claude-User
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: PanguBot
+Disallow: /
+
+User-agent: Kangaroo Bot
+Disallow: /
+
+User-agent: ICC-Crawler
 Disallow: /
 
 Sitemap: https://ishraqa.app/sitemap.xml
