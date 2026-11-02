@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-<url><loc>https://ishraqa.app/</loc><lastmod>2026-11-01</lastmod><xhtml:link rel="alternate" hreflang="ar" href="https://ishraqa.app/"/><xhtml:link rel="alternate" hreflang="en" href="https://ishraqa.app/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ishraqa.app/"/></url>
+<url><loc>https://ishraqa.app/</loc><lastmod>2026-11-02</lastmod><xhtml:link rel="alternate" hreflang="ar" href="https://ishraqa.app/"/><xhtml:link rel="alternate" hreflang="en" href="https://ishraqa.app/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ishraqa.app/"/></url>
 <url><loc>https://ishraqa.app/about/</loc><lastmod>2026-11-01</lastmod></url>
-<url><loc>https://ishraqa.app/a/</loc><lastmod>2026-11-01</lastmod></url>
+<url><loc>https://ishraqa.app/a/</loc><lastmod>2026-11-02</lastmod></url>
 <url><loc>https://ishraqa.app/k/</loc><lastmod>2026-11-01</lastmod></url>
 <url><loc>https://ishraqa.app/developers/</loc><lastmod>2026-11-01</lastmod></url>
 <url><loc>https://ishraqa.app/wallpapers/</loc><lastmod>2026-11-01</lastmod></url>
@@ -26,8 +26,10 @@
 <url><loc>https://ishraqa.app/a/reading-habit-two-minutes/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/stocksnap/2XTL98GVVF.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/remember-what-you-read/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/articles/2026-10/remember-what-you-read.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/return-to-reading/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/covers/1791669643100.png</image:loc></image:image></url>
+<url><loc>https://ishraqa.app/a/sahara-dust-feeds-amazon/</loc><lastmod>2026-11-02</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/articles/2026-10/sahara-dust-feeds-amazon.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/screen-eyes-20-20-20/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/articles/2026-10/screen-eyes-20-20-20.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/sleep-seven-hours/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/stocksnap/843D85B223.jpg</image:loc></image:image></url>
+<url><loc>https://ishraqa.app/a/society-without-an-integral-term/</loc><lastmod>2026-11-02</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/articles/2026-10/society-without-an-integral-term.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/spot-phishing-messages/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/stocksnap/ODN23L0AC9.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/sudanese-proverbs-mirror/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/stocksnap/72AMIX2KTZ.jpg</image:loc></image:image></url>
 <url><loc>https://ishraqa.app/a/sudanese-tea-and-jabana/</loc><lastmod>2026-10-30</lastmod><image:image><image:loc>https://jytbowsfvuzdnsmhmsly.supabase.co/storage/v1/object/public/article-covers/stocksnap/04E3HNGAKH.jpg</image:loc></image:image></url>
