@@ -45,22 +45,24 @@
   var done = function () { try { sessionStorage.setItem(K, '1'); } catch (e) {} };
   el.querySelector('button').addEventListener('click', function (e) {
     e.preventDefault(); e.stopPropagation(); done();
-    el.classList.remove('in'); setTimeout(function () { el.remove(); }, rm ? 0 : 600);
+    el.classList.remove('in'); document.documentElement.classList.remove('ap-on');
+    setTimeout(function () { el.remove(); }, rm ? 0 : 600);
   });
   el.addEventListener('click', done);
   var shown = false;
   var show = function () {
     if (shown) return;
-    // الشاشات الضيقة: لا تزاحم فقاعة «حمّل التطبيق»
-    var ga = document.querySelector('.ga.in');
-    if (ga && innerWidth <= 820) { setTimeout(show, 2500); return; }
-    shown = true;
+    shown = true; done();
     document.body.appendChild(el);
+    // لا تظهر فقاعة «حمّل التطبيق» مع هذه البطاقة معًا
+    document.documentElement.classList.add('ap-on');
     requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('in'); }); });
     removeEventListener('scroll', onScroll);
   };
-  var onScroll = function () { if (scrollY > innerHeight * 1.1) show(); };
+  // مرة واحدة في الجلسة، وبعد تجاوز نصف الصفحة فقط
+  var onScroll = function () {
+    var h = document.documentElement.scrollHeight - innerHeight;
+    if (h > 0 && scrollY >= h * 0.5) show();
+  };
   addEventListener('scroll', onScroll, { passive: true });
-  // الشاشات الضيقة: بعد تجاوز الواجهة فقط حتى لا تغطي أزرار المتاجر
-  if (innerWidth > 820) setTimeout(show, 12000);
 })();

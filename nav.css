@@ -24,5 +24,10 @@ html[dir=ltr] .snav{background:linear-gradient(240deg,#2A1B5E,#8E3A8C 60%,#F07A4
 .snav .snav-brand img{width:30px;height:30px}
 .snav .snav-links a{padding:6px 3px}
 }
+@media (max-width:359px){
+.snav-in{padding:10px 6px;gap:2px}
+.snav .snav-brand img{width:28px;height:28px}
+.snav .snav-links a{font-size:13px;padding:6px 2px;letter-spacing:-.1px}
+}
 /* شريط تبويبات صفحات السياسات تحت الشريط الموحّد لا يلتصق فوقه */
 .snav ~ header.bar{position:relative;top:auto}

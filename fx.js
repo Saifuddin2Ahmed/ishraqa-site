@@ -44,9 +44,34 @@
   } else grids.forEach(clear);
 
   /* ٣) الصور: تنكشف كالستارة */
+  var imgs = [];
+  var reveal = function (im) {
+    if (im.loading === 'lazy') im.loading = 'eager';
+    var go = function () { im.classList.add('fx-in'); };
+    if (im.complete) go(); else { im.addEventListener('load', go, { once: true }); im.addEventListener('error', go, { once: true }); }
+  };
+  /* داخل شريط يُمرَّر أفقيًا نراقب الشريط نفسه، وإلا فالحاوية المباشرة */
+  var host = function (im) {
+    for (var el = im.parentElement; el && el !== document.body; el = el.parentElement) {
+      var ox = getComputedStyle(el).overflowX;
+      if ((ox === 'auto' || ox === 'scroll') && el.scrollWidth > el.clientWidth + 1) return el;
+    }
+    return im.parentElement || im;
+  };
+  var iio = io ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      iio.unobserve(e.target);
+      imgs.forEach(function (im) { if (im._fxT === e.target && !im.classList.contains('fx-in')) reveal(im); });
+    });
+  }, { rootMargin: '0px 0px -10% 0px' }) : null;
   $('main img').forEach(function (im) {
     if (im.closest(skip + ', .card, .feat, .store, .play, .kg, .avatar, .devcard') || im.width < 120) return;
-    im.classList.add('fx-img'); watch(im);
+    im.classList.add('fx-img');
+    /* الصورة المقصوصة كليًا لا يجلبها المتصفح إن كانت loading=lazy، فنراقب الحاوية،
+       ثم نطلب الصورة فورًا ونكشفها بعد اكتمال تحميلها */
+    if (!iio) { im.classList.add('fx-in'); return; }
+    im._fxT = host(im); iio.observe(im._fxT); imgs.push(im);
   });
 
   /* ٤) كلمات بارزة داخل النص */

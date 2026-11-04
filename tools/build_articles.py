@@ -182,8 +182,8 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 main{padding-bottom:20px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.rv.on{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.card,.card img,.feat,.feat img,.btn{transition:none}html{scroll-behavior:auto}}
-footer{color:var(--muted);font-size:13px;text-align:center;padding:34px 0;line-height:2.2;border-top:1px solid var(--line);margin-top:30px}
-footer a{color:var(--muted);text-decoration:none}footer nav{margin-bottom:4px}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:34px 16px;line-height:2.2;border-top:1px solid var(--line);margin-top:30px}
+footer a{color:var(--muted);text-decoration:none;white-space:nowrap}footer nav{margin-bottom:4px}
 """
 
 # يظهر العنصر بهدوء عند الوصول إليه، وزر «افتح في التطبيق» يناسب جهاز القارئ

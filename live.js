@@ -57,6 +57,13 @@
       return s;
     }
     if (rm) { lines.forEach(function (l) { line(l).textContent = l.s; }); return; }
+    // ارتفاع الطرفية على قدر سطورها كاملة: لا فراغ زائد ولا قفزة أثناء الكتابة
+    var fit = function () {
+      t.style.minHeight = ''; t.textContent = '';
+      lines.forEach(function (l) { line(l).textContent = l.s; });
+      t.style.minHeight = t.offsetHeight + 'px';
+    };
+    fit();
     var vis = true, cur = document.createElement('span');
     cur.className = 'cur'; cur.textContent = '▍';
     whenVisible(t, function (v) { vis = v; });

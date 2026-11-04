@@ -24,6 +24,7 @@
     '.ga button{width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:18px;line-height:34px;cursor:pointer;padding:0}' +
     '.ga button:hover{background:rgba(255,255,255,.2)}' +
     '@media (max-width:520px){.ga{bottom:14px;gap:10px;padding:6px 6px 6px 10px}.ga b{display:none}.ga a{padding:9px 16px;font-size:14px}}' +
+    '.ap-on .ga.in{transform:translate(-50%,30px);opacity:0;pointer-events:none}' +
     '@media (prefers-reduced-motion:reduce){.ga{transition:opacity .2s}}';
   document.head.appendChild(css);
   var el = document.createElement('div');
