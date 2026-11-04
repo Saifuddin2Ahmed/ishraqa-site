@@ -42,11 +42,11 @@
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="../fx.css?v=20261101">
 <link rel="stylesheet" href="../home-v2.css?v=20261104">
-<link rel="stylesheet" href="/nav.css?v=20261104">
+<link rel="stylesheet" href="/nav.css?v=20261105">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="snav"><div class="snav-in"><a class="snav-brand" href="/en/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>Ishraqa Daily</span></a><nav class="snav-links" aria-label="Main"><a href="/en/contact/">Contact</a><a href="/en/support/">Support</a><a href="/" hreflang="ar" lang="ar">العربية</a></nav></div></div>
+<div class="snav"><div class="snav-in"><a class="snav-brand" href="/en/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>Ishraqa Daily</span></a><button class="snav-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="snav-menu"><span class="snav-bars" aria-hidden="true"><i></i><i></i><i></i></span></button><nav class="snav-links" id="snav-menu" aria-label="Main"><a href="/en/contact/">Contact</a><a href="/en/support/">Support</a><a class="snav-lang" href="/" hreflang="ar" lang="ar"><svg class="snav-globe" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span>العربية</span></a></nav></div><script src="/nav.js?v=20261105" defer></script></div>
 <header class="hero">
   <picture class="hero-media">
     <source media="(max-aspect-ratio: 4/5)" srcset="../media/hero/hero-m.webp" type="image/webp">
@@ -114,20 +114,7 @@
   </section>
 </main>
 
-<footer>
-  <div class="wrap row">
-    <nav class="links"><a href="/about/">About</a>
-      <a href="/developers/">Developers</a>
-      <a href="/wallpapers/">Wallpapers</a>
-      <a href="/en/privacy/">Privacy Policy</a>
-      <a href="/en/terms/">Terms of Use</a>
-      <a href="/en/delete-account/">Delete account</a>
-      <a href="/en/child-safety/">Child safety</a>
-      <a href="/en/contact/">Contact us</a>
-      <a href="/" hreflang="ar" lang="ar">العربية</a></nav>
-    <div class="credit"><a class="by" href="https://saifuddin.dev" rel="author">Built by Saifuddin Ahmed</a><span>© 2026 Ishraqa Daily. All rights reserved.</span></div>
-  </div>
-</footer>
+<footer class="sfoot"><nav class="sfoot-links" aria-label="Site"><a href="/en/contact/">Contact</a><a href="/en/support/">Support</a><a href="/en/privacy/">Privacy Policy</a><a href="/en/terms/">Terms of Use</a><a href="/en/delete-account/">Delete account</a><a href="/en/child-safety/">Child safety</a><a href="/en/press-kit/">Press kit</a><a href="/" hreflang="ar" lang="ar">العربية</a></nav><p class="sfoot-by"><a href="https://saifuddin.dev" rel="author">Built by Saifuddin Ahmed</a></p><p class="sfoot-c">© 2026 Ishraqa Daily. All rights reserved.</p></footer>
 <script src="../home-v2.js" defer></script>
 <script src="../fx.js" defer></script>
 <script id="hero-ph-rot">(function(){var p=document.querySelector(".hero-ph");if(!p||matchMedia("(prefers-reduced-motion: reduce)").matches)return;var a=p.querySelectorAll("img"),i=0;if(a.length<2)return;setInterval(function(){if(document.hidden)return;var n=(i+1)%a.length;if(!a[n].complete||!a[n].naturalWidth)return;for(var k=0;k<a.length;k++)a[k].classList.remove("was");a[i].classList.remove("on");a[i].classList.add("was");i=n;a[i].classList.add("on")},3800)})();</script>

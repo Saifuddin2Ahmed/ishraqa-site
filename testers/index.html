@@ -46,10 +46,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0
 h1{font-size:46px;line-height:1.35;margin:0 0 14px;font-weight:800;text-wrap:balance}
 .lead{font-size:19px;opacity:.95;margin:0 0 26px}
 .tag{display:inline-block;color:var(--gold);font-weight:700;margin-bottom:10px;letter-spacing:.3px}
-.play{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;text-decoration:none;padding:12px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-.play svg{width:28px;height:28px}
-.play small{display:block;font-size:11px;opacity:.8;line-height:1.2}
-.play b{display:block;font-size:19px;line-height:1.3}
+.stores{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta .stores{justify-content:center}.cta .st{background:#1E1030;border-color:rgba(255,255,255,.14);box-shadow:0 12px 28px rgba(30,16,48,.25)}.cta .st:hover{background:#2A1B5E}
+.st{display:grid;place-items:center;width:62px;height:62px;border-radius:19px;text-decoration:none;
+background:rgba(14,8,22,.55);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+box-shadow:0 14px 34px rgba(0,0,0,.35);transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,border-color .3s}
+.st:hover{transform:translateY(-3px);background:rgba(30,16,44,.7);border-color:rgba(248,210,153,.55)}
+.st svg{width:28px;height:28px}
 .free{margin-top:14px;font-size:14px;opacity:.9}
 .phone{justify-self:center;width:280px;border-radius:38px;border:9px solid rgba(255,255,255,.22);box-shadow:0 30px 70px rgba(0,0,0,.4);overflow:hidden;margin-bottom:-60px;background:#000}
 .phone img{display:block;width:100%}
@@ -179,10 +182,10 @@ border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px rgba(240,122,74,.18
 .wall span:before{content:'🏅 '}
 .lockbox{max-width:480px;margin:0 auto;text-align:center}
 </style><style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/fx.css?v=20261101">
-<link rel="stylesheet" href="/nav.css?v=20261104">
+<link rel="stylesheet" href="/nav.css?v=20261105">
 </head>
 <body>
-<div class="snav"><div class="snav-in"><a class="snav-brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>إشراقة يومية</span></a><nav class="snav-links" aria-label="الرئيسية"><a href="/about/">عن التطبيق</a><a href="/a/">المقالات</a><a href="/k/">المكتبة</a><a href="/developers/">للمطوّرين</a><a href="/en/" hreflang="en" lang="en">English</a></nav></div></div>
+<div class="snav"><div class="snav-in"><a class="snav-brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>إشراقة يومية</span></a><button class="snav-btn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="snav-menu"><span class="snav-bars" aria-hidden="true"><i></i><i></i><i></i></span></button><nav class="snav-links" id="snav-menu" aria-label="الرئيسية"><a href="/about/">عن التطبيق</a><a href="/a/">المقالات</a><a href="/developers/">المطوّرون</a><a class="snav-lang" href="/en/" hreflang="en" lang="en"><svg class="snav-globe" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span>English</span></a></nav></div><script src="/nav.js?v=20261105" defer></script></div>
 <header class="hero page-hero">
   <canvas id="sky" aria-hidden="true"></canvas>
   <div class="wrap">
@@ -190,29 +193,20 @@ border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px rgba(240,122,74,.18
       <div>
         <h1>كن من أوائل<br>من يصنعون إشراقة</h1>
         <p class="lead">لا تحتاج أن تكون مبرمجًا: استخدم التطبيق كما تستخدم أي تطبيق، وأخبرنا بما تراه.</p>
-        <a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
-          <span><small>احصل عليه من</small><b>Google Play</b></span>
-        </a>
+        <div class="stores"><a class="st" data-st="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="إشراقة يومية على Google Play" title="Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg></a><a class="st" data-st="as" href="https://apps.apple.com/app/id6826877682" aria-label="إشراقة يومية على App Store" title="App Store"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></a><a class="st" data-st="ms" href="https://apps.microsoft.com/detail/9nr3bxwzrdxs" target="_blank" rel="noopener" aria-label="إشراقة يومية على Microsoft Store" title="Microsoft Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.6v9.6H2z"/><path fill="#7FBA00" d="M12.4 2H22v9.6h-9.6z"/><path fill="#00A4EF" d="M2 12.4h9.6V22H2z"/><path fill="#FFB900" d="M12.4 12.4H22V22h-9.6z"/></svg></a></div>
       </div>
-      <div class="phone-wrap"><div class="phone"><img width="540" height="1134" src="/img/home.webp" alt="إشراقة الصباح" data-cap="إشراقة الصباح" class=on><img width="540" height="1134" src="/img/club.webp" alt="نادي القرّاء" data-cap="نادي القرّاء"><img width="540" height="1134" src="/img/community.webp" alt="تحدي المجتمعات" data-cap="تحدي المجتمعات"><img width="540" height="1134" src="/img/explain.webp" alt="اشرح لي" data-cap="اشرح لي"></div><div class="phone-cap" aria-live="off">إشراقة الصباح</div></div>
+      <div class="phone-wrap"><div class="phone"><img width="540" height="1134" src="/img/home.webp" alt="إشراقة اليوم" data-cap="إشراقة اليوم" class=on><img width="540" height="1134" src="/img/club.webp" alt="نادي القرّاء" data-cap="نادي القرّاء"><img width="540" height="1134" src="/img/community.webp" alt="تحدي المجتمعات" data-cap="تحدي المجتمعات"><img width="540" height="1134" src="/img/explain.webp" alt="اشرح لي" data-cap="اشرح لي"></div><div class="phone-cap" aria-live="off">إشراقة اليوم</div></div>
     </div>
   </div>
 </header>
 <main>
-  <section><div class="wrap"><h2 class="rv">سجّل الآن</h2><p class="sub rv">دقيقة واحدة، ونرحّب بك في البداية.</p><div class="ios-note rv" role="note">📱 الاختبار متاح الآن على أندرويد فقط، وقريبًا على آيفون. ويمكنك من الآن تثبيت إشراقة يومية على آيفون والحاسوب والاستفادة منها كاملة، لكن دون الانضمام إلى برنامج الاختبار.</div><div class="form rv">
+  <section><div class="wrap"><h2 class="rv">سجّل الآن</h2><p class="sub rv">دقيقة واحدة، ونرحّب بك في البداية.</p><div class="ios-note rv" role="note">📱 إشراقة يومية متاحة على آيفون وأندرويد وويندوز، وبرنامج الاختبار يجري على أندرويد عبر Google Play.</div><div class="form rv">
 <form id="join" autocomplete="on">
   <label for="n">اسمك الكامل</label>
   <input id="n" name="name" required minlength="4" maxlength="80" autocomplete="name" placeholder="مثل: أحمد محمد علي">
   <label for="e">بريدك في Gmail</label>
   <input id="e" name="email" type="email" required autocomplete="email" dir="ltr" placeholder="name@gmail.com">
   <div class="note">نفس حساب Google المسجّل على هاتفك، فبه تنضم للاختبار.</div>
-  <label>نوع هاتفك</label>
-  <div class="seg">
-    <label><input type="radio" name="phone" value="android"><span>أندرويد</span></label>
-    <label><input type="radio" name="phone" value="iphone"><span>آيفون</span></label>
-  </div>
-  <div class="note">الاختبار الآن على أندرويد. إن كان هاتفك آيفون فسجّل لتكون أول من نخبره حين تصدر نسخته.</div>
   <label for="c">مدينتك (اختياري)</label>
   <input id="c" name="city" maxlength="60" autocomplete="address-level2">
   <label class="check"><input type="checkbox" name="pub" checked> أوافق على ظهور اسمي في جدار روّاد إشراقة حين أكمل 14 يومًا</label>
@@ -228,12 +222,10 @@ border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px rgba(240,122,74,.18
     <div><b>٤</b>افتحها كل يوم ولو دقيقة، وشاركنا ملاحظاتك هنا أو من التطبيق.</div>
   </div>
   <p class="note" style="margin-top:12px">إن قال Google Play إن التطبيق غير متاح، انتظر دقائق بعد الانضمام للمجموعة ثم أعد فتح رابط الاختبار.</p></div>
-<div class="ok" id="okIphone"><div style="font-size:48px">📱</div><h3>أنت في قائمة الآيفون</h3>
-  <p class="prose">سنراسلك أول ما تصدر نسخة الآيفون. وحتى ذلك الحين، تابع إشراقة على الموقع.</p></div>
 </div></div></section>
   <section><div class="wrap"><h2 class="rv">ماذا تكسب؟</h2><p class="sub rv">المختبرون الأوائل هم من يصنعون التطبيق مع فريقه.</p><div class="features"><div class="f rv"><div class="i">🏅</div><h3>شارة «رائد»</h3><p>تبقى على حسابك إلى الأبد، علامة على أنك كنت هنا من البداية.</p></div><div class="f rv"><div class="i">✔️</div><h3>حساب موثّق تلقائيًا</h3><p>بعد 14 يومًا من الاستخدام وملاحظة واحدة، يُوثَّق حسابك دون طلب.</p></div><div class="f rv"><div class="i">🌟</div><h3>اسمك على جدار الروّاد</h3><p>في موقع إشراقة، يراه كل من يزورنا (إن وافقت).</p></div><div class="f rv"><div class="i">🛠️</div><h3>أثرك في كل نسخة</h3><p>ملاحظاتك تُقرأ كلها، ويُرد عليها، وكثير منها يصبح ميزة.</p></div><div class="f rv"><div class="i">🧠</div><h3>لا تحتاج أن تكون مبرمجًا</h3><p>يكفي أن تستخدم التطبيق كما تستخدم أي تطبيق، وتخبرنا بما رأيت.</p></div><div class="f rv"><div class="i">🤝</div><h3>مجتمع من البداية</h3><p>قناة خاصة بالمختبرين يرى فيها كل واحد ملاحظات الآخرين ويتفاعل معها.</p></div></div></div></section>
-  <section><div class="wrap"><h2 class="rv">كيف يعمل؟</h2><p class="sub rv">من التسجيل إلى «رائد إشراقة» في ست خطوات.</p><div class="tl"><div class="rv"><b>سجّل</b>اسمك الكامل وبريد Gmail ونوع هاتفك، في أقل من دقيقة.</div><div class="rv"><b>انضم</b>إلى مجموعة روّاد إشراقة بضغطة، فتُفتح لك نسخة الاختبار فورًا.</div><div class="rv"><b>ثبّت</b>من رابط الاختبار، ثم صفحة إشراقة في Google Play.</div><div class="rv"><b>14 يومًا</b>افتح التطبيق كل يوم ولو دقيقة، وجرّب ما تحب منه.</div><div class="rv"><b>شاركنا</b>ملاحظة واحدة على الأقل: مشكلة، أو فكرة، أو شيء أعجبك.</div><div class="rv"><b>رائد</b>تصلك الشارة والتوثيق، ويظهر اسمك على الجدار.</div></div></div></section>
-  <section><div class="wrap"><h2 class="rv">ما ستجرّبه</h2><p class="sub rv">اسحب لترى أهم ما في إشراقة.</p><div class="gallery rv"><figure><img width="540" height="1134" src="/img/home.webp" alt="صباحك" loading="lazy"><figcaption>صباحك</figcaption></figure><figure><img width="540" height="1134" src="/img/explain.webp" alt="اشرح لي" loading="lazy"><figcaption>اشرح لي</figcaption></figure><figure><img width="540" height="1134" src="/img/library.webp" alt="المكتبة" loading="lazy"><figcaption>المكتبة</figcaption></figure><figure><img width="540" height="1134" src="/img/club.webp" alt="النادي" loading="lazy"><figcaption>النادي</figcaption></figure><figure><img width="540" height="1134" src="/img/club4.webp" alt="اللقاءات" loading="lazy"><figcaption>اللقاءات</figcaption></figure><figure><img width="540" height="1134" src="/img/community.webp" alt="تحدي المجتمعات" loading="lazy"><figcaption>تحدي المجتمعات</figcaption></figure><figure><img width="540" height="1134" src="/img/grandma.webp" alt="حكمة جدّتي" loading="lazy"><figcaption>حكمة جدّتي</figcaption></figure></div></div></section>
+  <section><div class="wrap"><h2 class="rv">كيف يعمل؟</h2><p class="sub rv">من التسجيل إلى «رائد إشراقة» في ست خطوات.</p><div class="tl"><div class="rv"><b>سجّل</b>اسمك الكامل وبريد Gmail، في أقل من دقيقة.</div><div class="rv"><b>انضم</b>إلى مجموعة روّاد إشراقة بضغطة، فتُفتح لك نسخة الاختبار فورًا.</div><div class="rv"><b>ثبّت</b>من رابط الاختبار، ثم صفحة إشراقة في Google Play.</div><div class="rv"><b>14 يومًا</b>افتح التطبيق كل يوم ولو دقيقة، وجرّب ما تحب منه.</div><div class="rv"><b>شاركنا</b>ملاحظة واحدة على الأقل: مشكلة، أو فكرة، أو شيء أعجبك.</div><div class="rv"><b>رائد</b>تصلك الشارة والتوثيق، ويظهر اسمك على الجدار.</div></div></div></section>
+  <section><div class="wrap"><h2 class="rv">ما ستجرّبه</h2><p class="sub rv">اسحب لترى أهم ما في إشراقة.</p><div class="gallery rv"><figure><img width="540" height="1134" src="/img/home.webp" alt="يومك" loading="lazy"><figcaption>يومك</figcaption></figure><figure><img width="540" height="1134" src="/img/explain.webp" alt="اشرح لي" loading="lazy"><figcaption>اشرح لي</figcaption></figure><figure><img width="540" height="1134" src="/img/library.webp" alt="المكتبة" loading="lazy"><figcaption>المكتبة</figcaption></figure><figure><img width="540" height="1134" src="/img/club.webp" alt="النادي" loading="lazy"><figcaption>النادي</figcaption></figure><figure><img width="540" height="1134" src="/img/club4.webp" alt="اللقاءات" loading="lazy"><figcaption>اللقاءات</figcaption></figure><figure><img width="540" height="1134" src="/img/community.webp" alt="تحدي المجتمعات" loading="lazy"><figcaption>تحدي المجتمعات</figcaption></figure><figure><img width="540" height="1134" src="/img/grandma.webp" alt="حكمة جدّتي" loading="lazy"><figcaption>حكمة جدّتي</figcaption></figure></div></div></section>
   <section><div class="wrap"><h2 class="rv">قناة المختبرين</h2><p class="sub rv">ملاحظات المختبرين وردود الفريق، في مكان واحد.</p><div id="lock" class="lockbox form rv">
   <p style="margin-top:0">قناة المختبرين خاصة. أدخل كلمة السر التي وصلتك من فريق إشراقة.</p>
   <form id="unlock"><input name="code" required autocomplete="off" dir="ltr" style="text-align:center" placeholder="كلمة السر">
@@ -261,28 +253,11 @@ border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px rgba(240,122,74,.18
     <div class="wrap">
       <h2>من ذاكرة الماضي إلى احتمالات المستقبل، اقرأ معنا</h2>
       <p class="sub">حمّل إشراقة يومية وابدأ مع ناديك اليوم.</p>
-      <a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
-          <span><small>احصل عليه من</small><b>Google Play</b></span>
-        </a>
+      <div class="stores"><a class="st" data-st="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="إشراقة يومية على Google Play" title="Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg></a><a class="st" data-st="as" href="https://apps.apple.com/app/id6826877682" aria-label="إشراقة يومية على App Store" title="App Store"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></a><a class="st" data-st="ms" href="https://apps.microsoft.com/detail/9nr3bxwzrdxs" target="_blank" rel="noopener" aria-label="إشراقة يومية على Microsoft Store" title="Microsoft Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.6v9.6H2z"/><path fill="#7FBA00" d="M12.4 2H22v9.6h-9.6z"/><path fill="#00A4EF" d="M2 12.4h9.6V22H2z"/><path fill="#FFB900" d="M12.4 12.4H22V22h-9.6z"/></svg></a></div>
     </div>
   </section>
 </main>
-<footer>
-  <div class="wrap row">
-    <nav class="links">
-      <a href="/about/">عن التطبيق</a>
-      <a href="/developers/">للمطوّرين</a>
-      <a href="/testers/">كن مختبرًا</a>
-      <a href="/wallpapers/">خلفيات إشراقة</a>
-      <a href="/privacy/">سياسة الخصوصية</a>
-      <a href="/terms/">شروط الاستخدام</a>
-      <a href="/delete-account/">حذف الحساب</a>
-      <a href="/contact/">تواصل معنا</a>
-    </nav>
-    <div class="credit"><a class="by" href="https://saifuddin.dev" rel="author">تطوير سيف الدين أحمد</a><span>جميع الحقوق محفوظة © 2026 إشراقة يومية</span></div>
-  </div>
-</footer>
+<footer class="sfoot"><nav class="sfoot-links" aria-label="روابط الموقع"><a href="/about/">عن التطبيق</a><a href="/a/">المقالات</a><a href="/k/">المكتبة</a><a href="/developers/">المطوّرون</a><a href="/wallpapers/">خلفيات إشراقة</a><a href="/privacy/">سياسة الخصوصية</a><a href="/terms/">شروط الاستخدام</a><a href="/delete-account/">حذف الحساب</a><a href="/child-safety/">سلامة الأطفال</a><a href="/contact/">تواصل معنا</a><a href="/en/" hreflang="en" lang="en">English</a></nav><p class="sfoot-by"><a href="https://saifuddin.dev" rel="author">تطوير سيف الدين أحمد</a></p><p class="sfoot-c">جميع الحقوق محفوظة © 2026 إشراقة يومية</p></footer>
 <script>
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -337,13 +312,12 @@ function $(i){return document.getElementById(i)}
 function esc(s){var d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
 // التسجيل
 var f=$('join');f.onsubmit=function(e){e.preventDefault();$('jerr').textContent='';
- var name=f.name.value.trim(),mail=f.email.value.trim(),ph=(f.querySelector('input[name=phone]:checked')||{}).value;
+ var name=f.name.value.trim(),mail=f.email.value.trim(),ph='android';
  if(name.split(/\s+/).length<2){$('jerr').textContent='اكتب اسمك الكامل (الاسم واسم الأب على الأقل)';return}
- if(!ph){$('jerr').textContent='اختر نوع هاتفك';return}
  f.querySelector('button').disabled=true;
  rpc('join_testers',{p_name:name,p_email:mail,p_phone:ph,p_city:f.city.value,p_public:f.pub.checked}).then(function(r){
   if(r==='declined'){f.querySelector('button').disabled=false;$('jerr').textContent='لم يُقبل طلبك السابق. راسلنا على hello@ishraqa.app';return}
-  f.style.display='none';$(r==='waitlist'?'okIphone':'okAndroid').classList.add('on');
+  f.style.display='none';$('okAndroid').classList.add('on');
  }).catch(function(x){f.querySelector('button').disabled=false;
   $('jerr').textContent=/disposable/.test(x.message)?'هذا بريد مؤقت. سجّل ببريدك الدائم (مثل Gmail)':/busy/.test(x.message)?'الضغط كبير الآن، حاول بعد قليل':'تعذّر التسجيل، تأكد من البريد وحاول مرة أخرى'})};
 // قناة الملاحظات

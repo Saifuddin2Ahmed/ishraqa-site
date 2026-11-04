@@ -45,10 +45,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0
 h1{font-size:46px;line-height:1.35;margin:0 0 14px;font-weight:800;text-wrap:balance}
 .lead{font-size:19px;opacity:.95;margin:0 0 26px}
 .tag{display:inline-block;color:var(--gold);font-weight:700;margin-bottom:10px;letter-spacing:.3px}
-.play{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;text-decoration:none;padding:12px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-.play svg{width:28px;height:28px}
-.play small{display:block;font-size:11px;opacity:.8;line-height:1.2}
-.play b{display:block;font-size:19px;line-height:1.3}
+.stores{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta .stores{justify-content:center}.cta .st{background:#1E1030;border-color:rgba(255,255,255,.14);box-shadow:0 12px 28px rgba(30,16,48,.25)}.cta .st:hover{background:#2A1B5E}
+.st{display:grid;place-items:center;width:62px;height:62px;border-radius:19px;text-decoration:none;
+background:rgba(14,8,22,.55);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+box-shadow:0 14px 34px rgba(0,0,0,.35);transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,border-color .3s}
+.st:hover{transform:translateY(-3px);background:rgba(30,16,44,.7);border-color:rgba(248,210,153,.55)}
+.st svg{width:28px;height:28px}
 .free{margin-top:14px;font-size:14px;opacity:.9}
 .phone{justify-self:center;width:280px;border-radius:38px;border:9px solid rgba(255,255,255,.22);box-shadow:0 30px 70px rgba(0,0,0,.4);overflow:hidden;margin-bottom:-60px;background:#000}
 .phone img{display:block;width:100%}
@@ -381,10 +384,10 @@ dialog.kdlg[open]{animation:kdin .45s cubic-bezier(.2,.8,.2,1)}
 <script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="/fx.css?v=20261101">
 <link rel="stylesheet" href="/site.css">
-<style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/nav.css?v=20261104">
+<style>:where(img[width][height]){height:auto}</style><link rel="stylesheet" href="/nav.css?v=20261105">
 </head>
 <body>
-<div class="snav"><div class="snav-in"><a class="snav-brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>إشراقة يومية</span></a><nav class="snav-links" aria-label="الرئيسية"><a href="/about/" aria-current="page">عن التطبيق</a><a href="/a/">المقالات</a><a href="/k/">المكتبة</a><a href="/developers/">للمطوّرين</a><a href="/en/" hreflang="en" lang="en">English</a></nav></div></div>
+<div class="snav"><div class="snav-in"><a class="snav-brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>إشراقة يومية</span></a><button class="snav-btn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="snav-menu"><span class="snav-bars" aria-hidden="true"><i></i><i></i><i></i></span></button><nav class="snav-links" id="snav-menu" aria-label="الرئيسية"><a href="/about/" aria-current="page">عن التطبيق</a><a href="/a/">المقالات</a><a href="/developers/">المطوّرون</a><a class="snav-lang" href="/en/" hreflang="en" lang="en"><svg class="snav-globe" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span>English</span></a></nav></div><script src="/nav.js?v=20261105" defer></script></div>
 <header class="hero page-hero">
   <canvas id="sky" aria-hidden="true"></canvas>
   <div class="wrap">
@@ -392,10 +395,7 @@ dialog.kdlg[open]{animation:kdin .45s cubic-bezier(.2,.8,.2,1)}
       <div>
                 <h1>أن نرى أبعد،<br>كلما عرفنا أكثر</h1>
         <p class="lead">إشراقة — بوتقةٌ للمعرفة، وفضاءٌ للقراءة، وأفقٌ يمتد من ذاكرة الماضي إلى احتمالات المستقبل.</p>
-        <a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
-          <span><small>احصل عليه من</small><b>Google Play</b></span>
-        </a>
+        <div class="stores"><a class="st" data-st="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="إشراقة يومية على Google Play" title="Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg></a><a class="st" data-st="as" href="https://apps.apple.com/app/id6826877682" aria-label="إشراقة يومية على App Store" title="App Store"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></a><a class="st" data-st="ms" href="https://apps.microsoft.com/detail/9nr3bxwzrdxs" target="_blank" rel="noopener" aria-label="إشراقة يومية على Microsoft Store" title="Microsoft Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.6v9.6H2z"/><path fill="#7FBA00" d="M12.4 2H22v9.6h-9.6z"/><path fill="#00A4EF" d="M2 12.4h9.6V22H2z"/><path fill="#FFB900" d="M12.4 12.4H22V22h-9.6z"/></svg></a></div>
       </div>
       <div class="phone-wrap"><div class="phone"><img width="540" height="1134" src="/img/culture.webp" alt="صدى وثقافتك" data-cap="صدى وثقافتك" class=on><img width="540" height="1134" src="/img/explain.webp" alt="اشرح لي" data-cap="اشرح لي" loading=lazy><img width="540" height="1134" src="/img/community.webp" alt="تحدي المجتمعات" data-cap="تحدي المجتمعات" loading=lazy><img width="540" height="1134" src="/img/grandma.webp" alt="حكمة جدّتي" data-cap="حكمة جدّتي" loading=lazy></div><div class="phone-cap" aria-live="off">صدى وثقافتك</div></div>
     </div>
@@ -419,27 +419,11 @@ dialog.kdlg[open]{animation:kdin .45s cubic-bezier(.2,.8,.2,1)}
     <div class="wrap">
       <h2>من ذاكرة الماضي إلى احتمالات المستقبل، اقرأ معنا</h2>
       <p class="sub">حمّل إشراقة يومية وابدأ مع ناديك اليوم.</p>
-      <a class="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="احصل عليه من Google Play">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg>
-          <span><small>احصل عليه من</small><b>Google Play</b></span>
-        </a>
+      <div class="stores"><a class="st" data-st="play" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa" aria-label="إشراقة يومية على Google Play" title="Google Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.2 13.4 12l-9.8 9.8c-.4-.2-.6-.6-.6-1.1V3.3c0-.5.2-.9.6-1.1z"/><path fill="#FBBC04" d="m16.7 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1.1.6 1.1 1.8 0 2.4z"/><path fill="#EA4335" d="M3.6 21.8 13.4 12l3.3 3.3L5 21.9c-.5.3-1 .2-1.4-.1z"/><path fill="#4285F4" d="M3.6 2.2c.4-.3.9-.4 1.4-.1l11.7 6.6L13.4 12z"/></svg></a><a class="st" data-st="as" href="https://apps.apple.com/app/id6826877682" aria-label="إشراقة يومية على App Store" title="App Store"><svg viewBox="0 0 24 24" aria-hidden="true" fill="#fff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></a><a class="st" data-st="ms" href="https://apps.microsoft.com/detail/9nr3bxwzrdxs" target="_blank" rel="noopener" aria-label="إشراقة يومية على Microsoft Store" title="Microsoft Store"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.6v9.6H2z"/><path fill="#7FBA00" d="M12.4 2H22v9.6h-9.6z"/><path fill="#00A4EF" d="M2 12.4h9.6V22H2z"/><path fill="#FFB900" d="M12.4 12.4H22V22h-9.6z"/></svg></a></div>
     </div>
   </section>
 </main>
-<footer>
-  <div class="wrap row">
-    <nav class="links"><a href="/about/" aria-current="page">عن التطبيق</a>
-      <a href="/developers/">للمطوّرين</a>
-      <a href="/wallpapers/">خلفيات إشراقة</a>
-      <a href="/privacy/">سياسة الخصوصية</a>
-      <a href="/terms/">شروط الاستخدام</a>
-      <a href="/delete-account/">حذف الحساب</a>
-      <a href="/child-safety/">سلامة الأطفال</a>
-      <a href="/contact/">تواصل معنا</a>
-      <a href="/en/" hreflang="en" lang="en">English</a></nav>
-    <div class="credit"><a class="by" href="https://saifuddin.dev" rel="author">تطوير سيف الدين أحمد</a><span>جميع الحقوق محفوظة © 2026 إشراقة يومية</span></div>
-  </div>
-</footer>
+<footer class="sfoot"><nav class="sfoot-links" aria-label="روابط الموقع"><a href="/about/" aria-current="page">عن التطبيق</a><a href="/a/">المقالات</a><a href="/k/">المكتبة</a><a href="/developers/">المطوّرون</a><a href="/wallpapers/">خلفيات إشراقة</a><a href="/privacy/">سياسة الخصوصية</a><a href="/terms/">شروط الاستخدام</a><a href="/delete-account/">حذف الحساب</a><a href="/child-safety/">سلامة الأطفال</a><a href="/contact/">تواصل معنا</a><a href="/en/" hreflang="en" lang="en">English</a></nav><p class="sfoot-by"><a href="https://saifuddin.dev" rel="author">تطوير سيف الدين أحمد</a></p><p class="sfoot-c">جميع الحقوق محفوظة © 2026 إشراقة يومية</p></footer>
 <script>
 (function(){
 var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;

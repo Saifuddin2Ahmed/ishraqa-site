@@ -1,33 +1,83 @@
-/* الشريط العلوي الموحّد لكل صفحات الموقع */
-.snav{position:sticky;top:0;z-index:25;background:linear-gradient(120deg,#2A1B5E,#8E3A8C 60%,#F07A4A);color:#fff;box-shadow:0 6px 24px rgba(42,27,94,.18);font-family:Cairo,Tahoma,system-ui,sans-serif;line-height:1.5}
+/* الشريط العلوي الموحّد لكل صفحات الموقع (يولّده tools/site_nav.py، وقائمة الهاتف في /nav.js) */
+.snav{position:sticky;top:0;z-index:25;color:#fff;font-family:Cairo,Tahoma,system-ui,sans-serif;line-height:1.5;
+--g:linear-gradient(120deg,#2A1B5E,#8E3A8C 60%,#F07A4A)}
+.snav.is-open{z-index:80}
 .snav *{box-sizing:border-box}
+/* التدرّج في طبقة خلفية: تحته ستار القائمة على الهاتف، فلا يغمق الشريط نفسه */
+.snav:after{content:'';position:absolute;inset:0;z-index:-1;background:var(--g);box-shadow:0 6px 24px rgba(42,27,94,.18)}
 /* في الصفحات الإنجليزية الروابط على اليمين: يبدأ التدرّج البرتقالي من جهة الشعار ليبقى النص على البنفسجي */
-html[dir=ltr] .snav{background:linear-gradient(240deg,#2A1B5E,#8E3A8C 60%,#F07A4A)}
-.snav-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.snav .snav-brand{display:flex;align-items:center;gap:10px;flex:none;color:#fff;font-weight:800;font-size:17px;text-decoration:none;white-space:nowrap}
+html[dir=ltr] .snav{--g:linear-gradient(240deg,#2A1B5E,#8E3A8C 60%,#F07A4A)}
+.snav .snav-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.snav .snav-brand{display:flex;align-items:center;gap:10px;flex:none;color:#fff;font-weight:800;font-size:17px;line-height:1.3;text-decoration:none;white-space:nowrap}
 .snav .snav-brand img{width:34px;height:34px;border-radius:9px;display:block;max-width:none}
-.snav .snav-links{display:flex;align-items:center;justify-content:flex-start;gap:6px;margin:0;padding:0;background:none;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.snav .snav-links::-webkit-scrollbar{display:none}
-.snav .snav-links a{flex:none;color:#fff;text-decoration:none;font-weight:700;font-size:15px;line-height:1.4;white-space:nowrap;padding:6px 10px;border-radius:999px;text-shadow:0 1px 2px rgba(0,0,0,.3);transition:opacity .2s,background .2s}
-.snav .snav-links a:hover{opacity:1;background:rgba(255,255,255,.12)}
-.snav .snav-links a[aria-current]{opacity:1;font-weight:800;background:rgba(255,255,255,.18)}
-.snav .snav-links a:focus-visible,.snav .snav-brand:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
-@media (max-width:640px){
-.snav-in{padding:10px 12px;gap:8px}
-.snav .snav-brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.snav .snav-links{display:flex;align-items:center;gap:6px;margin:0;padding:0;background:none;border:0;min-width:0}
+.snav .snav-links a{flex:none;display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:none;font-weight:700;font-size:15px;line-height:1.4;white-space:nowrap;padding:6px 12px;border-radius:999px;text-shadow:0 1px 2px rgba(0,0,0,.3);transition:background .2s}
+.snav .snav-links a:hover{background:rgba(255,255,255,.12)}
+.snav .snav-links a[aria-current]{font-weight:800;background:rgba(255,255,255,.18)}
+.snav .snav-globe{width:17px;height:17px;flex:none;opacity:.9}
+.snav a:focus-visible,.snav .snav-btn:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
+.snav .snav-btn{display:none}
+
+/* الهاتف: الشعار والاسم في جهة، وزر قائمة واحد في الأخرى، والروابط في لوحة تنسدل تحت الشريط */
+@media (max-width:760px){
+.snav .snav-in{padding:8px 12px;padding-inline-start:16px}
+.snav .snav-brand{gap:9px}
 .snav .snav-brand img{width:32px;height:32px;border-radius:8px}
-.snav .snav-links{gap:0}
-.snav .snav-links a{font-size:14px;padding:6px 7px}
+.snav .snav-btn{display:grid;place-items:center;flex:none;width:44px;height:44px;margin:0;padding:0;border:0;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s}
+.snav .snav-btn:hover,.snav .snav-btn:active{background:rgba(255,255,255,.22)}
+.snav .snav-bars{position:relative;display:block;width:20px;height:14px}
+.snav .snav-bars i{position:absolute;left:0;right:0;height:2px;border-radius:2px;background:currentColor;transition:transform .25s cubic-bezier(.2,.7,.2,1),opacity .2s}
+.snav .snav-bars i:nth-child(1){top:0}.snav .snav-bars i:nth-child(2){top:6px}.snav .snav-bars i:nth-child(3){top:12px}
+.snav.is-open .snav-bars i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.snav.is-open .snav-bars i:nth-child(2){opacity:0}
+.snav.is-open .snav-bars i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.snav .snav-links{position:absolute;top:100%;left:0;right:0;z-index:1;display:block;padding:8px 0 12px;background:#fff;color:#241B3A;border-radius:0 0 22px 22px;box-shadow:0 22px 44px rgba(26,14,48,.24);max-height:calc(100vh - 72px);max-height:calc(100dvh - 72px);overflow-y:auto;overscroll-behavior:contain;
+visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .2s ease,transform .24s cubic-bezier(.2,.7,.2,1),visibility 0s linear .24s}
+.snav.is-open .snav-links{visibility:visible;opacity:1;transform:none;transition:opacity .2s ease,transform .24s cubic-bezier(.2,.7,.2,1),visibility 0s}
+.snav .snav-links a{display:flex;align-items:center;gap:10px;min-height:52px;margin:0 12px;padding:0 14px;border-radius:14px;color:#241B3A;font-size:17px;font-weight:700;line-height:1.4;text-shadow:none;white-space:normal;position:relative}
+.snav .snav-links a+a:before{content:'';position:absolute;top:0;left:14px;right:14px;height:1px;background:#EEE8F5}
+.snav .snav-links a:hover{background:#F7F3FC}
+.snav .snav-links a[aria-current]{background:#F3ECFA;color:#7A2F78;font-weight:800}
+.snav .snav-links a[aria-current]:before,.snav .snav-links a[aria-current]+a:before{display:none}
+.snav .snav-links a:focus-visible{outline:2px solid #8E3A8C;outline-offset:-2px}
+.snav .snav-links .snav-lang{color:#5E5672}
+.snav .snav-globe{width:20px;height:20px;opacity:.75}
+/* ستار خفيف خلف اللوحة: لمسة خارجها تغلقها دون أن تضغط ما تحتها */
+.snav:before{content:'';position:fixed;inset:0;z-index:-2;background:rgba(16,8,28,.32);opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s linear .2s}
+.snav.is-open:before{opacity:1;visibility:visible;transition:opacity .2s,visibility 0s}
 }
-@media (max-width:400px){
-.snav-in{padding:10px 8px;gap:4px}
-.snav .snav-brand img{width:30px;height:30px}
-.snav .snav-links a{padding:6px 3px}
+@media (max-width:760px) and (prefers-color-scheme:dark){
+.snav .snav-links{background:#1C1729;color:#F1ECF8;border:1px solid rgba(255,255,255,.07);border-top:0;box-shadow:0 22px 44px rgba(0,0,0,.55)}
+.snav .snav-links a{color:#F1ECF8}
+.snav .snav-links a+a:before{background:rgba(255,255,255,.08)}
+.snav .snav-links a:hover{background:rgba(255,255,255,.05)}
+.snav .snav-links a[aria-current]{background:rgba(255,255,255,.08);color:#FFC49B}
+.snav .snav-links a:focus-visible{outline-color:#FFB547}
+.snav .snav-links .snav-lang{color:#C9C0DA}
+.snav:before{background:rgba(0,0,0,.5)}
 }
-@media (max-width:359px){
-.snav-in{padding:10px 6px;gap:2px}
-.snav .snav-brand img{width:28px;height:28px}
-.snav .snav-links a{font-size:13px;padding:6px 2px;letter-spacing:-.1px}
+@media (max-width:340px){
+.snav .snav-in{padding-inline:12px 10px}
+.snav .snav-brand{font-size:16px;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){
+.snav .snav-links,.snav.is-open .snav-links,.snav .snav-bars i,.snav:before,.snav.is-open:before{transition:none}
+.snav .snav-links{transform:none}
 }
 /* شريط تبويبات صفحات السياسات تحت الشريط الموحّد لا يلتصق فوقه */
 .snav ~ header.bar{position:relative;top:auto}
+
+/* التذييل الموحّد لكل صفحات الموقع (يولّده tools/site_footer.py)؛ ألوانه من متغيرات الصفحة لتناسب خلفيتها */
+footer.sfoot{display:block;position:static;width:auto;max-width:none;margin:56px 0 0;padding:30px 16px 36px;border:0;border-top:1px solid var(--line,rgba(127,110,150,.22));background:none;box-shadow:none;
+color:var(--muted,#6B6480);font-family:Cairo,Tahoma,system-ui,sans-serif;font-size:14px;font-weight:400;line-height:1.9;text-align:center}
+footer.sfoot .sfoot-links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 20px;max-width:1180px;margin:0 auto 18px;padding:0;background:none;border:0}
+footer.sfoot a{color:inherit;text-decoration:none;opacity:1}
+footer.sfoot .sfoot-links a{display:inline-block;padding:5px 0;white-space:nowrap;font-weight:600}
+footer.sfoot a:hover{color:var(--ink,inherit);text-decoration:underline;text-underline-offset:4px}
+footer.sfoot a[aria-current]{color:var(--ink,inherit)}
+footer.sfoot a:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:4px}
+footer.sfoot p{margin:0;padding:0;max-width:none;font-size:14px;line-height:1.9;color:inherit;text-align:center}
+footer.sfoot .sfoot-by a{font-weight:700;color:var(--ink,inherit)}
+footer.sfoot .sfoot-c{margin-top:2px;font-size:13px}
+@media (max-width:480px){footer.sfoot .sfoot-links{gap:0 16px}}
+@media print{.snav,footer.sfoot{display:none}}

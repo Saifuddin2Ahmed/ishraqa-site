@@ -18,6 +18,7 @@ import markdown
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import seo  # noqa: E402
+import site_footer  # noqa: E402
 import site_nav  # noqa: E402
 
 SUPABASE_URL = 'https://jytbowsfvuzdnsmhmsly.supabase.co'
@@ -182,8 +183,6 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 main{padding-bottom:20px}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}.rv.on{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.card,.card img,.feat,.feat img,.btn{transition:none}html{scroll-behavior:auto}}
-footer{color:var(--muted);font-size:13px;text-align:center;padding:34px 16px;line-height:2.2;border-top:1px solid var(--line);margin-top:30px}
-footer a{color:var(--muted);text-decoration:none;white-space:nowrap}footer nav{margin-bottom:4px}
 """
 
 # يظهر العنصر بهدوء عند الوصول إليه، وزر «افتح في التطبيق» يناسب جهاز القارئ
@@ -213,10 +212,8 @@ chips.forEach(function(ch){ch.addEventListener('click',function(){cat=ch.dataset
 })();
 </script>"""
 
-FOOT = """<footer><nav><a href="/about/">عن التطبيق</a> · <a href="/a/">المقالات</a> ·
-<a href="/k/">مكتبة إشراقة</a> · <a href="/developers/">للمطوّرين</a> ·
-<a href="/privacy/">سياسة الخصوصية</a> · <a href="/terms/">شروط الاستخدام</a> ·
-<a href="/contact/">تواصل معنا</a></nav><div>جميع الحقوق محفوظة © {year} إشراقة يومية</div></footer>
+# التذييل الموحّد من site_footer.py
+FOOT = """{foot}
 {js}</body></html>"""
 
 ICONS = {
@@ -356,7 +353,7 @@ def article_page(a: dict, related: list) -> str:
         + share_row(url, a['title'])
         + '</main></div>'
         + (f'<div class="wrap wide"><h2 class="sec">اقرأ أيضًا</h2><div class="grid">{more}</div></div>' if more else '')
-        + FOOT.format(year=dt.date.today().year, js=js())
+        + FOOT.format(foot=site_footer.footer(f'/a/{slug}/'), js=js())
     )
     return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes, image=cover, image_alt=a['title'],
                         og_type='article', article={'published': date, 'modified': modified, 'section': cat})
@@ -404,7 +401,7 @@ def index_page(items: list) -> str:
         + feat_html
         + f'<div class="grid">{"".join(card(a) for a in rest)}</div>'
         + '<p class="empty">لا توجد مقالات مطابقة. جرّب كلمة أخرى.</p>'
-        + '</main></div>' + FOOT.format(year=dt.date.today().year, js=js())
+        + '</main></div>' + FOOT.format(foot=site_footer.footer('/a/'), js=js())
     )
     return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes)
 

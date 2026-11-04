@@ -1,15 +1,37 @@
-"""الشريط العلوي الموحّد للموقع (تنسيقه في /nav.css): مصدر واحد تستعمله المولّدات وتحديث الصفحات الثابتة."""
+"""الشريط العلوي الموحّد للموقع (تنسيقه في /nav.css وسلوك قائمة الهاتف في /nav.js):
+مصدر واحد تستعمله المولّدات وتحديث الصفحات الثابتة (tools/site_chrome.py)."""
 
-NAV_CSS = '<link rel="stylesheet" href="/nav.css?v=20261104">'
+VERSION = '20261105'
+NAV_CSS = f'<link rel="stylesheet" href="/nav.css?v={VERSION}">'
+NAV_JS = f'<script src="/nav.js?v={VERSION}" defer></script>'
 
-AR_LINKS = [('/about/', 'عن التطبيق'), ('/a/', 'المقالات'), ('/k/', 'المكتبة'), ('/developers/', 'للمطوّرين')]
+AR_LINKS = [('/about/', 'عن التطبيق'), ('/a/', 'المقالات'), ('/developers/', 'المطوّرون')]
 EN_LINKS = [('/en/contact/', 'Contact'), ('/en/support/', 'Support')]
 
 # صفحات لها نظيرة في اللغة الأخرى: زر اللغة يذهب إليها مباشرة
 PAIRS = ['privacy', 'terms', 'contact', 'delete-account', 'child-safety', 'press-kit', 'support']
 
+GLOBE = ('<svg class="snav-globe" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" '
+         'stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/>'
+         '<path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>')
+BURGER = '<span class="snav-bars" aria-hidden="true"><i></i><i></i><i></i></span>'
+ICON = '<img src="/img/icon-192.png" width="192" height="192" alt="">'
 
-def _current(path, href):
+
+def is_en(path):
+    return path == '/en/' or path.startswith('/en/')
+
+
+def other_lang(path):
+    """رابط الصفحة نفسها باللغة الأخرى إن وُجدت، وإلا الرئيسية"""
+    if is_en(path):
+        rest = path[len('/en/'):].strip('/')
+        return f'/{rest}/' if rest in PAIRS else '/'
+    rest = path.strip('/')
+    return f'/en/{rest}/' if rest in PAIRS else '/en/'
+
+
+def current(path, href):
     if path == href:
         return ' aria-current="page"'
     if href in ('/a/', '/k/') and path.startswith(href):
@@ -19,19 +41,15 @@ def _current(path, href):
 
 def header(path='/'):
     """path: مسار الصفحة مثل /about/ أو /en/privacy/ أو /a/<slug>/"""
-    en = path == '/en/' or path.startswith('/en/')
-    if en:
-        rest = path[len('/en/'):].strip('/')
-        other = f'/{rest}/' if rest in PAIRS else '/'
-        links = ''.join(f'<a href="{h}"{_current(path, h)}>{t}</a>' for h, t in EN_LINKS)
-        links += f'<a href="{other}" hreflang="ar" lang="ar">العربية</a>'
-        brand = '<a class="snav-brand" href="/en/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>Ishraqa Daily</span></a>'
-        label = 'Main'
+    if is_en(path):
+        links, home, name, label, menu = EN_LINKS, '/en/', 'Ishraqa Daily', 'Main', 'Menu'
+        lang = f'<a class="snav-lang" href="{other_lang(path)}" hreflang="ar" lang="ar">{GLOBE}<span>العربية</span></a>'
     else:
-        rest = path.strip('/')
-        other = f'/en/{rest}/' if rest in PAIRS else '/en/'
-        links = ''.join(f'<a href="{h}"{_current(path, h)}>{t}</a>' for h, t in AR_LINKS)
-        links += f'<a href="{other}" hreflang="en" lang="en">English</a>'
-        brand = '<a class="snav-brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""><span>إشراقة يومية</span></a>'
-        label = 'الرئيسية'
-    return f'<div class="snav"><div class="snav-in">{brand}<nav class="snav-links" aria-label="{label}">{links}</nav></div></div>'
+        links, home, name, label, menu = AR_LINKS, '/', 'إشراقة يومية', 'الرئيسية', 'القائمة'
+        lang = f'<a class="snav-lang" href="{other_lang(path)}" hreflang="en" lang="en">{GLOBE}<span>English</span></a>'
+    items = ''.join(f'<a href="{h}"{current(path, h)}>{t}</a>' for h, t in links) + lang
+    return (f'<div class="snav"><div class="snav-in">'
+            f'<a class="snav-brand" href="{home}">{ICON}<span>{name}</span></a>'
+            f'<button class="snav-btn" type="button" aria-label="{menu}" aria-expanded="false" aria-controls="snav-menu">{BURGER}</button>'
+            f'<nav class="snav-links" id="snav-menu" aria-label="{label}">{items}</nav>'
+            f'</div>{NAV_JS}</div>')
