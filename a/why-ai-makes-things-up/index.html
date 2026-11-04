@@ -39,6 +39,9 @@ a{color:inherit}img{max-width:100%}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;white-space:nowrap}.brand img{width:34px;height:34px;border-radius:9px}
 .tnav{display:flex;align-items:center;gap:18px}.tnav a{text-decoration:none;font-weight:700;font-size:15px;opacity:.9}.tnav a:hover{opacity:1}
 @media (max-width:640px){.tnav a:not(.btn):not(.lang){display:none}}
+.btn,.lang{white-space:nowrap}
+@media (max-width:640px){.top .wrap{padding:10px 16px;gap:10px}.brand{font-size:16px;gap:8px}.brand img{width:30px;height:30px;border-radius:8px}.tnav{gap:12px}.top .btn.light{padding:6px 13px;font-size:13px}.tnav a.lang{font-size:13px}}
+@media (max-width:370px){.brand{font-size:0;gap:0}.brand img{width:32px;height:32px}}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;border-radius:999px;padding:9px 18px;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.light{background:rgba(255,255,255,.18);color:#fff;font-size:14px;opacity:1!important;border:1px solid rgba(255,255,255,.25)}
