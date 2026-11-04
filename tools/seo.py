@@ -278,12 +278,12 @@ def static_page(path):
         return t, d, [webpage(url, t, d, 'AboutPage', about={'@id': APP_ID}, mainEntity={'@id': FOUNDER_ID}),
                       _crumbs(url, 'عن إشراقة'), founder(full=True), app(), org(), website()]
     if path == 'developers':
-        t = 'نوادي المطوّرين للمطوّرين' + SUFFIX
-        d = 'فريق صغير، ومرشد خبير، ومشروع مفتوح المصدر يراه العالم. نوادي المطوّرين في إشراقة يومية للمطوّرين والمطوّرات مجانًا.'
+        t = 'نوادي المطوّرين' + SUFFIX
+        d = 'فريق صغير، ومرشد خبير، ومشروع مفتوح المصدر يراه العالم. نوادي المطوّرين في إشراقة يومية للمطوّرين والمطوّرات.'
         return t, d, [webpage(url, t, d, about={'@id': APP_ID}), _crumbs(url, 'للمطوّرين'), app(), org(), website()]
     if path == 'wallpapers':
         t = 'خلفيات إشراقة: سمات ويندوز ولوحات للهاتف'
-        d = 'سمتا ويندوز من إشراقة يومية تتبدّل وحدها، ولوحات 4K للحاسوب والهاتف بلا أي كتابة، مجانًا.'
+        d = 'سمتا ويندوز من إشراقة يومية تتبدّل وحدها، ولوحات 4K للحاسوب والهاتف بلا أي كتابة.'
         return t, d, [webpage(url, t, d, 'CollectionPage', isAccessibleForFree=True), _crumbs(url, 'خلفيات إشراقة'),
                       org(), website()]
     if path == 'testers':
@@ -297,7 +297,7 @@ def finalize_static(doc, path, root=None):
     t, d, nodes = static_page(path)
     url = f'{SITE}/{path}/' if path else SITE + '/'
     # للرئيسية نسخة إنجليزية: بدون هذا تُحذف وسوم hreflang عند تحديث الرأس (--static)
-    alts = {'ar': SITE + '/', 'en': SITE + '/en/'} if path == '' else None
+    alts = {'ar': url, 'en': f'{SITE}/en/{path}/' if path else SITE + '/en/'} if path in ('', 'about', 'developers') else None
     return finalize(doc, url=url, title=t, desc=d, nodes=nodes, root=root, alternates=alts)
 
 

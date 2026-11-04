@@ -6,10 +6,10 @@ NAV_CSS = f'<link rel="stylesheet" href="/nav.css?v={VERSION}">'
 NAV_JS = f'<script src="/nav.js?v={VERSION}" defer></script>'
 
 AR_LINKS = [('/about/', 'عن التطبيق'), ('/a/', 'المقالات'), ('/developers/', 'المطوّرون')]
-EN_LINKS = [('/en/contact/', 'Contact'), ('/en/support/', 'Support')]
+EN_LINKS = [('/en/about/', 'About'), ('/en/developers/', 'Developers'), ('/en/support/', 'Support')]
 
 # صفحات لها نظيرة في اللغة الأخرى: زر اللغة يذهب إليها مباشرة
-PAIRS = ['privacy', 'terms', 'contact', 'delete-account', 'child-safety', 'press-kit', 'support']
+PAIRS = ['about', 'developers', 'privacy', 'terms', 'contact', 'delete-account', 'child-safety', 'press-kit', 'support']
 
 GLOBE = ('<svg class="snav-globe" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" '
          'stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/>'

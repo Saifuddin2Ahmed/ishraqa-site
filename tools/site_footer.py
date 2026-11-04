@@ -7,7 +7,7 @@ AUTHOR = 'https://saifuddin.dev'
 AR_LINKS = [('/about/', 'عن التطبيق'), ('/a/', 'المقالات'), ('/k/', 'المكتبة'), ('/developers/', 'المطوّرون'),
             ('/wallpapers/', 'خلفيات إشراقة'), ('/privacy/', 'سياسة الخصوصية'), ('/terms/', 'شروط الاستخدام'),
             ('/delete-account/', 'حذف الحساب'), ('/child-safety/', 'سلامة الأطفال'), ('/contact/', 'تواصل معنا')]
-EN_LINKS = [('/en/contact/', 'Contact'), ('/en/support/', 'Support'), ('/en/privacy/', 'Privacy Policy'),
+EN_LINKS = [('/en/about/', 'About the app'), ('/en/developers/', 'Developers'), ('/en/contact/', 'Contact'), ('/en/support/', 'Support'), ('/en/privacy/', 'Privacy Policy'),
             ('/en/terms/', 'Terms of Use'), ('/en/delete-account/', 'Delete account'),
             ('/en/child-safety/', 'Child safety'), ('/en/press-kit/', 'Press kit')]
 
