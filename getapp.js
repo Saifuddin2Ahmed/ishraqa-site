@@ -25,7 +25,8 @@
     '.ga button:hover{background:rgba(255,255,255,.2)}' +
     '@media (max-width:520px){.ga{bottom:14px;gap:10px;padding:6px 6px 6px 10px}.ga b{display:none}.ga a{padding:9px 16px;font-size:14px}}' +
     '.ap-on .ga.in{transform:translate(-50%,30px);opacity:0;pointer-events:none}' +
-    '@media (prefers-reduced-motion:reduce){.ga{transition:opacity .2s}}';
+    '@media (prefers-reduced-motion:reduce){.ga{transition:opacity .2s}}' +
+    'footer.sfoot{padding-bottom:96px}';
   document.head.appendChild(css);
   var el = document.createElement('div');
   el.className = 'ga'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', en ? 'Get the app' : 'حمّل التطبيق');

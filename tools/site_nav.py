@@ -43,10 +43,10 @@ def header(path='/'):
     """path: مسار الصفحة مثل /about/ أو /en/privacy/ أو /a/<slug>/"""
     if is_en(path):
         links, home, name, label, menu = EN_LINKS, '/en/', 'Ishraqa Daily', 'Main', 'Menu'
-        lang = f'<a class="snav-lang" href="{other_lang(path)}" hreflang="ar" lang="ar">{GLOBE}<span>العربية</span></a>'
+        lang = f'<a class="snav-lang" href="{other_lang(path)}" hreflang="ar" lang="ar"><span>العربية</span></a>'
     else:
         links, home, name, label, menu = AR_LINKS, '/', 'إشراقة يومية', 'الرئيسية', 'القائمة'
-        lang = f'<a class="snav-lang" href="{other_lang(path)}" hreflang="en" lang="en">{GLOBE}<span>English</span></a>'
+        lang = f'<a class="snav-lang" href="{other_lang(path)}" hreflang="en" lang="en"><span>English</span></a>'
     items = ''.join(f'<a href="{h}"{current(path, h)}>{t}</a>' for h, t in links) + lang
     return (f'<div class="snav"><div class="snav-in">'
             f'<a class="snav-brand" href="{home}">{ICON}<span>{name}</span></a>'
