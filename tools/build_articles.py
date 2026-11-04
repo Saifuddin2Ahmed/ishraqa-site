@@ -174,7 +174,7 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 .feat:hover{transform:translateY(-4px)}
 .feat .ph{overflow:hidden;min-height:320px}.feat img{width:100%;height:100%;object-fit:cover;transition:transform .7s}.feat:hover img{transform:scale(1.05)}
 .feat .in{padding:32px;display:flex;flex-direction:column;gap:12px;justify-content:center}
-.feat .tag{font-weight:800;color:var(--sun);font-size:14px;letter-spacing:.3px}
+.feat .tag{font-weight:800;color:#B5481F;font-size:14px;letter-spacing:.3px}
 .feat b{font-size:clamp(24px,2.8vw,32px);line-height:1.45}.feat p{margin:0;color:var(--muted);font-size:16.5px;line-height:1.85}
 .feat small{color:var(--muted)}
 @media (max-width:820px){.feat{grid-template-columns:1fr}.feat .ph{min-height:0;aspect-ratio:16/9}.feat .in{padding:22px}}
@@ -450,6 +450,8 @@ def main() -> None:
         f'&status=eq.published&publish_date=lte.{today}&order=publish_date.desc,published_at.desc&limit=500'
     )
     if OUT.exists():
+        if len(items) < 20:
+            sys.exit(f'only {len(items)} articles returned; refusing to rebuild a/')
         shutil.rmtree(OUT)
     OUT.mkdir()
     for a in items:

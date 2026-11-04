@@ -54,7 +54,7 @@ li:last-child{border:0}
   <p class="details hide" id="details"></p>
   <p class="note hide" id="private">هذه الفعالية في نادٍ خاص. اطلب رابط الدعوة من صاحب النادي، ثم سجّل حضورك من التطبيق.</p>
   <a class="btn primary" id="open" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">سأحضر: افتح في التطبيق</a>
-  <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer=utm_source%3Devent_page">حمّل إشراقة يومية مجانًا</a>
+  <a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer=utm_source%3Devent_page">حمّل إشراقة يومية</a>
   <p class="note">يصلك تذكير قبل الموعد بساعة حين تسجّل «سأحضر» من التطبيق.</p>
 </main>
 <script>
@@ -62,7 +62,7 @@ li:last-child{border:0}
   var id=(new URLSearchParams(location.search).get('id')||'').toLowerCase();
   if(!/^[0-9a-f-]{36}$/.test(id))return;
   var play='https://play.google.com/store/apps/details?id=com.taeziz.ishraqa&referrer='+encodeURIComponent('utm_source=event_page');
-  var target='ishraqa.otwox.com/event/?id='+id;
+  var target='ishraqa.app/event/?id='+id;
   document.getElementById('open').href='intent://'+target+'#Intent;scheme=https;package=com.taeziz.ishraqa;S.browser_fallback_url='+encodeURIComponent(play)+';end';
   var kinds={meetup:'📍 لقاء حضوري',guest:'🎙️ ضيف النادي',live:'🔴 جلسة مباشرة'};
   var platforms={meet:'Google Meet',zoom:'Zoom',youtube:'يوتيوب',facebook:'فيسبوك',tiktok:'تيك توك',x:'مساحات X',clubhouse:'كلوب هاوس',linkedin:'لينكدإن',whatsapp:'واتساب',viber:'فايبر',other:'منصة على الإنترنت'};

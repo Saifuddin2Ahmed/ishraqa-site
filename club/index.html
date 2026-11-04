@@ -57,7 +57,7 @@ li:last-child{border:0}
     <li>💬 نقاش لكل جزء، دون حرق للأحداث</li>
   </ul>
   <a class="btn primary" id="open" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">انضم من التطبيق</a>
-  <a class="btn secondary" id="get" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل إشراقة يومية مجانًا</a>
+  <a class="btn secondary" id="get" href="https://play.google.com/store/apps/details?id=com.taeziz.ishraqa">حمّل إشراقة يومية</a>
   <p class="code" id="codeLine">إن طُلب منك، رمز الدعوة: <b id="code"></b></p>
 </main>
 <script>
@@ -70,7 +70,7 @@ li:last-child{border:0}
   // الرمز يمر عبر Google Play، فيفتح التطبيق النادي مباشرة بعد التثبيت
   var playRef=play+'&referrer='+encodeURIComponent('utm_source=club_invite&club='+code);
   document.getElementById('get').href=playRef;
-  var target='ishraqa.otwox.com/club/?c='+code;
+  var target='ishraqa.app/club/?c='+code;
   document.getElementById('open').href='intent://'+target+'#Intent;scheme=https;package=com.taeziz.ishraqa;S.browser_fallback_url='+encodeURIComponent(playRef)+';end';
   fetch('https://jytbowsfvuzdnsmhmsly.supabase.co/rest/v1/rpc/club_by_code',{method:'POST',headers:{'apikey':'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD','Authorization':'Bearer sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD','Content-Type':'application/json'},body:JSON.stringify({p_code:code})})
     .then(function(r){return r.json();}).then(function(rows){
