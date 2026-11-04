@@ -1,0 +1,26 @@
+/* الشريط العلوي الموحّد لكل صفحات الموقع */
+.snav{position:sticky;top:0;z-index:25;background:linear-gradient(120deg,#2A1B5E,#8E3A8C 60%,#F07A4A);color:#fff;box-shadow:0 6px 24px rgba(42,27,94,.18);font-family:Cairo,Tahoma,system-ui,sans-serif;line-height:1.5}
+.snav *{box-sizing:border-box}
+.snav-in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.snav .snav-brand{display:flex;align-items:center;gap:10px;flex:none;color:#fff;font-weight:800;font-size:17px;text-decoration:none;white-space:nowrap}
+.snav .snav-brand img{width:34px;height:34px;border-radius:9px;display:block;max-width:none}
+.snav .snav-links{display:flex;align-items:center;justify-content:flex-start;gap:6px;margin:0;padding:0;background:none;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.snav .snav-links::-webkit-scrollbar{display:none}
+.snav .snav-links a{flex:none;color:#fff;text-decoration:none;font-weight:700;font-size:15px;line-height:1.4;white-space:nowrap;padding:6px 10px;border-radius:999px;opacity:.88;transition:opacity .2s,background .2s}
+.snav .snav-links a:hover{opacity:1;background:rgba(255,255,255,.12)}
+.snav .snav-links a[aria-current]{opacity:1;font-weight:800;background:rgba(255,255,255,.18)}
+.snav .snav-links a:focus-visible,.snav .snav-brand:focus-visible{outline:2px solid #FFB547;outline-offset:2px}
+@media (max-width:640px){
+.snav-in{padding:10px 12px;gap:8px}
+.snav .snav-brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.snav .snav-brand img{width:32px;height:32px;border-radius:8px}
+.snav .snav-links{gap:0}
+.snav .snav-links a{font-size:14px;padding:6px 7px}
+}
+@media (max-width:400px){
+.snav-in{padding:10px 8px;gap:4px}
+.snav .snav-brand img{width:30px;height:30px}
+.snav .snav-links a{padding:6px 3px}
+}
+/* شريط تبويبات صفحات السياسات تحت الشريط الموحّد لا يلتصق فوقه */
+.snav ~ header.bar{position:relative;top:auto}

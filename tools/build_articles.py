@@ -1,5 +1,5 @@
 """يولّد صفحة ويب لكل مقال منشور في إشراقة (ishraqa.app/a/<slug>/)
-مع معاينة المشاركة (صورة الغلاف) وزر فتح التطبيق، وصفحة فهرس /a/.
+مع معاينة المشاركة (صورة الغلاف) وزر فتح التطبيق داخل المقال، وصفحة فهرس /a/.
 
 يقرأ المقالات المنشورة فقط عبر المفتاح العام (القابل للنشر)؛ الحماية في سياسات RLS.
 يعمل يوميًا عبر GitHub Actions، ويمكن تشغيله يدويًا:
@@ -18,6 +18,7 @@ import markdown
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import seo  # noqa: E402
+import site_nav  # noqa: E402
 
 SUPABASE_URL = 'https://jytbowsfvuzdnsmhmsly.supabase.co'
 PUBLISHABLE_KEY = 'sb_publishable_cm8SXt2NPRY5RY7dclZsLw_4ng3Q0TD'
@@ -91,10 +92,8 @@ HEAD = """<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://jytbowsfvuzdnsmhmsly.supabase.co">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Amiri:ital@0;1&display=swap" rel="stylesheet">
-<style>{css}</style></head><body>
-<div class="top"><div class="wrap wide"><a class="brand" href="/"><img src="/img/icon-192.png" width="192" height="192" alt=""> إشراقة يومية</a>
-<nav class="tnav"><a href="/a/">المقالات</a><a href="/k/">المكتبة</a>
-<a class="btn light" data-open href="{open_app}">افتح في التطبيق</a><a class="lang" href="/en/" hreflang="en" lang="en">English</a></nav></div></div>
+<style>{css}</style>{nav_css}</head><body>
+{nav}
 """
 
 CSS = """
@@ -104,14 +103,7 @@ CSS = """
 body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:var(--cream);color:var(--ink);line-height:1.9;-webkit-font-smoothing:antialiased}
 a{color:inherit}img{max-width:100%}
 .wrap{max-width:780px;margin:0 auto;padding:0 20px}.wrap.wide{max-width:1180px}
-.top{position:sticky;top:0;z-index:20;background:linear-gradient(120deg,var(--night),var(--plum) 60%,var(--sun));color:#fff;box-shadow:0 6px 24px rgba(42,27,94,.18)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;white-space:nowrap}.brand img{width:34px;height:34px;border-radius:9px}
-.tnav{display:flex;align-items:center;gap:18px}.tnav a{text-decoration:none;font-weight:700;font-size:15px;opacity:.9}.tnav a:hover{opacity:1}
-@media (max-width:640px){.tnav a:not(.btn):not(.lang){display:none}}
-.btn,.lang{white-space:nowrap}
-@media (max-width:640px){.top .wrap{padding:10px 16px;gap:10px}.brand{font-size:16px;gap:8px}.brand img{width:30px;height:30px;border-radius:8px}.tnav{gap:12px}.top .btn.light{padding:6px 13px;font-size:13px}.tnav a.lang{font-size:13px}}
-@media (max-width:370px){.brand{font-size:0;gap:0}.brand img{width:32px;height:32px}}
+.btn{white-space:nowrap}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;border-radius:999px;padding:9px 18px;transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px)}
 .btn.light{background:rgba(255,255,255,.18);color:#fff;font-size:14px;opacity:1!important;border:1px solid rgba(255,255,255,.25)}
@@ -345,7 +337,7 @@ def article_page(a: dict, related: list) -> str:
     more = ''.join(card(r) for r in related)
     page = (
         HEAD.format(title=esc(title), desc=esc(desc), url=url, og_type='article', og_title=esc(a['title']),
-                    image=esc(cover), open_app=app, css=CSS)
+                    image=esc(cover), css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(f'/a/{slug}/'))
         + '<div class="progress" aria-hidden="true"></div>'
         + (f'<div class="hero-a"><figure><img src="{esc(sized(cover, 1024))}"'
            + (f' srcset="{srcset(cover)}" sizes="(max-width: 1180px) 100vw, 1140px"' if srcset(cover) else '')
@@ -403,7 +395,7 @@ def index_page(items: list) -> str:
             f'<p>{esc(feat.get("excerpt") or "")}</p><small>{esc(meta)}</small></div></a>')
     page = (
         HEAD.format(title=title, desc=desc, url=url, og_type='website', og_title=title,
-                    image=f'{SITE}/img/og.jpg', open_app=PLAY, css=CSS)
+                    image=f'{SITE}/img/og.jpg', css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header('/a/'))
         + '<header class="hero-i"><video class="hero-v" autoplay muted loop playsinline preload="metadata" poster="/media/articles/hero.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback><source src="/media/articles/hero.mp4" type="video/mp4"><source src="/media/articles/hero.webm" type="video/webm"></video><div class="wrap wide"><h1>مقالات إشراقة</h1>'
         + '<p>مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.</p>'
         + f'<label class="search">{SEARCH_ICON}<input type="search" placeholder="ابحث في المقالات…" aria-label="ابحث في المقالات"></label>'
