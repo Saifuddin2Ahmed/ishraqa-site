@@ -335,7 +335,7 @@ def pages(root):
 
 def _order(url):
     path = url[len(SITE):]
-    top = ['/', '/about/', '/a/', '/q/', '/k/', '/developers/', '/testers/', '/wallpapers/']
+    top = ['/', '/about/', '/a/', '/q/', '/k/', '/developers/', '/wallpapers/']
     if path in top:
         return (0, top.index(path), '')
     sect = {'a': 1, 'k': 2, 'q': 3}.get(path.strip('/').split('/')[0], 4)
@@ -441,7 +441,7 @@ def write_llms(root):
            '- الناشر: [أوتواكس للحلول الرقمية](https://otwox.com)\n'
            '- العبارة: من ذاكرة الماضي إلى احتمالات المستقبل\n\n'
            '## صفحات أساسية\n\n'
-           + line('/', 'الصفحة الرئيسية') + line('/about/') + line('/developers/') + line('/testers/')
+           + line('/', 'الصفحة الرئيسية') + line('/about/') + line('/developers/')
            + line('/wallpapers/') + line('/a/', 'مقالات إشراقة') + line('/q/', 'الحكم والأمثال مع معانيها')
            + line('/k/', 'مكتبة إشراقة')
            + '\n## أحدث المقالات\n\n' + ''.join(line(p) for _, p in arts[:15])
@@ -453,7 +453,7 @@ def write_llms(root):
     return out
 
 
-STATIC = ('', 'about', 'developers', 'wallpapers', 'testers')
+STATIC = ('', 'about', 'developers', 'wallpapers')
 
 
 def refresh_static(root):
