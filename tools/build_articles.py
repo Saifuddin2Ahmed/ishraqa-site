@@ -265,6 +265,16 @@ def author_of(a: dict) -> str:
     return a.get('author_name') or (a.get('author') or {}).get('display_name') or 'فريق إشراقة'
 
 
+def author_en(a: dict) -> str:
+    """اسم الكاتب في الصفحات الإنجليزية: الفريق والمؤسس بالإنجليزية، وغيرهما كما كتبه صاحبه"""
+    name = author_of(a)
+    if is_team(name):
+        return 'Ishraqa Team'
+    if 'سيف الدين' in name:
+        return 'Eng. Saifuddin Ahmed'
+    return name
+
+
 def pill(cat_slug: str, en: bool = False) -> str:
     name = (CAT_EN if en else CATEGORIES).get(cat_slug, '')
     if not name:
@@ -277,93 +287,133 @@ def minutes(a: dict, en: bool = False) -> str:
     return (f'{m} min read' if en else f'{m} دقائق قراءة') if m else ''
 
 
+def has_en(a: dict) -> bool:
+    """للمقال نسخة إنجليزية كتبها كاتبه (title_tr/body_tr)"""
+    return bool((a.get('title_tr') or '').strip() and (a.get('body_tr') or '').strip())
+
+
+def view(a: dict, en: bool) -> dict:
+    """حقول المقال باللغة المطلوبة إن وُجدت، وإلا العربية"""
+    if en and has_en(a):
+        return {'title': a['title_tr'], 'excerpt': a.get('excerpt_tr') or '', 'body': a['body_tr'],
+                'href': f'/en/a/{a["slug"]}/', 'rtl': False}
+    return {'title': a['title'], 'excerpt': a.get('excerpt') or '', 'body': a['body'],
+            'href': f'/a/{a["slug"]}/', 'rtl': en}
+
+
 def card(a: dict, en: bool = False) -> str:
-    q = ' '.join([a['title'], a.get('excerpt') or '', CATEGORIES.get(a['category'], ''), CAT_EN.get(a['category'], '')])
-    # في الصفحة الإنجليزية: العنوان والملخص واسم الكاتب بلغة المقال واتجاهها، وبقية البطاقة إنجليزية
-    ar = ' lang="ar" dir="rtl"' if en else ''
-    who = f'<bdi lang="ar">{esc(author_of(a))}</bdi>' if en else esc(author_of(a))
+    v = view(a, en)
+    q = ' '.join([a['title'], v['title'], v['excerpt'], CATEGORIES.get(a['category'], ''), CAT_EN.get(a['category'], '')])
+    # في الصفحة الإنجليزية: المقال الذي لا نسخة إنجليزية له يظهر بلغته واتجاهها، وبقية البطاقة إنجليزية
+    ar = ' lang="ar" dir="rtl"' if v['rtl'] else ''
+    who = f'<bdi>{esc(author_en(a))}</bdi>' if en else esc(author_of(a))
     meta = ' · '.join(x for x in [who, esc(minutes(a, en)), esc(a.get('publish_date') or '')] if x)
-    return (f'<a class="card rv" href="/a/{esc(a["slug"])}/" data-cat="{esc(a["category"])}" data-q="{esc(q)}">'
-            f'<div class="ph"><img src="{esc(sized(a.get("cover_url") or "/img/og.jpg", 640))}" alt="{esc(a["title"])}" width="640" height="400" loading="lazy" decoding="async"></div>'
-            f'<div class="in">{pill(a["category"], en)}<b{ar}>{esc(a["title"])}</b>'
-            f'<p{ar}>{esc(a.get("excerpt") or "")}</p><small>{meta}</small></div></a>')
+    return (f'<a class="card rv" href="{v["href"]}" data-cat="{esc(a["category"])}" data-q="{esc(q)}">'
+            f'<div class="ph"><img src="{esc(sized(a.get("cover_url") or "/img/og.jpg", 640))}" alt="{esc(v["title"])}" width="640" height="400" loading="lazy" decoding="async"></div>'
+            f'<div class="in">{pill(a["category"], en)}<b{ar}>{esc(v["title"])}</b>'
+            f'<p{ar}>{esc(v["excerpt"])}</p><small>{meta}</small></div></a>')
 
 
-def share_row(url: str, title: str) -> str:
+def share_row(url: str, title: str, en: bool = False) -> str:
     from urllib.parse import quote
     u, t = quote(url, safe=''), quote(title, safe='')
     links = [
-        ('wa', 'واتساب', f'https://wa.me/?text={t}%20{u}'),
+        ('wa', 'WhatsApp' if en else 'واتساب', f'https://wa.me/?text={t}%20{u}'),
         ('x', 'X', f'https://twitter.com/intent/tweet?text={t}&url={u}'),
-        ('fb', 'فيسبوك', f'https://www.facebook.com/sharer/sharer.php?u={u}'),
-        ('tg', 'تيليجرام', f'https://t.me/share/url?url={u}&text={t}'),
+        ('fb', 'Facebook' if en else 'فيسبوك', f'https://www.facebook.com/sharer/sharer.php?u={u}'),
+        ('tg', 'Telegram' if en else 'تيليجرام', f'https://t.me/share/url?url={u}&text={t}'),
     ]
-    out = ''.join(f'<a href="{h}" target="_blank" rel="noopener" aria-label="مشاركة عبر {n}" title="{n}">{ICONS[k]}</a>'
+    via = 'Share on {}' if en else 'مشاركة عبر {}'
+    out = ''.join(f'<a href="{h}" target="_blank" rel="noopener" aria-label="{via.format(n)}" title="{n}">{ICONS[k]}</a>'
                   for k, n, h in links)
+    if en:
+        return (f'<div class="share"><span>Share the article</span>{out}'
+                f'<button type="button" data-copy aria-label="Copy link" title="Copy link">{ICONS["link"]}</button>'
+                '<span class="ok">Link copied ✓</span></div>'
+                '<p class="rights">All rights reserved to Ishraqa Daily and the article’s author. You are welcome to quote it with credit and a link.</p>')
     return (f'<div class="share"><span>شارك المقال</span>{out}'
             f'<button type="button" data-copy aria-label="نسخ الرابط" title="نسخ الرابط">{ICONS["link"]}</button>'
             '<span class="ok">نُسخ الرابط ✓</span></div>'
             '<p class="rights">جميع الحقوق محفوظة لإشراقة يومية وكاتب المقال. يسرّنا الاقتباس مع ذكر المصدر ورابطه.</p>')
 
 
-def article_page(a: dict, related: list) -> str:
+def article_page(a: dict, related: list, en: bool = False) -> str:
+    """صفحة المقال. en=True لنسخته الإنجليزية (/en/a/<slug>/) ولا تُبنى إلا إن كان له نسخة إنجليزية"""
     slug = a['slug']
-    url = f'{SITE}/a/{slug}/'
+    v = view(a, en)
+    path = v['href']
+    url = f'{SITE}{path}'
+    alts = {'ar': f'{SITE}/a/{slug}/', 'en': f'{SITE}/en/a/{slug}/'} if has_en(a) else None
     author = author_of(a)
     cover = a.get('cover_url') or f'{SITE}/img/og.jpg'
-    body_html = markdown.markdown(teaser(a['body']), extensions=['extra', 'sane_lists'])
+    body_html = markdown.markdown(teaser(v['body']), extensions=['extra', 'sane_lists'])
     app = open_app(f'/a/{slug}/', 'article')
-    cat = CATEGORIES.get(a['category'], '')
+    cat = (CAT_EN if en else CATEGORIES).get(a['category'], '')
     date = a.get('publish_date') or ''
     modified = (a.get('updated_at') or '')[:10] or date
     if modified < date:
         modified = date
-    title = seo.fit_title(a['title'])
-    desc = seo.clip(a.get('excerpt') or a['title'], 155)
+    title = seo.fit_title(v['title'])
+    desc = seo.clip(v['excerpt'] or v['title'], 155)
     who = ({'@type': 'Organization', 'name': author, 'url': f'{SITE}/about/'} if is_team(author)
            else FOUNDER if 'سيف الدين' in author
            else {'@type': 'Person', 'name': author})
+    if en:
+        home, crumb = ('Ishraqa Daily', f'{SITE}/en/'), ('Articles', f'{SITE}/en/a/')
+    else:
+        home, crumb = ('إشراقة يومية', f'{SITE}/'), ('المقالات', f'{SITE}/a/')
     nodes = [
-        {'@type': 'Article', '@id': url + '#article', 'headline': seo.clip(a['title'], 110), 'description': desc,
+        {'@type': 'Article', '@id': url + '#article', 'headline': seo.clip(v['title'], 110), 'description': desc,
          'image': [cover], 'datePublished': date, 'dateModified': modified, 'author': who,
          'publisher': {'@id': seo.ORG_ID}, 'mainEntityOfPage': {'@id': url + '#webpage'},
-         'isPartOf': {'@id': seo.WEBSITE_ID}, 'articleSection': cat or None, 'inLanguage': 'ar',
+         'isPartOf': {'@id': seo.WEBSITE_ID}, 'articleSection': cat or None, 'inLanguage': 'en' if en else 'ar',
          'timeRequired': f'PT{a["reading_minutes"]}M' if a.get('reading_minutes') else None,
          'isAccessibleForFree': True},
-        seo.webpage(url, a['title'], desc),
-        seo.breadcrumb(url, [('إشراقة يومية', f'{SITE}/'), ('المقالات', f'{SITE}/a/'), (a['title'], url)]),
+        seo.webpage(url, v['title'], desc),
+        seo.breadcrumb(url, [home, crumb, (v['title'], url)]),
         seo.org(), seo.website(),
     ]
-    nodes[0] = {k: v for k, v in nodes[0].items() if v is not None}
+    nodes[0] = {k: x for k, x in nodes[0].items() if x is not None}
     initial = (author.replace('م.', '').replace('د.', '').strip() or 'إ')[0]
     avatar = ('<img class="avatar" src="/img/icon-192.png" alt="" width="46" height="46">' if is_team(author)
               else f'<div class="avatar" aria-hidden="true">{esc(initial)}</div>')
-    meta = ' · '.join(x for x in [minutes(a), f'<time datetime="{esc(date)}">{esc(date)}</time>' if date else ''] if x)
-    more = ''.join(card(r) for r in related)
+    meta = ' · '.join(x for x in [minutes(a, en), f'<time datetime="{esc(date)}">{esc(date)}</time>' if date else ''] if x)
+    more = ''.join(card(r, en) for r in related)
+    if en:
+        T = dict(cta='Keep reading in Ishraqa Daily',
+                 sub='The full article with its practical takeaway, plus a library and reading clubs.',
+                 btn='Read the full article in the app', small='No ads · Android, Windows, iPhone and Mac',
+                 more='Read next', author=f'<bdi>{esc(author_en(a))}</bdi>')
+    else:
+        T = dict(cta='أكمل القراءة في إشراقة يومية',
+                 sub='المقال كاملًا مع خلاصته العملية، ومقال جديد كل يوم، ومكتبة ونوادٍ للقراءة.',
+                 btn='اقرأه كاملًا في التطبيق', small='بلا إعلانات · أندرويد وويندوز وآيفون وماك',
+                 more='اقرأ أيضًا', author=esc(author))
     page = (
-        HEAD.format(**AR_HEAD, title=esc(title), desc=esc(desc), url=url, og_type='article', og_title=esc(a['title']),
-                    image=esc(cover), css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(f'/a/{slug}/'))
+        HEAD.format(**(EN_HEAD if en else AR_HEAD), title=esc(title), desc=esc(desc), url=url, og_type='article',
+                    og_title=esc(v['title']), image=esc(cover), css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(path))
         + '<div class="progress" aria-hidden="true"></div>'
         + (f'<div class="hero-a"><figure><img src="{esc(sized(cover, 1024))}"'
            + (f' srcset="{srcset(cover)}" sizes="(max-width: 1180px) 100vw, 1140px"' if srcset(cover) else '')
-           + f' alt="{esc(a["title"])}" width="1600" height="800" fetchpriority="high"></figure></div>')
+           + f' alt="{esc(v["title"])}" width="1600" height="800" fetchpriority="high"></figure></div>')
         + '<div class="wrap"><main><div class="head-a">'
-        + pill(a['category'])
-        + f'<h1>{esc(a["title"])}</h1>'
-        + (f'<p class="lead">{esc(a["excerpt"])}</p>' if a.get('excerpt') else '')
+        + pill(a['category'], en)
+        + f'<h1>{esc(v["title"])}</h1>'
+        + (f'<p class="lead">{esc(v["excerpt"])}</p>' if v['excerpt'] else '')
         + f'<div class="byline">{avatar}'
-        + f'<div><b>{esc(author)}</b><small>{meta}</small></div></div></div>'
+        + f'<div><b>{T["author"]}</b><small>{meta}</small></div></div></div>'
         + f'<article class="fade">{body_html}</article>'
-        + '<div class="cta rv"><h3>أكمل القراءة في إشراقة يومية</h3>'
-        + '<p>المقال كاملًا مع خلاصته العملية، ومقال جديد كل يوم، ومكتبة ونوادٍ للقراءة.</p>'
-        + f'<a class="btn main" data-open href="{app}">اقرأه كاملًا في التطبيق</a>'
-        + '<small>بلا إعلانات · أندرويد وويندوز وآيفون وماك</small></div>'
-        + share_row(url, a['title'])
+        + f'<div class="cta rv"><h3>{T["cta"]}</h3>'
+        + f'<p>{T["sub"]}</p>'
+        + f'<a class="btn main" data-open href="{app}">{T["btn"]}</a>'
+        + f'<small>{T["small"]}</small></div>'
+        + share_row(url, v['title'], en)
         + '</main></div>'
-        + (f'<div class="wrap wide"><h2 class="sec">اقرأ أيضًا</h2><div class="grid">{more}</div></div>' if more else '')
-        + FOOT.format(foot=site_footer.footer(f'/a/{slug}/'), js=js())
+        + (f'<div class="wrap wide"><h2 class="sec">{T["more"]}</h2><div class="grid">{more}</div></div>' if more else '')
+        + FOOT.format(foot=site_footer.footer(path), js=js())
     )
-    return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes, image=cover, image_alt=a['title'],
+    return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes, image=cover, image_alt=v['title'],
+                        lang='en' if en else 'ar', alternates=alts,
                         og_type='article', article={'published': date, 'modified': modified, 'section': cat})
 
 
@@ -392,7 +442,7 @@ def index_page(items: list, en: bool = False) -> str:
                  search='ابحث في المقالات…', cats='التصنيفات', empty='لا توجد مقالات مطابقة. جرّب كلمة أخرى.', note='')
     names = CAT_EN if en else CATEGORIES
     nodes = [seo.webpage(url, T['title'], T['desc'], 'CollectionPage',
-                         mainEntity=seo.item_list([f'{SITE}/a/{a["slug"]}/' for a in items])),
+                         mainEntity=seo.item_list([SITE + view(a, en)['href'] for a in items])),
              seo.breadcrumb(url, [(T['home'], f'{SITE}/en/' if en else f'{SITE}/'), (T['crumb'], url)]), seo.org(), seo.website()]
     feat, rest = (items[0], items[1:]) if items else (None, [])
     used = []
@@ -404,15 +454,16 @@ def index_page(items: list, en: bool = False) -> str:
                        for c in used))
     feat_html = ''
     if feat:
-        q = ' '.join([feat['title'], feat.get('excerpt') or '', CATEGORIES.get(feat['category'], ''), CAT_EN.get(feat['category'], '')])
-        ar = ' lang="ar" dir="rtl"' if en else ''
-        who = f'<bdi lang="ar">{esc(author_of(feat))}</bdi>' if en else esc(author_of(feat))
+        q = ' '.join([feat['title'], feat.get('excerpt') or '', feat.get('title_tr') or '', CATEGORIES.get(feat['category'], ''), CAT_EN.get(feat['category'], '')])
+        fv = view(feat, en)
+        ar = ' lang="ar" dir="rtl"' if fv['rtl'] else ''
+        who = f'<bdi>{esc(author_en(feat))}</bdi>' if en else esc(author_of(feat))
         meta = ' · '.join(x for x in [who, esc(minutes(feat, en)), esc(feat.get('publish_date') or '')] if x)
         feat_html = (
-            f'<a class="feat rv" href="/a/{esc(feat["slug"])}/" data-cat="{esc(feat["category"])}" data-q="{esc(q)}">'
-            f'<div class="ph"><img src="{esc(sized(feat.get("cover_url") or "/img/og.jpg", 1024))}" alt="{esc(feat["title"])}" width="900" height="560" fetchpriority="high"></div>'
-            f'<div class="in"><span class="tag">{T["feat"]}</span>{pill(feat["category"], en)}<b{ar}>{esc(feat["title"])}</b>'
-            f'<p{ar}>{esc(feat.get("excerpt") or "")}</p><small>{meta}</small></div></a>')
+            f'<a class="feat rv" href="{fv["href"]}" data-cat="{esc(feat["category"])}" data-q="{esc(q)}">'
+            f'<div class="ph"><img src="{esc(sized(feat.get("cover_url") or "/img/og.jpg", 1024))}" alt="{esc(fv["title"])}" width="900" height="560" fetchpriority="high"></div>'
+            f'<div class="in"><span class="tag">{T["feat"]}</span>{pill(feat["category"], en)}<b{ar}>{esc(fv["title"])}</b>'
+            f'<p{ar}>{esc(fv["excerpt"])}</p><small>{meta}</small></div></a>')
     page = (
         HEAD.format(**(EN_HEAD if en else AR_HEAD), title=T['title'], desc=T['desc'], url=url, og_type='website', og_title=T['title'],
                     image=f'{SITE}/img/og.jpg', css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(path))
@@ -466,7 +517,7 @@ def main() -> None:
         CATEGORIES[c['slug']] = c['name_ar']
     today = dt.date.today().isoformat()
     items = fetch(
-        'articles?select=slug,title,excerpt,body,cover_url,category,author_name,reading_minutes,sources,publish_date,updated_at,'
+        'articles?select=slug,title,excerpt,body,title_tr,excerpt_tr,body_tr,cover_url,category,author_name,reading_minutes,sources,publish_date,updated_at,'
         'author:profiles!articles_author_id_fkey(display_name)'
         f'&status=eq.published&publish_date=lte.{today}&order=publish_date.desc,published_at.desc&limit=500'
     )
@@ -475,13 +526,22 @@ def main() -> None:
             sys.exit(f'only {len(items)} articles returned; refusing to rebuild a/')
         shutil.rmtree(OUT)
     OUT.mkdir()
+    EN_OUT = ROOT / 'en' / 'a'
+    if EN_OUT.exists():
+        shutil.rmtree(EN_OUT)
+    EN_OUT.mkdir(parents=True)
+    for a in items:
+        if has_en(a):
+            site_nav.ALT[f'/a/{a["slug"]}/'] = f'/en/a/{a["slug"]}/'
     for a in items:
         d = OUT / a['slug']
         d.mkdir()
         (d / 'index.html').write_text(article_page(a, related_to(a, items)), encoding='utf-8')
+        if has_en(a):
+            (EN_OUT / a['slug']).mkdir()
+            (EN_OUT / a['slug'] / 'index.html').write_text(article_page(a, related_to(a, items), en=True), encoding='utf-8')
     (OUT / 'index.html').write_text(index_page(items), encoding='utf-8')
-    (ROOT / 'en' / 'a').mkdir(parents=True, exist_ok=True)
-    (ROOT / 'en' / 'a' / 'index.html').write_text(index_page(items, en=True), encoding='utf-8')
+    (EN_OUT / 'index.html').write_text(index_page(items, en=True), encoding='utf-8')
     home_latest(items)
 
     # خريطة الموقع كاملة (كل صفحة قابلة للفهرسة، مع تاريخ آخر تغيير) وملف llms.txt

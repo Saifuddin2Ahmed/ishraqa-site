@@ -22,16 +22,28 @@ def is_en(path):
     return path == '/en/' or path.startswith('/en/')
 
 
+from pathlib import Path
+_ROOT = Path(__file__).resolve().parents[1]
+
+# صفحات مولّدة لها نظيرة (مثل مقال له نسخة إنجليزية): المولّد يملؤها قبل البناء
+ALT = {}
+
+
 def other_lang(path):
     """رابط الصفحة نفسها باللغة الأخرى إن وُجدت، وإلا الرئيسية"""
+    if path in ALT:
+        return ALT[path]
     if is_en(path):
         rest = path[len('/en/'):].strip('/')
-        if rest == 'a':
-            return '/a/'
+        if rest == 'a' or rest.startswith('a/'):
+            return f'/{rest}/'
         return f'/{rest}/' if rest in PAIRS else '/'
     rest = path.strip('/')
     # المقالات بلغة كاتبها: زر English في أي مقال يذهب إلى واجهة المقالات الإنجليزية
     if rest == 'a' or rest.startswith('a/'):
+        # للمقال نسخة إنجليزية إن وُجدت صفحتها
+        if rest.startswith('a/') and (_ROOT / 'en' / rest / 'index.html').exists():
+            return f'/en/{rest}/'
         return '/en/a/'
     return f'/en/{rest}/' if rest in PAIRS else '/en/'
 
