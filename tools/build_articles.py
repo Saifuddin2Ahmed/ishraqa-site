@@ -169,13 +169,13 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 .hero-i h1{margin:0 0 8px}.hero-i p{margin:0;font-size:19px;opacity:.92;max-width:640px}
 .stats{display:flex;gap:26px;margin-top:22px;flex-wrap:wrap}.stats div{font-size:14px;opacity:.85}.stats b{display:block;font-size:28px;line-height:1.2;opacity:1}
 .search{margin-top:26px;max-width:560px;position:relative}
-.search input{width:100%;padding:15px 52px 15px 18px;border-radius:999px;border:0;font:inherit;font-size:16px;color:var(--night);background:#fff;box-shadow:0 14px 34px rgba(0,0,0,.2);outline:none}
+.search input{width:100%;padding-block:15px;padding-inline:52px 18px;border-radius:999px;border:0;font:inherit;font-size:16px;color:var(--night);background:#fff;box-shadow:0 14px 34px rgba(0,0,0,.2);outline:none}
 .search svg{position:absolute;top:50%;inset-inline-start:18px;transform:translateY(-50%);width:20px;height:20px;color:var(--plum)}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin:-26px 0 30px;position:relative;z-index:2}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:30px 0 30px;position:relative;z-index:2}
 @media (max-width:640px){.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding:4px 20px 8px}.chips::-webkit-scrollbar{display:none}.chip{flex-shrink:0}}
-.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(42,27,94,.08);transition:all .2s}
-.chip[aria-pressed=true]{background:var(--night);color:#fff;border-color:var(--night)}
-@media (prefers-color-scheme:dark){.chip[aria-pressed=true]{background:#fff;color:var(--night)}}
+.chip{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--soft);color:var(--ink);border-radius:999px;padding:9px 18px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:background .2s,color .2s,transform .2s}.chip:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c,var(--plum));transition:background .2s}.chip[data-c='']:before{display:none}.chip:hover{background:color-mix(in srgb,var(--c,var(--plum)) 14%,var(--soft))}.chip:active{transform:scale(.97)}
+.chip[aria-pressed=true]{background:var(--c,var(--plum));color:#fff}.chip[aria-pressed=true]:before{background:#fff}.chip[data-c=''][aria-pressed=true]{background:linear-gradient(135deg,var(--plum),var(--sun))}
+
 .feat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:28px;overflow:hidden;background:var(--card);border:1px solid var(--line);text-decoration:none;margin-bottom:34px;box-shadow:0 20px 50px rgba(42,27,94,.12);transition:transform .25s}
 .feat:hover{transform:translateY(-4px)}
 .feat .ph{overflow:hidden;min-height:320px}.feat img{width:100%;height:100%;object-fit:cover;transition:transform .7s}.feat:hover img{transform:scale(1.05)}
@@ -434,7 +434,7 @@ def index_page(items: list, en: bool = False) -> str:
                  desc='Short, sourced articles on health, technology, self-growth, money and culture, each with a practical takeaway.',
                  home='Ishraqa Daily', crumb='Articles', h1='Ishraqa Articles', all='All', feat='☀ Article of the day',
                  search='Search articles…', cats='Categories', empty='No matching articles. Try another word.',
-                 note='Each article appears in the language its author wrote it in.')
+                 note='')
     else:
         T = dict(title='مقالات إشراقة يومية: صحة وتقنية وتطوير ذات وثقافة',
                  desc='مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.',
@@ -450,7 +450,7 @@ def index_page(items: list, en: bool = False) -> str:
         if a['category'] in CATEGORIES and a['category'] not in used:
             used.append(a['category'])
     chips = (f'<button class="chip" type="button" data-c="" aria-pressed="true">{T["all"]}</button>'
-             + ''.join(f'<button class="chip" type="button" data-c="{esc(c)}" aria-pressed="false">{esc(names.get(c, CATEGORIES[c]))}</button>'
+             + ''.join(f'<button class="chip" type="button" data-c="{esc(c)}" aria-pressed="false" style="--c:{CAT_COLORS.get(c, "#8E3A8C")}">{esc(names.get(c, CATEGORIES[c]))}</button>'
                        for c in used))
     feat_html = ''
     if feat:
