@@ -10,6 +10,11 @@ on:
 permissions:
   contents: write
 
+# نشر سريع من التطبيق قد يطلب عدة بناءات متتالية: واحد يعمل وواحد ينتظر فقط
+concurrency:
+  group: articles
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
