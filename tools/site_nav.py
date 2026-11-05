@@ -6,7 +6,7 @@ NAV_CSS = f'<link rel="stylesheet" href="/nav.css?v={VERSION}">'
 NAV_JS = f'<script src="/nav.js?v={VERSION}" defer></script>'
 
 AR_LINKS = [('/about/', 'عن التطبيق'), ('/a/', 'المقالات'), ('/developers/', 'المطوّرون')]
-EN_LINKS = [('/en/about/', 'About'), ('/a/', 'Articles'), ('/en/developers/', 'Developers')]
+EN_LINKS = [('/en/about/', 'About'), ('/en/a/', 'Articles'), ('/en/developers/', 'Developers')]
 
 # صفحات لها نظيرة في اللغة الأخرى: زر اللغة يذهب إليها مباشرة
 PAIRS = ['about', 'developers', 'wallpapers', 'privacy', 'terms', 'contact', 'delete-account', 'child-safety', 'press-kit', 'support']
@@ -26,15 +26,20 @@ def other_lang(path):
     """رابط الصفحة نفسها باللغة الأخرى إن وُجدت، وإلا الرئيسية"""
     if is_en(path):
         rest = path[len('/en/'):].strip('/')
+        if rest == 'a':
+            return '/a/'
         return f'/{rest}/' if rest in PAIRS else '/'
     rest = path.strip('/')
+    # المقالات بلغة كاتبها: زر English في أي مقال يذهب إلى واجهة المقالات الإنجليزية
+    if rest == 'a' or rest.startswith('a/'):
+        return '/en/a/'
     return f'/en/{rest}/' if rest in PAIRS else '/en/'
 
 
 def current(path, href):
     if path == href:
         return ' aria-current="page"'
-    if href in ('/a/', '/k/') and path.startswith(href):
+    if href in ('/a/', '/k/', '/en/a/') and path.startswith(href):
         return ' aria-current="true"'
     return ''
 

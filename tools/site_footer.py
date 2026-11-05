@@ -9,7 +9,7 @@ AR_LINKS = [('/about/', 'عن التطبيق'), ('/a/', 'المقالات'), ('/
             ('/wallpapers/', 'خلفيات إشراقة'), ('/support/', 'ادعم إشراقة'), ('/press-kit/', 'حزمة الإعلام'),
             ('/privacy/', 'سياسة الخصوصية'), ('/terms/', 'شروط الاستخدام'), ('/delete-account/', 'حذف الحساب'),
             ('/child-safety/', 'سلامة الأطفال'), ('/contact/', 'تواصل معنا')]
-EN_LINKS = [('/en/about/', 'About'), ('/a/', 'Articles'), ('/k/', 'Library'), ('/en/developers/', 'Developers'),
+EN_LINKS = [('/en/about/', 'About'), ('/en/a/', 'Articles'), ('/k/', 'Library'), ('/en/developers/', 'Developers'),
             ('/en/wallpapers/', 'Wallpapers'), ('/en/support/', 'Support Ishraqa'), ('/en/press-kit/', 'Press kit'),
             ('/en/privacy/', 'Privacy Policy'), ('/en/terms/', 'Terms of Use'), ('/en/delete-account/', 'Delete account'),
             ('/en/child-safety/', 'Child safety'), ('/en/contact/', 'Contact us')]

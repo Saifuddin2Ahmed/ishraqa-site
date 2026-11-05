@@ -71,8 +71,13 @@ def esc(s) -> str:
     return html.escape(s or '', quote=True)
 
 
+AR_HEAD = dict(lang='ar', dir='rtl', site_name='إشراقة يومية', locale='ar_AR')
+EN_HEAD = dict(lang='en', dir='ltr', site_name='Ishraqa Daily', locale='en_US')
+CAT_EN = {'health': 'Health', 'tech': 'Technology', 'self': 'Self-growth', 'money': 'Money & work',
+          'science': 'Science', 'family': 'Family', 'culture': 'Culture & literature', 'ai': 'AI', 'reading': 'Reading'}
+
 HEAD = """<!doctype html>
-<html lang="ar" dir="rtl"><head>
+<html lang="{lang}" dir="{dir}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -80,8 +85,8 @@ HEAD = """<!doctype html>
 <link rel="canonical" href="{url}">
 <link rel="icon" type="image/png" href="/img/icon-192.png">
 <meta property="og:type" content="{og_type}">
-<meta property="og:site_name" content="إشراقة يومية">
-<meta property="og:locale" content="ar_AR">
+<meta property="og:site_name" content="{site_name}">
+<meta property="og:locale" content="{locale}">
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{og_title}">
 <meta property="og:description" content="{desc}">
@@ -260,25 +265,28 @@ def author_of(a: dict) -> str:
     return a.get('author_name') or (a.get('author') or {}).get('display_name') or 'فريق إشراقة'
 
 
-def pill(cat_slug: str) -> str:
-    name = CATEGORIES.get(cat_slug, '')
+def pill(cat_slug: str, en: bool = False) -> str:
+    name = (CAT_EN if en else CATEGORIES).get(cat_slug, '')
     if not name:
         return ''
     return f'<span class="pill" style="--c:{CAT_COLORS.get(cat_slug, "#8E3A8C")}">{esc(name)}</span>'
 
 
-def minutes(a: dict) -> str:
+def minutes(a: dict, en: bool = False) -> str:
     m = a.get('reading_minutes')
-    return f'{m} دقائق قراءة' if m else ''
+    return (f'{m} min read' if en else f'{m} دقائق قراءة') if m else ''
 
 
-def card(a: dict) -> str:
-    q = ' '.join([a['title'], a.get('excerpt') or '', CATEGORIES.get(a['category'], '')])
-    meta = ' · '.join(x for x in [author_of(a), minutes(a), a.get('publish_date') or ''] if x)
+def card(a: dict, en: bool = False) -> str:
+    q = ' '.join([a['title'], a.get('excerpt') or '', CATEGORIES.get(a['category'], ''), CAT_EN.get(a['category'], '')])
+    # في الصفحة الإنجليزية: العنوان والملخص واسم الكاتب بلغة المقال واتجاهها، وبقية البطاقة إنجليزية
+    ar = ' lang="ar" dir="rtl"' if en else ''
+    who = f'<bdi lang="ar">{esc(author_of(a))}</bdi>' if en else esc(author_of(a))
+    meta = ' · '.join(x for x in [who, esc(minutes(a, en)), esc(a.get('publish_date') or '')] if x)
     return (f'<a class="card rv" href="/a/{esc(a["slug"])}/" data-cat="{esc(a["category"])}" data-q="{esc(q)}">'
             f'<div class="ph"><img src="{esc(sized(a.get("cover_url") or "/img/og.jpg", 640))}" alt="{esc(a["title"])}" width="640" height="400" loading="lazy" decoding="async"></div>'
-            f'<div class="in">{pill(a["category"])}<b>{esc(a["title"])}</b>'
-            f'<p>{esc(a.get("excerpt") or "")}</p><small>{esc(meta)}</small></div></a>')
+            f'<div class="in">{pill(a["category"], en)}<b{ar}>{esc(a["title"])}</b>'
+            f'<p{ar}>{esc(a.get("excerpt") or "")}</p><small>{meta}</small></div></a>')
 
 
 def share_row(url: str, title: str) -> str:
@@ -333,7 +341,7 @@ def article_page(a: dict, related: list) -> str:
     meta = ' · '.join(x for x in [minutes(a), f'<time datetime="{esc(date)}">{esc(date)}</time>' if date else ''] if x)
     more = ''.join(card(r) for r in related)
     page = (
-        HEAD.format(title=esc(title), desc=esc(desc), url=url, og_type='article', og_title=esc(a['title']),
+        HEAD.format(**AR_HEAD, title=esc(title), desc=esc(desc), url=url, og_type='article', og_title=esc(a['title']),
                     image=esc(cover), css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(f'/a/{slug}/'))
         + '<div class="progress" aria-hidden="true"></div>'
         + (f'<div class="hero-a"><figure><img src="{esc(sized(cover, 1024))}"'
@@ -366,44 +374,60 @@ def related_to(a: dict, items: list, n: int = 3) -> list:
     return (same + [r for r in others if r not in same])[:n]
 
 
-def index_page(items: list) -> str:
-    url = f'{SITE}/a/'
-    title = 'مقالات إشراقة يومية: صحة وتقنية وتطوير ذات وثقافة'
-    desc = 'مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.'
-    nodes = [seo.webpage(url, title, desc, 'CollectionPage',
+def index_page(items: list, en: bool = False) -> str:
+    """صفحة المقالات. en=True: واجهة إنجليزية (/en/a/) والمقالات نفسها بلغة كاتبها"""
+    path = '/en/a/' if en else '/a/'
+    url = f'{SITE}{path}'
+    alts = {'ar': f'{SITE}/a/', 'en': f'{SITE}/en/a/'}
+    if en:
+        T = dict(title='Ishraqa Articles: health, technology, self-growth and culture',
+                 desc='Short, sourced articles on health, technology, self-growth, money and culture, each with a practical takeaway.',
+                 home='Ishraqa Daily', crumb='Articles', h1='Ishraqa Articles', all='All', feat='☀ Article of the day',
+                 search='Search articles…', cats='Categories', empty='No matching articles. Try another word.',
+                 note='Each article appears in the language its author wrote it in.')
+    else:
+        T = dict(title='مقالات إشراقة يومية: صحة وتقنية وتطوير ذات وثقافة',
+                 desc='مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.',
+                 home='إشراقة يومية', crumb='المقالات', h1='مقالات إشراقة', all='الكل', feat='☀ مقال اليوم',
+                 search='ابحث في المقالات…', cats='التصنيفات', empty='لا توجد مقالات مطابقة. جرّب كلمة أخرى.', note='')
+    names = CAT_EN if en else CATEGORIES
+    nodes = [seo.webpage(url, T['title'], T['desc'], 'CollectionPage',
                          mainEntity=seo.item_list([f'{SITE}/a/{a["slug"]}/' for a in items])),
-             seo.breadcrumb(url, [('إشراقة يومية', f'{SITE}/'), ('المقالات', url)]), seo.org(), seo.website()]
+             seo.breadcrumb(url, [(T['home'], f'{SITE}/en/' if en else f'{SITE}/'), (T['crumb'], url)]), seo.org(), seo.website()]
     feat, rest = (items[0], items[1:]) if items else (None, [])
     used = []
     for a in items:
         if a['category'] in CATEGORIES and a['category'] not in used:
             used.append(a['category'])
-    chips = ('<button class="chip" type="button" data-c="" aria-pressed="true">الكل</button>'
-             + ''.join(f'<button class="chip" type="button" data-c="{esc(c)}" aria-pressed="false">{esc(CATEGORIES[c])}</button>'
+    chips = (f'<button class="chip" type="button" data-c="" aria-pressed="true">{T["all"]}</button>'
+             + ''.join(f'<button class="chip" type="button" data-c="{esc(c)}" aria-pressed="false">{esc(names.get(c, CATEGORIES[c]))}</button>'
                        for c in used))
     feat_html = ''
     if feat:
-        q = ' '.join([feat['title'], feat.get('excerpt') or '', CATEGORIES.get(feat['category'], '')])
-        meta = ' · '.join(x for x in [author_of(feat), minutes(feat), feat.get('publish_date') or ''] if x)
+        q = ' '.join([feat['title'], feat.get('excerpt') or '', CATEGORIES.get(feat['category'], ''), CAT_EN.get(feat['category'], '')])
+        ar = ' lang="ar" dir="rtl"' if en else ''
+        who = f'<bdi lang="ar">{esc(author_of(feat))}</bdi>' if en else esc(author_of(feat))
+        meta = ' · '.join(x for x in [who, esc(minutes(feat, en)), esc(feat.get('publish_date') or '')] if x)
         feat_html = (
             f'<a class="feat rv" href="/a/{esc(feat["slug"])}/" data-cat="{esc(feat["category"])}" data-q="{esc(q)}">'
             f'<div class="ph"><img src="{esc(sized(feat.get("cover_url") or "/img/og.jpg", 1024))}" alt="{esc(feat["title"])}" width="900" height="560" fetchpriority="high"></div>'
-            f'<div class="in"><span class="tag">☀ مقال اليوم</span>{pill(feat["category"])}<b>{esc(feat["title"])}</b>'
-            f'<p>{esc(feat.get("excerpt") or "")}</p><small>{esc(meta)}</small></div></a>')
+            f'<div class="in"><span class="tag">{T["feat"]}</span>{pill(feat["category"], en)}<b{ar}>{esc(feat["title"])}</b>'
+            f'<p{ar}>{esc(feat.get("excerpt") or "")}</p><small>{meta}</small></div></a>')
     page = (
-        HEAD.format(title=title, desc=desc, url=url, og_type='website', og_title=title,
-                    image=f'{SITE}/img/og.jpg', css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header('/a/'))
-        + '<header class="hero-i"><video class="hero-v" autoplay muted loop playsinline preload="metadata" poster="/media/articles/hero.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback><source src="/media/articles/hero.mp4" type="video/mp4"><source src="/media/articles/hero.webm" type="video/webm"></video><div class="wrap wide"><h1>مقالات إشراقة</h1>'
-        + '<p>مقال قصير موثّق كل يوم في الصحة والتقنية وتطوير الذات والمال والثقافة، بخلاصة عملية تطبّقها في يومك.</p>'
-        + f'<label class="search">{SEARCH_ICON}<input type="search" placeholder="ابحث في المقالات…" aria-label="ابحث في المقالات"></label>'
+        HEAD.format(**(EN_HEAD if en else AR_HEAD), title=T['title'], desc=T['desc'], url=url, og_type='website', og_title=T['title'],
+                    image=f'{SITE}/img/og.jpg', css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(path))
+        + '<header class="hero-i"><video class="hero-v" autoplay muted loop playsinline preload="metadata" poster="/media/articles/hero.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback><source src="/media/articles/hero.mp4" type="video/mp4"><source src="/media/articles/hero.webm" type="video/webm"></video>'
+        + f'<div class="wrap wide"><h1>{T["h1"]}</h1>'
+        + f'<p>{T["desc"]}{(" " + T["note"]) if T["note"] else ""}</p>'
+        + f'<label class="search">{SEARCH_ICON}<input type="search" placeholder="{T["search"]}" aria-label="{T["search"]}"></label>'
         + '</div></header>'
-        + f'<div class="wrap wide"><main><div class="chips" role="group" aria-label="التصنيفات">{chips}</div>'
+        + f'<div class="wrap wide"><main><div class="chips" role="group" aria-label="{T["cats"]}">{chips}</div>'
         + feat_html
-        + f'<div class="grid">{"".join(card(a) for a in rest)}</div>'
-        + '<p class="empty">لا توجد مقالات مطابقة. جرّب كلمة أخرى.</p>'
-        + '</main></div>' + FOOT.format(foot=site_footer.footer('/a/'), js=js())
+        + f'<div class="grid">{"".join(card(a, en) for a in rest)}</div>'
+        + f'<p class="empty">{T["empty"]}</p>'
+        + '</main></div>' + FOOT.format(foot=site_footer.footer(path), js=js())
     )
-    return seo.finalize(page, url=url, title=title, desc=desc, nodes=nodes)
+    return seo.finalize(page, url=url, title=T['title'], desc=T['desc'], nodes=nodes, lang='en' if en else 'ar', alternates=alts)
 
 
 def home_latest(items: list, n: int = 6) -> None:
@@ -456,6 +480,8 @@ def main() -> None:
         d.mkdir()
         (d / 'index.html').write_text(article_page(a, related_to(a, items)), encoding='utf-8')
     (OUT / 'index.html').write_text(index_page(items), encoding='utf-8')
+    (ROOT / 'en' / 'a').mkdir(parents=True, exist_ok=True)
+    (ROOT / 'en' / 'a' / 'index.html').write_text(index_page(items, en=True), encoding='utf-8')
     home_latest(items)
 
     # خريطة الموقع كاملة (كل صفحة قابلة للفهرسة، مع تاريخ آخر تغيير) وملف llms.txt
