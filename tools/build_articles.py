@@ -119,11 +119,11 @@ a{color:inherit}img{max-width:100%}
 .pill:before{content:'';width:7px;height:7px;border-radius:50%;background:var(--c)}
 @media (prefers-color-scheme:dark){.pill{color:color-mix(in srgb,var(--c) 55%,#fff)}}
 /* ── صفحة المقال ── */
-.hero-a{max-width:1180px;margin:22px auto 0;padding:0 20px}
+.hero-a{max-width:1180px;margin:22px auto 0;padding:0 20px}.art{max-width:780px;margin:0 auto;padding:0 20px}.side{margin:6px 0 40px}.side h2{font-size:17px;margin:0 0 6px;display:flex;align-items:center;gap:10px}.side h2:before{content:'';width:26px;height:3px;border-radius:3px;background:var(--c,var(--plum))}.si{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}.si:last-child{border-bottom:0}.si img{width:92px;height:68px;object-fit:cover;border-radius:14px;display:block;background:var(--soft);transition:transform .4s}.si b{display:block;font-size:15px;line-height:1.6;transition:color .2s}.si small{color:var(--muted);font-size:12.5px}.si:hover b{color:var(--plum)}.si:hover img{transform:scale(1.04)}@media (min-width:1100px){.art{max-width:1180px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:64px;align-items:start}.side{position:sticky;top:96px;margin-top:30px;padding:22px 22px 10px;border-radius:24px;background:var(--card);border:1px solid var(--line)}}
 .hero-a figure{margin:0;position:relative;border-radius:28px;overflow:hidden;box-shadow:0 24px 60px rgba(42,27,94,.22)}
 .hero-a img{display:block;width:100%;aspect-ratio:16/8;object-fit:cover}
 @media (max-width:640px){.hero-a{padding:0}.hero-a figure{border-radius:0 0 24px 24px}.hero-a img{aspect-ratio:16/10}}
-.head-a{margin-top:26px}
+.head-a{margin-top:26px}.head-a .pill{background:none;padding:0;border-radius:0;gap:10px;font-size:13.5px;font-weight:800;letter-spacing:.04em}html[lang=en] .head-a .pill{text-transform:uppercase;letter-spacing:.09em;font-size:12.5px}.head-a .pill:before{width:26px;height:3px;border-radius:3px}
 h1{font-size:clamp(28px,4.4vw,42px);line-height:1.4;margin:14px 0 10px;font-weight:800;letter-spacing:-.2px}
 .lead{font-size:20px;line-height:1.85;color:var(--muted);margin:0 0 20px}
 .byline{display:flex;align-items:center;gap:12px;padding:14px 0;border-block:1px solid var(--line);margin-bottom:26px}
@@ -171,10 +171,11 @@ h2.sec{font-size:24px;margin:10px 0 18px}
 .search{margin-top:26px;max-width:560px;position:relative}
 .search input{width:100%;padding-block:15px;padding-inline:52px 18px;border-radius:999px;border:0;font:inherit;font-size:16px;color:var(--night);background:#fff;box-shadow:0 14px 34px rgba(0,0,0,.2);outline:none}
 .search svg{position:absolute;top:50%;inset-inline-start:18px;transform:translateY(-50%);width:20px;height:20px;color:var(--plum)}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin:30px 0 30px;position:relative;z-index:2}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:-26px 0 30px;position:relative;z-index:2}
 @media (max-width:640px){.chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding:4px 20px 8px}.chips::-webkit-scrollbar{display:none}.chip{flex-shrink:0}}
-.chip{display:inline-flex;align-items:center;gap:8px;border:0;background:var(--soft);color:var(--ink);border-radius:999px;padding:9px 18px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:background .2s,color .2s,transform .2s}.chip:before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c,var(--plum));transition:background .2s}.chip[data-c='']:before{display:none}.chip:hover{background:color-mix(in srgb,var(--c,var(--plum)) 14%,var(--soft))}.chip:active{transform:scale(.97)}
-.chip[aria-pressed=true]{background:var(--c,var(--plum));color:#fff}.chip[aria-pressed=true]:before{background:#fff}.chip[data-c=''][aria-pressed=true]{background:linear-gradient(135deg,var(--plum),var(--sun))}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(42,27,94,.08);transition:all .2s}
+.chip[aria-pressed=true]{background:var(--night);color:#fff;border-color:var(--night)}
+@media (prefers-color-scheme:dark){.chip[aria-pressed=true]{background:#fff;color:var(--night)}}
 
 .feat{display:grid;grid-template-columns:1.25fr 1fr;border-radius:28px;overflow:hidden;background:var(--card);border:1px solid var(--line);text-decoration:none;margin-bottom:34px;box-shadow:0 20px 50px rgba(42,27,94,.12);transition:transform .25s}
 .feat:hover{transform:translateY(-4px)}
@@ -337,7 +338,21 @@ def share_row(url: str, title: str, en: bool = False) -> str:
             '<p class="rights">جميع الحقوق محفوظة لإشراقة يومية وكاتب المقال. يسرّنا الاقتباس مع ذكر المصدر ورابطه.</p>')
 
 
-def article_page(a: dict, related: list, en: bool = False) -> str:
+def side_list(a: dict, items: list, n: int = 5) -> list:
+    """الشريط الجانبي: مقالات من التصنيف نفسه أولًا (الأحدث)، ثم الأحدث عمومًا"""
+    others = [r for r in items if r['slug'] != a['slug']]
+    same = [r for r in others if r['category'] == a['category']]
+    return (same + [r for r in others if r not in same])[:n]
+
+
+def side_item(a: dict, en: bool) -> str:
+    v = view(a, en)
+    ar = ' lang="ar" dir="rtl"' if v['rtl'] else ''
+    return (f'<a class="si" href="{v["href"]}"><img src="{esc(sized(a.get("cover_url") or "/img/og.jpg", 320))}" alt="" width="92" height="68" loading="lazy" decoding="async">'
+            f'<span><b{ar}>{esc(v["title"])}</b><small>{esc(minutes(a, en))}</small></span></a>')
+
+
+def article_page(a: dict, related: list, en: bool = False, side: list = ()) -> str:
     """صفحة المقال. en=True لنسخته الإنجليزية (/en/a/<slug>/) ولا تُبنى إلا إن كان له نسخة إنجليزية"""
     slug = a['slug']
     v = view(a, en)
@@ -383,12 +398,12 @@ def article_page(a: dict, related: list, en: bool = False) -> str:
         T = dict(cta='Keep reading in Ishraqa Daily',
                  sub='The full article with its practical takeaway, plus a library and reading clubs.',
                  btn='Read the full article in the app', small='No ads · Android, Windows, iPhone and Mac',
-                 more='Read next', author=f'<bdi>{esc(author_en(a))}</bdi>')
+                 more='Read next', side='More in {cat}', author=f'<bdi>{esc(author_en(a))}</bdi>')
     else:
         T = dict(cta='أكمل القراءة في إشراقة يومية',
                  sub='المقال كاملًا مع خلاصته العملية، ومقال جديد كل يوم، ومكتبة ونوادٍ للقراءة.',
                  btn='اقرأه كاملًا في التطبيق', small='بلا إعلانات · أندرويد وويندوز وآيفون وماك',
-                 more='اقرأ أيضًا', author=esc(author))
+                 more='اقرأ أيضًا', side='المزيد في {cat}', author=esc(author))
     page = (
         HEAD.format(**(EN_HEAD if en else AR_HEAD), title=esc(title), desc=esc(desc), url=url, og_type='article',
                     og_title=esc(v['title']), image=esc(cover), css=CSS, nav_css=site_nav.NAV_CSS, nav=site_nav.header(path))
@@ -396,7 +411,7 @@ def article_page(a: dict, related: list, en: bool = False) -> str:
         + (f'<div class="hero-a"><figure><img src="{esc(sized(cover, 1024))}"'
            + (f' srcset="{srcset(cover)}" sizes="(max-width: 1180px) 100vw, 1140px"' if srcset(cover) else '')
            + f' alt="{esc(v["title"])}" width="1600" height="800" fetchpriority="high"></figure></div>')
-        + '<div class="wrap"><main><div class="head-a">'
+        + '<div class="art"><main><div class="head-a">'
         + pill(a['category'], en)
         + f'<h1>{esc(v["title"])}</h1>'
         + (f'<p class="lead">{esc(v["excerpt"])}</p>' if v['excerpt'] else '')
@@ -408,7 +423,10 @@ def article_page(a: dict, related: list, en: bool = False) -> str:
         + f'<a class="btn main" data-open href="{app}">{T["btn"]}</a>'
         + f'<small>{T["small"]}</small></div>'
         + share_row(url, v['title'], en)
-        + '</main></div>'
+        + '</main>'
+        + (f'<aside class="side" style="--c:{CAT_COLORS.get(a["category"], "#8E3A8C")}"><h2>{T["side"].format(cat=esc(cat))}</h2>'
+           + ''.join(side_item(r, en) for r in side) + '</aside>' if side else '')
+        + '</div>'
         + (f'<div class="wrap wide"><h2 class="sec">{T["more"]}</h2><div class="grid">{more}</div></div>' if more else '')
         + FOOT.format(foot=site_footer.footer(path), js=js())
     )
@@ -536,10 +554,12 @@ def main() -> None:
     for a in items:
         d = OUT / a['slug']
         d.mkdir()
-        (d / 'index.html').write_text(article_page(a, related_to(a, items)), encoding='utf-8')
+        side = side_list(a, items)
+        rest = [r for r in items if r['slug'] != a['slug'] and r not in side][:3]
+        (d / 'index.html').write_text(article_page(a, rest, side=side), encoding='utf-8')
         if has_en(a):
             (EN_OUT / a['slug']).mkdir()
-            (EN_OUT / a['slug'] / 'index.html').write_text(article_page(a, related_to(a, items), en=True), encoding='utf-8')
+            (EN_OUT / a['slug'] / 'index.html').write_text(article_page(a, rest, en=True, side=side), encoding='utf-8')
     (OUT / 'index.html').write_text(index_page(items), encoding='utf-8')
     (EN_OUT / 'index.html').write_text(index_page(items, en=True), encoding='utf-8')
     home_latest(items)
