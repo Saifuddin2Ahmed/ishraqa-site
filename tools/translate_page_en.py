@@ -119,6 +119,9 @@ def build(name):
     s = re.sub(r'(<div class="phone-cap"[^>]*>)[^<]*', r'Your day', s)
     for a_, b_ in FIXES:
         s = s.replace(a_, b_)
+    # الروابط النسبية (مثل files/...) تشير إلى مجلد الصفحة العربية
+    s = re.sub(r'((?:href|src|srcset)=")(?!/|https?:|#|data:|mailto:|tel:|javascript:)([^"]+)"',
+               lambda m: m.group(1) + f'/{name}/' + m.group(2) + '"', s)
     path = f'/en/{name}/'
     s = re.sub(r'<div class="snav">[\s\S]*?</nav></div>(?:<script[^>]*></script>)?</div>', lambda m: site_nav.header(path), s, 1)
     s = re.sub(r'<footer[\s>][\s\S]*?</footer>', lambda m: site_footer.footer(path), s, 1)

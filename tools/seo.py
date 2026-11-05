@@ -297,7 +297,7 @@ def finalize_static(doc, path, root=None):
     t, d, nodes = static_page(path)
     url = f'{SITE}/{path}/' if path else SITE + '/'
     # للرئيسية نسخة إنجليزية: بدون هذا تُحذف وسوم hreflang عند تحديث الرأس (--static)
-    alts = {'ar': url, 'en': f'{SITE}/en/{path}/' if path else SITE + '/en/'} if path in ('', 'about', 'developers') else None
+    alts = {'ar': url, 'en': f'{SITE}/en/{path}/' if path else SITE + '/en/'} if path in ('', 'about', 'developers', 'wallpapers') else None
     return finalize(doc, url=url, title=t, desc=d, nodes=nodes, root=root, alternates=alts)
 
 

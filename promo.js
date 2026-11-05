@@ -23,6 +23,7 @@
   var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var css = document.createElement('style');
   css.textContent =
+    'html.ap-on footer.sfoot{padding-bottom:170px}' +
     '.ap{position:fixed;z-index:60;inset-inline-start:20px;bottom:20px;width:min(360px,calc(100vw - 32px));display:flex;gap:14px;align-items:center;' +
     'padding:12px 12px 12px 40px;border-radius:20px;background:rgba(18,10,28,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);' +
     'border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 60px rgba(4,1,10,.55);color:#fff;text-decoration:none;font-family:inherit;' +
