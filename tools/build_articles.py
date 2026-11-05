@@ -127,7 +127,7 @@ a{color:inherit}img{max-width:100%}
 h1{font-size:clamp(28px,4.4vw,42px);line-height:1.4;margin:14px 0 10px;font-weight:800;letter-spacing:-.2px}
 .lead{font-size:20px;line-height:1.85;color:var(--muted);margin:0 0 20px}
 .byline{display:flex;align-items:center;gap:12px;padding:14px 0;border-block:1px solid var(--line);margin-bottom:26px}
-.avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:19px;background:linear-gradient(140deg,var(--night),var(--plum),var(--sun));flex-shrink:0}
+.avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;display:grid;place-items:center;color:#fff;font-weight:800;font-size:19px;background:linear-gradient(140deg,var(--night),var(--plum),var(--sun));flex-shrink:0}
 .byline b{display:block;line-height:1.4}.byline small{color:var(--muted);font-size:13.5px}
 article{font-size:19px}
 article p,article li{line-height:2}
@@ -266,14 +266,21 @@ def author_of(a: dict) -> str:
     return a.get('author_name') or (a.get('author') or {}).get('display_name') or 'فريق إشراقة'
 
 
+def profile_of(a: dict) -> dict:
+    """ملف الكاتب في التطبيق، ولا يُستعمل لمقالات الفريق (تُنشر من حساب عضو فيه)"""
+    return {} if is_team(author_of(a)) else (a.get('author') or {})
+
+
 def author_en(a: dict) -> str:
-    """اسم الكاتب في الصفحات الإنجليزية: الفريق والمؤسس بالإنجليزية، وغيرهما كما كتبه صاحبه"""
+    """اسم الكاتب في الصفحات الإنجليزية: الفريق بالإنجليزية، والكاتب باسمه في ملفه بالتطبيق"""
     name = author_of(a)
     if is_team(name):
         return 'Ishraqa Team'
-    if 'سيف الدين' in name:
-        return 'Eng. Saifuddin Ahmed'
-    return name
+    return (profile_of(a).get('display_name') or name).replace('Eng. ', '').strip()
+
+
+def author_photo(a: dict) -> str:
+    return profile_of(a).get('avatar_url') or ''
 
 
 def pill(cat_slug: str, en: bool = False) -> str:
@@ -390,7 +397,9 @@ def article_page(a: dict, related: list, en: bool = False, side: list = ()) -> s
     ]
     nodes[0] = {k: x for k, x in nodes[0].items() if x is not None}
     initial = (author.replace('م.', '').replace('د.', '').strip() or 'إ')[0]
+    photo = author_photo(a)
     avatar = ('<img class="avatar" src="/img/icon-192.png" alt="" width="46" height="46">' if is_team(author)
+              else f'<img class="avatar" src="{esc(sized(photo, 120))}" alt="" width="46" height="46">' if photo
               else f'<div class="avatar" aria-hidden="true">{esc(initial)}</div>')
     meta = ' · '.join(x for x in [minutes(a, en), f'<time datetime="{esc(date)}">{esc(date)}</time>' if date else ''] if x)
     more = ''.join(card(r, en) for r in related)
@@ -536,7 +545,7 @@ def main() -> None:
     today = dt.date.today().isoformat()
     items = fetch(
         'articles?select=slug,title,excerpt,body,title_tr,excerpt_tr,body_tr,cover_url,category,author_name,reading_minutes,sources,publish_date,updated_at,'
-        'author:profiles!articles_author_id_fkey(display_name)'
+        'author:profiles!articles_author_id_fkey(display_name,avatar_url)'
         f'&status=eq.published&publish_date=lte.{today}&order=publish_date.desc,published_at.desc&limit=500'
     )
     if OUT.exists():

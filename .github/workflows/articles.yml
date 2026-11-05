@@ -2,7 +2,7 @@ name: Build article pages
 
 on:
   schedule:
-    - cron: '10 22 * * *'   # 00:10 بتوقيت الخرطوم: يظهر مقال اليوم الجديد
+    - cron: '10 * * * *'   # كل ساعة: ما يُنشر في التطبيق يظهر في الموقع خلال ساعة، ومقال اليوم الجديد بعد منتصف الليل بتوقيت الخرطوم
   workflow_dispatch:
   push:
     paths: ['tools/**', '.github/workflows/articles.yml']
@@ -30,7 +30,7 @@ jobs:
           # بعد دفعة يدوية: ننتظر حتى ينتهي نشر GitHub Pages الجاري، وإلا تتصادم عمليتا النشر وتفشلان معًا
           if ! git diff --cached --quiet; then
             [ "${{ github.event_name }}" = "push" ] && sleep 90
-            git commit -m "Daily articles: $(date +%F)" && git push
+            git commit -m "Articles: $(date +%F)" && git push
           fi
       # IndexNow بعد النشر لا قبله: ينتظر حتى تُنشر خريطة الموقع الجديدة على ishraqa.app
       - run: python tools/indexnow.py --wait
