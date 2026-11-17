@@ -1,11 +1,11 @@
 {
 "https://ishraqa.app/": [
-"a1b2cd03b6c6d8e3",
-"2026-11-17"
+"3bbd189a0f440938",
+"2026-11-18"
 ],
 "https://ishraqa.app/a/": [
-"b5f3a51242a89580",
-"2026-11-17"
+"05a5d0f05fd402f7",
+"2026-11-18"
 ],
 "https://ishraqa.app/a/adopt-technology-without-being-adopted/": [
 "52c58b62178f8607",
@@ -16,7 +16,7 @@
 "2026-10-30"
 ],
 "https://ishraqa.app/a/ai-and-future-jobs/": [
-"18516dad82bf2b5e",
+"cb669af7138820c3",
 "2026-11-03"
 ],
 "https://ishraqa.app/a/arabic-calligraphy-heritage/": [
@@ -28,7 +28,7 @@
 "2026-11-13"
 ],
 "https://ishraqa.app/a/better-ai-questions/": [
-"5e61e4310832fc05",
+"983380ac7ef6793e",
 "2026-11-03"
 ],
 "https://ishraqa.app/a/beyond-passwords/": [
@@ -36,15 +36,15 @@
 "2026-11-03"
 ],
 "https://ishraqa.app/a/budget-50-30-20/": [
-"d80ae6d9c8bf1318",
+"1f9ef9885dc34373",
 "2026-10-30"
 ],
 "https://ishraqa.app/a/cheap-evidence-chain-of-trust/": [
-"da4c95ab1f005833",
+"05826719fb06db53",
 "2026-11-08"
 ],
 "https://ishraqa.app/a/emergency-fund-small-start/": [
-"f7a09a28aadc9cd6",
+"0d663a25fa75831c",
 "2026-10-30"
 ],
 "https://ishraqa.app/a/english-graded-readers/": [
@@ -60,7 +60,7 @@
 "2026-11-08"
 ],
 "https://ishraqa.app/a/grooming-is-a-design-pattern/": [
-"9a57006d15f84a14",
+"96997046e5b0725f",
 "2026-11-08"
 ],
 "https://ishraqa.app/a/how-birds-find-their-way/": [
@@ -72,8 +72,12 @@
 "2026-11-14"
 ],
 "https://ishraqa.app/a/kids-screen-time/": [
-"fe3c0ceea1a9eda0",
+"d0bb9cf680561dd7",
 "2026-11-15"
+],
+"https://ishraqa.app/a/learn-with-ai-not-by-ai/": [
+"db0b800a382f7e17",
+"2026-11-18"
 ],
 "https://ishraqa.app/a/mans-search-for-meaning/": [
 "5227204b85dbf54e",
@@ -152,7 +156,7 @@
 "2026-11-08"
 ],
 "https://ishraqa.app/a/spot-ai-fakes/": [
-"302c4a0f9aeec7d6",
+"b463e391ee6691c8",
 "2026-11-07"
 ],
 "https://ishraqa.app/a/spot-phishing-messages/": [
@@ -172,11 +176,11 @@
 "2026-10-30"
 ],
 "https://ishraqa.app/a/ten-minutes-with-children/": [
-"478ca530be28ebfc",
+"789f0bc07c9e6382",
 "2026-10-30"
 ],
 "https://ishraqa.app/a/the-oil-that-refills-every-morning/": [
-"c23f6ac3ec8a82de",
+"7d34c6396d4cdd7a",
 "2026-11-08"
 ],
 "https://ishraqa.app/a/the-oppressed-before-the-screen/": [
@@ -188,7 +192,7 @@
 "2026-11-08"
 ],
 "https://ishraqa.app/a/track-spending-30-days/": [
-"50428405b8fa8735",
+"f5b03f48f0ec81e9",
 "2026-11-07"
 ],
 "https://ishraqa.app/a/two-minute-rule/": [
@@ -212,7 +216,7 @@
 "2026-11-10"
 ],
 "https://ishraqa.app/a/when-we-stopped-needing-each-other/": [
-"e477166099b0be4a",
+"c72145385752f2b9",
 "2026-11-08"
 ],
 "https://ishraqa.app/a/where-the-niles-meet/": [
@@ -220,7 +224,7 @@
 "2026-11-06"
 ],
 "https://ishraqa.app/a/why-ai-makes-things-up/": [
-"275df73b436c4d91",
+"a943775534c45b99",
 "2026-10-30"
 ],
 "https://ishraqa.app/a/why-reading-matters-now/": [
@@ -264,239 +268,243 @@
 "2026-11-06"
 ],
 "https://ishraqa.app/en/a/": [
-"543c6ef36f510ab1",
-"2026-11-17"
+"e581dd07ea35d10a",
+"2026-11-18"
 ],
 "https://ishraqa.app/en/a/adopt-technology-without-being-adopted/": [
-"2645c3977a0cf3db",
+"dcfdd288e2187413",
 "2026-11-11"
 ],
 "https://ishraqa.app/en/a/african-griots-storytelling/": [
-"14cb73e4ce32b6c8",
+"7a9eb6e6e2b4c1de",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/ai-and-future-jobs/": [
-"eb41588eef3fbc54",
+"0a8f54b26dd2f3f4",
 "2026-11-03"
 ],
 "https://ishraqa.app/en/a/arabic-calligraphy-heritage/": [
-"7deca8b24dc0b522",
+"8d5488adc97511c1",
 "2026-11-12"
 ],
 "https://ishraqa.app/en/a/backup-3-2-1/": [
-"d548e56f76b37ed7",
+"1b31971b3dfa7cbc",
 "2026-11-13"
 ],
 "https://ishraqa.app/en/a/better-ai-questions/": [
-"e0378cd94038857b",
+"d478094caddfff76",
 "2026-11-03"
 ],
 "https://ishraqa.app/en/a/beyond-passwords/": [
-"42d9d90b9d1dd97f",
+"95b4269eb8d47f78",
 "2026-11-03"
 ],
 "https://ishraqa.app/en/a/budget-50-30-20/": [
-"836d4ed310e16691",
+"7a3420dbdfb21937",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/cheap-evidence-chain-of-trust/": [
-"4ba14fced7a10bbb",
+"57d7aa52371b964c",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/emergency-fund-small-start/": [
-"f94b9e544e695ca8",
+"24497660215b7ca0",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/english-graded-readers/": [
-"f66c24275245b586",
+"4d4f1f455df8d733",
 "2026-11-09"
 ],
 "https://ishraqa.app/en/a/english-spaced-repetition/": [
-"b8b06de94baad766",
+"10b443f1edf4815b",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/gratitude-journal/": [
-"9d13a4e369875d24",
+"0d6df36187940496",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/grooming-is-a-design-pattern/": [
-"fe7281e1f93f9445",
+"06c353d558065dac",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/how-birds-find-their-way/": [
-"ccb0acfb587839dc",
+"ef942d9438b6b9c6",
 "2026-11-16"
 ],
 "https://ishraqa.app/en/a/if-then-plans/": [
-"45a76f039dde4fe7",
+"787324a079482e71",
 "2026-11-14"
 ],
 "https://ishraqa.app/en/a/kids-screen-time/": [
-"ee1193e627c3b098",
+"e0719d41a723eb5e",
 "2026-11-15"
 ],
+"https://ishraqa.app/en/a/learn-with-ai-not-by-ai/": [
+"8702733fea134409",
+"2026-11-18"
+],
 "https://ishraqa.app/en/a/mans-search-for-meaning/": [
-"3b1fbfd1f63d5249",
+"e0bbc368b54ec775",
 "2026-11-11"
 ],
 "https://ishraqa.app/en/a/moon-phases-explained/": [
-"110b832f9628b4ea",
+"9c97afac7e6218ad",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/morning-light-body-clock/": [
-"42a3c9750afa4d14",
+"8f49648bcdca7345",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/myth-of-multitasking/": [
-"8b0fe28b018c5e45",
+"44e66c3cb75c9615",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/one-percent-better/": [
-"a2fe24eaedd7694b",
+"2c391369044401d7",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/paper-or-screen-reading/": [
-"b88df4fb92149c96",
+"c3cc5decf991f88e",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/pomodoro-technique/": [
-"fbde1e66e001f443",
+"abe6fa997c5fdd78",
 "2026-11-04"
 ],
 "https://ishraqa.app/en/a/power-nap-science/": [
-"b7d8b1728e1f48a3",
+"3640456f2d5e59d3",
 "2026-11-11"
 ],
 "https://ishraqa.app/en/a/public-domain-books/": [
-"e378cabdea286a1f",
+"7dd8e8afccc430f3",
 "2026-11-09"
 ],
 "https://ishraqa.app/en/a/public-wifi-safety/": [
-"c5b4c4b84397fe0c",
+"20fb13310b82ef45",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/reading-aloud-to-children/": [
-"3cb5a477a85a2e43",
+"8394e63e67ba3a91",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/reading-habit-two-minutes/": [
-"4cc9319fa5042f71",
+"53ecc606f45d7f61",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/remember-what-you-read/": [
-"7b4b33fe79aa6b06",
+"e607e7dd75872498",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/return-to-reading/": [
-"d858eb2d2c835850",
+"228999b686f868f8",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/sahara-dust-feeds-amazon/": [
-"834d345a24c69c31",
+"1c23a92baec05f90",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/screen-eyes-20-20-20/": [
-"1bbfe8a418a029b2",
+"389cd524a2b08de7",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/sleep-seven-hours/": [
-"cd39198647e80df6",
+"2bd3ceb77f7b8d4f",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/slow-breathing-stress/": [
-"06dfed3caf06b1cd",
+"7920d89170f36dc3",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/society-without-an-integral-term/": [
-"6a331d499a50c202",
+"e1ad56014d9543ca",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/spot-ai-fakes/": [
-"39d9a95fe54b44f7",
+"28b8e3044828f33b",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/spot-phishing-messages/": [
-"60a5c0b90b511b5e",
+"c8330ef1110e4ca0",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/start-a-book-club/": [
-"e37b8de7ce627327",
+"88851ee04fcfad72",
 "2026-11-17"
 ],
 "https://ishraqa.app/en/a/sudanese-proverbs-mirror/": [
-"3e9b565aacdbc433",
+"cdf3823e29224f10",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/sudanese-tea-and-jabana/": [
-"d5b730cef647fc07",
+"86cd2cdbb5539378",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/ten-minutes-with-children/": [
-"87c839efb55c1b24",
+"244bfae69635f354",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/the-oil-that-refills-every-morning/": [
-"803e8209b6ad9b2c",
+"21c63cc59397dc15",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/the-oppressed-before-the-screen/": [
-"a4ab5cc829b9ac1b",
+"24b53ec49b0dfd65",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/timbuktu-manuscripts/": [
-"83ab7f70e133acd8",
+"60266fdb2fc6aba0",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/track-spending-30-days/": [
-"25b3127d47705829",
+"d475b3215cc14461",
 "2026-11-07"
 ],
 "https://ishraqa.app/en/a/two-minute-rule/": [
-"ddd4f4ebd462e7d5",
+"1dafd419abd73d8b",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/unmediated-hour-after-2030/": [
-"707110911c86ca0e",
+"5dc4d7232fdcc4c9",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/walking-150-minutes/": [
-"126928f2884d4243",
+"4e2ea9af4a4c808f",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/water-and-focus/": [
-"7c1c5de0b38d54df",
+"a9b825d0deafffff",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/webb-looking-back-in-time/": [
-"00923eef1cecda82",
+"40cb522f7678c173",
 "2026-11-10"
 ],
 "https://ishraqa.app/en/a/when-we-stopped-needing-each-other/": [
-"086d46449ef651d0",
+"59fc9bb18a76a189",
 "2026-11-08"
 ],
 "https://ishraqa.app/en/a/where-the-niles-meet/": [
-"51d99f8835e64a65",
+"90b9712c8f7e9ac4",
 "2026-11-06"
 ],
 "https://ishraqa.app/en/a/why-ai-makes-things-up/": [
-"29cd64d5b3f2d029",
+"a673716e80346582",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/why-reading-matters-now/": [
-"b1d31dfba00b74f6",
+"13ffa1ba89779ce2",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/why-sky-blue-sunrise-orange/": [
-"0a97fc0459548cac",
+"d924e5c22d658919",
 "2026-11-03"
 ],
 "https://ishraqa.app/en/a/why-update-your-phone/": [
-"f6c62d253eec5082",
+"74e35e19caee18e3",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/a/why-we-need-pollinators/": [
-"3232090c42798ec2",
+"c16bc52f916ec6ca",
 "2026-10-30"
 ],
 "https://ishraqa.app/en/about/": [
