@@ -21,6 +21,8 @@
 
 ## أحدث المقالات
 
+- [Talking to an AI about your feelings: what the evidence…](https://ishraqa.app/a/talking-to-ai-about-your-feelings-evidence/): Millions of people now tell a chatbot what they cannot tell anyone else. The first trials show real but modest benefits, the risks are specific, and…
+- [كيف يتعلم الجسم من لقاحٍ ما لم يمرض به؟](https://ishraqa.app/a/how-vaccines-train-immune-memory/): من حقنة جدري البقر عام 1796 إلى لقاحات mRNA، تعمل اللقاحات كلها بمبدأ واحد: عرض صورة آمنة للعدو حتى يحتفظ بها جهاز المناعة.
 - [What happens to the things you tell an AI chatbot](https://ishraqa.app/a/what-happens-to-what-you-tell-an-ai-chatbot/): People tell chatbots about their health, their debts and their marriages. Where those words go next depends on a few settings most people never open, and…
 - [في السادسة، ولم ترَ فصلًا دراسيًا قط](https://ishraqa.app/a/six-years-old-never-seen-a-classroom/): طفلةٌ كانت في الثالثة حين بدأت الحرب صارت اليوم في السادسة، ولا تعرف من الدنيا إلا الانتظار. فما الذي يمكن أن يُعينها؟
 - [كيف تعبر الإنترنت المحيطات؟](https://ishraqa.app/a/how-internet-crosses-oceans/): تمر عبر كابلات قاع البحر أكثر من 99٪ من البيانات الدولية، وتحتاج هذه الكابلات إلى نحو ثلاث عمليات إصلاح في الأسبوع.
@@ -34,8 +36,6 @@
 - [«إذا… فسأفعل»: خطة من سطر واحد تقرّبك من هدفك](https://ishraqa.app/a/if-then-plans/): لماذا تتعثر نوايانا الطيبة عند لحظة التنفيذ؟ وكيف تساعد جملة بسيطة تبدأ بـ«إذا» على تحويل الهدف إلى فعل؟
 - [قاعدة 3-2-1: نسخة احتياطية تحفظ ذكرياتك](https://ishraqa.app/a/backup-3-2-1/): هاتف يسقط أو يُسرق قد يأخذ معه صورًا لا تعوَّض. تعرّف إلى قاعدة 3-2-1 للنسخ الاحتياطي وكيف تطبّقها على هاتفك في دقائق.
 - [فنّ الخط: حبرٌ وقصبةٌ وصبرٌ طويل](https://ishraqa.app/a/arabic-calligraphy-heritage/): من الكوفي إلى الرقعة، ومن قلم القصب إلى جدران المدن، فنّ الخط تراث حيّ اعترفت به اليونسكو. تعرّف إلى خطوطه وأدواته، وجرّب أن تكتب بنفسك.
-- [القيلولة القصيرة: دقائق تعيد شحن يومك](https://ishraqa.app/a/power-nap-science/): غفوة قصيرة في النهار قد تعيد إليك اليقظة، لكن طولها وتوقيتها يصنعان الفرق. ماذا تقول الأبحاث عن القيلولة، ومتى لا تكون فكرة جيدة؟
-- [تلسكوب جيمس ويب: نافذة على ماضي الكون](https://ishraqa.app/a/webb-looking-back-in-time/): كلما نظرنا أبعد في الكون رأينا أقدم. كيف يلتقط تلسكوب جيمس ويب ضوءًا سافر مليارات السنين، ولماذا مرآته مطلية بالذهب؟
 
 ## الكتب
 
